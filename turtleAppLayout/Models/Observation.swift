@@ -11,6 +11,8 @@ import CoreLocation
 import RealmSwift
 
 class Observation: Object {
+    
+    @objc dynamic var id : String?
     @objc dynamic var nest : Bool = false
     @objc dynamic var track : Bool = false
     @objc dynamic var turtle : Bool = false
