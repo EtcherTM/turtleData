@@ -26,6 +26,8 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var turtleButton: UIButton!
     @IBOutlet weak var eggsButton: UIButton!
     @IBOutlet weak var carcassButton: UIButton!
+    @IBOutlet weak var zoneButton: UIButton!
+    @IBOutlet weak var propertyButton: UIButton!
     
     
     
@@ -34,11 +36,16 @@ class MenuViewController: UIViewController {
         // Do any additional setup after loading the view.
         locationManager.requestWhenInUseAuthorization()
         locationManager.delegate = self
-        print(Date())
     }
     
     //MARK:- IBActions: Data Entry
+    @IBAction func zoneButtonPressed(_ sender: UIButton) {
+        print("Zone button pressed")
+    }
     
+    @IBAction func propertyButtonPressed(_ sender: UIButton) {
+        print("Property button pressed")
+    }
     @IBAction func locationButtonPressed(_ sender: UIButton) {
         //Get location with CoreLocation
         locationManager.requestLocation()
@@ -202,3 +209,10 @@ extension MenuViewController: CLLocationManagerDelegate {
         print(error)
     }
 }
+
+/*
+
+ 
+ */
+
+
