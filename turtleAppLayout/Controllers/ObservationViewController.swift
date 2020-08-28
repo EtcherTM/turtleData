@@ -26,6 +26,7 @@ class ObservationViewController: UIViewController {
     @IBOutlet weak var turtleButton: UIButton!
     @IBOutlet weak var eggsButton: UIButton!
     @IBOutlet weak var carcassButton: UIButton!
+    @IBOutlet weak var otherTypeButton: UIButton!
     @IBOutlet weak var zoneButton: UIButton!
     @IBOutlet weak var propertyButton: UIButton!
     
@@ -133,6 +134,28 @@ class ObservationViewController: UIViewController {
         updateButtons(sender: sender, for: data.carcass)
     }
     
+    @IBAction func otherTypeButtonPressed(_ sender: UIButton) {
+    
+        var textField = UITextField()
+        
+//    SEBO:  I've got something extra here.  "Enter other type of observation" text in two places, can't be right.  Also I don't know how to format the data thingy.  FYI added a new data thing called "otherType" but it needs to be added to your realm
+
+        let alert = UIAlertController(title: "Enter other type of observation", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add", style: .default) { (action) in
+            self.otherTypeButton.setTitle(textField.text ?? "", for: .normal)
+        }
+        
+        alert.addAction(action)
+        alert.addTextField { (field) in
+            textField = field
+        }
+        
+        present(alert, animated: true)
+//        data.otherType = !data.otherType
+//        updateButtons(sender: sender, for: data.otherType)
+        
+    }
     //MARK:- Save Data
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
