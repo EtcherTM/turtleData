@@ -174,17 +174,17 @@ class ObservationViewController: UIViewController {
         if !data.turtle {
             var textField = UITextField()
             
-            let alert = UIAlertController(title: "Adult or baby?", message: "Change # if more than 1", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Adult or babies?", message: "Change # if more than 1", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "Adult", style: .default, handler: { (action) in
                 self.data.turtleType = "adult"
                 self.data.turtleCount = Int(textField.text ?? "1") ?? 1
-                sender.setTitle("Adults: \(self.data.turtleCount)", for: .normal)
+                sender.setTitle("Adult \(self.data.turtleCount)", for: .normal)
             }))
-            alert.addAction(UIAlertAction(title: "Baby", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "Babies", style: .default, handler: { (action) in
                 self.data.turtleType = "baby"
                 self.data.turtleCount = Int(textField.text ?? "1") ?? 1
-                sender.setTitle("Babies: \(self.data.turtleCount)", for: .normal)
+                sender.setTitle("Babies \(self.data.turtleCount)", for: .normal)
             }))
             alert.addTextField { (field) in
                 textField = field
@@ -208,7 +208,7 @@ class ObservationViewController: UIViewController {
         updateButtons(sender: sender, for: data.carcass)
     }
     
-    @IBAction func otherTypeButtonPressed(_ sender: UIButton) {
+    @IBAction func commentsButtonPressed(_ sender: UIButton) {
     
         var textField = UITextField()
     
