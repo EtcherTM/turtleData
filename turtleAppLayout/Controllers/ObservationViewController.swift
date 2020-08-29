@@ -45,11 +45,23 @@ class ObservationViewController: UIViewController {
         let alert = UIAlertController(title: "Select a zone", message: "", preferredStyle: .alert)
         for zone in K.zones {
             let action = UIAlertAction(title: "Zone \(zone)", style: .default) { (_) in
+                if self.data.zoneLocation != zone {
+                    self.data.property = ""
+                    self.propertyButton.setTitle("Choose\nProperty", for: .normal)
+                }
                 sender.setTitle("Zone: \(zone) ✓", for: .normal)
                 self.data.zoneLocation = zone
+                
             }
             alert.addAction(action)
         }
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+            sender.setTitle("Choose\nzone", for: .normal)
+            self.data.zoneLocation = ""
+            self.data.property = ""
+            self.propertyButton.setTitle("Choose\nProperty", for: .normal)
+        }))
         
         present(alert, animated: true)
         
@@ -69,7 +81,6 @@ class ObservationViewController: UIViewController {
             propertyList = K.propertiesInD
         case "E":
             propertyList = K.propertiesInE
-
         case "F":
             propertyList = K.propertiesInF
         default:
@@ -147,11 +158,13 @@ class ObservationViewController: UIViewController {
             
             alert.addAction(UIAlertAction(title: "Adult", style: .default, handler: { (action) in
                 self.data.turtleType = "adult"
-                self.data.turtleCount = Int(textField.text ?? "0")!
+                self.data.turtleCount = Int(textField.text ?? "0") ?? 0
+                sender.setTitle("Adults: \(self.data.turtleCount)", for: .normal)
             }))
             alert.addAction(UIAlertAction(title: "Baby", style: .default, handler: { (action) in
                 self.data.turtleType = "baby"
-                self.data.turtleCount = Int(textField.text ?? "0")!
+                self.data.turtleCount = Int(textField.text ?? "0") ?? 0
+                sender.setTitle("Babies: \(self.data.turtleCount)", for: .normal)
             }))
             alert.addTextField { (field) in
                 textField = field
@@ -228,7 +241,7 @@ class ObservationViewController: UIViewController {
                 self.nestButton.setTitle("Nest", for: .normal)
                 self.trackButton.setTitle("Track", for: .normal)
                 self.turtleButton.setTitle("Turtle", for: .normal)
-                self.eggsButton.setTitle("Other", for: .normal)
+                self.eggsButton.setTitle("Eggs", for: .normal)
                 self.carcassButton.setTitle("Carcass", for: .normal)
                 self.zoneButton.setTitle("Choose Zone", for: .normal)
                 self.propertyButton.setTitle("Choose Property", for: .normal)

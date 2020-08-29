@@ -18,16 +18,16 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Sl6-Po-jnQ">
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IJg-Pk-y6X" userLabel="Top View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IJg-Pk-y6X" userLabel="Top View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="t2p-mL-QQG">
-                                                <rect key="frame" x="30.5" y="38" width="314" height="144"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="t2p-mL-QQG">
+                                                <rect key="frame" x="30.5" y="28" width="314" height="144"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="xeW-R9-tt3">
                                                         <rect key="frame" x="0.0" y="0.0" width="314" height="72"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Ddi-ZA-hj2">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenDisabled="NO" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Ddi-ZA-hj2">
                                                                 <rect key="frame" x="0.0" y="0.0" width="84" height="72"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="25"/>
@@ -73,16 +73,16 @@ Property</string>
                                             </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="220" id="EVy-Nl-n4B"/>
+                                            <constraint firstAttribute="height" constant="200" id="Xkh-ZW-c5h"/>
                                             <constraint firstItem="t2p-mL-QQG" firstAttribute="centerY" secondItem="IJg-Pk-y6X" secondAttribute="centerY" id="pm7-Fg-cpF"/>
                                             <constraint firstItem="t2p-mL-QQG" firstAttribute="centerX" secondItem="IJg-Pk-y6X" secondAttribute="centerX" id="wSK-7n-ihA"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9hj-yE-ESY" userLabel="Middle View">
-                                        <rect key="frame" x="0.0" y="220" width="375" height="301"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9hj-yE-ESY" userLabel="Middle View">
+                                        <rect key="frame" x="0.0" y="200" width="375" height="321"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="33" translatesAutoresizingMaskIntoConstraints="NO" id="bm3-u6-0ZD">
-                                                <rect key="frame" x="106" y="39" width="163" height="267"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="33" translatesAutoresizingMaskIntoConstraints="NO" id="bm3-u6-0ZD">
+                                                <rect key="frame" x="106" y="27" width="163" height="267"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7Bm-vD-nFP">
                                                         <rect key="frame" x="0.0" y="0.0" width="163" height="42"/>
@@ -230,9 +230,9 @@ Property</string>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="IJg-Pk-y6X" firstAttribute="top" secondItem="Sl6-Po-jnQ" secondAttribute="top" id="U37-ZX-ymr"/>
-                                    <constraint firstItem="ZnV-FP-T7g" firstAttribute="top" secondItem="9hj-yE-ESY" secondAttribute="bottom" id="igv-fa-dqY"/>
-                                    <constraint firstItem="9hj-yE-ESY" firstAttribute="top" secondItem="IJg-Pk-y6X" secondAttribute="bottom" id="m7n-91-7ky"/>
+                                    <constraint firstItem="IJg-Pk-y6X" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Sl6-Po-jnQ" secondAttribute="top" priority="750" id="U37-ZX-ymr"/>
+                                    <constraint firstItem="ZnV-FP-T7g" firstAttribute="top" secondItem="9hj-yE-ESY" secondAttribute="bottom" priority="750" id="igv-fa-dqY"/>
+                                    <constraint firstItem="9hj-yE-ESY" firstAttribute="top" secondItem="IJg-Pk-y6X" secondAttribute="bottom" priority="750" id="m7n-91-7ky"/>
                                 </constraints>
                             </stackView>
                         </subviews>
