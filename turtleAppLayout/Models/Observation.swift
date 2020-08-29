@@ -25,4 +25,8 @@ class Observation: Object {
     @objc dynamic var lon: Double = 0.0
     
     @objc dynamic var date: Date = Date()
+    
+    @objc dynamic var nestProbability: String = ""
+    @objc dynamic var turtleType: String = ""
+    @objc dynamic var turtleCount: Int = 0
 }

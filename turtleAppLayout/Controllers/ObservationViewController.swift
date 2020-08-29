@@ -109,8 +109,29 @@ class ObservationViewController: UIViewController {
     
     @IBAction func nestButtonPressed(_ sender: UIButton) {
         //Probability of nest?
+        if !data.nest {
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Confirmed nest", style: .default, handler: { (action) in
+                sender.setTitle("Confirmed nest", for: .normal)
+                self.data.nestProbability = "1"
+            }))
+            alert.addAction(UIAlertAction(title: "Probable nest", style: .default, handler: { (action) in
+                self.data.nestProbability = "2"
+            }))
+            alert.addAction(UIAlertAction(title: "Possible nest", style: .default, handler: { (action) in
+                self.data.nestProbability = "3"
+            }))
+            alert.addAction(UIAlertAction(title: "Incomplete/Abandoned", style: .default, handler: { (action) in
+                self.data.nestProbability = "4"
+            }))
+            present(alert, animated: true)
+        }
+        
+        
         data.nest = !data.nest
         updateButtons(sender: sender, for: data.nest)
+        
     }
     
     @IBAction func trackButtonPressed(_ sender: UIButton) {
@@ -119,6 +140,26 @@ class ObservationViewController: UIViewController {
     }
     
     @IBAction func turtleButtonPressed(_ sender: UIButton) {
+        if !data.turtle {
+            var textField = UITextField()
+            
+            let alert = UIAlertController(title: "Enter number and type", message: "", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Adult", style: .default, handler: { (action) in
+                self.data.turtleType = "adult"
+                self.data.turtleCount = Int(textField.text ?? "0")!
+            }))
+            alert.addAction(UIAlertAction(title: "Baby", style: .default, handler: { (action) in
+                self.data.turtleType = "baby"
+                self.data.turtleCount = Int(textField.text ?? "0")!
+            }))
+            alert.addTextField { (field) in
+                textField = field
+//                textField.text = "1"
+            }
+            
+            present(alert, animated: true)
+        }
         data.turtle = !data.turtle
         updateButtons(sender: sender, for: data.turtle)
     }
@@ -137,9 +178,7 @@ class ObservationViewController: UIViewController {
     @IBAction func otherTypeButtonPressed(_ sender: UIButton) {
     
         var textField = UITextField()
-        
-//    SEBO:  I've got something extra here.  "Enter other type of observation" text in two places, can't be right.  Also I don't know how to format the data thingy.  FYI added a new data thing called "otherType" but it needs to be added to your realm
-
+    
         let alert = UIAlertController(title: "Enter other type of observation", message: "", preferredStyle: .alert)
         
         let action = UIAlertAction(title: "Add", style: .default) { (action) in
