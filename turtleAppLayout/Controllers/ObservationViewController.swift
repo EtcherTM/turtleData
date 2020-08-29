@@ -26,10 +26,19 @@ class ObservationViewController: UIViewController {
     @IBOutlet weak var turtleButton: UIButton!
     @IBOutlet weak var eggsButton: UIButton!
     @IBOutlet weak var carcassButton: UIButton!
-    @IBOutlet weak var otherTypeButton: UIButton!
+    @IBOutlet weak var commentsButton: UIButton!
     @IBOutlet weak var zoneButton: UIButton!
     @IBOutlet weak var propertyButton: UIButton!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    func didDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     
     
     override func viewDidLoad() {
@@ -113,6 +122,7 @@ class ObservationViewController: UIViewController {
     }
     
     @IBAction func photoButtonPressed(_ sender: UIButton) {
+        print("Click!")
         //Take Photo
         
         //WARNING! Firestore has a maximum limit to document sizes, 1MB, which is really small for pictures. There's something call Cloud Storage for Firestore, but I'm not sure about the pricing for that. It's recommended online to use Cloud Storage to store the photos themselves and keep just the download links in Firebase, kind of like how we currently keep the photos in a Drive folder and just put links to them in the spreadsheet.
@@ -205,7 +215,7 @@ class ObservationViewController: UIViewController {
         let alert = UIAlertController(title: "Enter other type of observation", message: "", preferredStyle: .alert)
         
         let action = UIAlertAction(title: "Add", style: .default) { (action) in
-            self.otherTypeButton.setTitle(textField.text ?? "", for: .normal)
+            self.commentsButton.setTitle(textField.text ?? "", for: .normal)
         }
         
         alert.addAction(action)
