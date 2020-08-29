@@ -123,19 +123,29 @@ class ObservationViewController: UIViewController {
         if !data.nest {
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             
-            alert.addAction(UIAlertAction(title: "Confirmed nest", style: .default, handler: { (action) in
-                sender.setTitle("Confirmed nest", for: .normal)
+            alert.addAction(UIAlertAction(title: "New: Confirmed nest", style: .default, handler: { (action) in
+                sender.setTitle("New: Confirmed nest", for: .normal)
                 self.data.nestProbability = "1"
             }))
-            alert.addAction(UIAlertAction(title: "Probable nest", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "New: Probable nest", style: .default, handler: { (action) in
                 self.data.nestProbability = "2"
+                sender.setTitle("New: Probable nest", for: .normal)
             }))
-            alert.addAction(UIAlertAction(title: "Possible nest", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "New: Possible nest", style: .default, handler: { (action) in
                 self.data.nestProbability = "3"
+                sender.setTitle("New: Possible nest", for: .normal)
+
             }))
-            alert.addAction(UIAlertAction(title: "Incomplete/Abandoned", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "New: Incomplete nest", style: .default, handler: { (action) in
                 self.data.nestProbability = "4"
+               sender.setTitle("New: Incomplete nest", for: .normal)
+                
             }))
+            alert.addAction(UIAlertAction(title: "Old: Disturbed nest ", style: .default, handler: { (action) in
+                sender.setTitle("Old: Disturbed nest", for: .normal)
+                self.data.nestProbability = "-"
+            }))
+            
             present(alert, animated: true)
         }
         
@@ -154,21 +164,21 @@ class ObservationViewController: UIViewController {
         if !data.turtle {
             var textField = UITextField()
             
-            let alert = UIAlertController(title: "Enter number and type", message: "", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Adult or baby?", message: "Change # if more than 1", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "Adult", style: .default, handler: { (action) in
                 self.data.turtleType = "adult"
-                self.data.turtleCount = Int(textField.text ?? "0") ?? 0
+                self.data.turtleCount = Int(textField.text ?? "1") ?? 1
                 sender.setTitle("Adults: \(self.data.turtleCount)", for: .normal)
             }))
             alert.addAction(UIAlertAction(title: "Baby", style: .default, handler: { (action) in
                 self.data.turtleType = "baby"
-                self.data.turtleCount = Int(textField.text ?? "0") ?? 0
+                self.data.turtleCount = Int(textField.text ?? "1") ?? 1
                 sender.setTitle("Babies: \(self.data.turtleCount)", for: .normal)
             }))
             alert.addTextField { (field) in
                 textField = field
-//                textField.text = "1"
+                textField.placeholder = "1"
             }
             
             present(alert, animated: true)
