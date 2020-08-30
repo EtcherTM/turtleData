@@ -131,17 +131,14 @@ class ObservationViewController: UIViewController {
     @IBAction func locationButtonPressed(_ sender: UIButton) {
         //Get location with CoreLocation
         locationManager.requestLocation()
-        sender.setTitle("Got Location! ✓", for: .normal)
+        sender.setTitle("Got Location ✓", for: .normal)
     }
     
     @IBAction func photoButtonPressed(_ sender: UIButton) {
         present(imagePicker, animated: true, completion: nil)
-        sender.setTitle("Image Taken!", for: .normal)
+        sender.setTitle("✓", for: .normal)
     }
     
-    @IBAction func audioRecordButtonPressed(_ sender: Any) {
-        print("Recording!")
-    }
     @IBAction func nestButtonPressed(_ sender: UIButton) {
         //Probability of nest?
         if !data.nest {
