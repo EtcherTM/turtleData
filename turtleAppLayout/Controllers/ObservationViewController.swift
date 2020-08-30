@@ -9,7 +9,11 @@
 import UIKit
 import CoreLocation
 import RealmSwift
-import Firebase
+import FirebaseAuth
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseStorage
+
 
 class ObservationViewController: UIViewController {
     
@@ -18,7 +22,13 @@ class ObservationViewController: UIViewController {
     let realm = try! Realm()
     let db = Firestore.firestore()
     
+    let storage = Storage.storage()
+    
     let locationManager = CLLocationManager()
+    
+    let imagePicker = UIImagePickerController()
+    
+    var image = [UIImage]()
     
     @IBOutlet weak var locationButton: UIButton!
     @IBOutlet weak var nestButton: UIButton!
@@ -46,6 +56,9 @@ class ObservationViewController: UIViewController {
         // Do any additional setup after loading the view.
         locationManager.requestWhenInUseAuthorization()
         locationManager.delegate = self
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .camera
     }
     
     //MARK:- IBActions: Data Entry
@@ -122,12 +135,13 @@ class ObservationViewController: UIViewController {
     }
     
     @IBAction func photoButtonPressed(_ sender: UIButton) {
-        print("Click!")
-        //Take Photo
-        
-        //WARNING! Firestore has a maximum limit to document sizes, 1MB, which is really small for pictures. There's something call Cloud Storage for Firestore, but I'm not sure about the pricing for that. It's recommended online to use Cloud Storage to store the photos themselves and keep just the download links in Firebase, kind of like how we currently keep the photos in a Drive folder and just put links to them in the spreadsheet.
+        present(imagePicker, animated: true, completion: nil)
+        sender.setTitle("Image Taken!", for: .normal)
     }
     
+    @IBAction func audioRecordButtonPressed(_ sender: Any) {
+        print("Recording!")
+    }
     @IBAction func nestButtonPressed(_ sender: UIButton) {
         //Probability of nest?
         if !data.nest {
@@ -157,11 +171,13 @@ class ObservationViewController: UIViewController {
             }))
             
             present(alert, animated: true)
+        } else {
+            sender.setTitle("Nest", for: .normal)
+            data.nestProbability = ""
         }
         
         
         data.nest = !data.nest
-        updateButtons(sender: sender, for: data.nest)
         
     }
     
@@ -179,22 +195,27 @@ class ObservationViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "Adult", style: .default, handler: { (action) in
                 self.data.turtleType = "adult"
                 self.data.turtleCount = Int(textField.text ?? "1") ?? 1
-                sender.setTitle("Adult \(self.data.turtleCount)", for: .normal)
+                sender.setTitle("Adult :\(self.data.turtleCount)", for: .normal)
             }))
             alert.addAction(UIAlertAction(title: "Babies", style: .default, handler: { (action) in
                 self.data.turtleType = "baby"
                 self.data.turtleCount = Int(textField.text ?? "1") ?? 1
-                sender.setTitle("Babies \(self.data.turtleCount)", for: .normal)
+                sender.setTitle("Babies :\(self.data.turtleCount)", for: .normal)
             }))
             alert.addTextField { (field) in
                 textField = field
                 textField.placeholder = "1"
+                textField.keyboardType = .decimalPad
             }
             
             present(alert, animated: true)
+        } else {
+            sender.setTitle("Turtle", for: .normal)
+            data.turtleType = ""
+            data.turtleCount = 0
         }
         data.turtle = !data.turtle
-        updateButtons(sender: sender, for: data.turtle)
+        
     }
     
     @IBAction func eggsButtonPressed(_ sender: UIButton) {
@@ -248,6 +269,8 @@ class ObservationViewController: UIViewController {
             saveData.date = Date()
             saveData.zoneLocation = self.data.zoneLocation
             saveData.property = self.data.property
+            saveData.imagePath = self.data.imagePath
+            
             
             
             do {
@@ -270,6 +293,8 @@ class ObservationViewController: UIViewController {
             } catch {
                 print("Error saving data, \(error) END")
             }
+            
+            
         }))
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
         
@@ -368,9 +393,22 @@ extension ObservationViewController: CLLocationManagerDelegate {
     }
 }
 
-/*
+//MARK:- Photo taker thing
 
- 
- */
-
-
+extension ObservationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let imageTaken = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            UIImageWriteToSavedPhotosAlbum(imageTaken, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        }
+        
+        imagePicker.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // we got back an error!
+            print(error)
+        }
+    }
+    
+}

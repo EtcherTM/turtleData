@@ -29,4 +29,6 @@ class Observation: Object {
     @objc dynamic var nestProbability: String = ""
     @objc dynamic var turtleType: String = ""
     @objc dynamic var turtleCount: Int = 0
+    
+    @objc dynamic var imagePath: String = ""
 }

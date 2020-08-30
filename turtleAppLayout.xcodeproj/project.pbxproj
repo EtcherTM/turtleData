@@ -7,18 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C31E3B5824FAF2210067193A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C31E3B5724FAF2210067193A /* GoogleService-Info.plist */; };
 		C3A9EA7A24F4FDF4006056A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A9EA7924F4FDF4006056A6 /* AppDelegate.swift */; };
 		C3A9EA7C24F4FDF4006056A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A9EA7B24F4FDF4006056A6 /* SceneDelegate.swift */; };
 		C3A9EA7E24F4FDF4006056A6 /* ObservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A9EA7D24F4FDF4006056A6 /* ObservationViewController.swift */; };
 		C3A9EA8124F4FDF4006056A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3A9EA7F24F4FDF4006056A6 /* Main.storyboard */; };
 		C3A9EA8324F4FDF5006056A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3A9EA8224F4FDF5006056A6 /* Assets.xcassets */; };
 		C3A9EA8624F4FDF5006056A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3A9EA8424F4FDF5006056A6 /* LaunchScreen.storyboard */; };
-		C3A9EA9124F4FDF6006056A6 /* turtleAppLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A9EA9024F4FDF6006056A6 /* turtleAppLayoutTests.swift */; };
-		C3A9EA9C24F4FDF6006056A6 /* turtleAppLayoutUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A9EA9B24F4FDF6006056A6 /* turtleAppLayoutUITests.swift */; };
 		C3B350BC24F768A0004CA8EA /* Observation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B350BB24F768A0004CA8EA /* Observation.swift */; };
-		C3B350BE24F77B87004CA8EA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3B350BD24F77B87004CA8EA /* GoogleService-Info.plist */; };
-		C3B350BF24F77B87004CA8EA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3B350BD24F77B87004CA8EA /* GoogleService-Info.plist */; };
-		C3B350C024F77B87004CA8EA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3B350BD24F77B87004CA8EA /* GoogleService-Info.plist */; };
 		C3DE600D24F94A39005FCF02 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DE600C24F94A39005FCF02 /* Constants.swift */; };
 		CBF8839743343F8BD6714AAD /* Pods_turtleAppLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A5CCE7C77B351B3C207AFE1 /* Pods_turtleAppLayout.framework */; };
 /* End PBXBuildFile section */
@@ -43,6 +39,7 @@
 /* Begin PBXFileReference section */
 		3A5CCE7C77B351B3C207AFE1 /* Pods_turtleAppLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_turtleAppLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E65270D1DFA47275E37A9AD /* Pods-turtleAppLayout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-turtleAppLayout.release.xcconfig"; path = "Target Support Files/Pods-turtleAppLayout/Pods-turtleAppLayout.release.xcconfig"; sourceTree = "<group>"; };
+		C31E3B5724FAF2210067193A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C3A9EA7624F4FDF4006056A6 /* turtleAppLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = turtleAppLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3A9EA7924F4FDF4006056A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3A9EA7B24F4FDF4006056A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,13 +49,8 @@
 		C3A9EA8524F4FDF5006056A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C3A9EA8724F4FDF5006056A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C3A9EA8C24F4FDF6006056A6 /* turtleAppLayoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = turtleAppLayoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C3A9EA9024F4FDF6006056A6 /* turtleAppLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = turtleAppLayoutTests.swift; sourceTree = "<group>"; };
-		C3A9EA9224F4FDF6006056A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C3A9EA9724F4FDF6006056A6 /* turtleAppLayoutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = turtleAppLayoutUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C3A9EA9B24F4FDF6006056A6 /* turtleAppLayoutUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = turtleAppLayoutUITests.swift; sourceTree = "<group>"; };
-		C3A9EA9D24F4FDF6006056A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C3B350BB24F768A0004CA8EA /* Observation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observation.swift; sourceTree = "<group>"; };
-		C3B350BD24F77B87004CA8EA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C3DE600C24F94A39005FCF02 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DC1499C8B142D73756F9A0F7 /* Pods-turtleAppLayout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-turtleAppLayout.debug.xcconfig"; path = "Target Support Files/Pods-turtleAppLayout/Pods-turtleAppLayout.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,8 +117,6 @@
 			isa = PBXGroup;
 			children = (
 				C3A9EA7824F4FDF4006056A6 /* turtleAppLayout */,
-				C3A9EA8F24F4FDF6006056A6 /* turtleAppLayoutTests */,
-				C3A9EA9A24F4FDF6006056A6 /* turtleAppLayoutUITests */,
 				C3A9EA7724F4FDF4006056A6 /* Products */,
 				C45FF5DC50634E4FC942C5B1 /* Pods */,
 				B0C608DB9E2DECC707D50E78 /* Frameworks */,
@@ -154,28 +144,10 @@
 				C3A9EA8224F4FDF5006056A6 /* Assets.xcassets */,
 				C3A9EA8424F4FDF5006056A6 /* LaunchScreen.storyboard */,
 				C3A9EA8724F4FDF5006056A6 /* Info.plist */,
+				C31E3B5724FAF2210067193A /* GoogleService-Info.plist */,
 				C3DE600C24F94A39005FCF02 /* Constants.swift */,
-				C3B350BD24F77B87004CA8EA /* GoogleService-Info.plist */,
 			);
 			path = turtleAppLayout;
-			sourceTree = "<group>";
-		};
-		C3A9EA8F24F4FDF6006056A6 /* turtleAppLayoutTests */ = {
-			isa = PBXGroup;
-			children = (
-				C3A9EA9024F4FDF6006056A6 /* turtleAppLayoutTests.swift */,
-				C3A9EA9224F4FDF6006056A6 /* Info.plist */,
-			);
-			path = turtleAppLayoutTests;
-			sourceTree = "<group>";
-		};
-		C3A9EA9A24F4FDF6006056A6 /* turtleAppLayoutUITests */ = {
-			isa = PBXGroup;
-			children = (
-				C3A9EA9B24F4FDF6006056A6 /* turtleAppLayoutUITests.swift */,
-				C3A9EA9D24F4FDF6006056A6 /* Info.plist */,
-			);
-			path = turtleAppLayoutUITests;
 			sourceTree = "<group>";
 		};
 		C45FF5DC50634E4FC942C5B1 /* Pods */ = {
@@ -294,7 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3A9EA8624F4FDF5006056A6 /* LaunchScreen.storyboard in Resources */,
-				C3B350BE24F77B87004CA8EA /* GoogleService-Info.plist in Resources */,
+				C31E3B5824FAF2210067193A /* GoogleService-Info.plist in Resources */,
 				C3A9EA8324F4FDF5006056A6 /* Assets.xcassets in Resources */,
 				C3A9EA8124F4FDF4006056A6 /* Main.storyboard in Resources */,
 			);
@@ -304,7 +276,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3B350BF24F77B87004CA8EA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,7 +283,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3B350C024F77B87004CA8EA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,7 +347,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3A9EA9124F4FDF6006056A6 /* turtleAppLayoutTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,7 +354,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3A9EA9C24F4FDF6006056A6 /* turtleAppLayoutUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,7 +520,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.etchertm.turtleAppLayout;
+				PRODUCT_BUNDLE_IDENTIFIER = com.OliviaJames.TurtleDataSJ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -574,7 +542,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.etchertm.turtleAppLayout;
+				PRODUCT_BUNDLE_IDENTIFIER = com.OliviaJames.TurtleDataSJ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
