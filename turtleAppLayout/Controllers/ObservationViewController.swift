@@ -36,7 +36,7 @@ class ObservationViewController: UIViewController {
     @IBOutlet weak var turtleButton: UIButton!
     @IBOutlet weak var eggsButton: UIButton!
     @IBOutlet weak var carcassButton: UIButton!
-    @IBOutlet weak var commentsButton: UIButton!
+//    @IBOutlet weak var commentsButton: UIButton!
     @IBOutlet weak var zoneButton: UIButton!
     @IBOutlet weak var propertyButton: UIButton!
     
@@ -229,26 +229,26 @@ class ObservationViewController: UIViewController {
         updateButtons(sender: sender, for: data.carcass)
     }
     
-    @IBAction func commentsButtonPressed(_ sender: UIButton) {
-    
-        var textField = UITextField()
-    
-        let alert = UIAlertController(title: "Enter other type of observation", message: "", preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: "Add", style: .default) { (action) in
-            self.commentsButton.setTitle(textField.text ?? "", for: .normal)
-        }
-        
-        alert.addAction(action)
-        alert.addTextField { (field) in
-            textField = field
-        }
-        
-        present(alert, animated: true)
-//        data.otherType = !data.otherType
-//        updateButtons(sender: sender, for: data.otherType)
-        
-    }
+//    @IBAction func commentsButtonPressed(_ sender: UIButton) {
+//
+//        var textField = UITextField()
+//
+//        let alert = UIAlertController(title: "Enter other type of observation", message: "", preferredStyle: .alert)
+//
+//        let action = UIAlertAction(title: "Add", style: .default) { (action) in
+//            self.commentsButton.setTitle(textField.text ?? "", for: .normal)
+//        }
+//
+//        alert.addAction(action)
+//        alert.addTextField { (field) in
+//            textField = field
+//        }
+//
+//        present(alert, animated: true)
+////        data.otherType = !data.otherType
+////        updateButtons(sender: sender, for: data.otherType)
+//
+//    }
     //MARK:- Save Data
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
