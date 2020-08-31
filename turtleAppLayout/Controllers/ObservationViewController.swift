@@ -143,17 +143,17 @@ class ObservationViewController: UIViewController {
         if !data.nest {
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             
-            alert.addAction(UIAlertAction(title: "New Nest", style: .default, handler: { (action) in
-                sender.setTitle("New Nest", for: .normal)
+            alert.addAction(UIAlertAction(title: "New/Probable", style: .default, handler: { (action) in
+                sender.setTitle("New/Probable ✓", for: .normal)
                 self.data.nestType = "nest"
             }))
             alert.addAction(UIAlertAction(title: "False Nest", style: .default, handler: { (action) in
                 self.data.nestType = "false nest"
-                sender.setTitle("False Nest", for: .normal)
+                sender.setTitle("False Nest ✓", for: .normal)
             }))
             alert.addAction(UIAlertAction(title: "False Crawl", style: .default, handler: { (action) in
                 self.data.nestType = "false crawl"
-                sender.setTitle("False Crawl", for: .normal)
+                sender.setTitle("False Crawl ✓", for: .normal)
 
             }))
             
@@ -176,15 +176,15 @@ class ObservationViewController: UIViewController {
     @IBAction func turtleButtonPressed(_ sender: UIButton) {
         if !data.turtle {
 
-            let alert = UIAlertController(title: "Adult or babies?", message: "", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Dead or Alive?", message: "", preferredStyle: .alert)
             
-            alert.addAction(UIAlertAction(title: "Adult", style: .default, handler: { (action) in
-                self.data.turtleType = "adult"
-                sender.setTitle("Adult", for: .normal)
+            alert.addAction(UIAlertAction(title: "Dead", style: .default, handler: { (action) in
+                self.data.turtleType = "dead"
+                sender.setTitle("Dead Adult ✓", for: .normal)
             }))
-            alert.addAction(UIAlertAction(title: "Babies", style: .default, handler: { (action) in
-                self.data.turtleType = "baby"
-                sender.setTitle("Babies", for: .normal)
+            alert.addAction(UIAlertAction(title: "Alive", style: .default, handler: { (action) in
+                self.data.turtleType = "live"
+                sender.setTitle("Live Adult ✓", for: .normal)
             }))
             
             present(alert, animated: true)
@@ -202,13 +202,13 @@ class ObservationViewController: UIViewController {
 
             let alert = UIAlertController(title: "Succesful hatching?", message: "", preferredStyle: .alert)
             
-            alert.addAction(UIAlertAction(title: "Success", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "Successful", style: .default, handler: { (action) in
                 self.data.hatchingType = "success"
-                sender.setTitle("Hatching: successful", for: .normal)
+                sender.setTitle("Successful Hatching ✓", for: .normal)
             }))
-            alert.addAction(UIAlertAction(title: "Fail", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "Failed", style: .default, handler: { (action) in
                 self.data.hatchingType = "fail"
-                sender.setTitle("Hatching: failure", for: .normal)
+                sender.setTitle("Failed Hatching ✓", for: .normal)
             }))
             
             present(alert, animated: true)
@@ -263,53 +263,47 @@ class ObservationViewController: UIViewController {
         
         let alert = UIAlertController(title: "Are you sure you want to upload your data to the database?", message: "This will delete all local observations", preferredStyle: .alert)
         
-        //Read from Realm
-        let observations = realm.objects(Observation.self)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            //Read from Realm
+            let observations = self.realm.objects(Observation.self)
+                    
+                    
+                    for obs in observations {
+                        //Create to Firebase
+                        //Do we need FirebaseAuth?
+                        
+                        var upload: Dictionary<String, Any> = [:]
+                        
+                        var type = [String]()
+                        
+                        if obs.turtle {type.append(obs.turtleType)}
+                        if obs.disturbed {type.append("disturbed")}
+                        if obs.nest {type.append(obs.nestType)}
+                        if obs.hatching {type.append(obs.hatchingType)}
+                        
+                        upload["date"] = obs.date
+                        upload["property"] = obs.property != "" ? obs.property : nil
+                        upload["zone"] = obs.zoneLocation != "" ? obs.zoneLocation : nil
+                        upload["coords"] = obs.lat != 0 && obs.lon != 0 ? [obs.lat, obs.lon] : nil
+                        upload["comments"] = obs.comments != "" ? obs.comments : nil
+                        upload["type"] = type != [] ? type : nil
+                        
+                        
+                        self.db.collection("observations").addDocument(data: upload) { (error) in
+                            if let error = error {
+                                print("Error saving to Firebase, \(error)")
+                            } else {
+                                //Destroy Realm safely, only if successfully created to FireBase? MAYBE?
+                                do {
+                                    try self.realm.write {
+                                        self.realm.delete(obs)
+                                    }
+                                } catch {
+                                    print("Error deleting Realm: \(error)")}}}}}))
         
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
         
-        for obs in observations {
-            //Create to Firebase
-            //Do we need FirebaseAuth?
-            
-            var upload: Dictionary<String, Any> = [:]
-            
-            var type = [String]()
-            
-            if obs.turtle {type.append(obs.turtleType)}
-            if obs.disturbed {type.append("disturbed")}
-            if obs.nest {type.append(obs.nestType)}
-            if obs.hatching {type.append(obs.hatchingType)}
-            
-//            if obs.nest {type.append("Nest")}
-//            if obs.track {type.append("Track")}
-//            if obs.eggs {type.append("Eggs")}
-//            if obs.carcass {type.append("Carcass")}
-            
-            
-            upload["date"] = obs.date
-            upload["property"] = obs.property != "" ? obs.property : obs.zoneLocation != "" ? obs.zoneLocation : nil
-            upload["coords"] = obs.lat != 0 && obs.lon != 0 ? [obs.lat, obs.lon] : nil
-            upload["comments"] = obs.comments != "" ? obs.comments : nil
-            upload["type"] = type != [] ? type : nil
-            
-            
-            db.collection("observations").addDocument(data: upload) { (error) in
-                if let error = error {
-                    print("Error saving to Firebase, \(error)")
-                } else {
-                    //Destroy Realm safely, only if successfully created to FireBase? MAYBE?
-                    do {
-                        try self.realm.write {
-                            self.realm.delete(obs)
-                        }
-                    } catch {
-                        print("Error deleting Realm: \(error)")
-                    }
-                }
-            }
-            
-            
-        }
+        present(alert, animated: true)
     }
     
     //MARK:- Helper Functions
@@ -324,7 +318,7 @@ class ObservationViewController: UIViewController {
     
 }
 
-//MARK:- Location Extention
+//MARK:- Location Extension
 
 extension ObservationViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -345,17 +339,16 @@ extension ObservationViewController: CLLocationManagerDelegate {
 extension ObservationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let imageTaken = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            UIImageWriteToSavedPhotosAlbum(imageTaken, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+            let fileName = ""
+            
+            var documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+            documentsDirectoryPath += fileName
+            let settingsData: NSData = imageTaken.jpegData(compressionQuality: 1.0)! as NSData
+            settingsData.write(toFile: documentsDirectoryPath, atomically: true)
+            
         }
         
         imagePicker.dismiss(animated: true, completion: nil)
-    }
-    
-    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        if let error = error {
-            // we got back an error!
-            print(error)
-        }
     }
     
 }
