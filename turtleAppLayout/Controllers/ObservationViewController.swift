@@ -30,15 +30,16 @@ class ObservationViewController: UIViewController {
     
     var image = [UIImage]()
     
-    @IBOutlet weak var locationButton: UIButton!
-    @IBOutlet weak var nestButton: UIButton!
-    @IBOutlet weak var trackButton: UIButton!
-    @IBOutlet weak var turtleButton: UIButton!
-    @IBOutlet weak var eggsButton: UIButton!
-    @IBOutlet weak var carcassButton: UIButton!
-//    @IBOutlet weak var commentsButton: UIButton!
     @IBOutlet weak var zoneButton: UIButton!
     @IBOutlet weak var propertyButton: UIButton!
+    @IBOutlet weak var locationButton: UIButton!
+    
+    @IBOutlet weak var nestButton: UIButton!
+    @IBOutlet weak var disturbedButton: UIButton!
+    @IBOutlet weak var turtleButton: UIButton!
+    @IBOutlet weak var hatchingButton: UIButton!
+
+    @IBOutlet weak var commentsTextField: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -121,8 +122,6 @@ class ObservationViewController: UIViewController {
                 }))
             }
             present(alert, animated: true)
-        } else {
-            print("nother")
         }
         
         
@@ -144,33 +143,24 @@ class ObservationViewController: UIViewController {
         if !data.nest {
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             
-            alert.addAction(UIAlertAction(title: "New: Confirmed nest", style: .default, handler: { (action) in
-                sender.setTitle("New: Confirmed nest", for: .normal)
-                self.data.nestProbability = "1"
+            alert.addAction(UIAlertAction(title: "New Nest", style: .default, handler: { (action) in
+                sender.setTitle("New Nest", for: .normal)
+                self.data.nestType = "nest"
             }))
-            alert.addAction(UIAlertAction(title: "New: Probable nest", style: .default, handler: { (action) in
-                self.data.nestProbability = "2"
-                sender.setTitle("New: Probable nest", for: .normal)
+            alert.addAction(UIAlertAction(title: "False Nest", style: .default, handler: { (action) in
+                self.data.nestType = "false nest"
+                sender.setTitle("False Nest", for: .normal)
             }))
-            alert.addAction(UIAlertAction(title: "New: Possible nest", style: .default, handler: { (action) in
-                self.data.nestProbability = "3"
-                sender.setTitle("New: Possible nest", for: .normal)
+            alert.addAction(UIAlertAction(title: "False Crawl", style: .default, handler: { (action) in
+                self.data.nestType = "false crawl"
+                sender.setTitle("False Crawl", for: .normal)
 
-            }))
-            alert.addAction(UIAlertAction(title: "New: Incomplete nest", style: .default, handler: { (action) in
-                self.data.nestProbability = "4"
-               sender.setTitle("New: Incomplete nest", for: .normal)
-                
-            }))
-            alert.addAction(UIAlertAction(title: "Old: Disturbed nest ", style: .default, handler: { (action) in
-                sender.setTitle("Old: Disturbed nest", for: .normal)
-                self.data.nestProbability = "-"
             }))
             
             present(alert, animated: true)
         } else {
             sender.setTitle("Nest", for: .normal)
-            data.nestProbability = ""
+            data.nestType = ""
         }
         
         
@@ -178,113 +168,80 @@ class ObservationViewController: UIViewController {
         
     }
     
-    @IBAction func trackButtonPressed(_ sender: UIButton) {
-        data.track = !data.track
-        updateButtons(sender: sender, for: data.track)
+    @IBAction func disturbedButtonPressed(_ sender: UIButton) {
+        data.disturbed = !data.disturbed
+        updateButtons(sender: sender, for: data.disturbed)
     }
     
     @IBAction func turtleButtonPressed(_ sender: UIButton) {
         if !data.turtle {
-            var textField = UITextField()
-            
-            let alert = UIAlertController(title: "Adult or babies?", message: "Change # if more than 1", preferredStyle: .alert)
+
+            let alert = UIAlertController(title: "Adult or babies?", message: "", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "Adult", style: .default, handler: { (action) in
                 self.data.turtleType = "adult"
-                self.data.turtleCount = Int(textField.text ?? "1") ?? 1
-                sender.setTitle("Adult :\(self.data.turtleCount)", for: .normal)
+                sender.setTitle("Adult", for: .normal)
             }))
             alert.addAction(UIAlertAction(title: "Babies", style: .default, handler: { (action) in
                 self.data.turtleType = "baby"
-                self.data.turtleCount = Int(textField.text ?? "1") ?? 1
-                sender.setTitle("Babies :\(self.data.turtleCount)", for: .normal)
+                sender.setTitle("Babies", for: .normal)
             }))
-            alert.addTextField { (field) in
-                textField = field
-                textField.placeholder = "1"
-                textField.keyboardType = .decimalPad
-            }
             
             present(alert, animated: true)
         } else {
             sender.setTitle("Turtle", for: .normal)
             data.turtleType = ""
-            data.turtleCount = 0
         }
         data.turtle = !data.turtle
         
     }
     
-    @IBAction func eggsButtonPressed(_ sender: UIButton) {
+    @IBAction func hatchingButtonPressed(_ sender: UIButton) {
         //Number of eggs?
-        data.eggs = !data.eggs
-        updateButtons(sender: sender, for: data.eggs)
+        if !data.hatching {
+
+            let alert = UIAlertController(title: "Succesful hatching?", message: "", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Success", style: .default, handler: { (action) in
+                self.data.hatchingType = "success"
+                sender.setTitle("Hatching: successful", for: .normal)
+            }))
+            alert.addAction(UIAlertAction(title: "Fail", style: .default, handler: { (action) in
+                self.data.hatchingType = "fail"
+                sender.setTitle("Hatching: failure", for: .normal)
+            }))
+            
+            present(alert, animated: true)
+        } else {
+            sender.setTitle("Hatching", for: .normal)
+            data.hatchingType = ""
+        }
+        data.hatching = !data.hatching
     }
     
-    @IBAction func carcassButtonPressed(_ sender: UIButton) {
-        data.carcass = !data.carcass
-        updateButtons(sender: sender, for: data.carcass)
-    }
-    
-//    @IBAction func commentsButtonPressed(_ sender: UIButton) {
-//
-//        var textField = UITextField()
-//
-//        let alert = UIAlertController(title: "Enter other type of observation", message: "", preferredStyle: .alert)
-//
-//        let action = UIAlertAction(title: "Add", style: .default) { (action) in
-//            self.commentsButton.setTitle(textField.text ?? "", for: .normal)
-//        }
-//
-//        alert.addAction(action)
-//        alert.addTextField { (field) in
-//            textField = field
-//        }
-//
-//        present(alert, animated: true)
-////        data.otherType = !data.otherType
-////        updateButtons(sender: sender, for: data.otherType)
-//
-//    }
     //MARK:- Save Data
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
         
         let alert = UIAlertController(title: "Save this observation and return to main menu?", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (eee) in
-            let saveData = Observation()
             
-            saveData.nest = self.data.nest
-            saveData.track = self.data.track
-            saveData.turtle = self.data.turtle
-            saveData.eggs = self.data.eggs
-            saveData.carcass = self.data.carcass
-
-            saveData.lat = self.data.lat
-            saveData.lon = self.data.lon
-            
-            saveData.date = Date()
-            saveData.zoneLocation = self.data.zoneLocation
-            saveData.property = self.data.property
-            saveData.imagePath = self.data.imagePath
-            
-            
-            
+            self.data.comments = self.commentsTextField.text ?? ""
             do {
                 try self.realm.write {
-                    self.realm.add(saveData)
+                    self.realm.add(self.data)
                 }
                 
                 //Reset all fields if successfully saved
                 
                 self.locationButton.setTitle("Get Location", for: .normal)
                 self.nestButton.setTitle("Nest", for: .normal)
-                self.trackButton.setTitle("Track", for: .normal)
+                self.disturbedButton.setTitle("Disturbed", for: .normal)
                 self.turtleButton.setTitle("Turtle", for: .normal)
-                self.eggsButton.setTitle("Eggs", for: .normal)
-                self.carcassButton.setTitle("Carcass", for: .normal)
-                self.zoneButton.setTitle("Choose Zone", for: .normal)
-                self.propertyButton.setTitle("Choose Property", for: .normal)
+                self.hatchingButton.setTitle("Hatching", for: .normal)
+                self.zoneButton.setTitle("Choose\nZone", for: .normal)
+                self.propertyButton.setTitle("Choose\nProperty", for: .normal)
+                self.commentsTextField.text = ""
                 
                 self.data = Observation()
             } catch {
@@ -297,25 +254,14 @@ class ObservationViewController: UIViewController {
         
         present(alert, animated: true)
         
-//        print("Nest: \(data.nest)")
-//        print("Track: \(data.track)")
-//        print("Turtle: \(data.turtle)")
-//        print("Eggs: \(data.eggs)")
-//        print("Carcass: \(data.carcass)")
-//
-//
-//        print(data.lat)
-//        print(data.lon)
-        
-        //Must be an easier way to copy
-        
-        
     }
     
     //MARK:- Sync
     
     @IBAction func syncButtonPressed(_ sender: UIButton) {
         //Probably should put a confirmation alert
+        
+        let alert = UIAlertController(title: "Are you sure you want to upload your data to the database?", message: "This will delete all local observations", preferredStyle: .alert)
         
         //Read from Realm
         let observations = realm.objects(Observation.self)
@@ -325,29 +271,33 @@ class ObservationViewController: UIViewController {
             //Create to Firebase
             //Do we need FirebaseAuth?
             
+            var upload: Dictionary<String, Any> = [:]
+            
             var type = [String]()
             
-            if obs.nest {type.append("Nest")}
-            if obs.track {type.append("Track")}
-            if obs.turtle {type.append("Turtle")}
-            if obs.eggs {type.append("Eggs")}
-            if obs.carcass {type.append("Carcass")}
+            if obs.turtle {type.append(obs.turtleType)}
+            if obs.disturbed {type.append("disturbed")}
+            if obs.nest {type.append(obs.nestType)}
+            if obs.hatching {type.append(obs.hatchingType)}
             
-            var coords = [Double]()
+//            if obs.nest {type.append("Nest")}
+//            if obs.track {type.append("Track")}
+//            if obs.eggs {type.append("Eggs")}
+//            if obs.carcass {type.append("Carcass")}
             
-            if obs.lat != 0 && obs.lon != 0 { coords = [obs.lat, obs.lon] }
             
-            db.collection("observations").addDocument(data: [
-                "zone": obs.zoneLocation,
-                "property": obs.property,
-                "type": type,
-                "coords": coords,
-                "date": obs.date
-            ]) { (error) in
+            upload["date"] = obs.date
+            upload["property"] = obs.property != "" ? obs.property : obs.zoneLocation != "" ? obs.zoneLocation : nil
+            upload["coords"] = obs.lat != 0 && obs.lon != 0 ? [obs.lat, obs.lon] : nil
+            upload["comments"] = obs.comments != "" ? obs.comments : nil
+            upload["type"] = type != [] ? type : nil
+            
+            
+            db.collection("observations").addDocument(data: upload) { (error) in
                 if let error = error {
                     print("Error saving to Firebase, \(error)")
                 } else {
-                    //Destroy Realm safely, only if successfully uploaded
+                    //Destroy Realm safely, only if successfully created to FireBase? MAYBE?
                     do {
                         try self.realm.write {
                             self.realm.delete(obs)

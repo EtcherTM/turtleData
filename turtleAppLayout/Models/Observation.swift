@@ -13,22 +13,25 @@ import RealmSwift
 class Observation: Object {
     
     @objc dynamic var id : String = ""
+    @objc dynamic var date: Date = Date()
+    
     @objc dynamic var zoneLocation: String = ""
     @objc dynamic var property: String = ""
-    @objc dynamic var nest : Bool = false
-    @objc dynamic var track : Bool = false
-    @objc dynamic var turtle : Bool = false
-    @objc dynamic var eggs : Bool = false
-    @objc dynamic var carcass : Bool = false
     
     @objc dynamic var lat: Double = 0.0
     @objc dynamic var lon: Double = 0.0
     
-    @objc dynamic var date: Date = Date()
+    @objc dynamic var nest : Bool = false
+    @objc dynamic var turtle : Bool = false
+    @objc dynamic var hatching : Bool = false
     
-    @objc dynamic var nestProbability: String = ""
+    @objc dynamic var nestType: String = ""
     @objc dynamic var turtleType: String = ""
-    @objc dynamic var turtleCount: Int = 0
-    
+    @objc dynamic var hatchingType: String = ""
+
+    @objc dynamic var disturbed : Bool = false
+
     @objc dynamic var imagePath: String = ""
+    
+    @objc dynamic var comments: String = ""
 }
