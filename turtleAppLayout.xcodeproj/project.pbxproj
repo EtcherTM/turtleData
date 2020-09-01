@@ -16,6 +16,7 @@
 		C3A9EA8624F4FDF5006056A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3A9EA8424F4FDF5006056A6 /* LaunchScreen.storyboard */; };
 		C3B350BC24F768A0004CA8EA /* Observation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B350BB24F768A0004CA8EA /* Observation.swift */; };
 		C3DE600D24F94A39005FCF02 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DE600C24F94A39005FCF02 /* Constants.swift */; };
+		C3FEC67224FEEFC1000711D2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FEC67124FEEFC1000711D2 /* HomeViewController.swift */; };
 		CBF8839743343F8BD6714AAD /* Pods_turtleAppLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A5CCE7C77B351B3C207AFE1 /* Pods_turtleAppLayout.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		C3A9EA9724F4FDF6006056A6 /* turtleAppLayoutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = turtleAppLayoutUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3B350BB24F768A0004CA8EA /* Observation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observation.swift; sourceTree = "<group>"; };
 		C3DE600C24F94A39005FCF02 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C3FEC67124FEEFC1000711D2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = SOURCE_ROOT; };
 		DC1499C8B142D73756F9A0F7 /* Pods-turtleAppLayout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-turtleAppLayout.debug.xcconfig"; path = "Target Support Files/Pods-turtleAppLayout/Pods-turtleAppLayout.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +94,7 @@
 		C33E17B724F7924700AA1956 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C3FEC67124FEEFC1000711D2 /* HomeViewController.swift */,
 				C3A9EA7D24F4FDF4006056A6 /* ObservationViewController.swift */,
 			);
 			path = Controllers;
@@ -335,6 +338,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3FEC67224FEEFC1000711D2 /* HomeViewController.swift in Sources */,
 				C3DE600D24F94A39005FCF02 /* Constants.swift in Sources */,
 				C3A9EA7E24F4FDF4006056A6 /* ObservationViewController.swift in Sources */,
 				C3A9EA7A24F4FDF4006056A6 /* AppDelegate.swift in Sources */,

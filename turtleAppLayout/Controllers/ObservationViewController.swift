@@ -28,6 +28,11 @@ class ObservationViewController: UIViewController {
     
     let imagePicker = UIImagePickerController()
     
+    let defaults = UserDefaults.standard
+    //Setting user id if doesn't exist, replace with the log + alert
+    var userID: String = ""
+    
+    
     var image = [UIImage]()
     
     @IBOutlet weak var zoneButton: UIButton!
@@ -66,6 +71,8 @@ class ObservationViewController: UIViewController {
     @IBAction func zoneButtonPressed(_ sender: UIButton) {
         
         let alert = UIAlertController(title: "Select a zone", message: "", preferredStyle: .alert)
+ 
+        
         for zone in K.zones {
             let action = UIAlertAction(title: "Zone \(zone)", style: .default) { (_) in
                 if self.data.zoneLocation != zone {
@@ -107,14 +114,19 @@ class ObservationViewController: UIViewController {
         case "F":
             propertyList = K.propertiesInF
         default:
-            let alert = UIAlertController(title: "Please select a zone first", message: "", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Select zone first", message: "", preferredStyle: .alert)
+            
+//            alert.setValue(messageMutableString, forKey: "attributedMessage")
+            
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             present(alert, animated: true)
         }
         
-        
         if let propertyList = propertyList {
             let alert = UIAlertController(title: "Select a property from zone \(data.zoneLocation)", message: "", preferredStyle: .alert)
+        
+            
+            
             for property in propertyList {
                 alert.addAction(UIAlertAction(title: "\(property.0) : \(property.1)", style: .default, handler: { (eee) in
                     self.data.property = property.0
@@ -135,6 +147,7 @@ class ObservationViewController: UIViewController {
     
     @IBAction func photoButtonPressed(_ sender: UIButton) {
         present(imagePicker, animated: true, completion: nil)
+        print("Click!")
         sender.setTitle("✓", for: .normal)
     }
     
@@ -169,9 +182,35 @@ class ObservationViewController: UIViewController {
     }
     
     @IBAction func disturbedButtonPressed(_ sender: UIButton) {
-        data.disturbed = !data.disturbed
-        updateButtons(sender: sender, for: data.disturbed)
+        
+        if !data.disturbed {
+
+               let alert = UIAlertController(title: "Disturbed or Relocated?", message: "", preferredStyle: .alert)
+//            action.setValue(UIColor.orange, forKey: "titleTextColor") Sebo:  Don't know where to put this to make it actually do something.
+               
+               alert.addAction(UIAlertAction(title: "Disturbed", style: .default, handler: { (action) in
+
+                   self.data.disturbedOrRelocated = "disturbed"
+                   sender.setTitle("Disturbed nest ✓", for: .normal)
+
+               }))
+               alert.addAction(UIAlertAction(title: "Relocated", style: .default, handler: { (action) in
+                   self.data.disturbedOrRelocated = "relocated"
+                   sender.setTitle("Relocated nest ✓", for: .normal)
+               }))
+               
+               present(alert, animated: true)
+
+           } else {
+               sender.setTitle("Existing Nest", for: .normal)
+               data.disturbedOrRelocated = ""
+           }
+           data.disturbed = !data.disturbed
+        
     }
+    
+    
+    
     
     @IBAction func turtleButtonPressed(_ sender: UIButton) {
         if !data.turtle {
@@ -227,6 +266,22 @@ class ObservationViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (eee) in
             
             self.data.comments = self.commentsTextField.text ?? ""
+            
+            var id = self.data.zoneLocation != "" ? self.data.zoneLocation : "-"
+            
+            if self.data.nest { id.append(self.data.nestType == "nest" ? "N" : "F") }
+            if self.data.disturbed { id.append(self.data.disturbedOrRelocated == "disturbed" ? "D" : "R") }
+            id.append(self.data.hatching ? "H" : "")
+            id.append(self.data.turtle ? "T" : "")
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyyMMddHHmmss"
+            
+            id.append(dateFormatter.string(from: Date()))
+            id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
+            self.data.id = id
+            print(id)
+            
             do {
                 try self.realm.write {
                     self.realm.add(self.data)
@@ -261,61 +316,104 @@ class ObservationViewController: UIViewController {
     @IBAction func syncButtonPressed(_ sender: UIButton) {
         //Probably should put a confirmation alert
         
-        let alert = UIAlertController(title: "Are you sure you want to upload your data to the database?", message: "This will delete all local observations", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Are you sure you want to upload your data to the database?", message: "This will clear all values", preferredStyle: .alert)
+        
         
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
             //Read from Realm
             let observations = self.realm.objects(Observation.self)
-                    
-                    
-                    for obs in observations {
-                        //Create to Firebase
-                        //Do we need FirebaseAuth?
-                        
-                        var upload: Dictionary<String, Any> = [:]
-                        
-                        var type = [String]()
-                        
-                        if obs.turtle {type.append(obs.turtleType)}
-                        if obs.disturbed {type.append("disturbed")}
-                        if obs.nest {type.append(obs.nestType)}
-                        if obs.hatching {type.append(obs.hatchingType)}
-                        
-                        upload["date"] = obs.date
-                        upload["property"] = obs.property != "" ? obs.property : nil
-                        upload["zone"] = obs.zoneLocation != "" ? obs.zoneLocation : nil
-                        upload["coords"] = obs.lat != 0 && obs.lon != 0 ? [obs.lat, obs.lon] : nil
-                        upload["comments"] = obs.comments != "" ? obs.comments : nil
-                        upload["type"] = type != [] ? type : nil
-                        
-                        
-                        self.db.collection("observations").addDocument(data: upload) { (error) in
-                            if let error = error {
-                                print("Error saving to Firebase, \(error)")
-                            } else {
-                                //Destroy Realm safely, only if successfully created to FireBase? MAYBE?
-                                do {
-                                    try self.realm.write {
-                                        self.realm.delete(obs)
-                                    }
-                                } catch {
-                                    print("Error deleting Realm: \(error)")}}}}}))
+            
+            
+            for obs in observations {
+                
+                var upload: Dictionary<String, Any> = [:]
+                
+                var type = [String]()
+                
+                let images = [obs.image1, obs.image2, obs.image3, obs.image4, obs.image5]
+                
+                if obs.turtle {type.append(obs.turtleType)}
+                if obs.disturbed {type.append("disturbed")}
+                if obs.nest {type.append(obs.nestType)}
+                if obs.hatching {type.append(obs.hatchingType)}
+                
+                upload["date"] = obs.date
+                upload["property"] = obs.property != "" ? obs.property : nil
+                upload["zone"] = obs.zoneLocation != "" ? obs.zoneLocation : nil
+                upload["coords"] = obs.lat != 0 && obs.lon != 0 ? [obs.lat, obs.lon] : nil
+                upload["comments"] = obs.comments != "" ? obs.comments : nil
+                upload["type"] = type != [] ? type : nil
+                upload["userid"] = self.defaults.string(forKey: "userID") ?? ""
+                upload["imageURLS"] = obs.id
+                
+                
+                self.db.collection("observations").addDocument(data: upload) { (error) in
+                    if let error = error {
+                        print("Error saving to Firebase, \(error)")
+                    } else {
+                        //Destroy Realm safely, only if successfully created to FireBase? MAYBE?
+                        do {
+                            try self.realm.write {
+                                self.realm.delete(obs)
+                            }
+                        } catch {
+                            print("Error deleting Realm: \(error)")
+                            
+                        }
+                    }
+                }
+                
+                
+                print(images)
+                
+//                for imageURL in images {
+//                    let storageRef = self.storage.reference()
+//                    let localFile = URL(string: imageURL)
+//                    let imageRef = storageRef.child("\(obs.id)/\(imageURL).jpg")
+//                    print("The imageRef is \(imageRef)")
+//
+//                    if let localFile = localFile {
+//                    let uploadTask = imageRef.putFile(from: localFile, metadata: nil) { metadata, error in
+//                        guard let metadata = metadata else {
+//                            // Uh-oh, an error occurred!
+//                            print("Error in guard let line 375")
+//                            return
+//                        }
+//                        // Metadata contains file metadata such as size, content-type.
+//                        // You can also access to download URL after upload.
+//                        imageRef.downloadURL { (url, error) in
+//                            guard let downloadURL = url else {
+//                                // Uh-oh, an error occurred!
+//                                return
+//                            }
+//
+//                        }
+//
+//                    }
+//                    }
+//                }
+
+
+            }
+        }))
         
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
         
         present(alert, animated: true)
     }
     
-    //MARK:- Helper Functions
-    
-    func updateButtons(sender: UIButton, for selected: Bool) {
-        if selected {
-            sender.setTitle(sender.currentTitle! + "✓", for: .normal)
-        } else {
-            sender.setTitle(String((sender.currentTitle?.dropLast())!), for: .normal)
+}
+//MARK:- Alert Action Extension -- doesn't go anything?  do I need to call it somehow?
+
+extension UIAlertAction {
+    var titleTextColor: UIColor? {
+        get {
+            return self.value(forKey: "titleTextColor") as? UIColor
+        } set {
+            
+            self.setValue(UIColor.black, forKey: "titleTextColor")
         }
     }
-    
 }
 
 //MARK:- Location Extension
@@ -339,12 +437,32 @@ extension ObservationViewController: CLLocationManagerDelegate {
 extension ObservationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let imageTaken = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            let fileName = ""
+            print("eegegegg")
+            let date = Date()
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'_'HH_mm_ss"
+            
+            let imageName = "/\(dateFormatter.string(from: date)).jpg"
             
             var documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-            documentsDirectoryPath += fileName
+            documentsDirectoryPath += imageName
             let settingsData: NSData = imageTaken.jpegData(compressionQuality: 1.0)! as NSData
             settingsData.write(toFile: documentsDirectoryPath, atomically: true)
+            
+            if data.image1 == "" {
+                data.image1 = documentsDirectoryPath
+            } else if data.image2 == "" {
+                data.image2 = documentsDirectoryPath
+            } else if data.image3 == "" {
+                data.image3 = documentsDirectoryPath
+            } else if data.image4 == "" {
+                data.image4 = documentsDirectoryPath
+            } else if data.image5 == "" {
+                data.image5 = documentsDirectoryPath
+            } else {
+                print("No more image storage ")
+            }
             
         }
         
