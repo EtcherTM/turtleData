@@ -24,8 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         let db = Firestore.firestore()
-        print(db)
-        print(Realm.Configuration.defaultConfiguration.fileURL)
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside  = true
         return true

@@ -25,7 +25,7 @@ struct K {
          ("A.10", "White house wooden shutters"),
          ("A.11", "Wooden gate/Beware of dog sign"),
          ("A.12", "White cement wall/red rocks"),
-         ("A.13", "Apartment bldg with purple wall")]
+         ("A.13", "Apartment bldg w/ purple wall")]
     
     static let propertiesInB =
         [("B.1", "Yellow house S of Atlantique"),
@@ -60,7 +60,7 @@ struct K {
          ("D.6", "Empty lot N of green tiles bldg"),
          ("D.7", "House two lots N of green tiles bldg"),
          ("D.8", "House 1 lot S of military event space"),
-         ("D.9", "Military event/grey military housing")]
+         ("D.9", "Military: event/grey housing")]
 
     static let propertiesInE =
         [("E.1", "Off-white military housing"),
@@ -70,7 +70,7 @@ struct K {
          ("E.5", "Spanish residence"),
          ("E.6", "White bldg/glass fence"),
          ("E.7", "Twin blue/white bldgs"),
-         ("E.8", "Rounded yellow building (x airport)"),
+         ("E.8", "Rounded yellow building"),
          ("E.9", "Lot/construct. N of twin blue bldgs"),
          ("E.10", "Large yellow apt bldg S of KFC lot")]
 

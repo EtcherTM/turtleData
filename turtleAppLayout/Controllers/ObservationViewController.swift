@@ -74,7 +74,7 @@ class ObservationViewController: UIViewController {
  
         
         for zone in K.zones {
-            let action = UIAlertAction(title: "Zone \(zone)", style: .default) { (_) in
+            let action = UIAlertAction(title: zone, style: .default) { (_) in
                 if self.data.zoneLocation != zone {
                     self.data.property = ""
                     self.propertyButton.setTitle("Choose\nProperty", for: .normal)
@@ -94,7 +94,8 @@ class ObservationViewController: UIViewController {
         }))
         
         present(alert, animated: true)
-        
+        alert.view.tintColor = UIColor.black
+
         
     }
     
@@ -133,11 +134,14 @@ class ObservationViewController: UIViewController {
                     sender.setTitle("\(property.0) : \(property.1)", for: .normal)
                 }))
             }
+                      
+            alert.addAction(UIAlertAction(title: "Clear Selection", style: .cancel, handler: { (_) in
+                sender.setTitle("Choose\nProperty", for: .normal)
+
+            }))
             present(alert, animated: true)
         }
-        
-        
-//        print("Property button pressed")
+
     }
     @IBAction func locationButtonPressed(_ sender: UIButton) {
         //Get location with CoreLocation
@@ -147,7 +151,6 @@ class ObservationViewController: UIViewController {
     
     @IBAction func photoButtonPressed(_ sender: UIButton) {
         present(imagePicker, animated: true, completion: nil)
-        print("Click!")
         sender.setTitle("✓", for: .normal)
     }
     
@@ -171,6 +174,8 @@ class ObservationViewController: UIViewController {
             }))
             
             present(alert, animated: true)
+            alert.view.tintColor = UIColor.black
+
         } else {
             sender.setTitle("Nest", for: .normal)
             data.nestType = ""
@@ -197,9 +202,13 @@ class ObservationViewController: UIViewController {
                alert.addAction(UIAlertAction(title: "Relocated", style: .default, handler: { (action) in
                    self.data.disturbedOrRelocated = "relocated"
                    sender.setTitle("Relocated nest ✓", for: .normal)
+
+
                }))
                
                present(alert, animated: true)
+//            YAY!  MAGIC!
+                alert.view.tintColor = UIColor.black
 
            } else {
                sender.setTitle("Existing Nest", for: .normal)
@@ -227,6 +236,8 @@ class ObservationViewController: UIViewController {
             }))
             
             present(alert, animated: true)
+            alert.view.tintColor = UIColor.black
+
         } else {
             sender.setTitle("Turtle", for: .normal)
             data.turtleType = ""
@@ -243,7 +254,7 @@ class ObservationViewController: UIViewController {
             
             alert.addAction(UIAlertAction(title: "Successful", style: .default, handler: { (action) in
                 self.data.hatchingType = "success"
-                sender.setTitle("Successful Hatching ✓", for: .normal)
+                sender.setTitle("Success Hatch ✓", for: .normal)
             }))
             alert.addAction(UIAlertAction(title: "Failed", style: .default, handler: { (action) in
                 self.data.hatchingType = "fail"
@@ -251,6 +262,8 @@ class ObservationViewController: UIViewController {
             }))
             
             present(alert, animated: true)
+            alert.view.tintColor = UIColor.black
+
         } else {
             sender.setTitle("Hatching", for: .normal)
             data.hatchingType = ""
@@ -280,7 +293,6 @@ class ObservationViewController: UIViewController {
             id.append(dateFormatter.string(from: Date()))
             id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
             self.data.id = id
-            print(id)
             
             do {
                 try self.realm.write {
@@ -288,7 +300,6 @@ class ObservationViewController: UIViewController {
                 }
                 
                 //Reset all fields if successfully saved
-                
                 self.locationButton.setTitle("Get Location", for: .normal)
                 self.nestButton.setTitle("Nest", for: .normal)
                 self.disturbedButton.setTitle("Disturbed", for: .normal)
@@ -303,106 +314,111 @@ class ObservationViewController: UIViewController {
                 print("Error saving data, \(error) END")
             }
             
-            
-        }))
+        })) // Ends closure begun in line 279
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
         
         present(alert, animated: true)
-        
-    }
     
-    //MARK:- Sync
+    } // Ends doneButtonPressed
+   
     
-    @IBAction func syncButtonPressed(_ sender: UIButton) {
-        //Probably should put a confirmation alert
+    
+    //MARK:- Back button
+    
+    @IBAction func backButtonPressed(_ sender: UIButton) {
+//        dismiss(animated: true, completion: nil) Sebo's old code
         
-        let alert = UIAlertController(title: "Are you sure you want to upload your data to the database?", message: "This will clear all values", preferredStyle: .alert)
-        
+        let alert = UIAlertController(title: "Discard all entries and return to Home Screen?", message: "", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-            //Read from Realm
-            let observations = self.realm.objects(Observation.self)
-            
-            
-            for obs in observations {
-                
-                var upload: Dictionary<String, Any> = [:]
-                
-                var type = [String]()
-                
-                let images = [obs.image1, obs.image2, obs.image3, obs.image4, obs.image5]
-                
-                if obs.turtle {type.append(obs.turtleType)}
-                if obs.disturbed {type.append("disturbed")}
-                if obs.nest {type.append(obs.nestType)}
-                if obs.hatching {type.append(obs.hatchingType)}
-                
-                upload["date"] = obs.date
-                upload["property"] = obs.property != "" ? obs.property : nil
-                upload["zone"] = obs.zoneLocation != "" ? obs.zoneLocation : nil
-                upload["coords"] = obs.lat != 0 && obs.lon != 0 ? [obs.lat, obs.lon] : nil
-                upload["comments"] = obs.comments != "" ? obs.comments : nil
-                upload["type"] = type != [] ? type : nil
-                upload["userid"] = self.defaults.string(forKey: "userID") ?? ""
-                upload["imageURLS"] = obs.id
-                
-                
-                self.db.collection("observations").addDocument(data: upload) { (error) in
-                    if let error = error {
-                        print("Error saving to Firebase, \(error)")
-                    } else {
-                        //Destroy Realm safely, only if successfully created to FireBase? MAYBE?
-                        do {
-                            try self.realm.write {
-                                self.realm.delete(obs)
-                            }
-                        } catch {
-                            print("Error deleting Realm: \(error)")
-                            
-                        }
-                    }
-                }
-                
-                
-                print(images)
-                
-//                for imageURL in images {
-//                    let storageRef = self.storage.reference()
-//                    let localFile = URL(string: imageURL)
-//                    let imageRef = storageRef.child("\(obs.id)/\(imageURL).jpg")
-//                    print("The imageRef is \(imageRef)")
-//
-//                    if let localFile = localFile {
-//                    let uploadTask = imageRef.putFile(from: localFile, metadata: nil) { metadata, error in
-//                        guard let metadata = metadata else {
-//                            // Uh-oh, an error occurred!
-//                            print("Error in guard let line 375")
-//                            return
-//                        }
-//                        // Metadata contains file metadata such as size, content-type.
-//                        // You can also access to download URL after upload.
-//                        imageRef.downloadURL { (url, error) in
-//                            guard let downloadURL = url else {
-//                                // Uh-oh, an error occurred!
-//                                return
-//                            }
-//
-//                        }
-//
-//                    }
-//                    }
-//                }
+            self.locationButton.setTitle("Get Location", for: .normal)
+            self.nestButton.setTitle("Nest", for: .normal)
+            self.disturbedButton.setTitle("Disturbed", for: .normal)
+            self.turtleButton.setTitle("Turtle", for: .normal)
+            self.hatchingButton.setTitle("Hatching", for: .normal)
+            self.zoneButton.setTitle("Choose\nZone", for: .normal)
+            self.propertyButton.setTitle("Choose\nProperty", for: .normal)
+            self.commentsTextField.text = ""
 
+            self.performSegue(withIdentifier: "ObsToHome", sender: self)
 
-            }
         }))
         
-        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-        
-        present(alert, animated: true)
-    }
     
+    
+    alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+    
+    present(alert, animated: true)
+    
+        } //Ends backButtonPressed function
+
+            
+            //Read from Realm
+
+//            let observations = self.realm.objects(Observation.self)
+//
+//
+//            for obs in observations {
+//
+//                var upload: Dictionary<String, Any> = [:]
+//
+//                var type = [String]()
+//
+//                let images = [obs.image1, obs.image2, obs.image3, obs.image4, obs.image5]
+//
+//                if obs.turtle {type.append(obs.turtleType)}
+//                if obs.disturbed {type.append("disturbed")}
+//                if obs.nest {type.append(obs.nestType)}
+//                if obs.hatching {type.append(obs.hatchingType)}
+//
+//                upload["date"] = obs.date
+//                upload["property"] = obs.property != "" ? obs.property : nil
+//                upload["zone"] = obs.zoneLocation != "" ? obs.zoneLocation : nil
+//                upload["coords"] = obs.lat != 0 && obs.lon != 0 ? [obs.lat, obs.lon] : nil
+//                upload["comments"] = obs.comments != "" ? obs.comments : nil
+//                upload["type"] = type != [] ? type : nil
+//                upload["userid"] = self.defaults.string(forKey: "userID") ?? ""
+//                upload["imageURLS"] = obs.id
+//
+//
+//                self.db.collection("observations").addDocument(data: upload) { (error) in
+//                    if let error = error {
+//                        print("Error saving to Firebase, \(error)")
+//                    } else {
+//                        //Destroy Realm safely, only if successfully created to FireBase? MAYBE?
+//                        do {
+//                            try self.realm.write {
+//                                self.realm.delete(obs)
+//                            }
+//                        } catch {
+//                            print("Error deleting Realm: \(error)")
+//
+//                        }
+//                    }
+//                }
+//
+//                let storageRef = self.storage.reference()
+//                for image in 0...4 {
+//                    if images[image] != "" {
+//                        if var documentsPathURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+//                            //This gives you the URL of the path
+//                            documentsPathURL.appendPathComponent("\(images[image]).jpg")
+//                            let imageRef = storageRef.child("\(obs.id)/image\(image).jpg")
+//                            print("The imageRef is \(imageRef)")
+//
+//                            print("documentsPathURL \(documentsPathURL)")
+//
+//                            imageRef.putFile(from: documentsPathURL, metadata: nil)
+//                        }
+//                    }
+//                }
+//            }
+
+//
+//    }
+//
 }
+
 //MARK:- Alert Action Extension -- doesn't go anything?  do I need to call it somehow?
 
 extension UIAlertAction {
@@ -437,29 +453,33 @@ extension ObservationViewController: CLLocationManagerDelegate {
 extension ObservationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let imageTaken = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            print("eegegegg")
             let date = Date()
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'_'HH_mm_ss"
             
-            let imageName = "/\(dateFormatter.string(from: date)).jpg"
+            let imgRef = dateFormatter.string(from: date)
+            
+            let imageName = "/\(imgRef).jpg"
+            
+            
             
             var documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+            print(documentsDirectoryPath)
             documentsDirectoryPath += imageName
             let settingsData: NSData = imageTaken.jpegData(compressionQuality: 1.0)! as NSData
             settingsData.write(toFile: documentsDirectoryPath, atomically: true)
             
             if data.image1 == "" {
-                data.image1 = documentsDirectoryPath
+                data.image1 = imgRef
             } else if data.image2 == "" {
-                data.image2 = documentsDirectoryPath
+                data.image2 = imgRef
             } else if data.image3 == "" {
-                data.image3 = documentsDirectoryPath
+                data.image3 = imgRef
             } else if data.image4 == "" {
-                data.image4 = documentsDirectoryPath
+                data.image4 = imgRef
             } else if data.image5 == "" {
-                data.image5 = documentsDirectoryPath
+                data.image5 = imgRef
             } else {
                 print("No more image storage ")
             }

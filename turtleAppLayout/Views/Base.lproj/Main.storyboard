@@ -12,11 +12,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ObservationViewController" customModule="turtleAppLayout" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Sl6-Po-jnQ">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IJg-Pk-y6X" userLabel="Top View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
@@ -149,13 +149,13 @@ Property</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZnV-FP-T7g" userLabel="Bottom View">
-                                        <rect key="frame" x="0.0" y="375" width="375" height="248"/>
+                                        <rect key="frame" x="0.0" y="375" width="375" height="272"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="MN1-JX-5QJ" userLabel="Bottom Stack View">
-                                                <rect key="frame" x="31" y="13" width="313" height="222"/>
+                                                <rect key="frame" x="37.5" y="2.5" width="300" height="267"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="75" translatesAutoresizingMaskIntoConstraints="NO" id="6Ec-qm-P1G" userLabel="Photo Ear Stack View">
-                                                        <rect key="frame" x="124" y="0.0" width="65" height="65"/>
+                                                        <rect key="frame" x="117.5" y="0.0" width="65" height="65"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PZV-Y3-Huh" userLabel="Photo View">
                                                                 <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
@@ -192,18 +192,28 @@ Property</string>
                                                         </subviews>
                                                     </stackView>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add comments here" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zbi-2B-yV1">
-                                                        <rect key="frame" x="31.5" y="85" width="250" height="75"/>
+                                                        <rect key="frame" x="25" y="85" width="250" height="25"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="250" id="8Fm-kb-LdX"/>
-                                                            <constraint firstAttribute="height" constant="75" id="OVQ-8X-ZNq"/>
-                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="wNH-6c-yOH"/>
+                                                            <constraint firstAttribute="height" constant="25" id="OVQ-8X-ZNq"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textField>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jfj-Ux-Bfd">
+                                                        <rect key="frame" x="0.0" y="130" width="300" height="75"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="75" id="VIr-OM-Rhf"/>
+                                                            <constraint firstAttribute="width" constant="300" id="XNo-fV-kUr"/>
+                                                        </constraints>
+                                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="ANG-3X-hSh" userLabel="Horizontal Done Upload Stack View">
-                                                        <rect key="frame" x="0.0" y="180" width="313" height="42"/>
+                                                        <rect key="frame" x="6" y="225" width="288" height="42"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ygf-aJ-Fyr">
                                                                 <rect key="frame" x="0.0" y="0.0" width="129" height="42"/>
@@ -217,14 +227,15 @@ Property</string>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bnH-kB-XBU">
-                                                                <rect key="frame" x="229" y="0.0" width="84" height="42"/>
+                                                                <rect key="frame" x="229" y="0.0" width="59" height="42"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                                                <state key="normal" title="Upload">
+                                                                <state key="normal" title="Back">
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
                                                                 <connections>
-                                                                    <action selector="syncButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Obq-bB-OBZ"/>
+                                                                    <action selector="backButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Obq-bB-OBZ"/>
+                                                                    <segue destination="bou-N1-6x4" kind="show" identifier="ObsToHome" id="TKZ-io-vQp"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -268,7 +279,7 @@ Property</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2701.5999999999999" y="97.601199400299862"/>
+            <point key="canvasLocation" x="2998" y="-255"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Kqs-zd-4TO">
@@ -293,13 +304,13 @@ Property</string>
             <objects>
                 <viewController id="bou-N1-6x4" customClass="HomeViewController" customModule="turtleAppLayout" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IXE-q9-aGY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="zH9-NS-mEr">
-                                <rect key="frame" x="62.5" y="123.5" width="250" height="420"/>
+                                <rect key="frame" x="62.5" y="113.5" width="250" height="420"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="User ID" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d5O-6d-BIY">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User ID" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d5O-6d-BIY">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="Pez-tr-Y95"/>
@@ -308,6 +319,9 @@ Property</string>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="userIDTextField:" destination="bou-N1-6x4" eventType="editingDidEnd" id="ubJ-4A-8Db"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OqP-8m-69z">
                                         <rect key="frame" x="0.0" y="90" width="250" height="60"/>
@@ -321,7 +335,7 @@ Property</string>
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="BYZ-38-t0r" kind="show" id="pkm-7A-HtD"/>
+                                            <action selector="newObsButtonPressed:" destination="bou-N1-6x4" eventType="touchUpInside" id="tww-tk-X9D"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="voD-vY-92a">
@@ -335,14 +349,16 @@ Property</string>
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GXw-ok-bQm">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="GXw-ok-bQm">
                                         <rect key="frame" x="0.0" y="270" width="250" height="60"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="d8M-bK-ZXP"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                        <state key="normal" title="Report No Activity">
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <state key="normal">
+                                            <string key="title">Report Zone 
+w/ No Activity</string>
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
@@ -356,6 +372,9 @@ Property</string>
                                         <state key="normal" title="Upload">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="uploadButtonPressed:" destination="bou-N1-6x4" eventType="touchUpInside" id="N2C-C1-WFc"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -368,12 +387,34 @@ Property</string>
                         <viewLayoutGuide key="safeArea" id="NnF-iK-dkQ"/>
                     </view>
                     <navigationItem key="navigationItem" id="LWp-jv-dQk"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="homeToObs" id="Mnt-mG-9Mf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E3V-1m-KF7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1943.4782608695655" y="-257.8125"/>
+            <point key="canvasLocation" x="1956" y="164"/>
+        </scene>
+        <!--Review View Controller-->
+        <scene sceneID="fny-mh-3TJ">
+            <objects>
+                <viewController id="6GO-ME-WD8" customClass="ReviewViewController" customModule="turtleAppLayout" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UGe-dw-V9n">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Nk0-sa-QLb"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vJB-yF-c1Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2998" y="512"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Mnt-mG-9Mf"/>
+        <segue reference="TKZ-io-vQp"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="camera.fill" catalog="system" width="128" height="96"/>
     </resources>
