@@ -38,4 +38,12 @@ class Observation: Object {
     @objc dynamic var image5: String = ""
     
     @objc dynamic var comments: String = ""
+    
+    @objc dynamic var aNoActivity : Bool = false
+    @objc dynamic var bNoActivity : Bool = false
+    @objc dynamic var cNoActivity : Bool = false
+    @objc dynamic var dNoActivity : Bool = false
+    @objc dynamic var eNoActivity : Bool = false
+    @objc dynamic var fNoActivity : Bool = false
+    
 }

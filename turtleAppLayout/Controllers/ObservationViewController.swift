@@ -140,6 +140,8 @@ class ObservationViewController: UIViewController {
 
             }))
             present(alert, animated: true)
+            alert.view.tintColor = UIColor.black
+
         }
 
     }
@@ -159,8 +161,8 @@ class ObservationViewController: UIViewController {
         if !data.nest {
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             
-            alert.addAction(UIAlertAction(title: "New/Probable", style: .default, handler: { (action) in
-                sender.setTitle("New/Probable ✓", for: .normal)
+            alert.addAction(UIAlertAction(title: "New/Prob", style: .default, handler: { (action) in
+                sender.setTitle("New/Prob ✓", for: .normal)
                 self.data.nestType = "nest"
             }))
             alert.addAction(UIAlertAction(title: "False Nest", style: .default, handler: { (action) in
@@ -275,7 +277,7 @@ class ObservationViewController: UIViewController {
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
         
-        let alert = UIAlertController(title: "Save this observation and return to main menu?", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Save this observation and clear all fields?", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (eee) in
             
             self.data.comments = self.commentsTextField.text ?? ""
@@ -300,10 +302,10 @@ class ObservationViewController: UIViewController {
                 }
                 
                 //Reset all fields if successfully saved
-                self.locationButton.setTitle("Get Location", for: .normal)
+                self.locationButton.setTitle("Get GPS Location", for: .normal)
                 self.nestButton.setTitle("Nest", for: .normal)
                 self.disturbedButton.setTitle("Disturbed", for: .normal)
-                self.turtleButton.setTitle("Turtle", for: .normal)
+                self.turtleButton.setTitle("Adult Turtle", for: .normal)
                 self.hatchingButton.setTitle("Hatching", for: .normal)
                 self.zoneButton.setTitle("Choose\nZone", for: .normal)
                 self.propertyButton.setTitle("Choose\nProperty", for: .normal)
@@ -318,6 +320,8 @@ class ObservationViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
         
         present(alert, animated: true)
+        alert.view.tintColor = UIColor.black
+
     
     } // Ends doneButtonPressed
    
@@ -326,21 +330,13 @@ class ObservationViewController: UIViewController {
     //MARK:- Back button
     
     @IBAction func backButtonPressed(_ sender: UIButton) {
-//        dismiss(animated: true, completion: nil) Sebo's old code
+        
         
         let alert = UIAlertController(title: "Discard all entries and return to Home Screen?", message: "", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-            self.locationButton.setTitle("Get Location", for: .normal)
-            self.nestButton.setTitle("Nest", for: .normal)
-            self.disturbedButton.setTitle("Disturbed", for: .normal)
-            self.turtleButton.setTitle("Turtle", for: .normal)
-            self.hatchingButton.setTitle("Hatching", for: .normal)
-            self.zoneButton.setTitle("Choose\nZone", for: .normal)
-            self.propertyButton.setTitle("Choose\nProperty", for: .normal)
-            self.commentsTextField.text = ""
-
-            self.performSegue(withIdentifier: "ObsToHome", sender: self)
+            
+            self.dismiss(animated: true, completion: nil)
 
         }))
         
@@ -349,6 +345,8 @@ class ObservationViewController: UIViewController {
     alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
     
     present(alert, animated: true)
+        alert.view.tintColor = UIColor.black
+
     
         } //Ends backButtonPressed function
 

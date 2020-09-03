@@ -20,39 +20,74 @@ class HomeViewController: UIViewController {
     let db = Firestore.firestore()
     let storage = Storage.storage()
 
-//    var userIdentification: String? = nil  ** NEED HELP! **
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        userIDTextField.text = defaults.value(forKey: "userID") ?? nil
-        //        let userIdentification = defaults.string(forKey: "userID") ** NEED HELP! **
 
-        // Do any additional setup after loading the view.
-    }
+        }
+        
 
-    
-    @IBAction func userIDTextField(_ sender: UITextField) {
-        print("entering user id")
-        print(sender.text)
-//        let userIdentification = sender.text ?? nil  ** NEED HELP **
-        
-        defaults.set(sender.text ?? nil, forKey: "userID")
-        print(defaults.value(forKey: "userID"))
-        // userID should be saved in user defaults
-        
-    }
     @IBAction func newObsButtonPressed(_ sender: UIButton) {
-        print(defaults.value(forKey: "userID"))
-//        if defaults.value(forKey: "userID") == nil {
-            print("Enter a User ID first")
-
-//        }
+        if defaults.value(forKey: "userID") as? String != "" {
+            performSegue(withIdentifier: "HomeToObs", sender: self)
+        } else {
+            let alert = UIAlertController(title: "Enter a User ID first", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+            present(alert, animated: true)
+            alert.view.tintColor = UIColor.black
+        }
+        
     }
 
-//        If userID is nil or "" then show alert saying add user ID first
+
         
+    @IBAction func reviewPressed(_ sender: UIButton) {
+            let observations = self.realm.objects(Observation.self)
+        
+            let alert = UIAlertController(title: "Select an observation to review", message: "", preferredStyle: .alert)
+        
+          for obs in observations {
+
+            let title: String
+            
+            var type: String = ""
+            
+            if obs.nest {
+                type = "Nest "
+            }
+            if obs.disturbed {
+                type.append("Disturbed or Relocated")
+            }
+            if obs.hatching {
+                type.append("Hatching ")
+            }
+            if obs.turtle {
+                type.append("Turtle")
+            }
+            
+            title = "\(obs.property) \(type)"
+            
+            alert.addAction(UIAlertAction(title: title, style: .default, handler: nil))
+            }
+                      
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+                       
+               self.dismiss(animated: true, completion: nil)
+
+           }))
+        
+            present(alert, animated: true)
+            alert.view.tintColor = UIColor.black
+        
+        
+    }
     
     
+    @IBAction func noActivityPressed(_ sender: UIButton) {
+        
+        
+  
+        
+    }
     
     @IBAction func uploadButtonPressed(_ sender: UIButton) {
         
@@ -124,6 +159,8 @@ class HomeViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
         
         present(alert, animated: true)
+        alert.view.tintColor = UIColor.black
+
     }
     
 }
