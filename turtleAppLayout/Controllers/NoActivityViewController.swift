@@ -30,7 +30,7 @@ class NoActivityViewController: UIViewController {
 
         data.aNoActivity = !data.aNoActivity
         if data.aNoActivity == true {
-//            sender.setTitle("A ✓", for: .normal)
+            sender.setTitle("A ✓", for: .normal)
         }
     }
     
