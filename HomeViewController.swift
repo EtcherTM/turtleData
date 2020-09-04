@@ -30,8 +30,8 @@ class HomeViewController: UIViewController {
         if defaults.value(forKey: "userID") as? String != "" {
             performSegue(withIdentifier: "HomeToObs", sender: self)
         } else {
-            let alert = UIAlertController(title: "Enter a User ID first", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+            let alert = UIAlertController(title: "NO USER ID ENTERED. GO BACK TO WELCOME SCREEN AND ENTER USER ID FIRST", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "DISMISS", style: .cancel, handler: nil))
             present(alert, animated: true)
             alert.view.tintColor = UIColor.black
         }
@@ -41,11 +41,12 @@ class HomeViewController: UIViewController {
 
         
     @IBAction func reviewPressed(_ sender: UIButton) {
-            let observations = self.realm.objects(Observation.self)
         
-            let alert = UIAlertController(title: "Select an observation to review", message: "", preferredStyle: .alert)
+        let observations = self.realm.objects(Observation.self)
+    
+        let alert = UIAlertController(title: "Select an observation to review", message: "", preferredStyle: .alert)
         
-          for obs in observations {
+        for obs in observations {
 
             let title: String
             
@@ -66,18 +67,17 @@ class HomeViewController: UIViewController {
             
             title = "\(obs.property) \(type)"
             
-            alert.addAction(UIAlertAction(title: title, style: .default, handler: nil))
+//            alert.addAction(UIAlertAction(title: title, style: .default, handler: { (_) in
+//                
+//            })
             }
-                      
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-                       
-               self.dismiss(animated: true, completion: nil)
 
-           }))
-        
+            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            
             present(alert, animated: true)
             alert.view.tintColor = UIColor.black
-        
         
     }
     

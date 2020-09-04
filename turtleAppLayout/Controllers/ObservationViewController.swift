@@ -15,7 +15,7 @@ import FirebaseFirestore
 import FirebaseStorage
 
 
-class ObservationViewController: UIViewController {
+class ObservationViewController: UIViewController, UITextViewDelegate{
     
     var data = Observation()
     
@@ -44,7 +44,8 @@ class ObservationViewController: UIViewController {
     @IBOutlet weak var turtleButton: UIButton!
     @IBOutlet weak var hatchingButton: UIButton!
 
-    @IBOutlet weak var commentsTextField: UITextField!
+    @IBOutlet weak var commentsTextView: UITextView!
+//    @IBOutlet weak var commentsTextField: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -65,19 +66,24 @@ class ObservationViewController: UIViewController {
         imagePicker.delegate = self
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .camera
+        self.commentsTextView.delegate = self
+        
     }
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.view.endEditing(true)
+    }
     //MARK:- IBActions: Data Entry
     @IBAction func zoneButtonPressed(_ sender: UIButton) {
         
-        let alert = UIAlertController(title: "Select a zone", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "SELECT A ZONE", message: "", preferredStyle: .alert)
  
         
         for zone in K.zones {
             let action = UIAlertAction(title: zone, style: .default) { (_) in
                 if self.data.zoneLocation != zone {
                     self.data.property = ""
-                    self.propertyButton.setTitle("Choose\nProperty", for: .normal)
+                    self.propertyButton.setTitle("CHOOSE\nPROPERTY", for: .normal)
                 }
                 sender.setTitle("Zone: \(zone) ✓", for: .normal)
                 self.data.zoneLocation = zone
@@ -86,7 +92,7 @@ class ObservationViewController: UIViewController {
             alert.addAction(action)
         }
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+        alert.addAction(UIAlertAction(title: "CANCEL", style: .cancel, handler: { (_) in
             sender.setTitle("Choose\nzone", for: .normal)
             self.data.zoneLocation = ""
             self.data.property = ""
@@ -115,16 +121,14 @@ class ObservationViewController: UIViewController {
         case "F":
             propertyList = K.propertiesInF
         default:
-            let alert = UIAlertController(title: "Select zone first", message: "", preferredStyle: .alert)
-            
-//            alert.setValue(messageMutableString, forKey: "attributedMessage")
+            let alert = UIAlertController(title: "SELECT ZONE FIRST", message: "", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             present(alert, animated: true)
         }
         
         if let propertyList = propertyList {
-            let alert = UIAlertController(title: "Select a property from zone \(data.zoneLocation)", message: "", preferredStyle: .alert)
+            let alert = UIAlertController(title: "SELECT A PROPERTY FROM ZONE \(data.zoneLocation)", message: "", preferredStyle: .alert)
         
             
             
@@ -135,7 +139,7 @@ class ObservationViewController: UIViewController {
                 }))
             }
                       
-            alert.addAction(UIAlertAction(title: "Clear Selection", style: .cancel, handler: { (_) in
+            alert.addAction(UIAlertAction(title: "CLEAR SELECTION", style: .cancel, handler: { (_) in
                 sender.setTitle("Choose\nProperty", for: .normal)
 
             }))
@@ -161,15 +165,15 @@ class ObservationViewController: UIViewController {
         if !data.nest {
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             
-            alert.addAction(UIAlertAction(title: "New/Prob", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "NEW/PROBABLE", style: .default, handler: { (action) in
                 sender.setTitle("New/Prob ✓", for: .normal)
                 self.data.nestType = "nest"
             }))
-            alert.addAction(UIAlertAction(title: "False Nest", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "FALSE NEST", style: .default, handler: { (action) in
                 self.data.nestType = "false nest"
                 sender.setTitle("False Nest ✓", for: .normal)
             }))
-            alert.addAction(UIAlertAction(title: "False Crawl", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "FALSE CRAWL", style: .default, handler: { (action) in
                 self.data.nestType = "false crawl"
                 sender.setTitle("False Crawl ✓", for: .normal)
 
@@ -192,16 +196,16 @@ class ObservationViewController: UIViewController {
         
         if !data.disturbed {
 
-               let alert = UIAlertController(title: "Disturbed or Relocated?", message: "", preferredStyle: .alert)
+               let alert = UIAlertController(title: "DISTURBED OR RELOCATED?", message: "", preferredStyle: .alert)
 //            action.setValue(UIColor.orange, forKey: "titleTextColor") Sebo:  Don't know where to put this to make it actually do something.
                
-               alert.addAction(UIAlertAction(title: "Disturbed", style: .default, handler: { (action) in
+               alert.addAction(UIAlertAction(title: "DISTURBED", style: .default, handler: { (action) in
 
                    self.data.disturbedOrRelocated = "disturbed"
                    sender.setTitle("Disturbed nest ✓", for: .normal)
 
                }))
-               alert.addAction(UIAlertAction(title: "Relocated", style: .default, handler: { (action) in
+               alert.addAction(UIAlertAction(title: "RELOCATED", style: .default, handler: { (action) in
                    self.data.disturbedOrRelocated = "relocated"
                    sender.setTitle("Relocated nest ✓", for: .normal)
 
@@ -226,13 +230,13 @@ class ObservationViewController: UIViewController {
     @IBAction func turtleButtonPressed(_ sender: UIButton) {
         if !data.turtle {
 
-            let alert = UIAlertController(title: "Dead or Alive?", message: "", preferredStyle: .alert)
+            let alert = UIAlertController(title: "DEAD OR ALIVE?", message: "", preferredStyle: .alert)
             
-            alert.addAction(UIAlertAction(title: "Dead", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "DEAD", style: .default, handler: { (action) in
                 self.data.turtleType = "dead"
                 sender.setTitle("Dead Adult ✓", for: .normal)
             }))
-            alert.addAction(UIAlertAction(title: "Alive", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "ALIVE", style: .default, handler: { (action) in
                 self.data.turtleType = "live"
                 sender.setTitle("Live Adult ✓", for: .normal)
             }))
@@ -252,13 +256,13 @@ class ObservationViewController: UIViewController {
         //Number of eggs?
         if !data.hatching {
 
-            let alert = UIAlertController(title: "Succesful hatching?", message: "", preferredStyle: .alert)
+            let alert = UIAlertController(title: "SUCCESSFUL HATCHING?", message: "", preferredStyle: .alert)
             
-            alert.addAction(UIAlertAction(title: "Successful", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "SUCCESS", style: .default, handler: { (action) in
                 self.data.hatchingType = "success"
                 sender.setTitle("Success Hatch ✓", for: .normal)
             }))
-            alert.addAction(UIAlertAction(title: "Failed", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "FAIL", style: .default, handler: { (action) in
                 self.data.hatchingType = "fail"
                 sender.setTitle("Failed Hatching ✓", for: .normal)
             }))
@@ -273,15 +277,18 @@ class ObservationViewController: UIViewController {
         data.hatching = !data.hatching
     }
     
+    
+ 
+    
+    
     //MARK:- Save Data
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
         
-        let alert = UIAlertController(title: "Save this observation and clear all fields?", message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (eee) in
+        let alert = UIAlertController(title: "SAVE THIS OBSERVATION AND CLEAR ALL FIELDS?", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (eee) in
             
-            self.data.comments = self.commentsTextField.text ?? ""
-            
+            self.data.comments = self.commentsTextView.text ?? ""
             var id = self.data.zoneLocation != "" ? self.data.zoneLocation : "-"
             
             if self.data.nest { id.append(self.data.nestType == "nest" ? "N" : "F") }
@@ -309,7 +316,8 @@ class ObservationViewController: UIViewController {
                 self.hatchingButton.setTitle("Hatching", for: .normal)
                 self.zoneButton.setTitle("Choose\nZone", for: .normal)
                 self.propertyButton.setTitle("Choose\nProperty", for: .normal)
-                self.commentsTextField.text = ""
+                self.commentsTextView.text = ""
+                
                 
                 self.data = Observation()
             } catch {
@@ -317,7 +325,7 @@ class ObservationViewController: UIViewController {
             }
             
         })) // Ends closure begun in line 279
-        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "NO", style: .cancel, handler: nil))
         
         present(alert, animated: true)
         alert.view.tintColor = UIColor.black
@@ -332,9 +340,9 @@ class ObservationViewController: UIViewController {
     @IBAction func backButtonPressed(_ sender: UIButton) {
         
         
-        let alert = UIAlertController(title: "Discard all entries and return to Home Screen?", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "DISCARD ALL ENTRIES AND RETURN TO HOME SCREEN?", message: "", preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (action) in
             
             self.dismiss(animated: true, completion: nil)
 
@@ -342,93 +350,15 @@ class ObservationViewController: UIViewController {
         
     
     
-    alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+    alert.addAction(UIAlertAction(title: "NO", style: .cancel, handler: nil))
     
     present(alert, animated: true)
         alert.view.tintColor = UIColor.black
-
-    
+        
         } //Ends backButtonPressed function
 
-            
-            //Read from Realm
-
-//            let observations = self.realm.objects(Observation.self)
-//
-//
-//            for obs in observations {
-//
-//                var upload: Dictionary<String, Any> = [:]
-//
-//                var type = [String]()
-//
-//                let images = [obs.image1, obs.image2, obs.image3, obs.image4, obs.image5]
-//
-//                if obs.turtle {type.append(obs.turtleType)}
-//                if obs.disturbed {type.append("disturbed")}
-//                if obs.nest {type.append(obs.nestType)}
-//                if obs.hatching {type.append(obs.hatchingType)}
-//
-//                upload["date"] = obs.date
-//                upload["property"] = obs.property != "" ? obs.property : nil
-//                upload["zone"] = obs.zoneLocation != "" ? obs.zoneLocation : nil
-//                upload["coords"] = obs.lat != 0 && obs.lon != 0 ? [obs.lat, obs.lon] : nil
-//                upload["comments"] = obs.comments != "" ? obs.comments : nil
-//                upload["type"] = type != [] ? type : nil
-//                upload["userid"] = self.defaults.string(forKey: "userID") ?? ""
-//                upload["imageURLS"] = obs.id
-//
-//
-//                self.db.collection("observations").addDocument(data: upload) { (error) in
-//                    if let error = error {
-//                        print("Error saving to Firebase, \(error)")
-//                    } else {
-//                        //Destroy Realm safely, only if successfully created to FireBase? MAYBE?
-//                        do {
-//                            try self.realm.write {
-//                                self.realm.delete(obs)
-//                            }
-//                        } catch {
-//                            print("Error deleting Realm: \(error)")
-//
-//                        }
-//                    }
-//                }
-//
-//                let storageRef = self.storage.reference()
-//                for image in 0...4 {
-//                    if images[image] != "" {
-//                        if var documentsPathURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-//                            //This gives you the URL of the path
-//                            documentsPathURL.appendPathComponent("\(images[image]).jpg")
-//                            let imageRef = storageRef.child("\(obs.id)/image\(image).jpg")
-//                            print("The imageRef is \(imageRef)")
-//
-//                            print("documentsPathURL \(documentsPathURL)")
-//
-//                            imageRef.putFile(from: documentsPathURL, metadata: nil)
-//                        }
-//                    }
-//                }
-//            }
-
-//
-//    }
-//
 }
 
-//MARK:- Alert Action Extension -- doesn't go anything?  do I need to call it somehow?
-
-extension UIAlertAction {
-    var titleTextColor: UIColor? {
-        get {
-            return self.value(forKey: "titleTextColor") as? UIColor
-        } set {
-            
-            self.setValue(UIColor.black, forKey: "titleTextColor")
-        }
-    }
-}
 
 //MARK:- Location Extension
 
@@ -479,7 +409,7 @@ extension ObservationViewController: UIImagePickerControllerDelegate, UINavigati
             } else if data.image5 == "" {
                 data.image5 = imgRef
             } else {
-                print("No more image storage ")
+                print("NO MORE IMAGE STORAGE SPACE AVAILABLE")
             }
             
         }

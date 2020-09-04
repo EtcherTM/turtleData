@@ -19,6 +19,7 @@ class LoginViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
+    
     func didDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -36,8 +37,8 @@ class LoginViewController: UIViewController {
         if defaults.value(forKey: "userID") as? String != "" {
               performSegue(withIdentifier: "LoginToHome", sender: self)
           } else {
-              let alert = UIAlertController(title: "Enter a User ID first", message: "", preferredStyle: .alert)
-              alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+              let alert = UIAlertController(title: "ENTER A USER ID FIRST", message: "", preferredStyle: .alert)
+              alert.addAction(UIAlertAction(title: "DISMISS", style: .cancel, handler: nil))
               present(alert, animated: true)
               alert.view.tintColor = UIColor.black
           }
