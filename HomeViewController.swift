@@ -13,8 +13,19 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseStorage
 
-class HomeViewController: UIViewController {
+protocol ButtonUpdater {
+    func changeButtonLabel()
+}
 
+class HomeViewController: UIViewController, ButtonUpdater {
+    
+    func changeButtonLabel() {
+        noActivityButton.setTitle(noActivityValue, for: .normal)
+        print("eIHEFEIFHEI\(noActivityValue)")
+    }
+    
+    @IBOutlet weak var noActivityButton: UIButton!
+    
     let realm = try! Realm()
     let defaults = UserDefaults.standard
     let db = Firestore.firestore()
@@ -74,10 +85,8 @@ class HomeViewController: UIViewController {
             }))
             }
 
-            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
-                self.dismiss(animated: true, completion: nil)
-            }))
-            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
             present(alert, animated: true)
             alert.view.tintColor = UIColor.black
         
@@ -87,7 +96,8 @@ class HomeViewController: UIViewController {
     @IBAction func noActivityPressed(_ sender: UIButton) {
         
         self.performSegue(withIdentifier: "HomeToNoActivity", sender: self)
-//        sender.setTitle(data.noActivityValue, for: .normal)
+        
+//        sender.setTitle(data.noActivityValue, for: .normal) NEED TO DO THIS AFTER COMING BACK FROM NoActivityViewController
     
     }
     

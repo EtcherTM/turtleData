@@ -12,8 +12,8 @@ import RealmSwift
 
 
 class NoActivityViewController: UIViewController {
-
-    var data = Observation()
+    let defaults = UserDefaults.standard
+    var noAct = NoActivityReport()
     
     @IBOutlet weak var aButton: UIButton!
     @IBOutlet weak var bButton: UIButton!
@@ -28,9 +28,8 @@ class NoActivityViewController: UIViewController {
     }
     
     @IBAction func aButtonPressed(_ sender: UIButton) {
-
-        data.aNoActivity = !data.aNoActivity
-        if data.aNoActivity == true {
+        noAct.aNoActivity = !noAct.aNoActivity
+        if noAct.aNoActivity == true {
             sender.setTitle("A ✓", for: .normal)
         } else {
             sender.setTitle("A", for: .normal)
@@ -38,41 +37,40 @@ class NoActivityViewController: UIViewController {
     }
     
     @IBAction func bButtonPressed(_ sender: UIButton) {
-        data.bNoActivity = !data.bNoActivity
-        if data.bNoActivity == true {
+        noAct.bNoActivity = !noAct.bNoActivity
+        if noAct.bNoActivity == true {
             sender.setTitle("B ✓", for: .normal)
         } else {
             sender.setTitle("B", for: .normal)
         }
     }
     @IBAction func cButtonPressed(_ sender: UIButton) {
-        data.cNoActivity = !data.cNoActivity
-        if data.cNoActivity == true {
-            sender.setTitle("C ✓", for: .normal)
+        noAct.cNoActivity = !noAct.cNoActivity
+        if noAct.cNoActivity == true {            sender.setTitle("C ✓", for: .normal)
         } else {
             sender.setTitle("C", for: .normal)
         }
     }
     
     @IBAction func dButtonPressed(_ sender: UIButton) {
-        data.dNoActivity = !data.dNoActivity
-        if data.dNoActivity == true {
+         noAct.dNoActivity = !noAct.dNoActivity
+         if noAct.dNoActivity == true {
             sender.setTitle("D ✓", for: .normal)
         } else {
             sender.setTitle("D", for: .normal)
         }
     }
     @IBAction func eButtonPressed(_ sender: UIButton) {
-        data.eNoActivity = !data.eNoActivity
-        if data.eNoActivity == true {
+        noAct.eNoActivity = !noAct.eNoActivity
+        if noAct.eNoActivity == true {
             sender.setTitle("E ✓", for: .normal)
         } else {
             sender.setTitle("E", for: .normal)
         }
     }
     @IBAction func fButtonPressed(_ sender: UIButton) {
-        data.fNoActivity = !data.fNoActivity
-        if data.fNoActivity == true {
+        noAct.fNoActivity = !noAct.fNoActivity
+        if noAct.fNoActivity == true {
             sender.setTitle("F ✓", for: .normal)
         } else {
             sender.setTitle("F", for: .normal)
@@ -83,40 +81,104 @@ class NoActivityViewController: UIViewController {
     
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
+        
+        print(noAct)
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMddHH"
+
+        
+        if noAct.aNoActivity == true {
+            var id = ""
+            id.append("A")
+            id.append(dateFormatter.string(from: Date()))
+            id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
+            id.append("NOACTIVITY")
+            print("The new observation ID is: \(id)")
+        }
+        
+        if noAct.bNoActivity == true {
+            var id = ""
+            id.append("B")
+            id.append(dateFormatter.string(from: Date()))
+            id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
+            id.append("NOACTIVITY")
+            print("The new observation ID is: \(id)")
+
+        }
+        
+        if noAct.cNoActivity == true {
+            var id = ""
+            id.append("C")
+            id.append(dateFormatter.string(from: Date()))
+            id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
+            id.append("NOACTIVITY")
+            print("The new observation ID is: \(id)")
+
+        }
+        
+        if noAct.dNoActivity == true {
+            var id = ""
+            id.append("D")
+            id.append(dateFormatter.string(from: Date()))
+            id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
+            id.append("NOACTIVITY")
+            print("The new observation ID is: \(id)")
+
+        }
+        
+        if noAct.eNoActivity == true {
+            var id = ""
+            id.append("E")
+            id.append(dateFormatter.string(from: Date()))
+            id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
+            id.append("NOACTIVITY")
+            print("The new observation ID is: \(id)")
+
+        }
+        
+        if noAct.fNoActivity == true {
+            var id = ""
+            id.append("F")
+            id.append(dateFormatter.string(from: Date()))
+            id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
+            id.append("NOACTIVITY")
+            print("The new observation ID is: \(id)")
+
+        }
+        
         self.dismiss(animated: true, completion: createLabel)
-//        self.performSegue(withIdentifier: "NoActivityToHome", sender: self)
-    
+            
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
 
-    
-     func createLabel() {
+    func createLabel() {
 
-            data.noActivityValue = "No Activity in Zone: "
+            var noActButtonText = "No Activity in Zone: "
             
-            if data.aNoActivity {
-                data.noActivityValue.append("A")
+            if noAct.aNoActivity {
+                noActButtonText.append("A")
             }
-            if data.bNoActivity {
-                data.noActivityValue.append("B")
+            if noAct.bNoActivity {
+                noActButtonText.append("B")
             }
-            if data.cNoActivity {
-                data.noActivityValue.append("C")
+            if noAct.cNoActivity {
+                noActButtonText.append("C")
             }
-            if data.dNoActivity {
-                data.noActivityValue.append("D")
+            if noAct.dNoActivity {
+                noActButtonText.append("D")
             }
-            if data.eNoActivity {
-                data.noActivityValue.append("E")
+            if noAct.eNoActivity {
+                noActButtonText.append("E")
             }
-            if data.fNoActivity {
-                data.noActivityValue.append("F")
+            if noAct.fNoActivity {
+                noActButtonText.append("F")
             }
             
-            print(data.noActivityValue ?? "No zone selected")
+            print(noActButtonText)
             
             
         }

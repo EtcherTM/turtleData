@@ -339,25 +339,26 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     
     @IBAction func backButtonPressed(_ sender: UIButton) {
         
+        self.dismiss(animated: true, completion: nil)
         
-        let alert = UIAlertController(title: "CLEAR ALL ENTRIES AND RETURN TO HOME SCREEN?", message: "", preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (action) in
-            
-            self.dismiss(animated: true, completion: nil)
+        }
 
-        }))
-        
     
-    
-    alert.addAction(UIAlertAction(title: "NO", style: .cancel, handler: nil))
-    
-    present(alert, animated: true)
-        alert.view.tintColor = UIColor.black
-        
-        } //Ends backButtonPressed function
-
 }
+//        let alert = UIAlertController(title: "CLEAR ALL ENTRIES AND RETURN TO HOME SCREEN?", message: "", preferredStyle: .alert)
+//
+//        alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (action) in
+//
+//            self.dismiss(animated: true, completion: nil)
+//
+//
+//
+//
+//    alert.addAction(UIAlertAction(title: "NO", style: .cancel, handler: nil))
+//
+//    present(alert, animated: true)
+//        alert.view.tintColor = UIColor.black
+//
 
 
 //MARK:- Location Extension
