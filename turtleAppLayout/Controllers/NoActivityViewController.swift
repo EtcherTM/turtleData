@@ -14,6 +14,8 @@ import RealmSwift
 class NoActivityViewController: UIViewController {
     let defaults = UserDefaults.standard
     var noAct = NoActivityReport()
+
+    
     
     @IBOutlet weak var aButton: UIButton!
     @IBOutlet weak var bButton: UIButton!
@@ -24,7 +26,12 @@ class NoActivityViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        noAct.aNoActivity = false
+        noAct.bNoActivity = false
+        noAct.cNoActivity = false
+        noAct.dNoActivity = false
+        noAct.eNoActivity = false
+        noAct.fNoActivity = false
     }
     
     @IBAction func aButtonPressed(_ sender: UIButton) {
