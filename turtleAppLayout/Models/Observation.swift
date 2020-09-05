@@ -46,4 +46,7 @@ class Observation: Object {
     @objc dynamic var eNoActivity : Bool = false
     @objc dynamic var fNoActivity : Bool = false
     
+    @objc dynamic var noActivityValue : String = ""
+
+    
 }

@@ -19,6 +19,8 @@ class HomeViewController: UIViewController {
     let defaults = UserDefaults.standard
     let db = Firestore.firestore()
     let storage = Storage.storage()
+    var data = Observation()
+    var noActivityValue: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,9 +69,9 @@ class HomeViewController: UIViewController {
             
             title = "\(obs.property) \(type)"
             
-//            alert.addAction(UIAlertAction(title: title, style: .default, handler: { (_) in
-//                
-//            })
+            alert.addAction(UIAlertAction(title: title, style: .default, handler: { (_) in
+                
+            }))
             }
 
             alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
@@ -84,9 +86,9 @@ class HomeViewController: UIViewController {
     
     @IBAction func noActivityPressed(_ sender: UIButton) {
         
-        
-  
-        
+        self.performSegue(withIdentifier: "HomeToNoActivity", sender: self)
+//        sender.setTitle(data.noActivityValue, for: .normal)
+    
     }
     
     @IBAction func uploadButtonPressed(_ sender: UIButton) {
@@ -121,6 +123,7 @@ class HomeViewController: UIViewController {
                 upload["userid"] = self.defaults.string(forKey: "userID") ?? ""
                 upload["imageURLS"] = obs.id
                 
+//   NEED TO ADD OBSERVATION ID#, AND "NO ACTIVITY" VALUES
                 
                 self.db.collection("observations").addDocument(data: upload) { (error) in
                     if let error = error {

@@ -7,19 +7,20 @@
 //
 
 import UIKit
-
+import CoreLocation
+import RealmSwift
 
 
 class NoActivityViewController: UIViewController {
 
+    var data = Observation()
+    
     @IBOutlet weak var aButton: UIButton!
     @IBOutlet weak var bButton: UIButton!
     @IBOutlet weak var cButton: UIButton!
     @IBOutlet weak var dButton: UIButton!
     @IBOutlet weak var eButton: UIButton!
     @IBOutlet weak var fButton: UIButton!
-
-    var data = Observation()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,20 +79,50 @@ class NoActivityViewController: UIViewController {
         }
     }
     
+    
+    
+    
     @IBAction func doneButtonPressed(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
-        
+        self.dismiss(animated: true, completion: createLabel)
+//        self.performSegue(withIdentifier: "NoActivityToHome", sender: self)
+    
     }
     
-    
-    /*
-    // MARK: - Navigation
+    @IBAction func cancelButtonPressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
+    
+     func createLabel() {
+
+            data.noActivityValue = "No Activity in Zone: "
+            
+            if data.aNoActivity {
+                data.noActivityValue.append("A")
+            }
+            if data.bNoActivity {
+                data.noActivityValue.append("B")
+            }
+            if data.cNoActivity {
+                data.noActivityValue.append("C")
+            }
+            if data.dNoActivity {
+                data.noActivityValue.append("D")
+            }
+            if data.eNoActivity {
+                data.noActivityValue.append("E")
+            }
+            if data.fNoActivity {
+                data.noActivityValue.append("F")
+            }
+            
+            print(data.noActivityValue ?? "No zone selected")
+            
+            
+        }
+//        sender.destination.
         // Pass the selected object to the new view controller.
     }
-    */
 
-}
+
+

@@ -320,9 +320,18 @@ Property</string>
                                     <action selector="loginPressed:" destination="W9u-GY-0Fu" eventType="touchUpInside" id="vXy-YS-Xf1"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo projet tortues" translatesAutoresizingMaskIntoConstraints="NO" id="ph4-h5-JRX">
+                                <rect key="frame" x="137.5" y="537" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="dGP-jm-MqD"/>
+                                    <constraint firstAttribute="width" constant="100" id="kLI-WT-DIi"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.26752641799999999" green="0.76885825399999996" blue="0.94120407100000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="fZh-ws-Okr" firstAttribute="bottom" secondItem="ph4-h5-JRX" secondAttribute="bottom" constant="30" id="K1Z-dB-wMD"/>
+                            <constraint firstItem="ph4-h5-JRX" firstAttribute="centerX" secondItem="G01-Qk-CI9" secondAttribute="centerX" id="Kvi-rd-KVJ"/>
                             <constraint firstItem="GVZ-UT-0nI" firstAttribute="top" secondItem="mJM-wY-G7A" secondAttribute="bottom" constant="50" id="RrK-LB-cZA"/>
                             <constraint firstItem="mJM-wY-G7A" firstAttribute="centerX" secondItem="G01-Qk-CI9" secondAttribute="centerX" id="TUN-Me-vRW"/>
                             <constraint firstItem="mJM-wY-G7A" firstAttribute="top" secondItem="fZh-ws-Okr" secondAttribute="top" constant="50" id="gZn-hS-S6S"/>
@@ -338,7 +347,7 @@ Property</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a3d-0l-NGm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1081" y="162"/>
+            <point key="canvasLocation" x="1080.8" y="161.46926536731635"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Kqs-zd-4TO">
@@ -348,6 +357,10 @@ Property</string>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="d7a-r0-y83">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" type="italicSystem" pointSize="25"/>
+                            <color key="textColor" red="0.26752641799999999" green="0.76885825399999996" blue="0.94120407100000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -363,11 +376,11 @@ Property</string>
             <objects>
                 <viewController id="bou-N1-6x4" customClass="HomeViewController" customModule="turtleAppLayout" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IXE-q9-aGY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="zH9-NS-mEr">
-                                <rect key="frame" x="62.5" y="153.5" width="250" height="360"/>
+                                <rect key="frame" x="62.5" y="143.5" width="250" height="360"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OqP-8m-69z">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="60"/>
@@ -413,7 +426,6 @@ w/ No Activity</string>
                                         </state>
                                         <connections>
                                             <action selector="noActivityPressed:" destination="bou-N1-6x4" eventType="touchUpInside" id="pAF-Sx-24L"/>
-                                            <segue destination="EQF-wT-VWZ" kind="presentation" identifier="HomeToNoActivity" id="oBN-Fe-gOh"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGe-Jg-qMo">
@@ -433,7 +445,7 @@ w/ No Activity</string>
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.84644907709999995" green="0.82422047850000002" blue="0.78430789710000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="zH9-NS-mEr" firstAttribute="centerX" secondItem="IXE-q9-aGY" secondAttribute="centerX" id="6h8-fi-tBL"/>
                             <constraint firstItem="zH9-NS-mEr" firstAttribute="centerY" secondItem="IXE-q9-aGY" secondAttribute="centerY" id="LpE-wa-PLZ"/>
@@ -443,6 +455,7 @@ w/ No Activity</string>
                     <navigationItem key="navigationItem" id="LWp-jv-dQk"/>
                     <connections>
                         <segue destination="6GO-ME-WD8" kind="presentation" identifier="HomeToReview" id="Cko-og-qoX"/>
+                        <segue destination="EQF-wT-VWZ" kind="presentation" identifier="HomeToNoActivity" id="PBx-1e-EMO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E3V-1m-KF7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -458,21 +471,21 @@ w/ No Activity</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" &quot;Nothing to report&quot; for which zones?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3F4-0Z-yUP" userLabel="&quot;Nothing to report&quot; for which zones?">
-                                <rect key="frame" x="62.5" y="30" width="250" height="70"/>
+                                <rect key="frame" x="62.5" y="15" width="250" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="5nC-z1-VTa"/>
-                                    <constraint firstAttribute="height" constant="70" id="L2S-5u-gee"/>
+                                    <constraint firstAttribute="height" constant="60" id="L2S-5u-gee"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <color key="textColor" red="0.27459414652732816" green="0.33138772947106598" blue="0.24271003608548017" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xsg-pA-VBe">
-                                <rect key="frame" x="150" y="120" width="75" height="60"/>
+                                <rect key="frame" x="150" y="95" width="75" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="WPZ-Pe-ddd"/>
-                                    <constraint firstAttribute="height" constant="60" id="kpZ-Uj-SAY"/>
+                                    <constraint firstAttribute="height" constant="50" id="kpZ-Uj-SAY"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <state key="normal" title="A">
@@ -483,11 +496,11 @@ w/ No Activity</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x22-v7-R4Q">
-                                <rect key="frame" x="150" y="190" width="75" height="60"/>
+                                <rect key="frame" x="150" y="155" width="75" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="MK1-Bd-kpm"/>
-                                    <constraint firstAttribute="height" constant="60" id="Rd0-5K-d0d"/>
+                                    <constraint firstAttribute="height" constant="50" id="Rd0-5K-d0d"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <state key="normal" title="B">
@@ -498,10 +511,10 @@ w/ No Activity</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rNQ-Vl-aMb">
-                                <rect key="frame" x="150" y="260" width="75" height="60"/>
+                                <rect key="frame" x="150" y="215" width="75" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="Hdd-af-PO4"/>
+                                    <constraint firstAttribute="height" constant="50" id="Hdd-af-PO4"/>
                                     <constraint firstAttribute="width" constant="75" id="l6o-DN-KhA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
@@ -513,10 +526,10 @@ w/ No Activity</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gPX-ci-Bms">
-                                <rect key="frame" x="150" y="330" width="75" height="60"/>
+                                <rect key="frame" x="150" y="275" width="75" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="bwk-5W-pBd"/>
+                                    <constraint firstAttribute="height" constant="50" id="bwk-5W-pBd"/>
                                     <constraint firstAttribute="width" constant="75" id="gsv-rD-Fpy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
@@ -528,10 +541,10 @@ w/ No Activity</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uJ5-rW-801">
-                                <rect key="frame" x="150" y="400" width="75" height="60"/>
+                                <rect key="frame" x="150" y="335" width="75" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="5se-mE-qAa"/>
+                                    <constraint firstAttribute="height" constant="50" id="5se-mE-qAa"/>
                                     <constraint firstAttribute="width" constant="75" id="Fs8-EL-ge4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
@@ -543,10 +556,10 @@ w/ No Activity</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yji-0u-TU5">
-                                <rect key="frame" x="150" y="470" width="75" height="60"/>
+                                <rect key="frame" x="150" y="395" width="75" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="Pr7-4T-se3"/>
+                                    <constraint firstAttribute="height" constant="50" id="Pr7-4T-se3"/>
                                     <constraint firstAttribute="width" constant="75" id="qxV-YJ-RRw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
@@ -557,20 +570,36 @@ w/ No Activity</string>
                                     <action selector="fButtonPressed:" destination="EQF-wT-VWZ" eventType="touchUpInside" id="st5-5g-470"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lXJ-0e-IJw">
-                                <rect key="frame" x="150" y="550" width="75" height="48"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="75" id="ya4-Um-4D9"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                <state key="normal" title="Done">
-                                    <color key="titleColor" red="0.27459414650000002" green="0.33138772950000001" blue="0.2427100361" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
-                                <connections>
-                                    <action selector="doneButtonPressed:" destination="EQF-wT-VWZ" eventType="touchUpInside" id="hc6-eS-XEE"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="xxd-BR-umD" userLabel="Done Stack View">
+                                <rect key="frame" x="71" y="569" width="233" height="48"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lXJ-0e-IJw">
+                                        <rect key="frame" x="0.0" y="0.0" width="75" height="48"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="75" id="ya4-Um-4D9"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                        <state key="normal" title="Done">
+                                            <color key="titleColor" red="0.27459414650000002" green="0.33138772950000001" blue="0.2427100361" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="doneButtonPressed:" destination="EQF-wT-VWZ" eventType="touchUpInside" id="hc6-eS-XEE"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Yk-kr-idY">
+                                        <rect key="frame" x="135" y="0.0" width="98" height="48"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelButtonPressed:" destination="EQF-wT-VWZ" eventType="touchUpInside" id="HZT-Rg-Qx1"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.75582505646804654" green="0.91038519139999996" blue="0.66310057530652433" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -583,13 +612,13 @@ w/ No Activity</string>
                             <constraint firstItem="x22-v7-R4Q" firstAttribute="centerX" secondItem="zxr-Pd-MAn" secondAttribute="centerX" id="W5R-VI-9AH"/>
                             <constraint firstItem="xsg-pA-VBe" firstAttribute="centerX" secondItem="zxr-Pd-MAn" secondAttribute="centerX" id="WwP-7y-ZNQ"/>
                             <constraint firstItem="uJ5-rW-801" firstAttribute="centerX" secondItem="zxr-Pd-MAn" secondAttribute="centerX" id="blN-au-bk4"/>
-                            <constraint firstItem="lXJ-0e-IJw" firstAttribute="centerX" secondItem="zxr-Pd-MAn" secondAttribute="centerX" id="cHp-Ae-ibn"/>
                             <constraint firstItem="gPX-ci-Bms" firstAttribute="top" secondItem="rNQ-Vl-aMb" secondAttribute="bottom" constant="10" id="d0P-sO-jbz"/>
                             <constraint firstItem="x22-v7-R4Q" firstAttribute="top" secondItem="xsg-pA-VBe" secondAttribute="bottom" constant="10" id="fl9-wS-Wmw"/>
-                            <constraint firstItem="lXJ-0e-IJw" firstAttribute="top" secondItem="yji-0u-TU5" secondAttribute="bottom" constant="20" id="hCa-El-t2w"/>
+                            <constraint firstItem="xxd-BR-umD" firstAttribute="centerX" secondItem="zxr-Pd-MAn" secondAttribute="centerX" id="ksk-h5-vrV"/>
                             <constraint firstItem="rNQ-Vl-aMb" firstAttribute="top" secondItem="x22-v7-R4Q" secondAttribute="bottom" constant="10" id="mbj-8l-anE"/>
                             <constraint firstItem="rNQ-Vl-aMb" firstAttribute="centerX" secondItem="zxr-Pd-MAn" secondAttribute="centerX" id="pJ1-gs-JTy"/>
-                            <constraint firstItem="3F4-0Z-yUP" firstAttribute="top" secondItem="fI0-1w-LID" secondAttribute="top" constant="30" id="qrA-08-ipl" userLabel="&quot;Nothing to report&quot; for which zones?.top = Safe Area.top + 30"/>
+                            <constraint firstItem="3F4-0Z-yUP" firstAttribute="top" secondItem="fI0-1w-LID" secondAttribute="top" constant="15" id="qrA-08-ipl" userLabel="&quot;Nothing to report&quot; for which zones?.top = Safe Area.top + 30"/>
+                            <constraint firstItem="fI0-1w-LID" firstAttribute="bottom" secondItem="xxd-BR-umD" secondAttribute="bottom" constant="30" id="sgc-f4-yvr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fI0-1w-LID"/>
                     </view>
@@ -601,6 +630,7 @@ w/ No Activity</string>
                         <outlet property="dButton" destination="gPX-ci-Bms" id="hXx-ci-XIP"/>
                         <outlet property="eButton" destination="uJ5-rW-801" id="9rd-Gz-MFH"/>
                         <outlet property="fButton" destination="yji-0u-TU5" id="VOW-q1-CUw"/>
+                        <segue destination="bou-N1-6x4" kind="presentation" identifier="NoActivityToHome" id="Qut-vR-tEU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZAr-41-AML" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -814,7 +844,12 @@ w/ No Activity</string>
             <point key="canvasLocation" x="2802" y="161"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="PBx-1e-EMO"/>
+        <segue reference="Qut-vR-tEU"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="camera.fill" catalog="system" width="128" height="96"/>
+        <image name="logo projet tortues" width="701" height="701"/>
     </resources>
 </document>

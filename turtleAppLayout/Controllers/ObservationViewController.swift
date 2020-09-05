@@ -49,12 +49,12 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
+//        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     func didDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+//        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     
@@ -340,7 +340,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     @IBAction func backButtonPressed(_ sender: UIButton) {
         
         
-        let alert = UIAlertController(title: "DISCARD ALL ENTRIES AND RETURN TO HOME SCREEN?", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "CLEAR ALL ENTRIES AND RETURN TO HOME SCREEN?", message: "", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (action) in
             
