@@ -21,7 +21,7 @@ class HomeViewController: UIViewController, ButtonUpdater {
     
     func changeButtonLabel() {
         noActivityButton.setTitle(noActivityValue, for: .normal)
-        print("eIHEFEIFHEI\(noActivityValue)")
+        
     }
     
     @IBOutlet weak var noActivityButton: UIButton!
@@ -35,12 +35,15 @@ class HomeViewController: UIViewController, ButtonUpdater {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(false, animated: true)
+
 
         }
         
 
     @IBAction func newObsButtonPressed(_ sender: UIButton) {
         if defaults.value(forKey: "userID") as? String != "" {
+            print("New Observation Button pressed.")
             performSegue(withIdentifier: "HomeToObs", sender: self)
         } else {
             let alert = UIAlertController(title: "NO USER ID ENTERED. GO BACK TO WELCOME SCREEN AND ENTER USER ID FIRST", message: "", preferredStyle: .alert)
@@ -54,45 +57,46 @@ class HomeViewController: UIViewController, ButtonUpdater {
 
         
     @IBAction func reviewPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "ToLog", sender: self)
         
-        let observations = self.realm.objects(Observation.self)
-    
-        let alert = UIAlertController(title: "Select an observation to review", message: "", preferredStyle: .alert)
         
-        for obs in observations {
-
-            let title: String
-            
-            var type: String = ""
-            
-            if obs.nest {
-                type = "Nest "
-            }
-            if obs.disturbed {
-                type.append("Disturbed or Relocated")
-            }
-            if obs.hatching {
-                type.append("Hatching ")
-            }
-            if obs.turtle {
-                type.append("Turtle")
-            }
-            
-            title = "\(obs.property) \(type)"
-            
-            alert.addAction(UIAlertAction(title: title, style: .default, handler: { (_) in
-                
-            }))
-            }
-
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-            present(alert, animated: true)
-            alert.view.tintColor = UIColor.black
+//        let observations = self.realm.objects(Observation.self)
+//
+//        let alert = UIAlertController(title: "Select an observation to review", message: "", preferredStyle: .alert)
+//
+//        for obs in observations {
+//
+//            let title: String
+//
+//            var type: String = ""
+//
+//            if obs.nest {
+//                type = "Nest "
+//            }
+//            if obs.disturbed {
+//                type.append("Disturbed or Relocated")
+//            }
+//            if obs.hatching {
+//                type.append("Hatching ")
+//            }
+//            if obs.turtle {
+//                type.append("Turtle")
+//            }
+//
+//            title = "\(obs.property) \(type) \(obs.comments)"
+//
+//            alert.addAction(UIAlertAction(title: title, style: .default, handler: { (_) in
+//
+//            }))
+//            }
+//
+//            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//
+//            present(alert, animated: true)
+//            alert.view.tintColor = UIColor.black
         
     }
-    
-    
+
     @IBAction func noActivityPressed(_ sender: UIButton) {
         
         self.performSegue(withIdentifier: "HomeToNoActivity", sender: self)

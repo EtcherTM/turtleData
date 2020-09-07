@@ -68,11 +68,31 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         imagePicker.sourceType = .camera
         self.commentsTextView.delegate = self
         
+//        if let data  = data {
+//          title = "Edit \(data.id)"
+//
+//          fillTextFields()
+//        } else {
+//          title = "Add New Observation"
+//        }
+
+        
     }
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         self.view.endEditing(true)
     }
+    
+    
+    func fillTextFields() {
+      commentsTextView.text = data.comments
+//      categoryTextField.text = specimen.category.name
+//      descriptionTextField.text = specimen.specimenDescription
+//
+//      selectedCategory = specimen.category
+    }
+
     //MARK:- IBActions: Data Entry
     @IBAction func zoneButtonPressed(_ sender: UIButton) {
         
@@ -317,6 +337,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
                 self.zoneButton.setTitle("Choose\nZone", for: .normal)
                 self.propertyButton.setTitle("Choose\nProperty", for: .normal)
                 self.commentsTextView.text = ""
+//                self.photoButton.setTitle("", for: .normal)  What's wrong here?
                 
                 
                 self.data = Observation()
@@ -368,6 +389,10 @@ extension ObservationViewController: CLLocationManagerDelegate {
         if let location = locations.last {
             data.lat = location.coordinate.latitude
             data.lon = location.coordinate.longitude
+            print(data.lat)
+            print(data.lon)
+            
+//            Need a notification for when it actually get location, how long does it take?
         }
         
         
