@@ -60,7 +60,7 @@ class ListTableViewController: UITableViewController {
     
     
     
-    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Row selected")
         performSegue(withIdentifier: "Edit", sender: self)
     }
