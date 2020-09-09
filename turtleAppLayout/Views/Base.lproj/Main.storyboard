@@ -763,10 +763,16 @@ w/ No Activity</string>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="beL-wd-4Uk" userLabel="Zone Button">
                                                 <rect key="frame" x="67" y="0.0" width="57" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="57" id="RM2-V4-nOf"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                 <state key="normal" title="Zone?">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="zoneButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="6Iz-XH-rcb"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -789,6 +795,10 @@ w/ No Activity</string>
                                                 <state key="normal" title="Property/Lot?">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="propertyButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="4gv-Xd-7eU"/>
+                                                    <action selector="zoneButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="UJm-ZA-Mv7"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -811,6 +821,10 @@ w/ No Activity</string>
                                                 <state key="normal" title="GPS coordinates?">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="locationButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="x8J-lF-gNj"/>
+                                                    <action selector="propertyButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="pUN-5g-nuq"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -850,6 +864,9 @@ w/ No Activity</string>
                                                 <state key="normal" title="?">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="nestButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="uwW-mb-598"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -865,13 +882,16 @@ w/ No Activity</string>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wTO-Za-23X" userLabel="Accuracy Button">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wTO-Za-23X" userLabel="Disturbed Relocated Button">
                                                 <rect key="frame" x="206.5" y="0.0" width="30" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                 <state key="normal" title="?">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="disturbedButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="Psf-q2-0Xo"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -894,6 +914,9 @@ w/ No Activity</string>
                                                 <state key="normal" title="?">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="turtleButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="qW2-OQ-s1P"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -916,6 +939,9 @@ w/ No Activity</string>
                                                 <state key="normal" title="?">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="hatchingButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="0dG-Uj-NGL"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -925,7 +951,7 @@ w/ No Activity</string>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="325" id="ng3-PI-dsZ" userLabel="width = 340"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="waz-BC-VmS" userLabel="height = 60"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" spellCheckingType="yes" returnKeyType="done"/>
                                     </textField>
                                 </subviews>
@@ -958,6 +984,9 @@ w/ No Activity</string>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f7P-v2-lSa" userLabel="Photo 1 Button">
                                                         <rect key="frame" x="0.0" y="0.0" width="80" height="75"/>
+                                                        <connections>
+                                                            <action selector="photo1ButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="K1S-Yx-fRS"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -982,6 +1011,9 @@ w/ No Activity</string>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ifl-Tz-b6a" userLabel="Photo 2 Button">
                                                         <rect key="frame" x="17" y="0.0" width="46" height="80"/>
+                                                        <connections>
+                                                            <action selector="photo2ButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="cl4-hh-jzo"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1015,6 +1047,9 @@ w/ No Activity</string>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ky-U8-rpB" userLabel="Photo 3 Button">
                                                         <rect key="frame" x="17" y="0.0" width="46" height="80"/>
+                                                        <connections>
+                                                            <action selector="photo3ButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="O8v-Ef-euG"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1040,6 +1075,9 @@ w/ No Activity</string>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HH5-CH-GPF" userLabel="Photo 4 Button">
                                                         <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                                        <connections>
+                                                            <action selector="photo4ButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="WJz-to-T3s"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1065,6 +1103,9 @@ w/ No Activity</string>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5dh-sg-nGO" userLabel="Photo 5 Button">
                                                         <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                                        <connections>
+                                                            <action selector="photo5ButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="k3X-GI-bZy"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1099,6 +1140,9 @@ w/ No Activity</string>
                                 <state key="normal" title="Done/Save">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="doneButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="I5U-II-bf3"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.99763482809066772" green="0.9297772252719545" blue="0.46690741279966258" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1114,6 +1158,22 @@ w/ No Activity</string>
                         <viewLayoutGuide key="safeArea" id="eSJ-oj-V0G"/>
                     </view>
                     <navigationItem key="navigationItem" id="SYP-qN-KU4"/>
+                    <connections>
+                        <outlet property="accuracyLabel" destination="owY-e1-kue" id="203-ak-YEf"/>
+                        <outlet property="commentsTextView" destination="nzz-FT-sc7" id="Td6-Uo-qgz"/>
+                        <outlet property="disturbedButton" destination="wTO-Za-23X" id="5kJ-lL-Dvi"/>
+                        <outlet property="hatchingButton" destination="ARa-yI-MLa" id="GAO-Nv-oGa"/>
+                        <outlet property="locationButton" destination="YjK-Hw-8u5" id="HXX-u6-9E9"/>
+                        <outlet property="nestButton" destination="F93-Th-nFc" id="rA2-ID-hep"/>
+                        <outlet property="photoImageView1" destination="zCc-N4-0ka" id="Pt9-O6-gZV"/>
+                        <outlet property="photoImageView2" destination="uSW-nU-dVf" id="Bm7-9a-0N9"/>
+                        <outlet property="photoImageView3" destination="XDv-C2-8Kx" id="oyq-F2-QDe"/>
+                        <outlet property="photoImageView4" destination="BKM-Ct-ais" id="tkc-bI-1pS"/>
+                        <outlet property="photoImageView5" destination="KZ3-L7-c4i" id="9xN-xO-GQR"/>
+                        <outlet property="propertyButton" destination="U9L-FI-Edf" id="PSo-4Z-Rga"/>
+                        <outlet property="turtleButton" destination="QDb-zI-d3w" id="HKC-gt-vJJ"/>
+                        <outlet property="zoneButton" destination="beL-wd-4Uk" id="pnV-Wh-gPi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mw9-Ep-fnZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
