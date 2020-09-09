@@ -33,7 +33,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     var userID: String = ""
     
     
-    var image = [UIImage]()
+    var image = 0
     
     @IBOutlet weak var zoneButton: UIButton!
     @IBOutlet weak var propertyButton: UIButton!
@@ -43,19 +43,24 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     @IBOutlet weak var disturbedButton: UIButton!
     @IBOutlet weak var turtleButton: UIButton!
     @IBOutlet weak var hatchingButton: UIButton!
-
+    
     @IBOutlet weak var photoImage1: UIImageView!
+    @IBOutlet weak var photoImage2: UIImageView!
+    @IBOutlet weak var photoImage3: UIImageView!
+    @IBOutlet weak var photoImage4: UIImageView!
+    @IBOutlet weak var photoImage5: UIImageView!
+    
     @IBOutlet weak var commentsTextView: UITextView!
-//    @IBOutlet weak var commentsTextField: UITextField!
+    //    @IBOutlet weak var commentsTextField: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        navigationController?.setNavigationBarHidden(true, animated: animated)
+        //        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     func didDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        navigationController?.setNavigationBarHidden(false, animated: animated)
+        //        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     
@@ -69,33 +74,48 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         imagePicker.sourceType = .camera
         self.commentsTextView.delegate = self
         
+        //Set image ids
+        photoImage1.tag = 1
+        photoImage2.tag = 2
+        photoImage3.tag = 3
+        photoImage4.tag = 4
+        photoImage5.tag = 5
+        
+        print(photoImage1.tag)
+        print(photoImage1)
+        print(photoImage2.tag)
+        print(photoImage2)
+        print(photoImage3.tag)
+        print(photoImage4.tag)
+        print(photoImage5.tag)
+        
     }
-
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         self.view.endEditing(true)
     }
     
-    func prepareForSegue(_ segue: UIStoryboardSegue, sender sender: AnyObject?)
+    func prepareForSegue(_ segue: UIStoryboardSegue, sender: AnyObject?)
     {
         var destinationController = segue.destination
-         // now you can pass the image to the destination view controller
+        // now you can pass the image to the destination view controller
     }
     
     
     func fillTextFields() {
-      commentsTextView.text = data.comments
-//      categoryTextField.text = specimen.category.name
-//      descriptionTextField.text = specimen.specimenDescription
-//
-//      selectedCategory = specimen.category
+        commentsTextView.text = data.comments
+        //      categoryTextField.text = specimen.category.name
+        //      descriptionTextField.text = specimen.specimenDescription
+        //
+        //      selectedCategory = specimen.category
     }
-
+    
     //MARK:- IBActions: Data Entry
     @IBAction func zoneButtonPressed(_ sender: UIButton) {
         
         let alert = UIAlertController(title: "SELECT A ZONE", message: "", preferredStyle: .alert)
- 
+        
         
         for zone in K.zones {
             let action = UIAlertAction(title: zone, style: .default) { (_) in
@@ -119,7 +139,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         
         present(alert, animated: true)
         alert.view.tintColor = UIColor.black
-
+        
         
     }
     
@@ -147,7 +167,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         
         if let propertyList = propertyList {
             let alert = UIAlertController(title: "SELECT A PROPERTY FROM ZONE \(data.zoneLocation)", message: "", preferredStyle: .alert)
-        
+            
             
             
             for property in propertyList {
@@ -156,17 +176,18 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
                     sender.setTitle("\(property.0) : \(property.1)", for: .normal)
                 }))
             }
-                      
+            
             alert.addAction(UIAlertAction(title: "CLEAR SELECTION", style: .cancel, handler: { (_) in
                 sender.setTitle("Property/Lot?", for: .normal)
-
+                
             }))
             present(alert, animated: true)
             alert.view.tintColor = UIColor.black
-
+            
         }
-
+        
     }
+    
     @IBAction func locationButtonPressed(_ sender: UIButton) {
         //Get location with CoreLocation
         locationManager.requestLocation()
@@ -174,6 +195,22 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     }
     
     @IBAction func photoButtonPressed(_ sender: UIButton) {
+        
+        switch sender.currentTitle ?? "" {
+        case "photo1":
+            image = 1
+        case "photo2":
+            image = 2
+        case "photo3":
+            image = 3
+        case "photo4":
+            image = 4
+        case "photo5":
+            image = 5
+        default:
+            print("DODODODODO")
+        }
+        
         present(imagePicker, animated: true, completion: nil)
     }
     
@@ -193,12 +230,12 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             alert.addAction(UIAlertAction(title: "FALSE CRAWL", style: .default, handler: { (action) in
                 self.data.nestType = "false crawl"
                 sender.setTitle("False Crawl ✓", for: .normal)
-
+                
             }))
             
             present(alert, animated: true)
             alert.view.tintColor = UIColor.black
-
+            
         } else {
             sender.setTitle("Nest?", for: .normal)
             data.nestType = ""
@@ -212,32 +249,32 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     @IBAction func disturbedButtonPressed(_ sender: UIButton) {
         
         if !data.disturbed {
-
-               let alert = UIAlertController(title: "DISTURBED OR RELOCATED?", message: "", preferredStyle: .alert)
-//            action.setValue(UIColor.orange, forKey: "titleTextColor") Sebo:  Don't know where to put this to make it actually do something.
-               
-               alert.addAction(UIAlertAction(title: "DISTURBED", style: .default, handler: { (action) in
-
-                   self.data.disturbedOrRelocated = "disturbed"
-                   sender.setTitle("Disturbed nest ✓", for: .normal)
-
-               }))
-               alert.addAction(UIAlertAction(title: "RELOCATED", style: .default, handler: { (action) in
-                   self.data.disturbedOrRelocated = "relocated"
-                   sender.setTitle("Relocated nest ✓", for: .normal)
-
-
-               }))
-               
-               present(alert, animated: true)
-//            YAY!  MAGIC!
-                alert.view.tintColor = UIColor.black
-
-           } else {
-               sender.setTitle("Disturb/Reloc?", for: .normal)
-               data.disturbedOrRelocated = ""
-           }
-           data.disturbed = !data.disturbed
+            
+            let alert = UIAlertController(title: "DISTURBED OR RELOCATED?", message: "", preferredStyle: .alert)
+            //            action.setValue(UIColor.orange, forKey: "titleTextColor") Sebo:  Don't know where to put this to make it actually do something.
+            
+            alert.addAction(UIAlertAction(title: "DISTURBED", style: .default, handler: { (action) in
+                
+                self.data.disturbedOrRelocated = "disturbed"
+                sender.setTitle("Disturbed nest ✓", for: .normal)
+                
+            }))
+            alert.addAction(UIAlertAction(title: "RELOCATED", style: .default, handler: { (action) in
+                self.data.disturbedOrRelocated = "relocated"
+                sender.setTitle("Relocated nest ✓", for: .normal)
+                
+                
+            }))
+            
+            present(alert, animated: true)
+            //            YAY!  MAGIC!
+            alert.view.tintColor = UIColor.black
+            
+        } else {
+            sender.setTitle("Disturb/Reloc?", for: .normal)
+            data.disturbedOrRelocated = ""
+        }
+        data.disturbed = !data.disturbed
         
     }
     
@@ -246,7 +283,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     
     @IBAction func turtleButtonPressed(_ sender: UIButton) {
         if !data.turtle {
-
+            
             let alert = UIAlertController(title: "DEAD OR ALIVE?", message: "", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "DEAD", style: .default, handler: { (action) in
@@ -260,7 +297,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             
             present(alert, animated: true)
             alert.view.tintColor = UIColor.black
-
+            
         } else {
             sender.setTitle("Turtle?", for: .normal)
             data.turtleType = ""
@@ -272,7 +309,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     @IBAction func hatchingButtonPressed(_ sender: UIButton) {
         //Number of eggs?
         if !data.hatching {
-
+            
             let alert = UIAlertController(title: "SUCCESSFUL HATCHING?", message: "", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "SUCCESS", style: .default, handler: { (action) in
@@ -286,7 +323,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             
             present(alert, animated: true)
             alert.view.tintColor = UIColor.black
-
+            
         } else {
             sender.setTitle("Hatching?", for: .normal)
             data.hatchingType = ""
@@ -295,7 +332,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     }
     
     
- 
+    
     
     
     //MARK:- Save Data
@@ -327,15 +364,19 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
                 
                 //Reset all fields if successfully saved
                 self.locationButton.setTitle("Get GPS Location", for: .normal)
-                self.nestButton.setTitle("Nest", for: .normal)
-                self.disturbedButton.setTitle("Disturbed", for: .normal)
-                self.turtleButton.setTitle("Adult Turtle", for: .normal)
+                self.nestButton.setTitle("Nest?", for: .normal)
+                self.disturbedButton.setTitle("Disturb/Reloc?", for: .normal)
+                self.turtleButton.setTitle("Turtle?", for: .normal)
                 self.hatchingButton.setTitle("Hatching", for: .normal)
-                self.zoneButton.setTitle("Choose\nZone", for: .normal)
-                self.propertyButton.setTitle("Choose\nProperty", for: .normal)
+                self.zoneButton.setTitle("Zone?", for: .normal)
+                self.propertyButton.setTitle("Property/Lot?", for: .normal)
                 self.commentsTextView.text = ""
 //                self.photoButton.setTitle("", for: .normal)  What's wrong here?
-                
+                self.photoImage1.image = UIImage(systemName: "camera.fill")
+                self.photoImage2.image = UIImage(systemName: "camera.fill")
+                self.photoImage3.image = UIImage(systemName: "camera.fill")
+                self.photoImage4.image = UIImage(systemName: "camera.fill")
+                self.photoImage5.image = UIImage(systemName: "camera.fill")
                 
                 self.data = Observation()
             } catch {
@@ -347,10 +388,10 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         
         present(alert, animated: true)
         alert.view.tintColor = UIColor.black
-
-    
+        
+        
     } // Ends doneButtonPressed
-   
+    
     
     
     //MARK:- Back button
@@ -359,8 +400,8 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         
         self.dismiss(animated: true, completion: nil)
         
-        }
-
+    }
+    
     
 }
 //        let alert = UIAlertController(title: "CLEAR ALL ENTRIES AND RETURN TO HOME SCREEN?", message: "", preferredStyle: .alert)
@@ -406,8 +447,14 @@ extension ObservationViewController: UIImagePickerControllerDelegate, UINavigati
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let imageTaken = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             
-            photoImage1.image = imageTaken
-
+            //          Call function to set the image on the obs screen
+            //          Call function to generate reference
+            //           Maybe instead of saving to realm here just save image to variables imageTaken1 - imageTaken5 and save to realm with the rest of data
+            //     Also note after 5 photos they can just replace a photo by tapping on it.
+            
+            
+            
+            
             let date = Date()
             
             let dateFormatter = DateFormatter()
@@ -423,18 +470,24 @@ extension ObservationViewController: UIImagePickerControllerDelegate, UINavigati
             let settingsData: NSData = imageTaken.jpegData(compressionQuality: 1.0)! as NSData
             settingsData.write(toFile: documentsDirectoryPath, atomically: true)
             
-            if data.image1 == "" {
+            switch image {
+            case 1:
+                photoImage1.image = imageTaken
                 data.image1 = imgRef
-            } else if data.image2 == "" {
+            case 2:
+                photoImage2.image = imageTaken
                 data.image2 = imgRef
-            } else if data.image3 == "" {
+            case 3:
+                photoImage3.image = imageTaken
                 data.image3 = imgRef
-            } else if data.image4 == "" {
+            case 4:
+                photoImage4.image = imageTaken
                 data.image4 = imgRef
-            } else if data.image5 == "" {
+            case 5:
+                photoImage5.image = imageTaken
                 data.image5 = imgRef
-            } else {
-                print("NO MORE IMAGE STORAGE SPACE AVAILABLE")
+            default:
+                print("error BOUBOUBOBUOBUBOUBOBUOUBBUBUBO")
             }
             
         }
