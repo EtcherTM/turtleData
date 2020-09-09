@@ -47,6 +47,7 @@ class EditViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var photoImageView4: UIImageView!
     @IBOutlet weak var photoImageView5: UIImageView!
     
+    @IBOutlet weak var doneButtonPressed: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -78,40 +79,59 @@ class EditViewController: UIViewController, UITextViewDelegate {
     }
 
     @IBAction func zoneButtonPressed(_ sender: UIButton) {
+        print("zone")
     }
     @IBAction func propertyButtonPressed(_ sender: UIButton) {
+        print("property")
+
     }
     
     @IBAction func locationButtonPressed(_ sender: UIButton) {
+        print("location")
+
     }
     
     @IBAction func nestButtonPressed(_ sender: UIButton) {
+        print("nest")
     }
     
     @IBAction func disturbedButtonPressed(_ sender: UIButton) {
+        print("disturbed")
+
     }
     
     @IBAction func turtleButtonPressed(_ sender: UIButton) {
+        print("turtle")
+
     }
 
     @IBAction func hatchingButtonPressed(_ sender: UIButton) {
+        print("hatching")
     }
     
     @IBAction func photo1ButtonPressed(_ sender: UIButton) {
+        print("click1")
     }
     
     @IBAction func photo2ButtonPressed(_ sender: UIButton) {
+        print("click2")
     }
     
     @IBAction func photo3ButtonPressed(_ sender: UIButton) {
+        print("click3")
+
     }
     
     @IBAction func photo4ButtonPressed(_ sender: UIButton) {
+        print("click4")
     }
     
     @IBAction func photo5ButtonPressed(_ sender: UIButton) {
+        print("click5")
+
     }
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
+        print("DONE!!!")
     }
 }
