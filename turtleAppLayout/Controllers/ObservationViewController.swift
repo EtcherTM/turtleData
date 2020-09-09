@@ -103,9 +103,9 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             let action = UIAlertAction(title: zone, style: .default) { (_) in
                 if self.data.zoneLocation != zone {
                     self.data.property = ""
-                    self.propertyButton.setTitle("Choose\nProperty", for: .normal)
+                    self.propertyButton.setTitle("Property/Lot?", for: .normal)
                 }
-                sender.setTitle("Zone: \(zone) ✓", for: .normal)
+                sender.setTitle("Zone \(zone) ✓", for: .normal)
                 self.data.zoneLocation = zone
                 
             }
@@ -113,10 +113,10 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         }
         
         alert.addAction(UIAlertAction(title: "CANCEL", style: .cancel, handler: { (_) in
-            sender.setTitle("Choose\nzone", for: .normal)
+            sender.setTitle("Zone?", for: .normal)
             self.data.zoneLocation = ""
             self.data.property = ""
-            self.propertyButton.setTitle("Choose\nProperty", for: .normal)
+            self.propertyButton.setTitle("Property/Lot?", for: .normal)
         }))
         
         present(alert, animated: true)
@@ -160,7 +160,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             }
                       
             alert.addAction(UIAlertAction(title: "CLEAR SELECTION", style: .cancel, handler: { (_) in
-                sender.setTitle("Choose\nProperty", for: .normal)
+                sender.setTitle("Property/Lot?", for: .normal)
 
             }))
             present(alert, animated: true)
@@ -173,11 +173,11 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         //Get location with CoreLocation
         locationManager.requestLocation()
     //        Need an alert -- "Wait 10-15 seconds before moving"
-        let latAsStr = String(format: "%.2f", data.lat)
-        let lonAsStr = String(format: "%.2f", data.lon)
-        print(data.lat)
-        print(data.lon)
-        sender.setTitle("\(latAsStr), \(lonAsStr)", for: .normal)
+//        let latAsStr = String(format: "%.2f", data.lat)
+//        let lonAsStr = String(format: "%.2f", data.lon)
+                
+//        }
+//        sender.setTitle("\(latAsStr), \(lonAsStr), Accuracy: \(accessibilityAssistiveTechnologyFocusedIdentifiers())", for: .normal)
     }
     
     @IBAction func photoButtonPressed(_ sender: UIButton) {
@@ -208,7 +208,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             alert.view.tintColor = UIColor.black
 
         } else {
-            sender.setTitle("Nest", for: .normal)
+            sender.setTitle("Nest?", for: .normal)
             data.nestType = ""
         }
         
@@ -242,7 +242,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
                 alert.view.tintColor = UIColor.black
 
            } else {
-               sender.setTitle("Existing Nest", for: .normal)
+               sender.setTitle("Disturb/Reloc?", for: .normal)
                data.disturbedOrRelocated = ""
            }
            data.disturbed = !data.disturbed
@@ -270,7 +270,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             alert.view.tintColor = UIColor.black
 
         } else {
-            sender.setTitle("Turtle", for: .normal)
+            sender.setTitle("Turtle?", for: .normal)
             data.turtleType = ""
         }
         data.turtle = !data.turtle
@@ -296,7 +296,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             alert.view.tintColor = UIColor.black
 
         } else {
-            sender.setTitle("Hatching", for: .normal)
+            sender.setTitle("Hatching?", for: .normal)
             data.hatchingType = ""
         }
         data.hatching = !data.hatching
@@ -392,10 +392,35 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
 extension ObservationViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
+            print("Location accuracy is \(location.horizontalAccuracy)")
+//
+//        if (location.horizontalAccuracy < 0)
+//        {
+//            print("No Signal")
+//        }
+//        else if (location.horizontalAccuracy > 163)
+//        {
+//            print("Poor accuracy")
+//        }
+//        else if (location.horizontalAccuracy > 48)
+//        {
+//            print("Accurate w/i 48 m")
+//        }
+//        else
+//        {
+////          
+            
+            
             data.lat = location.coordinate.latitude
             data.lon = location.coordinate.longitude
+            let latAsStr = String(format: "%.2f", data.lat)
+            let lonAsStr = String(format: "%.2f", data.lon)
+            let accAsStr = String(format: "%.1f", location.horizontalAccuracy)
+            locationButton.setTitle("\(latAsStr), \(lonAsStr), Accuracy: \(accAsStr)", for: .normal)
+            
             print(data.lat)
             print(data.lon)
+            
             
 //            Need a notification for when it actually get location, how long does it take?
         }

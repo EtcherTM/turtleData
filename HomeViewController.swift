@@ -43,7 +43,6 @@ class HomeViewController: UIViewController, ButtonUpdater {
 
     @IBAction func newObsButtonPressed(_ sender: UIButton) {
         if defaults.value(forKey: "userID") as? String != "" {
-            print("New Observation Button pressed.")
             performSegue(withIdentifier: "HomeToObs", sender: self)
         } else {
             let alert = UIAlertController(title: "NO USER ID ENTERED. GO BACK TO WELCOME SCREEN AND ENTER USER ID FIRST", message: "", preferredStyle: .alert)
