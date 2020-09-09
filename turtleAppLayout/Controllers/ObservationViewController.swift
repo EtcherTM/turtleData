@@ -44,6 +44,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     @IBOutlet weak var turtleButton: UIButton!
     @IBOutlet weak var hatchingButton: UIButton!
 
+    @IBOutlet weak var photoImage1: UIImageView!
     @IBOutlet weak var commentsTextView: UITextView!
 //    @IBOutlet weak var commentsTextField: UITextField!
     
@@ -68,20 +69,17 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         imagePicker.sourceType = .camera
         self.commentsTextView.delegate = self
         
-//        if let data  = data {
-//          title = "Edit \(data.id)"
-//
-//          fillTextFields()
-//        } else {
-//          title = "Add New Observation"
-//        }
-
-        
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         self.view.endEditing(true)
+    }
+    
+    func prepareForSegue(_ segue: UIStoryboardSegue, sender sender: AnyObject?)
+    {
+        var destinationController = segue.destination
+         // now you can pass the image to the destination view controller
     }
     
     
@@ -172,17 +170,11 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     @IBAction func locationButtonPressed(_ sender: UIButton) {
         //Get location with CoreLocation
         locationManager.requestLocation()
-    //        Need an alert -- "Wait 10-15 seconds before moving"
-//        let latAsStr = String(format: "%.2f", data.lat)
-//        let lonAsStr = String(format: "%.2f", data.lon)
-                
-//        }
-//        sender.setTitle("\(latAsStr), \(lonAsStr), Accuracy: \(accessibilityAssistiveTechnologyFocusedIdentifiers())", for: .normal)
+        sender.setTitle("Getting: hold position . . .", for: .normal)
     }
     
     @IBAction func photoButtonPressed(_ sender: UIButton) {
         present(imagePicker, animated: true, completion: nil)
-        sender.setTitle("✓", for: .normal)
     }
     
     @IBAction func nestButtonPressed(_ sender: UIButton) {
@@ -259,11 +251,11 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             
             alert.addAction(UIAlertAction(title: "DEAD", style: .default, handler: { (action) in
                 self.data.turtleType = "dead"
-                sender.setTitle("Dead Adult ✓", for: .normal)
+                sender.setTitle("Dead Turtle ✓", for: .normal)
             }))
             alert.addAction(UIAlertAction(title: "ALIVE", style: .default, handler: { (action) in
                 self.data.turtleType = "live"
-                sender.setTitle("Live Adult ✓", for: .normal)
+                sender.setTitle("Live Turtle ✓", for: .normal)
             }))
             
             present(alert, animated: true)
@@ -392,37 +384,12 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
 extension ObservationViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
-            print("Location accuracy is \(location.horizontalAccuracy)")
-//
-//        if (location.horizontalAccuracy < 0)
-//        {
-//            print("No Signal")
-//        }
-//        else if (location.horizontalAccuracy > 163)
-//        {
-//            print("Poor accuracy")
-//        }
-//        else if (location.horizontalAccuracy > 48)
-//        {
-//            print("Accurate w/i 48 m")
-//        }
-//        else
-//        {
-////          
-            
-            
             data.lat = location.coordinate.latitude
             data.lon = location.coordinate.longitude
             let latAsStr = String(format: "%.2f", data.lat)
             let lonAsStr = String(format: "%.2f", data.lon)
             let accAsStr = String(format: "%.1f", location.horizontalAccuracy)
-            locationButton.setTitle("\(latAsStr), \(lonAsStr), Accuracy: \(accAsStr)", for: .normal)
-            
-            print(data.lat)
-            print(data.lon)
-            
-            
-//            Need a notification for when it actually get location, how long does it take?
+            locationButton.setTitle("\(latAsStr), \(lonAsStr), ± \(accAsStr)m", for: .normal)
         }
         
         
@@ -435,8 +402,12 @@ extension ObservationViewController: CLLocationManagerDelegate {
 //MARK:- Photo taker thing
 
 extension ObservationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let imageTaken = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            
+            photoImage1.image = imageTaken
+
             let date = Date()
             
             let dateFormatter = DateFormatter()
@@ -445,8 +416,6 @@ extension ObservationViewController: UIImagePickerControllerDelegate, UINavigati
             let imgRef = dateFormatter.string(from: date)
             
             let imageName = "/\(imgRef).jpg"
-            
-            
             
             var documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
             print(documentsDirectoryPath)

@@ -32,7 +32,6 @@ class ListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("Made it to cellforrowat")
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath) as! ListCell
 
         let observation = listOfObservations[indexPath.row]
