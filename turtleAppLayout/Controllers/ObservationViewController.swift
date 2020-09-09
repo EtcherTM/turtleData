@@ -103,7 +103,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             let action = UIAlertAction(title: zone, style: .default) { (_) in
                 if self.data.zoneLocation != zone {
                     self.data.property = ""
-                    self.propertyButton.setTitle("CHOOSE\nPROPERTY", for: .normal)
+                    self.propertyButton.setTitle("Choose\nProperty", for: .normal)
                 }
                 sender.setTitle("Zone: \(zone) ✓", for: .normal)
                 self.data.zoneLocation = zone
@@ -172,7 +172,12 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     @IBAction func locationButtonPressed(_ sender: UIButton) {
         //Get location with CoreLocation
         locationManager.requestLocation()
-        sender.setTitle("Got Location ✓", for: .normal)
+    //        Need an alert -- "Wait 10-15 seconds before moving"
+        let latAsStr = String(format: "%.2f", data.lat)
+        let lonAsStr = String(format: "%.2f", data.lon)
+        print(data.lat)
+        print(data.lon)
+        sender.setTitle("\(latAsStr), \(lonAsStr)", for: .normal)
     }
     
     @IBAction func photoButtonPressed(_ sender: UIButton) {
