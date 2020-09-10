@@ -23,13 +23,19 @@ class Observation: Object {
     
     @objc dynamic var nest : Bool = false
     @objc dynamic var turtle : Bool = false
-    @objc dynamic var hatching : Bool = false
     @objc dynamic var disturbed : Bool = false
     
     @objc dynamic var nestType: String = ""
     @objc dynamic var turtleType: String = ""
-    @objc dynamic var hatchingType: String = ""
     @objc dynamic var disturbedOrRelocated : String = ""
+    
+    @objc dynamic var hatching : Bool = false
+    @objc dynamic var hatchingType: String = ""
+    @objc dynamic var totalHatched : String = ""
+    @objc dynamic var numStranded : String = ""
+    @objc dynamic var numDead : String = ""
+    
+
 
     @objc dynamic var image1: String = ""
     @objc dynamic var image2: String = ""

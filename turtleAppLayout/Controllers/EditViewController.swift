@@ -14,7 +14,7 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseStorage
 
-class EditViewController: UIViewController, UITextViewDelegate {
+class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
 
     var data: Observation?
     
@@ -43,7 +43,7 @@ class EditViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var disturbedButton: UIButton!
     @IBOutlet weak var turtleButton: UIButton!
     @IBOutlet weak var hatchingButton: UIButton!
-    @IBOutlet weak var commentsTextView: UITextField!
+    @IBOutlet weak var commentsTextView: UITextView!
     @IBOutlet weak var photoImageView1: UIImageView!
     @IBOutlet weak var photoImageView2: UIImageView!
     @IBOutlet weak var photoImageView3: UIImageView!
@@ -51,17 +51,26 @@ class EditViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var photoImageView5: UIImageView!
     
     @IBOutlet weak var doneButtonPressed: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Edit \(data?.id)"
+        if data?.id != nil {
+            title = "Edit \(data!.id)"
+            fillTextFields()
+        }
+        else {
+//            put an alert here?
+        }
+        
+        
         // Do any additional setup after loading the view.
-//        locationManager.requestWhenInUseAuthorization()
-//        locationManager.delegate = self
-//        imagePicker.delegate = self
-//        imagePicker.allowsEditing = false
-//        imagePicker.sourceType = .camera
-//        self.commentsTextView.delegate = self
+//        locationManager.requestWhenInUseAuthorization()  Already did this, right?
+        locationManager.delegate = self
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = false
+//        imagePicker.sourceType = .camera LET USER SELECT GALLERY OR CAMERA
+        self.commentsTextView.delegate = self
 //
 //        //Set image ids
 //        photoImage1.tag = 1
@@ -78,9 +87,46 @@ class EditViewController: UIViewController, UITextViewDelegate {
 //        print(photoImage4.tag)
 //        print(photoImage5.tag)
 //
+        
 
+    }
+    
+    func fillTextFields () {
+        zoneButton.setTitle(data!.zoneLocation, for: .normal)
+        var propertyDesc = ""
+//        if data!.property != nil {
+//            let index = Int(String(data!.property.dropFirst().dropFirst()))! - 1 // Checking for nil but still fails
+//            switch data?.property.first {
+//            case "A":
+//                propertyDesc = K.propertiesInA[index].1
+//            case "B":
+//            propertyDesc = K.propertiesInB[index].1
+//            case "C":
+//                propertyDesc = K.propertiesInC[index].1
+//            case "D":
+//                propertyDesc = K.propertiesInD[index].1
+//            case "E":
+//                propertyDesc = K.propertiesInE[index].1
+//            case "F":
+//                propertyDesc = K.propertiesInF[index].1
+//            default:
+//                propertyDesc = "No property/lot selected"
+//            }
+//        }
+//        propertyButton.setTitle(propertyDesc, for: .normal)
+        
+        if data!.lat != 0.0 || data!.lon != 0.0 {
+            let latAsStr = String(format: "%.2f", data!.lat)
+            let lonAsStr = String(format: "%.2f", data!.lon)
+    //        let accAsStr = String(format: "%.1f", location.horizontalAccuracy)
+            locationButton.setTitle("\(latAsStr), \(lonAsStr) ± ____ m", for: .normal)
+        } else {
+            locationButton.setTitle("", for: .normal)
 
-
+        }
+        nestButton.setTitle(data!.nest ? data?.nestType : "", for: .normal)
+        turtleButton.setTitle(data!.turtle ? data?.turtleType : "", for: .normal)
+        commentsTextView.text = data!.comments
     }
 
     @IBAction func zoneButtonPressed(_ sender: UIButton) {
