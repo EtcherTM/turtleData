@@ -19,12 +19,12 @@
                                 <rect key="frame" x="0.0" y="10" width="375" height="627"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="xeW-R9-tt3" userLabel="Zone Prop Stack View">
-                                        <rect key="frame" x="40" y="0.0" width="295" height="39"/>
+                                        <rect key="frame" x="35.5" y="0.0" width="304" height="42"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Ddi-ZA-hj2">
-                                                <rect key="frame" x="0.0" y="0.0" width="65" height="39"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="74" height="42"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                                 <state key="normal" title="Zone?">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -32,13 +32,13 @@
                                                     <action selector="zoneButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kTH-05-rRl"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="1uX-5i-qUL">
-                                                <rect key="frame" x="95" y="0.0" width="200" height="39"/>
+                                            <button opaque="NO" contentMode="top" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="1uX-5i-qUL">
+                                                <rect key="frame" x="104" y="0.0" width="200" height="42"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="200" id="J3a-BY-yZc"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <state key="normal" title="Property/Lot?">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -49,7 +49,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MMQ-vv-ms8">
-                                        <rect key="frame" x="97" y="59" width="181" height="39"/>
+                                        <rect key="frame" x="97" y="61.5" width="181" height="39"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                         <state key="normal" title="Get GPS Location">
@@ -60,7 +60,7 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7Bm-vD-nFP" userLabel="Obs Top Stack View">
-                                        <rect key="frame" x="70.5" y="118" width="234" height="39"/>
+                                        <rect key="frame" x="70.5" y="120" width="234" height="39"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9dG-hv-tBp">
                                                 <rect key="frame" x="0.0" y="0.0" width="112" height="39"/>
@@ -87,7 +87,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="CLe-Kt-6Ub" userLabel="Obs Bottom Stack View">
-                                        <rect key="frame" x="76.5" y="177" width="222" height="39"/>
+                                        <rect key="frame" x="76.5" y="178.5" width="222" height="39"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sx7-Tr-IIj">
                                                 <rect key="frame" x="0.0" y="0.0" width="107" height="39"/>
@@ -111,7 +111,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S0x-jV-5Fl">
-                                        <rect key="frame" x="121" y="236" width="133" height="39"/>
+                                        <rect key="frame" x="121" y="237.5" width="133" height="39"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                         <state key="normal" title="Adult Turtle?">
@@ -122,7 +122,7 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3Lu-ik-i45" userLabel="Upper Image Stack View">
-                                        <rect key="frame" x="112.5" y="294.5" width="150" height="65"/>
+                                        <rect key="frame" x="112.5" y="296" width="150" height="65"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PZV-Y3-Huh" userLabel="Photo 1 View">
                                                 <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
@@ -195,7 +195,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ime-bd-ju4" userLabel="Lower Image Stack View">
-                                        <rect key="frame" x="70" y="379.5" width="235" height="65"/>
+                                        <rect key="frame" x="70" y="380.5" width="235" height="65"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4J8-4c-NDG" userLabel="Photo 3 View">
                                                 <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
@@ -304,7 +304,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Fez-Bn-9C9" userLabel="Comments Stack View">
-                                        <rect key="frame" x="37.5" y="464.5" width="300" height="100.5"/>
+                                        <rect key="frame" x="37.5" y="465" width="300" height="100.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COMMENTS:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBw-2g-cfV">
                                                 <rect key="frame" x="0.0" y="0.0" width="101" height="20.5"/>

@@ -18,6 +18,7 @@ class EditViewController: UIViewController, UITextViewDelegate {
 
     var data: Observation?
     
+    
     let realm = try! Realm()
     let db = Firestore.firestore()
     
@@ -28,10 +29,12 @@ class EditViewController: UIViewController, UITextViewDelegate {
     let imagePicker = UIImagePickerController()
     
     let defaults = UserDefaults.standard
+    
+    //Setting user id if doesn't exist, replace with the log + alert
+//    var userID: String = ""  SEBO I THINK WE DON'T WANT THIS?
 
-//    var userID: String = ""
-
-
+    var image = 0
+    
     @IBOutlet weak var zoneButton: UIButton!
     @IBOutlet weak var propertyButton: UIButton!
     @IBOutlet weak var locationButton: UIButton!
@@ -50,6 +53,8 @@ class EditViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var doneButtonPressed: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Edit \(data?.id)"
         // Do any additional setup after loading the view.
 //        locationManager.requestWhenInUseAuthorization()
 //        locationManager.delegate = self
@@ -134,4 +139,82 @@ class EditViewController: UIViewController, UITextViewDelegate {
     @IBAction func doneButtonPressed(_ sender: UIButton) {
         print("DONE!!!")
     }
+}
+
+
+//MARK:- Location Extension
+
+extension EditViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+//            data.lat = location.coordinate.latitude
+//            data.lon = location.coordinate.longitude
+//            let latAsStr = String(format: "%.2f", data.lat)
+//            let lonAsStr = String(format: "%.2f", data.lon)
+//            let accAsStr = String(format: "%.1f", location.horizontalAccuracy)
+//            locationButton.setTitle("\(latAsStr), \(lonAsStr), ± \(accAsStr)m", for: .normal)
+        }
+        
+        
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
+}
+
+//MARK:- Photo taker thing
+
+extension EditViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let imageTaken = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            
+            //          Call function to set the image on the obs screen
+            //          Call function to generate reference
+            //           Maybe instead of saving to realm here just save image to variables imageTaken1 - imageTaken5 and save to realm with the rest of data
+            //     Also note after 5 photos they can just replace a photo by tapping on it.
+            
+            
+            
+            
+            let date = Date()
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'_'HH_mm_ss"
+            
+            let imgRef = dateFormatter.string(from: date)
+            
+            let imageName = "/\(imgRef).jpg"
+            
+            var documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+            print(documentsDirectoryPath)
+            documentsDirectoryPath += imageName
+            let settingsData: NSData = imageTaken.jpegData(compressionQuality: 1.0)! as NSData
+            settingsData.write(toFile: documentsDirectoryPath, atomically: true)
+            
+            switch image {
+            case 1:
+                photoImageView1.image = imageTaken
+                data!.image1 = imgRef
+            case 2:
+                photoImageView2.image = imageTaken
+                data!.image2 = imgRef
+            case 3:
+                photoImageView3.image = imageTaken
+                data!.image3 = imgRef
+            case 4:
+                photoImageView4.image = imageTaken
+                data!.image4 = imgRef
+            case 5:
+                photoImageView5.image = imageTaken
+                data!.image5 = imgRef
+            default:
+                print("error BOUBOUBOBUOBUBOUBOBUOUBBUBUBO")
+            }
+            
+        }
+        
+        imagePicker.dismiss(animated: true, completion: nil)
+    }
+    
 }

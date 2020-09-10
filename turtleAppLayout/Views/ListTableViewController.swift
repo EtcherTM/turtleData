@@ -17,12 +17,20 @@ class ListTableViewController: UITableViewController {
         super.viewDidLoad()
         print(listOfObservations)
         tableView.register(UINib(nibName: "ListCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
-
-
-        // Uncomment the following line to preserve selection between presentations
-//         self.clearsSelectionOnViewWillAppear = false
-
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        var selectedObservation: Observation
+        let indexPath = tableView.indexPathForSelectedRow
+        if segue.destination is EditViewController
+        {
+            let vc = segue.destination as? EditViewController
+            selectedObservation = listOfObservations[indexPath!.row]
+            vc?.data = selectedObservation
+            
+        }
+    }
+    
 
     // MARK: - Table view data source
 
@@ -51,7 +59,7 @@ class ListTableViewController: UITableViewController {
             type.append("Turtle")
         }
         
-        cell.cellLabel?.text = "\(observation.zoneLocation):  \(type) \(observation.comments)"
+        cell.cellLabel?.text = "\(observation.zoneLocation):  \(type) \(observation.comments) \(observation.id)"
 
         
         return cell
@@ -63,5 +71,6 @@ class ListTableViewController: UITableViewController {
         print("Row selected")
         performSegue(withIdentifier: "Edit", sender: self)
     }
+
 
 }

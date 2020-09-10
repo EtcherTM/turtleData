@@ -82,9 +82,9 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         photoImage5.tag = 5
         
         print(photoImage1.tag)
-        print(photoImage1)
+//        print(photoImage1)
         print(photoImage2.tag)
-        print(photoImage2)
+//        print(photoImage2)
         print(photoImage3.tag)
         print(photoImage4.tag)
         print(photoImage5.tag)
@@ -232,12 +232,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
                 sender.setTitle("False Crawl ✓", for: .normal)
                 
             }))
-            
-        alert.addAction(UIAlertAction(title: "RELOCATED FROM PRIOR", style: .default, handler: { (action) in
-            self.data.nestType = "relocated from prior"
-            sender.setTitle("Reloc From Prior ✓", for: .normal)
-            
-        }))
+    
             
             present(alert, animated: true)
             alert.view.tintColor = UIColor.black
@@ -265,7 +260,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
                 sender.setTitle("Disturb/Nature ✓", for: .normal)
                 
             }))
-            alert.addAction(UIAlertAction(title: "DISTURBED BY HUMAN ACTIVITY", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "DISTURBED BY HUMAN CAUSE", style: .default, handler: { (action) in
                 
                 self.data.disturbedOrRelocated = "disturbed human"
                 sender.setTitle("Disturb/Human ✓", for: .normal)
@@ -276,27 +271,29 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
                 self.data.disturbedOrRelocated = "lost nature"
                 sender.setTitle("Lost/Nature ✓", for: .normal)
                 
-                
             }))
             
-            alert.addAction(UIAlertAction(title: "LOST BY HUMAN ACTIVITY", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "LOST BY HUMAN CAUSE", style: .default, handler: { (action) in
                 self.data.disturbedOrRelocated = "lost human"
                 sender.setTitle("Lost/Human ✓", for: .normal)
                 
+            }))
+            
+            alert.addAction(UIAlertAction(title: "MOVED FROM: NATURAL CAUSE", style: .default, handler: { (action) in
+                self.data.disturbedOrRelocated = "relocated nature"
+                sender.setTitle("Move From/Natu ✓", for: .normal)
                 
             }))
             
-            alert.addAction(UIAlertAction(title: "MOVED DUE TO NATURAL CAUSE", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "MOVED FROM: HUMAN ACTIVITY", style: .default, handler: { (action) in
                 self.data.disturbedOrRelocated = "relocated nature"
-                sender.setTitle("Move/Nature", for: .normal)
-                
+                sender.setTitle("Move From/Human ✓", for: .normal)
                 
             }))
             
-            alert.addAction(UIAlertAction(title: "MOVED DUE TO HUMAN ACTIVITY", style: .default, handler: { (action) in
-                self.data.disturbedOrRelocated = "relocated nature"
-                sender.setTitle("Move/Human", for: .normal)
-                
+            alert.addAction(UIAlertAction(title: "MOVED TO", style: .default, handler: { (action) in
+                self.data.nestType = "relocated to"
+                sender.setTitle("Moved To ✓", for: .normal)
                 
             }))
             
@@ -397,7 +394,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (eee) in
             
             self.data.comments = self.commentsTextView.text ?? ""
-            var id = self.data.zoneLocation != "" ? self.data.zoneLocation : "-"
+            var id = "\(self.data.zoneLocation)-" != "" ? "\(self.data.zoneLocation)-": "-"
             
             if self.data.nest { id.append(self.data.nestType == "nest" ? "N" : "F") }
             if self.data.disturbed { id.append(self.data.disturbedOrRelocated == "disturbed" ? "D" : "R") }
@@ -405,7 +402,8 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             id.append(self.data.turtle ? "T" : "")
             
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyyMMddHHmmss"
+            
+            dateFormatter.dateFormat = "-yyyyMMdd-HHmmss-"
             
             id.append(dateFormatter.string(from: Date()))
             id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
