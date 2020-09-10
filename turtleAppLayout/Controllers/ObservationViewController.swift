@@ -233,11 +233,17 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
                 
             }))
             
+        alert.addAction(UIAlertAction(title: "RELOCATED FROM PRIOR", style: .default, handler: { (action) in
+            self.data.nestType = "relocated from prior"
+            sender.setTitle("Reloc From Prior ✓", for: .normal)
+            
+        }))
+            
             present(alert, animated: true)
             alert.view.tintColor = UIColor.black
             
         } else {
-            sender.setTitle("Nest?", for: .normal)
+            sender.setTitle("New Nest?", for: .normal)
             data.nestType = ""
         }
         
@@ -250,18 +256,46 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         
         if !data.disturbed {
             
-            let alert = UIAlertController(title: "DISTURBED OR RELOCATED?", message: "", preferredStyle: .alert)
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             //            action.setValue(UIColor.orange, forKey: "titleTextColor") Sebo:  Don't know where to put this to make it actually do something.
             
-            alert.addAction(UIAlertAction(title: "DISTURBED", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "DISTURBED BY NATURAL CAUSE", style: .default, handler: { (action) in
                 
-                self.data.disturbedOrRelocated = "disturbed"
-                sender.setTitle("Disturbed nest ✓", for: .normal)
+                self.data.disturbedOrRelocated = "disturbed nature"
+                sender.setTitle("Disturb/Nature ✓", for: .normal)
                 
             }))
-            alert.addAction(UIAlertAction(title: "RELOCATED", style: .default, handler: { (action) in
-                self.data.disturbedOrRelocated = "relocated"
-                sender.setTitle("Relocated nest ✓", for: .normal)
+            alert.addAction(UIAlertAction(title: "DISTURBED BY HUMAN ACTIVITY", style: .default, handler: { (action) in
+                
+                self.data.disturbedOrRelocated = "disturbed human"
+                sender.setTitle("Disturb/Human ✓", for: .normal)
+                
+            }))
+
+            alert.addAction(UIAlertAction(title: "LOST BY NATURAL CAUSE", style: .default, handler: { (action) in
+                self.data.disturbedOrRelocated = "lost nature"
+                sender.setTitle("Lost/Nature ✓", for: .normal)
+                
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "LOST BY HUMAN ACTIVITY", style: .default, handler: { (action) in
+                self.data.disturbedOrRelocated = "lost human"
+                sender.setTitle("Lost/Human ✓", for: .normal)
+                
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "MOVED DUE TO NATURAL CAUSE", style: .default, handler: { (action) in
+                self.data.disturbedOrRelocated = "relocated nature"
+                sender.setTitle("Move/Nature", for: .normal)
+                
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "MOVED DUE TO HUMAN ACTIVITY", style: .default, handler: { (action) in
+                self.data.disturbedOrRelocated = "relocated nature"
+                sender.setTitle("Move/Human", for: .normal)
                 
                 
             }))
@@ -271,35 +305,32 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             alert.view.tintColor = UIColor.black
             
         } else {
-            sender.setTitle("Disturb/Reloc?", for: .normal)
+            sender.setTitle("Old Nest?", for: .normal)
             data.disturbedOrRelocated = ""
         }
         data.disturbed = !data.disturbed
         
     }
     
-    
-    
-    
     @IBAction func turtleButtonPressed(_ sender: UIButton) {
         if !data.turtle {
             
-            let alert = UIAlertController(title: "DEAD OR ALIVE?", message: "", preferredStyle: .alert)
+            let alert = UIAlertController(title: "ADULT TURTLE:", message: "", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "DEAD", style: .default, handler: { (action) in
                 self.data.turtleType = "dead"
-                sender.setTitle("Dead Turtle ✓", for: .normal)
+                sender.setTitle("Dead Adult ✓", for: .normal)
             }))
             alert.addAction(UIAlertAction(title: "ALIVE", style: .default, handler: { (action) in
                 self.data.turtleType = "live"
-                sender.setTitle("Live Turtle ✓", for: .normal)
+                sender.setTitle("Live Adult ✓", for: .normal)
             }))
             
             present(alert, animated: true)
             alert.view.tintColor = UIColor.black
             
         } else {
-            sender.setTitle("Turtle?", for: .normal)
+            sender.setTitle("Adult Turtle?", for: .normal)
             data.turtleType = ""
         }
         data.turtle = !data.turtle
@@ -310,16 +341,39 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         //Number of eggs?
         if !data.hatching {
             
-            let alert = UIAlertController(title: "SUCCESSFUL HATCHING?", message: "", preferredStyle: .alert)
+            let alert = UIAlertController(title: "PROBLEMS?", message: "", preferredStyle: .alert)
             
-            alert.addAction(UIAlertAction(title: "SUCCESS", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "NO PROBLEMS", style: .default, handler: { (action) in
                 self.data.hatchingType = "success"
-                sender.setTitle("Success Hatch ✓", for: .normal)
+                sender.setTitle("No prob ✓", for: .normal)
             }))
-            alert.addAction(UIAlertAction(title: "FAIL", style: .default, handler: { (action) in
-                self.data.hatchingType = "fail"
-                sender.setTitle("Failed Hatching ✓", for: .normal)
+            alert.addAction(UIAlertAction(title: "PROBLEM: LIGHTS", style: .default, handler: { (action) in
+                self.data.hatchingType = "lights"
+                sender.setTitle("Prob: Lights ✓", for: .normal)
             }))
+
+            alert.addAction(UIAlertAction(title: "PROBLEM: TRASH", style: .default, handler: { (action) in
+                self.data.hatchingType = "trash"
+                sender.setTitle("Prob: Trash ✓", for: .normal)
+            }))
+
+            alert.addAction(UIAlertAction(title: "PROBLEM: OTHER", style: .default, handler: { (action) in
+                self.data.hatchingType = "other"
+                sender.setTitle("Prob: Other ✓", for: .normal)
+            }))
+
+            alert.addAction(UIAlertAction(title: "# RESCUED", style: .default, handler: { (action) in
+                self.data.hatchingType = "rescued"
+                sender.setTitle("# Rescued  ✓", for: .normal)
+            }))
+            alert.addAction(UIAlertAction(title: "# DEAD", style: .default, handler: { (action) in
+                self.data.hatchingType = "dead"
+                sender.setTitle("# Dead ✓", for: .normal)
+
+            }))
+            
+            
+            
             
             present(alert, animated: true)
             alert.view.tintColor = UIColor.black

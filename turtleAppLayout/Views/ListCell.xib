@@ -19,7 +19,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kkB-dP-yeL">
                         <rect key="frame" x="10" y="5" width="305" height="61"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -30,7 +30,7 @@
                     <constraint firstAttribute="trailing" secondItem="kkB-dP-yeL" secondAttribute="trailing" constant="5" id="lrS-sz-QHF"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.93547368049621582" green="0.72036233225972868" blue="0.67363690099498386" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color key="backgroundColor" red="0.91921168565750122" green="0.38435360954649994" blue="0.3093369539240759" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="cellLabel" destination="kkB-dP-yeL" id="36A-lZ-JSH"/>
