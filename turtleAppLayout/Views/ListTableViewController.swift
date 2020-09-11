@@ -11,7 +11,7 @@ import RealmSwift
 
 class ListTableViewController: UITableViewController {
         
-    var listOfObservations = try! Realm().objects(Observation.self)
+    var listOfObservations = try! Realm().objects(Observation.self).sorted(byKeyPath: "zoneLocation")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,10 +47,10 @@ class ListTableViewController: UITableViewController {
         var type: String = ""
         
         if observation.nest {
-            type = "Nest "
+            type = "Emergence "
         }
-        if observation.disturbed {
-            type.append("Disturbed or Relocated")
+        if observation.existingNestDisturbed {
+            type.append("Existing Nest ")
         }
         if observation.hatching {
             type.append("Hatching ")

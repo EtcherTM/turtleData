@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreLocation
 import RealmSwift
 
 
@@ -92,64 +91,60 @@ class NoActivityViewController: UIViewController {
         print(noAct)
 
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyyMMddHH"
+        dateFormatter.dateFormat = "yyyyMMdd-"
 
         
         if noAct.aNoActivity == true {
-            var id = ""
-            id.append("A")
+            var id = "NOACTIVITY-"
+            id.append("A-")
             id.append(dateFormatter.string(from: Date()))
             id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
-            id.append("NOACTIVITY")
+
             print("The new observation ID is: \(id)")
         }
         
         if noAct.bNoActivity == true {
-            var id = ""
-            id.append("B")
+            var id = "NOACTIVITY-"
+            id.append("B-")
             id.append(dateFormatter.string(from: Date()))
             id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
-            id.append("NOACTIVITY")
+
             print("The new observation ID is: \(id)")
 
         }
         
         if noAct.cNoActivity == true {
-            var id = ""
-            id.append("C")
+            var id = "NOACTIVITY-"
+            id.append("C-")
             id.append(dateFormatter.string(from: Date()))
             id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
-            id.append("NOACTIVITY")
             print("The new observation ID is: \(id)")
 
         }
         
         if noAct.dNoActivity == true {
-            var id = ""
-            id.append("D")
+            var id = "NOACTIVITY-"
+            id.append("D-")
             id.append(dateFormatter.string(from: Date()))
             id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
-            id.append("NOACTIVITY")
             print("The new observation ID is: \(id)")
 
         }
         
         if noAct.eNoActivity == true {
-            var id = ""
-            id.append("E")
+            var id = "NOACTIVITY-"
+            id.append("E-")
             id.append(dateFormatter.string(from: Date()))
             id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
-            id.append("NOACTIVITY")
             print("The new observation ID is: \(id)")
 
         }
         
         if noAct.fNoActivity == true {
-            var id = ""
-            id.append("F")
+            var id = "NOACTIVITY-"
+            id.append("F-")
             id.append(dateFormatter.string(from: Date()))
             id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
-            id.append("NOACTIVITY")
             print("The new observation ID is: \(id)")
 
         }

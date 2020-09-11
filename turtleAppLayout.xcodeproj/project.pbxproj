@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C31E3B5824FAF2210067193A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C31E3B5724FAF2210067193A /* GoogleService-Info.plist */; };
 		C35164F825092D4D00784FB2 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35164F725092D4D00784FB2 /* EditViewController.swift */; };
+		C37055AD250C10E60006081B /* HatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37055AC250C10E60006081B /* HatchingViewController.swift */; };
 		C3A209CA2504247E00FCBA16 /* NoActivityReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A209C92504247E00FCBA16 /* NoActivityReport.swift */; };
 		C3A9EA7A24F4FDF4006056A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A9EA7924F4FDF4006056A6 /* AppDelegate.swift */; };
 		C3A9EA7C24F4FDF4006056A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A9EA7B24F4FDF4006056A6 /* SceneDelegate.swift */; };
@@ -49,6 +50,7 @@
 		8E65270D1DFA47275E37A9AD /* Pods-turtleAppLayout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-turtleAppLayout.release.xcconfig"; path = "Target Support Files/Pods-turtleAppLayout/Pods-turtleAppLayout.release.xcconfig"; sourceTree = "<group>"; };
 		C31E3B5724FAF2210067193A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C35164F725092D4D00784FB2 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		C37055AC250C10E60006081B /* HatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatchingViewController.swift; sourceTree = "<group>"; };
 		C3A209C92504247E00FCBA16 /* NoActivityReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoActivityReport.swift; sourceTree = "<group>"; };
 		C3A9EA7624F4FDF4006056A6 /* turtleAppLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = turtleAppLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3A9EA7924F4FDF4006056A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				C3B77B2C2501817B00CFCD79 /* NoActivityViewController.swift */,
 				C3E6748325049BD000B38ED6 /* ListTableViewController.swift */,
 				C35164F725092D4D00784FB2 /* EditViewController.swift */,
+				C37055AC250C10E60006081B /* HatchingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				C35164F825092D4D00784FB2 /* EditViewController.swift in Sources */,
 				C3A9EA7A24F4FDF4006056A6 /* AppDelegate.swift in Sources */,
 				C3B350BC24F768A0004CA8EA /* Observation.swift in Sources */,
+				C37055AD250C10E60006081B /* HatchingViewController.swift in Sources */,
 				C3A9EA7C24F4FDF4006056A6 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

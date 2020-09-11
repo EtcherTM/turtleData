@@ -41,7 +41,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     @IBOutlet weak var locationButton: UIButton!
     
     @IBOutlet weak var nestButton: UIButton!
-    @IBOutlet weak var disturbedButton: UIButton!
+    @IBOutlet weak var existingNestButton: UIButton!
     @IBOutlet weak var turtleButton: UIButton!
     @IBOutlet weak var hatchingButton: UIButton!
     
@@ -198,8 +198,8 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         if !data.nest {
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             
-            alert.addAction(UIAlertAction(title: "NEW/PROBABLE", style: .default, handler: { (action) in
-                sender.setTitle("New/Prob ✓", for: .normal)
+            alert.addAction(UIAlertAction(title: "NEW/PROBABLE NEST", style: .default, handler: { (action) in
+                sender.setTitle("New Nest ✓", for: .normal)
                 self.data.nestType = "nest"
             }))
             alert.addAction(UIAlertAction(title: "FALSE NEST", style: .default, handler: { (action) in
@@ -226,46 +226,46 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         
     }
     
-    @IBAction func disturbedButtonPressed(_ sender: UIButton) {
+    @IBAction func existingNestButtonPressed(_ sender: UIButton) {
         
-        if !data.disturbed {
+        if !data.existingNestDisturbed {
             
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             //            action.setValue(UIColor.orange, forKey: "titleTextColor") Sebo:  Don't know where to put this to make it actually do something.
             
             alert.addAction(UIAlertAction(title: "DISTURBED BY NATURAL CAUSE", style: .default, handler: { (action) in
                 
-                self.data.disturbedOrRelocated = "disturbed nature"
+                self.data.existingNestDisturbedType = "disturbed nature"
                 sender.setTitle("Disturb/Nature ✓", for: .normal)
                 
             }))
             alert.addAction(UIAlertAction(title: "DISTURBED BY HUMAN CAUSE", style: .default, handler: { (action) in
                 
-                self.data.disturbedOrRelocated = "disturbed human"
+                self.data.existingNestDisturbedType = "disturbed human"
                 sender.setTitle("Disturb/Human ✓", for: .normal)
                 
             }))
 
             alert.addAction(UIAlertAction(title: "LOST BY NATURAL CAUSE", style: .default, handler: { (action) in
-                self.data.disturbedOrRelocated = "lost nature"
+                self.data.existingNestDisturbedType = "lost nature"
                 sender.setTitle("Lost/Nature ✓", for: .normal)
                 
             }))
             
             alert.addAction(UIAlertAction(title: "LOST BY HUMAN CAUSE", style: .default, handler: { (action) in
-                self.data.disturbedOrRelocated = "lost human"
+                self.data.existingNestDisturbedType = "lost human"
                 sender.setTitle("Lost/Human ✓", for: .normal)
                 
             }))
             
             alert.addAction(UIAlertAction(title: "MOVED FROM: NATURAL CAUSE", style: .default, handler: { (action) in
-                self.data.disturbedOrRelocated = "relocated nature"
+                self.data.existingNestDisturbedType = "relocated nature"
                 sender.setTitle("Move From/Natu ✓", for: .normal)
                 
             }))
             
             alert.addAction(UIAlertAction(title: "MOVED FROM: HUMAN ACTIVITY", style: .default, handler: { (action) in
-                self.data.disturbedOrRelocated = "relocated nature"
+                self.data.existingNestDisturbedType = "relocated nature"
                 sender.setTitle("Move From/Human ✓", for: .normal)
                 
             }))
@@ -282,9 +282,9 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             
         } else {
             sender.setTitle("Old Nest?", for: .normal)
-            data.disturbedOrRelocated = ""
+            data.existingNestDisturbedType = ""
         }
-        data.disturbed = !data.disturbed
+        data.existingNestDisturbed = !data.existingNestDisturbed
         
     }
     
@@ -390,7 +390,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             var id = "\(self.data.zoneLocation)-" != "" ? "\(self.data.zoneLocation)-": "-"
             
             if self.data.nest { id.append(self.data.nestType == "nest" ? "N" : "F") }
-            if self.data.disturbed { id.append(self.data.disturbedOrRelocated == "disturbed" ? "D" : "R") }
+            if self.data.existingNestDisturbed { id.append(self.data.existingNestDisturbedType == "disturbed" ? "D" : "R") }
             id.append(self.data.hatching ? "H" : "")
             id.append(self.data.turtle ? "T" : "")
             
@@ -411,7 +411,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
                 //Reset all fields if successfully saved
                 self.locationButton.setTitle("Get GPS Location", for: .normal)
                 self.nestButton.setTitle("Nest?", for: .normal)
-                self.disturbedButton.setTitle("Disturb/Reloc?", for: .normal)
+                self.existingNestButton.setTitle("Disturb/Reloc?", for: .normal)
                 self.turtleButton.setTitle("Turtle?", for: .normal)
                 self.hatchingButton.setTitle("Hatching", for: .normal)
                 self.zoneButton.setTitle("Zone?", for: .normal)

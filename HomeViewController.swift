@@ -123,7 +123,7 @@ class HomeViewController: UIViewController, ButtonUpdater {
                 let images = [obs.image1, obs.image2, obs.image3, obs.image4, obs.image5]
                 
                 if obs.turtle {type.append(obs.turtleType)}
-                if obs.disturbed {type.append("disturbed")}
+                if obs.existingNestDisturbed {type.append("disturbed")}
                 if obs.nest {type.append(obs.nestType)}
                 if obs.hatching {type.append(obs.hatchingType)}
                 
