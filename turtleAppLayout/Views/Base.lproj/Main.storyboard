@@ -489,7 +489,7 @@ w/ No Activity</string>
                                             <constraint firstAttribute="height" constant="60" id="i7P-x0-UcI"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                        <state key="normal" title="Review Observations">
+                                        <state key="normal" title="Edit Observations">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>

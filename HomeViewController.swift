@@ -136,7 +136,7 @@ class HomeViewController: UIViewController, ButtonUpdater {
                 upload["userid"] = self.defaults.string(forKey: "userID") ?? ""
                 upload["imageURLS"] = obs.id
                 
-//   NEED TO ADD OBSERVATION ID#, AND "NO ACTIVITY" VALUES
+//   NEED TO ADD "NO ACTIVITY" VALUES
                 
                 self.db.collection("observations").addDocument(data: upload) { (error) in
                     if let error = error {

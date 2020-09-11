@@ -20,6 +20,7 @@ class Observation: Object {
     
     @objc dynamic var lat: Double = 0.0
     @objc dynamic var lon: Double = 0.0
+    @objc dynamic var accuracy: Double = 0.0
     
     @objc dynamic var nest : Bool = false
     @objc dynamic var turtle : Bool = false
@@ -36,6 +37,7 @@ class Observation: Object {
     @objc dynamic var numDead : String = ""
     
 
+//    @objc dynamic var docDirPath: String = ""
 
     @objc dynamic var image1: String = ""
     @objc dynamic var image2: String = ""

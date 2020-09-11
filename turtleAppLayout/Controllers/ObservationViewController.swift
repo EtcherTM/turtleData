@@ -34,6 +34,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     
     
     var image = 0
+    var documentsDirectoryPath = ""
     
     @IBOutlet weak var zoneButton: UIButton!
     @IBOutlet weak var propertyButton: UIButton!
@@ -423,6 +424,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
             self.data.id = id
             
+            
             do {
                 try self.realm.write {
                     self.realm.add(self.data)
@@ -493,10 +495,8 @@ extension ObservationViewController: CLLocationManagerDelegate {
         if let location = locations.last {
             data.lat = location.coordinate.latitude
             data.lon = location.coordinate.longitude
-            let latAsStr = String(format: "%.2f", data.lat)
-            let lonAsStr = String(format: "%.2f", data.lon)
-            let accAsStr = String(format: "%.1f", location.horizontalAccuracy)
-            locationButton.setTitle("\(latAsStr), \(lonAsStr), ± \(accAsStr)m", for: .normal)
+            data.accuracy = location.horizontalAccuracy
+            locationButton.setTitle("\(data.lat), \(data.lon), ± \(data.accuracy)m", for: .normal)
         }
         
         
@@ -506,7 +506,7 @@ extension ObservationViewController: CLLocationManagerDelegate {
     }
 }
 
-//MARK:- Photo taker thing
+//MARK:- Image Picker extension
 
 extension ObservationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -527,11 +527,12 @@ extension ObservationViewController: UIImagePickerControllerDelegate, UINavigati
             dateFormatter.dateFormat = "yyyy-MM-dd'_'HH_mm_ss"
             
             let imgRef = dateFormatter.string(from: date)
-            
             let imageName = "/\(imgRef).jpg"
             
             var documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-            print(documentsDirectoryPath)
+//            print(documentsDirectoryPath)
+//            self.data.docDirPath = self.documentsDirectoryPath THIS IS INEFFECTIVE
+
             documentsDirectoryPath += imageName
             let settingsData: NSData = imageTaken.jpegData(compressionQuality: 1.0)! as NSData
             settingsData.write(toFile: documentsDirectoryPath, atomically: true)
