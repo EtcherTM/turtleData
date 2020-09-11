@@ -214,6 +214,35 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     @IBAction func zoneButtonPressed(_ sender: UIButton) {
         print("zone")
+        var zoneTemp = self.data!.zoneLocation
+        var propertyTemp = self.data!.property
+        let alert = UIAlertController(title: "SELECT A ZONE", message: "", preferredStyle: .alert)
+        
+        for zone in K.zones {
+            let action = UIAlertAction(title: zone, style: .default) { (_) in
+                if zoneTemp != zone {
+                    propertyTemp = ""
+                    self.propertyButton.setTitle("", for: .normal)
+                }
+                sender.setTitle(zone, for: .normal)
+                zoneTemp = zone
+                
+            }
+            alert.addAction(action)
+        }
+        
+        alert.addAction(UIAlertAction(title: "CANCEL", style: .cancel, handler: { (_) in
+            sender.setTitle("", for: .normal)
+            zoneTemp = ""
+            propertyTemp = ""
+            self.propertyButton.setTitle("", for: .normal)
+        }))
+        
+        present(alert, animated: true)
+        alert.view.tintColor = UIColor.black
+        
+        
+        
     }
     @IBAction func propertyButtonPressed(_ sender: UIButton) {
         print("property")

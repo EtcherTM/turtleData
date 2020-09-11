@@ -75,20 +75,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         imagePicker.sourceType = .camera
         self.commentsTextView.delegate = self
         
-        //Set image ids
-        photoImage1.tag = 1
-        photoImage2.tag = 2
-        photoImage3.tag = 3
-        photoImage4.tag = 4
-        photoImage5.tag = 5
-        
-        print(photoImage1.tag)
-//        print(photoImage1)
-        print(photoImage2.tag)
-//        print(photoImage2)
-        print(photoImage3.tag)
-        print(photoImage4.tag)
-        print(photoImage5.tag)
+
         
     }
     
@@ -100,17 +87,8 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     func prepareForSegue(_ segue: UIStoryboardSegue, sender: AnyObject?)
     {
         var destinationController = segue.destination
-        // now you can pass the image to the destination view controller
     }
     
-    
-    func fillTextFields() {
-        commentsTextView.text = data.comments
-        //      categoryTextField.text = specimen.category.name
-        //      descriptionTextField.text = specimen.specimenDescription
-        //
-        //      selectedCategory = specimen.category
-    }
     
     //MARK:- IBActions: Data Entry
     @IBAction func zoneButtonPressed(_ sender: UIButton) {
