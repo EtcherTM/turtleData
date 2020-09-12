@@ -113,10 +113,10 @@
 				C3BC007125014C1E00881E7B /* LoginViewController.swift */,
 				C3FEC67124FEEFC1000711D2 /* HomeViewController.swift */,
 				C3A9EA7D24F4FDF4006056A6 /* ObservationViewController.swift */,
+				C37055AC250C10E60006081B /* HatchingViewController.swift */,
 				C3B77B2C2501817B00CFCD79 /* NoActivityViewController.swift */,
 				C3E6748325049BD000B38ED6 /* ListTableViewController.swift */,
 				C35164F725092D4D00784FB2 /* EditViewController.swift */,
-				C37055AC250C10E60006081B /* HatchingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

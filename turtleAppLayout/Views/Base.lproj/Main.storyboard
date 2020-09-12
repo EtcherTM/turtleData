@@ -392,7 +392,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="lh0-nT-fNk" userLabel="Problem Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="220" height="280"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UAk-oD-a7X">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UAk-oD-a7X">
                                                 <rect key="frame" x="0.0" y="0.0" width="220" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -403,8 +403,11 @@
                                                 <state key="normal" title="No Problems">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="noProblemButtonPressed:" destination="E22-2l-jpa" eventType="touchUpInside" id="tOl-Uh-51X"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9BH-Eq-zN4">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9BH-Eq-zN4">
                                                 <rect key="frame" x="0.0" y="49" width="220" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -415,8 +418,11 @@
                                                 <state key="normal" title="Lights">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="lightsButtonPressed:" destination="E22-2l-jpa" eventType="touchUpInside" id="jCq-Uk-iSK"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9CD-AN-J49">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9CD-AN-J49">
                                                 <rect key="frame" x="0.0" y="98" width="220" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -427,8 +433,11 @@
                                                 <state key="normal" title="Trash">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="trashButtonPressed:" destination="E22-2l-jpa" eventType="touchUpInside" id="vAi-lY-61r"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEw-cS-vOu">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEw-cS-vOu">
                                                 <rect key="frame" x="0.0" y="147" width="220" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -439,8 +448,11 @@
                                                 <state key="normal" title="Sewer">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="sewerButtonPressed:" destination="E22-2l-jpa" eventType="touchUpInside" id="eMs-Si-Zf5"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sHD-Tq-GDx">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sHD-Tq-GDx">
                                                 <rect key="frame" x="0.0" y="196" width="220" height="35"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -451,8 +463,11 @@
                                                 <state key="normal" title="Plants">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="plantsButtonPressed:" destination="E22-2l-jpa" eventType="touchUpInside" id="VeW-zU-QOS"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5PT-2X-weY">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5PT-2X-weY">
                                                 <rect key="frame" x="0.0" y="250" width="220" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -463,13 +478,16 @@
                                                 <state key="normal" title="Other">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="otherButtonPressed:" destination="E22-2l-jpa" eventType="touchUpInside" id="TUn-Fv-hCL"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Or5-P5-Bit" userLabel="Number Stack View">
                                         <rect key="frame" x="0.0" y="326" width="220" height="135"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QfY-GE-JTk">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QfY-GE-JTk">
                                                 <rect key="frame" x="0.0" y="0.0" width="220" height="35"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -477,11 +495,14 @@
                                                     <constraint firstAttribute="height" constant="35" id="lyz-gA-ic0"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                                <state key="normal" title="# Unassisted">
+                                                <state key="normal" title="# Success">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="successButtonPressed:" destination="E22-2l-jpa" eventType="touchUpInside" id="7Tf-N5-JFb"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Thx-Js-14A">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Thx-Js-14A">
                                                 <rect key="frame" x="0.0" y="55" width="220" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -492,8 +513,11 @@
                                                 <state key="normal" title="# Stranded">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="strandedButtonPressed:" destination="E22-2l-jpa" eventType="touchUpInside" id="jUD-Mj-Ypo"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Da2-zD-6CB">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Da2-zD-6CB">
                                                 <rect key="frame" x="0.0" y="105" width="220" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -504,30 +528,60 @@
                                                 <state key="normal" title="# Dead">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="deadButtonPressed:" destination="E22-2l-jpa" eventType="touchUpInside" id="gHU-ee-mMw"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjc-fM-xDs">
-                                <rect key="frame" x="156" y="585" width="62" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                <state key="normal" title="Done">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="75" translatesAutoresizingMaskIntoConstraints="NO" id="2G6-UA-eOk" userLabel="Done Stack View">
+                                <rect key="frame" x="44.5" y="595" width="286" height="42"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjc-fM-xDs">
+                                        <rect key="frame" x="0.0" y="0.0" width="129" height="42"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                        <state key="normal" title="Done/Save">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbA-Jf-N8c">
+                                        <rect key="frame" x="204" y="0.0" width="82" height="42"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.58105844259999995" green="0.12855249639999999" blue="0.57453137639999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="mvt-Ae-Z5H" firstAttribute="centerX" secondItem="9ki-ff-0oU" secondAttribute="centerX" id="6P3-3i-E40"/>
+                            <constraint firstItem="2G6-UA-eOk" firstAttribute="centerX" secondItem="9ki-ff-0oU" secondAttribute="centerX" id="DQM-MO-1eL"/>
                             <constraint firstItem="mvt-Ae-Z5H" firstAttribute="centerY" secondItem="9ki-ff-0oU" secondAttribute="centerY" id="Giy-17-QbO"/>
                             <constraint firstItem="AP8-Ra-zWa" firstAttribute="top" secondItem="1Ei-KB-NqK" secondAttribute="top" constant="10" id="I62-bZ-MbM"/>
+                            <constraint firstItem="1Ei-KB-NqK" firstAttribute="bottom" secondItem="2G6-UA-eOk" secondAttribute="bottom" constant="10" id="J3K-vS-hgY"/>
                             <constraint firstItem="AP8-Ra-zWa" firstAttribute="centerX" secondItem="9ki-ff-0oU" secondAttribute="centerX" id="fcc-S8-7K3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1Ei-KB-NqK"/>
                     </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="gbA-Jf-N8c" id="l52-q8-iX6"/>
+                        <outlet property="deadButton" destination="Da2-zD-6CB" id="BW4-6t-m2i"/>
+                        <outlet property="doneButton" destination="fjc-fM-xDs" id="j9D-j4-1EI"/>
+                        <outlet property="lightsButton" destination="9BH-Eq-zN4" id="jZr-Bp-R5I"/>
+                        <outlet property="noProblemButton" destination="9BH-Eq-zN4" id="TXF-BW-3UL"/>
+                        <outlet property="otherButton" destination="5PT-2X-weY" id="v1V-ao-vbs"/>
+                        <outlet property="plantsButton" destination="sHD-Tq-GDx" id="u8Q-c1-GWG"/>
+                        <outlet property="sewerButton" destination="vEw-cS-vOu" id="H1c-kY-oQr"/>
+                        <outlet property="strandedButton" destination="Thx-Js-14A" id="FAw-j6-leC"/>
+                        <outlet property="successButton" destination="QfY-GE-JTk" id="vbd-VN-d2S"/>
+                        <outlet property="trashButton" destination="9CD-AN-J49" id="WeF-uO-Kg6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XEJ-H3-Odz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

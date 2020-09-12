@@ -31,8 +31,8 @@ class Observation: Object {
     @objc dynamic var existingNestDisturbedType : String = ""
     
     @objc dynamic var hatching : Bool = false
-    @objc dynamic var hatchingType: String = ""
-    @objc dynamic var totalHatched : String = ""
+    @objc dynamic var hatchingType: String = "" //No problems; Lights; Trash; Sewer; Plants; Other
+    @objc dynamic var numSuccess : String = ""
     @objc dynamic var numStranded : String = ""
     @objc dynamic var numDead : String = ""
     

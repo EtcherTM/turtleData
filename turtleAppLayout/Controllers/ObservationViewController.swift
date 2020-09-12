@@ -67,7 +67,6 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         locationManager.requestWhenInUseAuthorization()
         locationManager.delegate = self
         imagePicker.delegate = self
