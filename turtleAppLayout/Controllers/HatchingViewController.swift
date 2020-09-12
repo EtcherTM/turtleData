@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import RealmSwift
 
 class HatchingViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
+    
+//    Need to define realm, can we use this for both new and reviewed
     
     let defaults = UserDefaults.standard
     var hatchingTemp = true
@@ -38,9 +41,11 @@ class HatchingViewController: UIViewController, UITextViewDelegate, UITextFieldD
     }
    
     @IBAction func noProblemButtonPressed(_ sender: UIButton) {
+        hatchingTemp = false
     }
     
     @IBAction func lightsButtonPressed(_ sender: UIButton) {
+        
     }
     
     @IBAction func trashButtonPressed(_ sender: UIButton) {

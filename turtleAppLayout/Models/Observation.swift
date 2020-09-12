@@ -29,9 +29,12 @@ class Observation: Object {
     @objc dynamic var nestType: String = ""
     @objc dynamic var turtleType: String = ""
     @objc dynamic var existingNestDisturbedType : String = ""
+
+//    Moved hatching values into own Object
+//    @objc dynamic var hatching : Bool = false
+//    @objc dynamic var hatchingType: String = "" //No problems; Lights; Trash; Sewer; Plants; Other
     
-    @objc dynamic var hatching : Bool = false
-    @objc dynamic var hatchingType: String = "" //No problems; Lights; Trash; Sewer; Plants; Other
+    
     @objc dynamic var numSuccess : String = ""
     @objc dynamic var numStranded : String = ""
     @objc dynamic var numDead : String = ""
