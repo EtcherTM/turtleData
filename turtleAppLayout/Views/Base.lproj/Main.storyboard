@@ -400,7 +400,7 @@
                                                     <constraint firstAttribute="width" constant="220" id="pmW-ST-ILb"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                                <state key="normal" title="None">
+                                                <state key="normal" title="No Problems">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -546,6 +546,9 @@
                                         <state key="normal" title="Done/Save">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="doneButtonPressed:" destination="E22-2l-jpa" eventType="touchUpInside" id="AGY-PD-IKX"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbA-Jf-N8c">
                                         <rect key="frame" x="204" y="0.0" width="82" height="42"/>
@@ -554,6 +557,9 @@
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="cancelButtonPressed:" destination="E22-2l-jpa" eventType="touchUpInside" id="jNQ-9s-dl2"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -570,7 +576,6 @@
                         <viewLayoutGuide key="safeArea" id="1Ei-KB-NqK"/>
                     </view>
                     <connections>
-                        <outlet property="cancelButton" destination="gbA-Jf-N8c" id="l52-q8-iX6"/>
                         <outlet property="deadButton" destination="Da2-zD-6CB" id="BW4-6t-m2i"/>
                         <outlet property="doneButton" destination="fjc-fM-xDs" id="j9D-j4-1EI"/>
                         <outlet property="lightsButton" destination="9BH-Eq-zN4" id="jZr-Bp-R5I"/>

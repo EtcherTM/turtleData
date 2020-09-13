@@ -12,14 +12,22 @@ import RealmSwift
 class HatchingViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     
 //    Need to define realm, can we use this for both new and reviewed
-    
+    var obs : Observation?
     let defaults = UserDefaults.standard
-    var hatchingTemp = true
+    var hatch = Hatching()
+
+    var hatchingExistsTemp = true
     var hatchingTypeTemp = ""
+    var hatchingNoProblemsTemp : Bool = false
+    var hatchingLightsTemp : Bool = false
+    var hatchingTrashTemp : Bool = false
+    var hatchingSewerTemp : Bool = false
+    var hatchingPlantsTemp : Bool = false
+    var hatchingOtherTemp : Bool = false
+    
     var numSuccessTemp = 0
     var numStrandedTemp = 0
     var numDeadTemp = 0
-    
 
     @IBOutlet weak var noProblemButton: UIButton!
     @IBOutlet weak var lightsButton: UIButton!
@@ -37,36 +45,175 @@ class HatchingViewController: UIViewController, UITextViewDelegate, UITextFieldD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
    
+    
     @IBAction func noProblemButtonPressed(_ sender: UIButton) {
-        hatchingTemp = false
+        hatchingNoProblemsTemp = !hatchingNoProblemsTemp
+        if hatchingNoProblemsTemp {
+            sender.setTitle("No Problems ✓", for: .normal)
+            print("No problems")
+        } else {
+            sender.setTitle("No Problems", for: .normal)
+            print("Problems")
+        }
     }
     
     @IBAction func lightsButtonPressed(_ sender: UIButton) {
-        
+        hatchingLightsTemp = !hatchingLightsTemp
+        if hatchingLightsTemp {
+            sender.setTitle("Lights ✓", for: .normal)
+            print("Light problem")
+        } else {
+            sender.setTitle("Lights", for: .normal)
+            print("No light problem")
+        }
     }
     
     @IBAction func trashButtonPressed(_ sender: UIButton) {
+        hatchingTrashTemp = !hatchingTrashTemp
+        if hatchingTrashTemp {
+            sender.setTitle("Trash ✓", for: .normal)
+            print("Trash problem")
+        } else {
+            sender.setTitle("Trash", for: .normal)
+            print("No Trash problem")
+        }
     }
     
     @IBAction func sewerButtonPressed(_ sender: UIButton) {
+    hatchingSewerTemp = !hatchingSewerTemp
+    if hatchingSewerTemp {
+        sender.setTitle("Sewer ✓", for: .normal)
+        print("sewer problem")
+    } else {
+        sender.setTitle("Sewer", for: .normal)
+        print("No sewer problem")
+    }
     }
     
     @IBAction func plantsButtonPressed(_ sender: UIButton) {
+        hatchingPlantsTemp = !hatchingPlantsTemp
+        if hatchingPlantsTemp {
+            sender.setTitle("Plants ✓", for: .normal)
+            print("plants problem")
+        } else {
+            sender.setTitle("Plants", for: .normal)
+            print("No Plants problem")
+        }
     }
     
     @IBAction func otherButtonPressed(_ sender: UIButton) {
+        hatchingOtherTemp = !hatchingOtherTemp
+          if hatchingOtherTemp {
+              sender.setTitle("Other ✓", for: .normal)
+              print("Other problem")
+          } else {
+              sender.setTitle("Other", for: .normal)
+              print("No other problem")
+          }
+        
     }
     
     @IBAction func successButtonPressed(_ sender: UIButton) {
+
+        var myTextField : UITextField?
+        let alert = UIAlertController.init(title: "Estimate the number of babies that went unassisted to ocean", message: nil, preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            // make sure your outside any property should be accessed with self here
+            myTextField = textField
+            //Important step assign textfield delegate to self
+            myTextField?.delegate = self
+            myTextField?.placeholder = "0"
+            myTextField?.keyboardType = .numberPad
+        }
+        
+        alert.addAction(UIAlertAction(title: "CANCEL", style: .cancel, handler: { (_) in
+            sender.setTitle("# Success", for: .normal)
+        }))
+   
+        alert.addAction(UIAlertAction(title: "DONE", style: .default, handler: { (action) in
+            guard let num = Int(myTextField!.text!) else { return }
+            self.numSuccessTemp = num
+            sender.setTitle("\(num) Success", for: .normal)
+        }))
+
+        present(alert, animated: true, completion:nil)
+        
     }
     
     @IBAction func strandedButtonPressed(_ sender: UIButton) {
+        
+         var myTextField : UITextField?
+         let alert = UIAlertController.init(title: "Enter number of babies that were stranded and needed rescue", message: nil, preferredStyle: .alert)
+         alert.addTextField { (textField) in
+             myTextField = textField
+             myTextField?.delegate = self
+             myTextField?.placeholder = "0"
+             myTextField?.keyboardType = .numberPad
+         }
+         
+         alert.addAction(UIAlertAction(title: "CANCEL", style: .cancel, handler: { (_) in
+             sender.setTitle("# Stranded", for: .normal)
+         }))
+    
+         alert.addAction(UIAlertAction(title: "DONE", style: .default, handler: { (action) in
+             guard let num = Int(myTextField!.text!) else { return }
+            self.numStrandedTemp = num
+             sender.setTitle("\(num) Stranded", for: .normal)
+         }))
+
+             present(alert, animated: true, completion:nil)
     }
     
     @IBAction func deadButtonPressed(_ sender: UIButton) {
+
+     var myTextField : UITextField?
+     let alert = UIAlertController.init(title: "Enter number of dead babies found", message: nil, preferredStyle: .alert)
+     alert.addTextField { (textField) in
+         myTextField = textField
+         myTextField?.delegate = self
+         myTextField?.placeholder = "0"
+         myTextField?.keyboardType = .numberPad
+     }
+     
+     alert.addAction(UIAlertAction(title: "CANCEL", style: .cancel, handler: { (_) in
+         sender.setTitle("# Dead", for: .normal)
+     }))
+
+     alert.addAction(UIAlertAction(title: "DONE", style: .default, handler: { (action) in
+         guard let num = Int(myTextField!.text!) else { return }
+        self.numDeadTemp = num
+         sender.setTitle("\(num) Dead", for: .normal)
+     }))
+
+         present(alert, animated: true, completion:nil)
+    }
+    
+    @IBAction func doneButtonPressed(_ sender: UIButton) {
+        
+        hatch.hatchingExists = hatchingOtherTemp || hatchingSewerTemp || hatchingLightsTemp || hatchingPlantsTemp || hatchingTrashTemp || hatchingNoProblemsTemp
+        hatch.noProblems = hatchingNoProblemsTemp
+        hatch.trash = hatchingTrashTemp
+        hatch.plants = hatchingPlantsTemp
+        hatch.lights = hatchingLightsTemp
+        hatch.sewer = hatchingSewerTemp
+        hatch.other = hatchingOtherTemp
+        hatch.numSuccess = numSuccessTemp
+        hatch.numStranded = numStrandedTemp
+        hatch.numDead = numDeadTemp
+        print(hatch)
+        
+        obs?.hatching = hatch
+        
+        print(obs)
+        
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func cancelButtonPressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     

@@ -127,7 +127,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         nestButton.setTitle(data!.nest ? data?.nestType : "", for: .normal)
         disturbedButton.setTitle(data!.existingNestDisturbed ? data?.existingNestDisturbedType : "", for: .normal)
         turtleButton.setTitle(data!.turtle ? data?.turtleType : "", for: .normal)
-        hatchingButton.setTitle(data!.hatching ? data?.hatchingType : "", for: .normal)
+//        hatchingButton.setTitle(data!.hatching ? data?.hatchingType : "", for: .normal)
         commentsTextView.text = data!.comments
         
         //      Displaying images:

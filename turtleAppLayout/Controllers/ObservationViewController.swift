@@ -83,9 +83,12 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         self.view.endEditing(true)
     }
     
-    func prepareForSegue(_ segue: UIStoryboardSegue, sender: AnyObject?)
-    {
-        var destinationController = segue.destination
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ObsToHatching" {
+            let vc = segue.destination as! HatchingViewController
+            vc.obs = data
+        }
+    
     }
     
     
@@ -315,9 +318,10 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     @IBAction func hatchingButtonPressed(_ sender: UIButton) {
         
         self.performSegue(withIdentifier: "ObsToHatching", sender: self)
-
-        if !data.hatching {
-            
+        
+        print(data)
+//        if !data.hatching {
+//        }
             
             
 //            var rescued = UITextField()
@@ -378,7 +382,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
 //            data.hatchingType = ""
         }
 //        data.hatching = !data.hatching
-    }
+    
     
     
     
@@ -387,14 +391,16 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     @IBAction func doneButtonPressed(_ sender: UIButton) {
         
         let alert = UIAlertController(title: "SAVE THIS OBSERVATION AND CLEAR ALL FIELDS?", message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (eee) in
+        alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (_) in
             
             self.data.comments = self.commentsTextView.text ?? ""
+            
+            // creat id
             var id = "\(self.data.zoneLocation)-" != "" ? "\(self.data.zoneLocation)-": "-"
             
             if self.data.nest { id.append(self.data.nestType == "nest" ? "N" : "F") }
             if self.data.existingNestDisturbed { id.append(self.data.existingNestDisturbedType == "disturbed" ? "D" : "R") }
-            id.append(self.data.hatching ? "H" : "")
+//            id.append(self.data.hatching ? "H" : "")
             id.append(self.data.turtle ? "T" : "")
             
             let dateFormatter = DateFormatter()
@@ -477,7 +483,7 @@ extension ObservationViewController: CLLocationManagerDelegate {
             data.lat = location.coordinate.latitude
             data.lon = location.coordinate.longitude
             data.accuracy = location.horizontalAccuracy
-            locationButton.setTitle("\(data.lat), \(data.lon), ± \(data.accuracy)m", for: .normal)
+            locationButton.setTitle("\(String(format: "%.2f", data.lat)), \(String(format: "%.2f", data.lon)), ± \(String(format: "%.2f", data.accuracy))m", for: .normal)
         }
         
         

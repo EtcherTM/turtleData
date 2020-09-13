@@ -52,9 +52,9 @@ class ListTableViewController: UITableViewController {
         if observation.existingNestDisturbed {
             type.append("Existing Nest ")
         }
-        if observation.hatching {
-            type.append("Hatching ")
-        }
+//        if observation.hatching {
+//            type.append("Hatching ")
+//        }
         if observation.turtle {
             type.append("Turtle")
         }

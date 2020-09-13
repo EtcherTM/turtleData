@@ -14,7 +14,7 @@ class NoActivityViewController: UIViewController {
     let defaults = UserDefaults.standard
     var noAct = NoActivityReport()
 
-    
+    let realm = try! Realm()
     
     @IBOutlet weak var aButton: UIButton!
     @IBOutlet weak var bButton: UIButton!
@@ -87,66 +87,49 @@ class NoActivityViewController: UIViewController {
     
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
-        
-        print(noAct)
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd-"
 
+        var id = "NOACTIVITY-"
         
-        if noAct.aNoActivity == true {
-            var id = "NOACTIVITY-"
-            id.append("A-")
-            id.append(dateFormatter.string(from: Date()))
-            id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
-
-            print("The new observation ID is: \(id)")
+        if noAct.aNoActivity {
+            id.append("A")
         }
         
-        if noAct.bNoActivity == true {
-            var id = "NOACTIVITY-"
-            id.append("B-")
-            id.append(dateFormatter.string(from: Date()))
-            id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
-
-            print("The new observation ID is: \(id)")
-
+        if noAct.bNoActivity  {
+            id.append("B")
         }
         
-        if noAct.cNoActivity == true {
-            var id = "NOACTIVITY-"
-            id.append("C-")
-            id.append(dateFormatter.string(from: Date()))
-            id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
-            print("The new observation ID is: \(id)")
-
+        if noAct.cNoActivity {
+            id.append("C")
         }
         
-        if noAct.dNoActivity == true {
-            var id = "NOACTIVITY-"
-            id.append("D-")
-            id.append(dateFormatter.string(from: Date()))
-            id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
-            print("The new observation ID is: \(id)")
-
+        if noAct.dNoActivity  {
+            id.append("D")
         }
         
-        if noAct.eNoActivity == true {
-            var id = "NOACTIVITY-"
-            id.append("E-")
-            id.append(dateFormatter.string(from: Date()))
-            id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
-            print("The new observation ID is: \(id)")
-
+        if noAct.eNoActivity {
+            id.append("E")
         }
         
-        if noAct.fNoActivity == true {
-            var id = "NOACTIVITY-"
-            id.append("F-")
-            id.append(dateFormatter.string(from: Date()))
-            id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
-            print("The new observation ID is: \(id)")
-
+        if noAct.fNoActivity  {
+            id.append("F")
+        }
+        
+        id.append("-\(dateFormatter.string(from: Date()))")
+        id.append(defaults.string(forKey: "userID") ?? "NOUSER")
+        
+        noAct.id = id
+        
+        print(noAct)
+        
+        do {
+        try realm.write {
+            realm.add(noAct)
+        }
+        } catch {
+            print("error saving noAct, \(error)")
         }
         
         self.dismiss(animated: true, completion: createLabel)
@@ -181,6 +164,7 @@ class NoActivityViewController: UIViewController {
             }
             
             print(noActButtonText)
+        
             
             
         }

@@ -11,16 +11,16 @@ import RealmSwift
 
 class Hatching: Object {
 
-    @objc dynamic var hatching : Bool = false
-    @objc dynamic var hatchingNoProblems : Bool = false
+    @objc dynamic var hatchingExists : Bool = false
 
-    @objc dynamic var hatchingLights : Bool = false
-    @objc dynamic var hatchingTrash : Bool = false
-    @objc dynamic var hatchingSewer : Bool = false
-    @objc dynamic var hatchingPlants : Bool = false
-    @objc dynamic var hatchingOther : Bool = false
+    @objc dynamic var noProblems : Bool = false
+    @objc dynamic var lights : Bool = false
+    @objc dynamic var trash : Bool = false
+    @objc dynamic var sewer : Bool = false
+    @objc dynamic var plants : Bool = false
+    @objc dynamic var other : Bool = false
     
-   @objc dynamic var numSuccess = 0
+    @objc dynamic var numSuccess = 0
     @objc dynamic var numStranded = 0
     @objc dynamic var numDead = 0
     
