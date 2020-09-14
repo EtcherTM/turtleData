@@ -195,6 +195,32 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         present(imagePicker, animated: true, completion: nil)
     }
     
+    @IBAction func handleGesture(_ sender: UILongPressGestureRecognizer) {
+        
+        switch sender.state {
+           case .began:
+               UIView.animate(withDuration: 0.05,
+                              animations: {
+                                self.photoImage1.transform = CGAffineTransform(scaleX: 8.0, y: 8.0)
+               },
+                              completion: nil)
+           case .ended:
+               UIView.animate(withDuration: 0.05) {
+                   self.photoImage1.transform = CGAffineTransform.identity
+               }
+           default: break
+           }
+        
+//        if sender.state == .began
+//        {
+//            let alertController = UIAlertController(title: nil, message:
+//                "Long-Press Gesture Detected", preferredStyle: .alert)
+//            alertController.addAction(UIAlertAction(title: "OK", style: .default,handler: nil))
+//
+//            present(alertController, animated: true, completion: nil)
+//        }
+
+    }
     @IBAction func nestButtonPressed(_ sender: UIButton) {
         //Probability of nest?
         if !data.nest {

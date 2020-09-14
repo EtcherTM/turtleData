@@ -125,6 +125,7 @@
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mFJ-R1-NmM" userLabel="Photo Button 1">
                                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
+                                                        <gestureRecognizers/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="65" id="ch0-Cm-7Tb"/>
                                                         </constraints>
@@ -134,6 +135,7 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="photoButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5OB-uP-qzZ"/>
+                                                            <outletCollection property="gestureRecognizers" destination="1U2-mY-F8R" appends="YES" id="Kfg-tm-fWw"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -365,6 +367,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="1U2-mY-F8R">
+                    <connections>
+                        <action selector="handleGesture:" destination="BYZ-38-t0r" id="BPa-JW-DMm"/>
+                        <outlet property="delegate" destination="mFJ-R1-NmM" id="D9X-0o-4At"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2894" y="-690"/>
         </scene>
