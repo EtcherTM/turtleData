@@ -1380,6 +1380,9 @@ w/ No Activity</string>
                                         <state key="normal" title="Delete">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="deleteButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="KaX-Qe-Jbx"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
