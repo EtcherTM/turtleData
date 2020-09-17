@@ -31,7 +31,9 @@ class Observation: Object {
     @objc dynamic var existingNestDisturbedType : String = ""
 
 //    Moved hatching values into own Object
-    @objc dynamic var hatching : Hatching?
+    @objc dynamic var hatchingBool = false
+    @objc dynamic var hatchingDetails : Hatching?
+    
     
     @objc dynamic var numSuccess : String = ""
     @objc dynamic var numStranded : String = ""

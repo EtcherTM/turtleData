@@ -17,6 +17,14 @@ class ListTableViewController: UITableViewController {
         super.viewDidLoad()
         print(listOfObservations)
         tableView.register(UINib(nibName: "ListCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 300
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -47,19 +55,25 @@ class ListTableViewController: UITableViewController {
         var type: String = ""
         
         if observation.nest {
-            type = "Emergence "
+            type = "New Nest "
         }
         if observation.existingNestDisturbed {
             type.append("Existing Nest ")
         }
-//        if observation.hatching {
-//            type.append("Hatching ")
-//        }
+        if observation.hatchingBool {
+            type.append("Hatching ")
+        }
         if observation.turtle {
             type.append("Turtle")
         }
         
-        cell.cellLabel?.text = "\(observation.zoneLocation):  \(type) \(observation.comments) \(observation.id)"
+        let dateFormatter = DateFormatter()
+         
+         dateFormatter.dateFormat = "dd-MM"
+         
+        let itemDate = dateFormatter.string(from: observation.date)
+        
+        cell.cellLabel?.text = "\(observation.property):  \(type) \(itemDate) \(observation.comments)\n\(observation.id)"
 
         
         return cell

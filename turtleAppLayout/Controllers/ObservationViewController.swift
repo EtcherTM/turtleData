@@ -152,7 +152,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             
             
             for property in propertyList {
-                alert.addAction(UIAlertAction(title: "\(property.0) : \(property.1)", style: .default, handler: { (eee) in
+                alert.addAction(UIAlertAction(title: "\(property.0) : \(property.1)", style: .default, handler: { (_) in
                     self.data.property = property.0
                     sender.setTitle("\(property.0) : \(property.1)", for: .normal)
                 }))
@@ -182,7 +182,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             image = 1
         case "photo2":
             image = 2
-        case "photo3":
+        case " photo3":
             image = 3
         case "photo4":
             image = 4
@@ -426,7 +426,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             
             if self.data.nest { id.append(self.data.nestType == "nest" ? "N" : "F") }
             if self.data.existingNestDisturbed { id.append(self.data.existingNestDisturbedType == "disturbed" ? "D" : "R") }
-//            id.append(self.data.hatching ? "H" : "")
+            id.append(self.data.hatchingDetails != nil ? "H" : "")
             id.append(self.data.turtle ? "T" : "")
             
             let dateFormatter = DateFormatter()
@@ -524,6 +524,7 @@ extension ObservationViewController: CLLocationManagerDelegate {
 extension ObservationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
         if let imageTaken = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             
             //          Call function to set the image on the obs screen

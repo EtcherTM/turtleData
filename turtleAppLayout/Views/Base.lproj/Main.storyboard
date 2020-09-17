@@ -583,11 +583,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1Ei-KB-NqK"/>
                     </view>
+                    <navigationItem key="navigationItem" id="upt-p9-hEM"/>
                     <connections>
                         <outlet property="deadButton" destination="Da2-zD-6CB" id="BW4-6t-m2i"/>
                         <outlet property="doneButton" destination="fjc-fM-xDs" id="j9D-j4-1EI"/>
                         <outlet property="lightsButton" destination="9BH-Eq-zN4" id="jZr-Bp-R5I"/>
-                        <outlet property="noProblemButton" destination="9BH-Eq-zN4" id="TXF-BW-3UL"/>
+                        <outlet property="noProblemButton" destination="UAk-oD-a7X" id="jOI-xi-nWJ"/>
                         <outlet property="otherButton" destination="5PT-2X-weY" id="v1V-ao-vbs"/>
                         <outlet property="plantsButton" destination="sHD-Tq-GDx" id="u8Q-c1-GWG"/>
                         <outlet property="sewerButton" destination="vEw-cS-vOu" id="H1c-kY-oQr"/>
@@ -1210,8 +1211,9 @@ w/ No Activity</string>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f7P-v2-lSa" userLabel="Photo 1 Button">
                                                         <rect key="frame" x="0.0" y="0.0" width="80" height="75"/>
+                                                        <state key="normal" title="photo1"/>
                                                         <connections>
-                                                            <action selector="photo1ButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="7dl-W2-9sH"/>
+                                                            <action selector="photoButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="ZMz-qZ-dC7"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -1237,8 +1239,9 @@ w/ No Activity</string>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ifl-Tz-b6a" userLabel="Photo 2 Button">
                                                         <rect key="frame" x="17" y="0.0" width="46" height="80"/>
+                                                        <state key="normal" title="photo2"/>
                                                         <connections>
-                                                            <action selector="photo2ButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="iJ1-37-MrX"/>
+                                                            <action selector="photoButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="XFK-QX-tmQ"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -1273,8 +1276,9 @@ w/ No Activity</string>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ky-U8-rpB" userLabel="Photo 3 Button">
                                                         <rect key="frame" x="17" y="0.0" width="46" height="80"/>
+                                                        <state key="normal" title="photo3"/>
                                                         <connections>
-                                                            <action selector="photo3ButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="b7g-9m-VVo"/>
+                                                            <action selector="photoButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="xg8-rg-dfb"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -1301,8 +1305,9 @@ w/ No Activity</string>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HH5-CH-GPF" userLabel="Photo 4 Button">
                                                         <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                                        <state key="normal" title="photo4"/>
                                                         <connections>
-                                                            <action selector="photo4ButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="jJa-hX-SxL"/>
+                                                            <action selector="photoButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="cUe-WZ-5Mh"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -1329,8 +1334,9 @@ w/ No Activity</string>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5dh-sg-nGO" userLabel="Photo 5 Button">
                                                         <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                                        <state key="normal" title="photo5"/>
                                                         <connections>
-                                                            <action selector="photo5ButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="qY9-QB-H6e"/>
+                                                            <action selector="photoButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="8Wr-cc-bVj"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -1415,6 +1421,7 @@ w/ No Activity</string>
                         <outlet property="propertyButton" destination="U9L-FI-Edf" id="jhT-1w-1sY"/>
                         <outlet property="turtleButton" destination="QDb-zI-d3w" id="f78-mr-X5v"/>
                         <outlet property="zoneButton" destination="beL-wd-4Uk" id="mhW-kd-KWm"/>
+                        <segue destination="E22-2l-jpa" kind="presentation" identifier="EditToHatching" id="QFq-NS-hbW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mw9-Ep-fnZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1442,6 +1449,7 @@ w/ No Activity</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Qut-vR-tEU"/>
+        <segue reference="W7i-oC-iVy"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="camera.fill" catalog="system" width="128" height="96"/>

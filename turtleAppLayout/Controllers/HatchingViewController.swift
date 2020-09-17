@@ -45,6 +45,33 @@ class HatchingViewController: UIViewController, UITextViewDelegate, UITextFieldD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let hatching = obs?.hatchingDetails {
+            print(hatching)
+            noProblemButton.setTitle(hatching.noProblems ? "No Problems ✓" : "No hgirhProblems", for: .normal)
+            print(hatching.noProblems ? "No Problems ✓" : "No Problems")
+            lightsButton.setTitle(hatching.lights ? "Lights ✓" : "Lights", for: .normal)
+            trashButton.setTitle(hatching.trash ? "Trash ✓" : "Trash", for: .normal)
+            sewerButton.setTitle(hatching.sewer ? "Sewer ✓" : "Sewer", for: .normal)
+            plantsButton.setTitle(hatching.plants ? "Plants ✓" : "Plants", for: .normal)
+            otherButton.setTitle(hatching.other ? "Other ✓" : "Other", for: .normal)
+            successButton.setTitle("\(hatching.numSuccess) Success", for: .normal)
+            strandedButton.setTitle("\(hatching.numStranded) Stranded", for: .normal)
+            deadButton.setTitle("\(hatching.numDead) Dead", for: .normal)
+            
+            hatchingExistsTemp = true
+            hatchingTypeTemp = ""
+            hatchingNoProblemsTemp = hatching.noProblems
+            hatchingLightsTemp = hatching.lights
+            hatchingTrashTemp = hatching.trash
+            hatchingSewerTemp = hatching.sewer
+            hatchingPlantsTemp = hatching.plants
+            hatchingOtherTemp = hatching.other
+            
+            numSuccessTemp = hatching.numSuccess
+            numStrandedTemp = hatching.numStranded
+            numDeadTemp = hatching.numDead
+        }
     }
    
     
@@ -204,9 +231,8 @@ class HatchingViewController: UIViewController, UITextViewDelegate, UITextFieldD
         hatch.numDead = numDeadTemp
         print(hatch)
         
-        obs?.hatching = hatch
+        obs?.hatchingDetails = hatch
         
-        print(obs)
         
         self.dismiss(animated: true, completion: nil)
         

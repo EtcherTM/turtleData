@@ -115,7 +115,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         temp.turtleType = data!.turtleType
         temp.existingNestDisturbedType = data!.existingNestDisturbedType
         
-        temp.hatching = data!.hatching
+        temp.hatchingDetails = data!.hatchingDetails
         
         temp.numSuccess = data!.numSuccess
         temp.numStranded = data!.numStranded
@@ -168,7 +168,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         nestButton.setTitle(data!.nest ? data?.nestType : "", for: .normal)
         disturbedButton.setTitle(data!.existingNestDisturbed ? data?.existingNestDisturbedType : "", for: .normal)
         turtleButton.setTitle(data!.turtle ? data?.turtleType : "", for: .normal)
-        //        hatchingButton.setTitle(data!.hatching ? data?.hatchingType : "", for: .normal)
+                hatchingButton.setTitle("Edit Hatching Data", for: .normal)
         commentsTextView.text = data!.comments
         
         //      Displaying images:
@@ -253,6 +253,15 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         
         
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "EditToHatching" {
+            let vc = segue.destination as! HatchingViewController
+            vc.obs = temp
+        }
+    }
+//MARK:- Data Entry
     
     @IBAction func zoneButtonPressed(_ sender: UIButton) {
         print("zone")
@@ -355,29 +364,50 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     @IBAction func hatchingButtonPressed(_ sender: UIButton) {
         print("hatching")
+        
+        performSegue(withIdentifier: "EditToHatching", sender: self)
+        
     }
     
-    @IBAction func photo1ButtonPressed(_ sender: UIButton) {
+    @IBAction func photoButtonPressed(_ sender: UIButton) {
         print("click1")
-    }
-    
-    @IBAction func photo2ButtonPressed(_ sender: UIButton) {
-        print("click2")
-    }
-    
-    @IBAction func photo3ButtonPressed(_ sender: UIButton) {
-        print("click3")
+        
+        switch sender.currentTitle ?? "" {
+        case "photo1":
+            image = 1
+        case "photo2":
+            image = 2
+        case "photo3":
+            image = 3
+        case "photo4":
+            image = 4
+        case "photo5":
+            image = 5
+        default:
+            print("DODODODODO")
+        }
+        
+        let alert = UIAlertController(title: "Choose image source", message: "", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) in
+            self.imagePicker.allowsEditing = false
+            self.imagePicker.sourceType = .camera
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { (_) in
+            self.imagePicker.allowsEditing = false
+            self.imagePicker.sourceType = .photoLibrary
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }))
+        print("present Choie")
+        present(alert, animated: true)
+        
+        
+        //need to wait until other one is dismissed
         
     }
     
-    @IBAction func photo4ButtonPressed(_ sender: UIButton) {
-        print("click4")
-    }
-    
-    @IBAction func photo5ButtonPressed(_ sender: UIButton) {
-        print("click5")
-        
-    }
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
         print("DONE!!!")
@@ -452,11 +482,14 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             }
             
             //Go back to main menu
+            
+            print("dismissed")
         }))
         
         alert.addAction(UIAlertAction(title: "no", style: .default, handler: nil))
         
         present(alert, animated: true)
+        
     }
 }
 
@@ -514,19 +547,19 @@ extension EditViewController: UIImagePickerControllerDelegate, UINavigationContr
             switch image {
             case 1:
                 photoImageView1.image = imageTaken
-                data!.image1 = imgRef
+                temp.image1 = imgRef
             case 2:
                 photoImageView2.image = imageTaken
-                data!.image2 = imgRef
+                temp.image2 = imgRef
             case 3:
                 photoImageView3.image = imageTaken
-                data!.image3 = imgRef
+                temp.image3 = imgRef
             case 4:
                 photoImageView4.image = imageTaken
-                data!.image4 = imgRef
+                temp.image4 = imgRef
             case 5:
                 photoImageView5.image = imageTaken
-                data!.image5 = imgRef
+                temp.image5 = imgRef
             default:
                 print("error BOUBOUBOBUOBUBOUBOBUOUBBUBUBO")
             }

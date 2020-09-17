@@ -10,11 +10,13 @@ import UIKit
 
 class ListCell: UITableViewCell {
 
+    @IBOutlet weak var cellView: UIView!
     @IBOutlet weak var cellLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
+        cellView.layer.cornerRadius = cellView.frame.size.height / 5
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

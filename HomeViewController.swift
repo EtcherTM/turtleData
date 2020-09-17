@@ -126,7 +126,7 @@ class HomeViewController: UIViewController, ButtonUpdater {
 //                if obs.existingNestDisturbed {type.append("disturbed")}
 //                if obs.nest {type.append(obs.nestType)}
 var hatchingL: Dictionary<String, Bool> = [:]
-                if let hatch = obs.hatching {
+                if let hatch = obs.hatchingDetails {
                     
                     if hatch.hatchingExists { hatchingL["exists"] = hatch.hatchingExists }
                     if hatch.noProblems { hatchingL["noProblems"] = hatch.noProblems }
@@ -166,14 +166,14 @@ var hatchingL: Dictionary<String, Bool> = [:]
                     "userid": self.defaults.string(forKey: "userID") ?? "",
                     "imageURLS": obs.id,
                     "type": [
-                        "hatching": obs.hatching != nil ? [
-                            "exists": obs.hatching?.hatchingExists ?? false ? obs.hatching?.hatchingExists : nil,
-                            "noProblems": obs.hatching?.noProblems ?? false ? obs.hatching?.noProblems : nil,
-                            "lights": obs.hatching?.lights ?? false ? obs.hatching?.lights : nil,
-                            "trash": obs.hatching?.trash ?? false ? obs.hatching?.trash: nil,
-                            "sewer": obs.hatching?.sewer ?? false ? obs.hatching?.sewer : nil,
-                            "plants": obs.hatching?.plants ?? false ? obs.hatching?.plants : nil,
-                            "other": obs.hatching?.other ?? false ? obs.hatching?.other : nil,
+                        "hatching": obs.hatchingDetails != nil ? [
+                            "exists": obs.hatchingDetails?.hatchingExists ?? false ? obs.hatchingDetails?.hatchingExists : nil,
+                            "noProblems": obs.hatchingDetails?.noProblems ?? false ? obs.hatchingDetails?.noProblems : nil,
+                            "lights": obs.hatchingDetails?.lights ?? false ? obs.hatchingDetails?.lights : nil,
+                            "trash": obs.hatchingDetails?.trash ?? false ? obs.hatchingDetails?.trash: nil,
+                            "sewer": obs.hatchingDetails?.sewer ?? false ? obs.hatchingDetails?.sewer : nil,
+                            "plants": obs.hatchingDetails?.plants ?? false ? obs.hatchingDetails?.plants : nil,
+                            "other": obs.hatchingDetails?.other ?? false ? obs.hatchingDetails?.other : nil,
 //                            "numSuccess": obs.hatching?.numSuccess != 0 ? obs.hatching?.numSuccess : nil,
 //                            "numStranded": obs.hatching?.numStranded != 0 ? obs.hatching?.numStranded : nil,
 //                            "numDead": obs.hatching?.hatchingExists != 0 ? obs.hatching?.hatchingExists : nil,
