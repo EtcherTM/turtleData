@@ -345,69 +345,14 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         
         self.performSegue(withIdentifier: "ObsToHatching", sender: self)
         
-        print(data)
-//        if !data.hatching {
-//        }
-            
-            
-//            var rescued = UITextField()
-//
-//            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-//
-//            alert.addAction(UIAlertAction(title: "NO PROBLEMS", style: .default, handler: { (action) in
-//                self.data.hatchingType = "success"
-//                sender.setTitle("No prob ✓", for: .normal)
-//                self.data.numStranded = rescued.text ?? ""
-//            }))
-//            alert.addAction(UIAlertAction(title: "PROBLEM: LIGHTS", style: .default, handler: { (action) in
-//                self.data.hatchingType = "lights"
-//                sender.setTitle("Prob: Lights ✓", for: .normal)
-//                self.data.numStranded = rescued.text ?? ""
-//            }))
-//
-//            alert.addAction(UIAlertAction(title: "PROBLEM: TRASH", style: .default, handler: { (action) in
-//                self.data.hatchingType = "trash"
-//                sender.setTitle("Prob: Trash ✓", for: .normal)
-//                self.data.numStranded = rescued.text ?? ""
-//            }))
-//
-//            alert.addAction(UIAlertAction(title: "PROBLEM: OTHER", style: .default, handler: { (action) in
-//                self.data.hatchingType = "other"
-//                sender.setTitle("Prob: Other ✓", for: .normal)
-//                self.data.numStranded = rescued.text ?? ""
-//            }))
-////                        alert.addTextField { (rescuedField) in
-////                            rescued = rescuedField
-////                            rescued.text = "Number Rescued"
-////                        }
-////
-////                        alert.addTextField { (rescuedField) in
-////                            rescued = rescuedField
-////                            rescued.placeholder = "Number Rescued"
-////                        }
-//
-//
-////            alert.addAction(UIAlertAction(title: "# RESCUED", style: .default, handler: { (action) in
-////                self.data.hatchingType = "rescued"
-////                sender.setTitle("# Rescued  ✓", for: .normal)
-////            }))
-////            alert.addAction(UIAlertAction(title: "# DEAD", style: .default, handler: { (action) in
-////                self.data.hatchingType = "dead"
-////                sender.setTitle("# Dead ✓", for: .normal)
-////
-////            }))
-//
-//
-//
-//
-//            present(alert, animated: true)
-//            alert.view.tintColor = UIColor.black
-//
-//        } else {
-//            sender.setTitle("Hatching?", for: .normal)
-//            data.hatchingType = ""
+        if data.hatchingDetails != nil {
+            print("NOT NIL")
+            sender.setTitle("Hatching ✓", for: .normal)
+        } else {
+            sender.setTitle("Hatching?", for: .normal)
         }
-//        data.hatching = !data.hatching
+    }
+
     
     
     

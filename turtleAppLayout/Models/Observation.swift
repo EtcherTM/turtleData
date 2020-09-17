@@ -35,10 +35,6 @@ class Observation: Object {
     @objc dynamic var hatchingDetails : Hatching?
     
     
-    @objc dynamic var numSuccess : String = ""
-    @objc dynamic var numStranded : String = ""
-    @objc dynamic var numDead : String = ""
-    
 
 //    @objc dynamic var docDirPath: String = ""
 

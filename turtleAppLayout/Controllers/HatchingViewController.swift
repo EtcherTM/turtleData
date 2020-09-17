@@ -233,6 +233,12 @@ class HatchingViewController: UIViewController, UITextViewDelegate, UITextFieldD
         
         obs?.hatchingDetails = hatch
         
+//        if ObservationViewController.data.hatchingDetails != nil {
+//            print("NOT NIL")
+//            sender.setTitle("Hatching ✓", for: .normal)
+//        } else {
+//            sender.setTitle("Hatching?", for: .normal)
+//        }
         
         self.dismiss(animated: true, completion: nil)
         

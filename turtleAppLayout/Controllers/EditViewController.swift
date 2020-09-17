@@ -117,10 +117,6 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         
         temp.hatchingDetails = data!.hatchingDetails
         
-        temp.numSuccess = data!.numSuccess
-        temp.numStranded = data!.numStranded
-        temp.numDead = data!.numDead
-        
         temp.image1 = data!.image1
         temp.image2 = data!.image2
         temp.image3 = data!.image3
