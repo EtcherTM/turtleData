@@ -35,6 +35,7 @@ class HomeViewController: UIViewController, ButtonUpdater {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Home"
         navigationController?.setNavigationBarHidden(false, animated: true)
         
         

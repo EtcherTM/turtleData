@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 class HatchingViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
-    
+    var hisVariable: String?
 //    Need to define realm, can we use this for both new and reviewed
     var obs : Observation?
     let defaults = UserDefaults.standard
@@ -41,14 +41,14 @@ class HatchingViewController: UIViewController, UITextViewDelegate, UITextFieldD
     @IBOutlet weak var deadButton: UIButton!
     
     @IBOutlet weak var doneButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var resetButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = "HATCHING PROBLEMS"
         if let hatching = obs?.hatchingDetails {
             print(hatching)
-            noProblemButton.setTitle(hatching.noProblems ? "No Problems ✓" : "No hgirhProblems", for: .normal)
+            noProblemButton.setTitle(hatching.noProblems ? "No Problems ✓" : "No Problems", for: .normal)
             print(hatching.noProblems ? "No Problems ✓" : "No Problems")
             lightsButton.setTitle(hatching.lights ? "Lights ✓" : "Lights", for: .normal)
             trashButton.setTitle(hatching.trash ? "Trash ✓" : "Trash", for: .normal)
@@ -73,7 +73,6 @@ class HatchingViewController: UIViewController, UITextViewDelegate, UITextFieldD
             numDeadTemp = hatching.numDead
         }
     }
-   
     
     @IBAction func noProblemButtonPressed(_ sender: UIButton) {
         hatchingNoProblemsTemp = !hatchingNoProblemsTemp
@@ -233,19 +232,31 @@ class HatchingViewController: UIViewController, UITextViewDelegate, UITextFieldD
         
         obs?.hatchingDetails = hatch
         
-//        if ObservationViewController.data.hatchingDetails != nil {
-//            print("NOT NIL")
-//            sender.setTitle("Hatching ✓", for: .normal)
-//        } else {
-//            sender.setTitle("Hatching?", for: .normal)
-//        }
-        
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
+//        self.dismiss(animated: true, completion: nil)
         
     }
     
-    @IBAction func cancelButtonPressed(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+    @IBAction func resetButtonPressed(_ sender: UIButton) {
+     
+//        hatchDetails = nil
+    
+        hatch.hatchingExists = false
+         hatch.noProblems = false
+         hatch.trash = false
+         hatch.plants = false
+         hatch.lights = false
+         hatch.sewer = false
+         hatch.other = false
+         hatch.numSuccess = 0
+         hatch.numStranded = 0
+         hatch.numDead = 0
+         print(hatch)
+
+         obs?.hatchingDetails = hatch
+         
+         self.navigationController?.popViewController(animated: true)
+        
     }
     
     

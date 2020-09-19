@@ -41,7 +41,6 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBOutlet weak var zoneButton: UIButton!
     @IBOutlet weak var propertyButton: UIButton!
     @IBOutlet weak var locationButton: UIButton!
-    @IBOutlet weak var accuracyLabel: UILabel!
     @IBOutlet weak var nestButton: UIButton!
     @IBOutlet weak var disturbedButton: UIButton!
     @IBOutlet weak var turtleButton: UIButton!
@@ -65,16 +64,14 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         }
         else {
             //            put an alert here?
-            print("eoirhoerihwoeirho")
+            print("No data to load.")
         }
         
         
-        // Do any additional setup after loading the view.
-        //        locationManager.requestWhenInUseAuthorization()  Already did this, right?
+        locationManager.requestWhenInUseAuthorization()
         locationManager.delegate = self
         imagePicker.delegate = self
         imagePicker.allowsEditing = false
-        //        imagePicker.sourceType = .camera LET USER SELECT GALLERY OR CAMERA
         self.commentsTextView.delegate = self
         //
         //        //Set image ids
@@ -105,7 +102,6 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         
         temp.lat = data!.lat
         temp.lon = data!.lon
-        temp.accuracy = data!.accuracy
         
         temp.nest = data!.nest
         temp.turtle = data!.turtle

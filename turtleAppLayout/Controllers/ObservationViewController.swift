@@ -56,7 +56,13 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //        navigationController?.setNavigationBarHidden(true, animated: animated)
+        if data.hatchingDetails != nil && data.hatchingDetails?.hatchingExists != false {
+                   print("NOT NIL")
+                    print(data.hatchingDetails?.hatchingExists)
+                   hatchingButton.setTitle("Hatching ✓", for: .normal)
+               } else {
+                   hatchingButton.setTitle("Hatching?", for: .normal)
+               }
     }
     
     func didDisappear(_ animated: Bool) {
@@ -64,18 +70,15 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         //        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "New Observation"
         locationManager.requestWhenInUseAuthorization()
         locationManager.delegate = self
         imagePicker.delegate = self
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .camera
         self.commentsTextView.delegate = self
-        
-
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -88,8 +91,17 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             let vc = segue.destination as! HatchingViewController
             vc.obs = data
         }
-    
     }
+    
+//    @IBAction func hatchingCancelButtonPressed(_ unwindSegue: UIStoryboardSegue) {
+//    guard let hatchingVC = unwindSegue.source as? HatchingViewController,
+//        let myVariable = hatchingVC.hisVariable,
+//        print(myVariable) else {
+//
+//        }
+//        let wasThereAHatching = hatchingVC.hatch.hatchingExists else {
+//            return
+//    }
     
     
     //MARK:- IBActions: Data Entry
@@ -345,12 +357,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         
         self.performSegue(withIdentifier: "ObsToHatching", sender: self)
         
-        if data.hatchingDetails != nil {
-            print("NOT NIL")
-            sender.setTitle("Hatching ✓", for: .normal)
-        } else {
-            sender.setTitle("Hatching?", for: .normal)
-        }
+       
     }
 
     
