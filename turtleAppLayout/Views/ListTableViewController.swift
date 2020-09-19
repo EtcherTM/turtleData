@@ -76,7 +76,7 @@ class ListTableViewController: UITableViewController {
          
         let itemDate = dateFormatter.string(from: observation.date)
         
-        cell.cellLabel?.text = "\(observation.property):  \(type) \(itemDate) \(observation.comments)\n\(observation.id)"
+        cell.cellLabel?.text = "\(observation.property == "" ? observation.zoneLocation : observation.property):  \(type) \(itemDate) \(observation.comments)\n\(observation.id)"
 
         
         return cell
