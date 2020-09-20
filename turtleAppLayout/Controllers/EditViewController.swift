@@ -37,6 +37,8 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     //    var userID: String = ""  SEBO I THINK WE DON'T WANT THIS?
     
     var image = 0
+    let dispatchGroup = DispatchGroup()
+
     
     @IBOutlet weak var zoneButton: UIButton!
     @IBOutlet weak var propertyButton: UIButton!
@@ -154,12 +156,12 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             let accAsStr = String(format: "%.1f", data!.accuracy)
             locationButton.setTitle("\(latAsStr), \(lonAsStr) ± \(accAsStr) m", for: .normal)
         } else {
-            locationButton.setTitle("", for: .normal)
+            locationButton.setTitle("--", for: .normal)
             
         }
-        emergeButton.setTitle(data!.emerge ? data?.emergeType : "", for: .normal)
-        existingNestDisturbedButton.setTitle(data!.existingNestDisturbed ? data?.existingNestDisturbedType : "", for: .normal)
-        turtleButton.setTitle(data!.turtle ? data?.turtleType : "", for: .normal)
+        emergeButton.setTitle(temp.emerge ? temp.emergeType : "--", for: .normal)
+        existingNestDisturbedButton.setTitle(temp.existingNestDisturbed ? temp.existingNestDisturbedType : "--", for: .normal)
+        turtleButton.setTitle(data!.turtle ? data?.turtleType : "--", for: .normal)
                 hatchingButton.setTitle("Edit Hatching Data", for: .normal)
         commentsTextView.text = data!.comments
         
@@ -215,7 +217,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             let action = UIAlertAction(title: zone, style: .default) { (_) in
                 if self.temp.zoneLocation != zone {
                     self.temp.property = ""
-                    self.propertyButton.setTitle("", for: .normal)
+                    self.propertyButton.setTitle("--", for: .normal)
                 }
                 sender.setTitle(zone, for: .normal)
                 self.temp.zoneLocation = zone
@@ -225,10 +227,10 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         }
         
         alert.addAction(UIAlertAction(title: "CANCEL", style: .cancel, handler: { (_) in
-            sender.setTitle("", for: .normal)
+            sender.setTitle("--", for: .normal)
             self.temp.zoneLocation = ""
             self.temp.property = ""
-            self.propertyButton.setTitle("", for: .normal)
+            self.propertyButton.setTitle("--", for: .normal)
         }))
         
         present(alert, animated: true)
@@ -295,36 +297,93 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
                 let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: "NEW/PROBABLE NEST", style: .default, handler: { (action) in
-                    sender.setTitle("New Nest ✓", for: .normal)
                     self.temp.emergeType = "nest"
+                    sender.setTitle(self.temp.emergeType, for: .normal)
+
                 }))
                 alert.addAction(UIAlertAction(title: "FALSE NEST", style: .default, handler: { (action) in
                     self.temp.emergeType = "false nest"
-                    sender.setTitle("False Nest ✓", for: .normal)
+                    sender.setTitle(self.temp.emergeType, for: .normal)
                 }))
                 alert.addAction(UIAlertAction(title: "FALSE CRAWL", style: .default, handler: { (action) in
                     self.temp.emergeType = "false crawl"
-                    sender.setTitle("False Crawl ✓", for: .normal)
+                    sender.setTitle(self.temp.emergeType, for: .normal)
                     
                 }))
         
                 
                 present(alert, animated: true)
-                alert.view.tintColor = UIColor.black
                 
             } else {
-                sender.setTitle("", for: .normal)
+                sender.setTitle("--", for: .normal)
                 temp.emergeType = ""
             }
             
             
             temp.emerge = !temp.emerge
             
-        
     }
     
     @IBAction func existingNestDisturbedButtonPressed(_ sender: UIButton) {
-        print("disturbed")
+        print("existing nest pressed")
+        if !temp.existingNestDisturbed {
+            
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "DISTURBED BY NATURAL CAUSE", style: .default, handler: { (action) in
+                
+                self.temp.existingNestDisturbedType = "disturbed nature"
+                sender.setTitle(self.temp.existingNestDisturbedType, for: .normal)
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "DISTURBED BY HUMAN CAUSE", style: .default, handler: { (action) in
+                
+                self.temp.existingNestDisturbedType = "disturbed human"
+                sender.setTitle(self.temp.existingNestDisturbedType, for: .normal)
+                
+            }))
+
+            alert.addAction(UIAlertAction(title: "LOST BY NATURAL CAUSE", style: .default, handler: { (action) in
+                self.temp.existingNestDisturbedType = "lost nature"
+                sender.setTitle(self.temp.existingNestDisturbedType, for: .normal)
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "LOST BY HUMAN CAUSE", style: .default, handler: { (action) in
+                self.temp.existingNestDisturbedType = "lost human"
+                sender.setTitle(self.temp.existingNestDisturbedType, for: .normal)
+                print("existingNestDisturbedType = \(self.temp.existingNestDisturbedType)")
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "MOVED FROM: NATURAL CAUSE", style: .default, handler: { (action) in
+                self.temp.existingNestDisturbedType = "relocated nature"
+                sender.setTitle(self.temp.existingNestDisturbedType, for: .normal)
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "MOVED FROM: HUMAN ACTIVITY", style: .default, handler: { (action) in
+                self.temp.existingNestDisturbedType = "relocated nature"
+                sender.setTitle(self.temp.existingNestDisturbedType, for: .normal)
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "MOVED TO", style: .default, handler: { (action) in
+                self.temp.existingNestDisturbedType = "relocated to"
+                sender.setTitle(self.temp.existingNestDisturbedType, for: .normal)
+                
+            }))
+            
+            present(alert, animated: true)
+            
+        } else {
+            sender.setTitle("--", for: .normal)
+            temp.existingNestDisturbedType = ""
+        }
+        
+        temp.existingNestDisturbed = !temp.existingNestDisturbed
+        
         
     }
     
@@ -384,17 +443,21 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         print("Done button pressed")
         
         let alert = UIAlertController(title: "SAVE THIS OBSERVATION AND CLEAR ALL FIELDS?", message: "", preferredStyle: .alert)
+        
         alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (_) in
             
+            self.dispatchGroup.enter()
             
             self.temp.comments = self.commentsTextView.text ?? ""
             
-            // creat id
+            // create id
             var id = "\(self.temp.zoneLocation)-" != "" ? "\(self.temp.zoneLocation)-": "-"
             
             if self.temp.emerge { id.append(self.temp.emergeType == "nest" ? "N" : "F") }
             if self.temp.existingNestDisturbed { id.append(self.temp.existingNestDisturbedType == "disturbed" ? "D" : "R") }
+
             //            id.append(self.data.hatching ? "H" : "")
+
             id.append(self.temp.turtle ? "T" : "")
             
             let dateFormatter = DateFormatter()
@@ -412,42 +475,38 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
                     self.realm.delete(self.data!)
                 }
                 
-                //                        //Reset all fields if successfully saved
-                //                        self.locationButton.setTitle("Get GPS Location", for: .normal)
-                //                        self.nestButton.setTitle("Nest?", for: .normal)
-                //                        self.existingNestButton.setTitle("Disturb/Reloc?", for: .normal)
-                //                        self.turtleButton.setTitle("Turtle?", for: .normal)
-                //                        self.hatchingButton.setTitle("Hatching", for: .normal)
-                //                        self.zoneButton.setTitle("Zone?", for: .normal)
-                //                        self.propertyButton.setTitle("Property/Lot?", for: .normal)
-                //                        self.commentsTextView.text = ""
-                //        //                self.photoButton.setTitle("", for: .normal)  What's wrong here?
-                //                        self.photoImage1.image = UIImage(systemName: "camera.fill")
-                //                        self.photoImage2.image = UIImage(systemName: "camera.fill")
-                //                        self.photoImage3.image = UIImage(systemName: "camera.fill")
-                //                        self.photoImage4.image = UIImage(systemName: "camera.fill")
-                //                        self.photoImage5.image = UIImage(systemName: "camera.fill")
-                
                 self.data = Observation()
             } catch {
                 print("Error saving data, \(error) END")
             }
             
-        })) // Ends closure begun in line 279
+            self.dispatchGroup.leave()
+            print("juoiu)")
+            
+            self.dispatchGroup.wait()
+            
+            DispatchQueue.main.async {
+                print("About to pop vc.")
+                self.navigationController?.popViewController(animated: true)
+
+            }
+            
+        })) // Ends closure begun in line 392
         alert.addAction(UIAlertAction(title: "NO", style: .cancel, handler: nil))
         
         present(alert, animated: true)
-        
-        self.navigationController?.popViewController(animated: true)
-
-        
+       
     }
+    
     @IBAction func deleteButtonPressed(_ sender: UIButton) {
         print("Deleting observation")
         
         let alert = UIAlertController(title: "Delete this observation?", message: "", preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "Yes", style: .cancel, handler: { (_) in
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
+            
+            self.dispatchGroup.enter()
+            
             do {
                 try self.realm.write{
                     self.realm.delete(self.data!)
@@ -456,12 +515,19 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
                 print("Eror deleting observation: \(error)")
             }
             
-            //Go back to main menu
-            self.navigationController?.popViewController(animated: true)
+            self.dispatchGroup.leave()
+            print("Done deleting data")
+            
+            self.dispatchGroup.wait()
+            
+            DispatchQueue.main.async {
+                print("About to pop vc.")
+                self.navigationController?.popViewController(animated: true)
 
+            }
         }))
         
-        alert.addAction(UIAlertAction(title: "no", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
         
         present(alert, animated: true)
         

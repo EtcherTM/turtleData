@@ -29,6 +29,8 @@ class HatchingViewController: UIViewController, UITextViewDelegate, UITextFieldD
     var numStrandedTemp = 0
     var numDeadTemp = 0
 
+    let dispatchGroup = DispatchGroup()
+    
     @IBOutlet weak var noProblemButton: UIButton!
     @IBOutlet weak var lightsButton: UIButton!
     @IBOutlet weak var trashButton: UIButton!
@@ -218,6 +220,8 @@ class HatchingViewController: UIViewController, UITextViewDelegate, UITextFieldD
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
         
+        dispatchGroup.enter()
+        
         hatch.hatchingExists = hatchingOtherTemp || hatchingSewerTemp || hatchingLightsTemp || hatchingPlantsTemp || hatchingTrashTemp || hatchingNoProblemsTemp
         hatch.noProblems = hatchingNoProblemsTemp
         hatch.trash = hatchingTrashTemp
@@ -231,32 +235,37 @@ class HatchingViewController: UIViewController, UITextViewDelegate, UITextFieldD
         print(hatch)
         
         obs?.hatchingDetails = hatch
+        dispatchGroup.leave()
         
-        self.navigationController?.popViewController(animated: true)
-//        self.dismiss(animated: true, completion: nil)
+        dispatchGroup.notify(queue: .main) {
+            self.navigationController?.popViewController(animated: true)
+
+        }
         
     }
     
     @IBAction func resetButtonPressed(_ sender: UIButton) {
      
-//        hatchDetails = nil
-    
+        dispatchGroup.enter()
+        print("Saving data")
         hatch.hatchingExists = false
-         hatch.noProblems = false
-         hatch.trash = false
-         hatch.plants = false
-         hatch.lights = false
-         hatch.sewer = false
-         hatch.other = false
-         hatch.numSuccess = 0
-         hatch.numStranded = 0
-         hatch.numDead = 0
-         print(hatch)
-
-         obs?.hatchingDetails = hatch
-         
-         self.navigationController?.popViewController(animated: true)
+        hatch.noProblems = false
+        hatch.trash = false
+        hatch.plants = false
+        hatch.lights = false
+        hatch.sewer = false
+        hatch.other = false
+        hatch.numSuccess = 0
+        hatch.numStranded = 0
+        hatch.numDead = 0
+        print(hatch)
+        obs?.hatchingDetails = hatch
+        print("Done saving the following data: \(obs?.hatchingDetails)")
+        dispatchGroup.leave()
         
+        dispatchGroup.notify(queue: .main) {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     
