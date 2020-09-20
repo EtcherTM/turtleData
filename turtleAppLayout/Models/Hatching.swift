@@ -11,7 +11,7 @@ import RealmSwift
 
 class Hatching: Object {
 
-    @objc dynamic var hatchingExists : Bool = false
+    @objc dynamic var hatchingExists : Bool = false // Not using this, probably can delete
 
     @objc dynamic var noProblems : Bool = false
     @objc dynamic var lights : Bool = false

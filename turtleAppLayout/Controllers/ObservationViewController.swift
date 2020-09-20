@@ -196,32 +196,17 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
     @IBAction func photo1ButtonPressed(_ sender: UIButton) {
         image = 1
         
-        
-//        switch sender.currentTitle ?? "" {
-//        case "photo1":
-//            image = 1
-//        case "photo2":
-//            image = 2
-//        case " photo3":
-//            image = 3
-//        case "photo4":
-//            image = 4
-//        case "photo5":
-//            image = 5
-//        default:
-//            print("DODODODODO")
-//        }
-        
         present(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func handleGesture1(_ sender: UILongPressGestureRecognizer) {
-        
         switch sender.state {
            case .began:
+
                UIView.animate(withDuration: 0.05,
                               animations: {
                                 self.photoImage1.transform = CGAffineTransform(scaleX: 8.0, y: 8.0)
+
                },
                               completion: nil)
            case .ended:
