@@ -162,7 +162,7 @@ class HatchingViewController: UIViewController, UITextViewDelegate, UITextFieldD
    
         alert.addAction(UIAlertAction(title: "DONE", style: .default, handler: { (action) in
             guard let num = Int(myTextField!.text!) else { return }
-            self.numSuccessTemp = num
+            self.hatch.numSuccess = num
             sender.setTitle("\(num) Success", for: .normal)
         }))
 

@@ -15,9 +15,10 @@ import FirebaseFirestore
 import FirebaseStorage
 
 
-class ObservationViewController: UIViewController, UITextViewDelegate{
+class ObservationViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     
     var data = Observation()
+    var hatch = Hatching()
     
     let realm = try! Realm()
     let db = Firestore.firestore()
@@ -43,7 +44,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     @IBOutlet weak var emergeButton: UIButton!
     @IBOutlet weak var existingNestButton: UIButton!
     @IBOutlet weak var turtleButton: UIButton!
-    @IBOutlet weak var hatchingButton: UIButton!
+
     
     @IBOutlet weak var photoImage1: UIImageView!
     @IBOutlet weak var photoImage2: UIImageView!
@@ -52,6 +53,21 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     @IBOutlet weak var photoImage5: UIImageView!
     
     @IBOutlet weak var commentsTextView: UITextView!
+    @IBOutlet weak var hatchingButton: UIButton!
+    
+    @IBOutlet weak var noProblemsButton: UIButton!
+    @IBOutlet weak var lightsButton: UIButton!
+    @IBOutlet weak var trashButton: UIButton!
+    @IBOutlet weak var sewerButton: UIButton!
+    
+    @IBOutlet weak var plantsButton: UIButton!
+    @IBOutlet weak var otherButton: UIButton!
+    @IBOutlet weak var successButton: UIButton!
+    @IBOutlet weak var strandedButton: UIButton!
+    @IBOutlet weak var deadButton: UIButton!
+    
+    
+    
     //    @IBOutlet weak var commentsTextField: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,16 +108,6 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             vc.obs = data
         }
     }
-    
-//    @IBAction func hatchingCancelButtonPressed(_ unwindSegue: UIStoryboardSegue) {
-//    guard let hatchingVC = unwindSegue.source as? HatchingViewController,
-//        let myVariable = hatchingVC.hisVariable,
-//        print(myVariable) else {
-//
-//        }
-//        let wasThereAHatching = hatchingVC.hatch.hatchingExists else {
-//            return
-//    }
     
     
     //MARK:- IBActions: Data Entry
@@ -187,27 +193,29 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
         sender.setTitle("Getting: hold position . . .", for: .normal)
     }
     
-    @IBAction func photoButtonPressed(_ sender: UIButton) {
+    @IBAction func photo1ButtonPressed(_ sender: UIButton) {
+        image = 1
         
-        switch sender.currentTitle ?? "" {
-        case "photo1":
-            image = 1
-        case "photo2":
-            image = 2
-        case " photo3":
-            image = 3
-        case "photo4":
-            image = 4
-        case "photo5":
-            image = 5
-        default:
-            print("DODODODODO")
-        }
+        
+//        switch sender.currentTitle ?? "" {
+//        case "photo1":
+//            image = 1
+//        case "photo2":
+//            image = 2
+//        case " photo3":
+//            image = 3
+//        case "photo4":
+//            image = 4
+//        case "photo5":
+//            image = 5
+//        default:
+//            print("DODODODODO")
+//        }
         
         present(imagePicker, animated: true, completion: nil)
     }
     
-    @IBAction func handleGesture(_ sender: UILongPressGestureRecognizer) {
+    @IBAction func handleGesture1(_ sender: UILongPressGestureRecognizer) {
         
         switch sender.state {
            case .began:
@@ -222,17 +230,98 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
                }
            default: break
            }
-        
-//        if sender.state == .began
-//        {
-//            let alertController = UIAlertController(title: nil, message:
-//                "Long-Press Gesture Detected", preferredStyle: .alert)
-//            alertController.addAction(UIAlertAction(title: "OK", style: .default,handler: nil))
-//
-//            present(alertController, animated: true, completion: nil)
-//        }
+    }
+    
+    @IBAction func photo2ButtonPressed(_ sender: UIButton) {
+            image = 2
+            
+            present(imagePicker, animated: true, completion: nil)
 
     }
+    
+    @IBAction func handleGesture2(_ sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+           case .began:
+               UIView.animate(withDuration: 0.05,
+                              animations: {
+                                self.photoImage2.transform = CGAffineTransform(scaleX: 8.0, y: 8.0)
+               },
+                              completion: nil)
+           case .ended:
+               UIView.animate(withDuration: 0.05) {
+                   self.photoImage2.transform = CGAffineTransform.identity
+               }
+           default: break
+           }
+    }
+    
+    @IBAction func photo3ButtonPressed(_ sender: UIButton) {
+        image = 3
+        
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func handleGesture3(_ sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+            case .began:
+                UIView.animate(withDuration: 0.05,
+                               animations: {
+                                 self.photoImage3.transform = CGAffineTransform(scaleX: 8.0, y: 8.0)
+                },
+                               completion: nil)
+            case .ended:
+                UIView.animate(withDuration: 0.05) {
+                    self.photoImage3.transform = CGAffineTransform.identity
+                }
+            default: break
+            }
+    }
+    
+    @IBAction func photo4ButtonPressed(_ sender: UIButton) {
+         image = 4
+         
+         present(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func handleGesture4(_ sender: UILongPressGestureRecognizer) {
+   
+        switch sender.state {
+            case .began:
+                UIView.animate(withDuration: 0.05,
+                               animations: {
+                                 self.photoImage4.transform = CGAffineTransform(scaleX: 8.0, y: 8.0)
+                },
+                               completion: nil)
+            case .ended:
+                UIView.animate(withDuration: 0.05) {
+                    self.photoImage4.transform = CGAffineTransform.identity
+                }
+            default: break
+            }
+    }
+    
+    @IBAction func photo5ButtonPressed(_ sender: UIButton) {
+        image = 5
+        
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func handleGesture5(_ sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+            case .began:
+                UIView.animate(withDuration: 0.05,
+                               animations: {
+                                 self.photoImage5.transform = CGAffineTransform(scaleX: 8.0, y: 8.0)
+                },
+                               completion: nil)
+            case .ended:
+                UIView.animate(withDuration: 0.05) {
+                    self.photoImage5.transform = CGAffineTransform.identity
+                }
+            default: break
+            }
+    }
+    
     @IBAction func emergeButtonPressed(_ sender: UIButton) {
 
         if !data.emerge {
@@ -354,12 +443,162 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     }
     
     @IBAction func hatchingButtonPressed(_ sender: UIButton) {
+        data.hatchingBool = !data.hatchingBool
+        if data.hatchingBool {
+            sender.setTitle("Hatching ✓", for: .normal)
+            print("Hatching true")
+        } else {
+            sender.setTitle("Hatching?", for: .normal)
+            print("No hatching")
+        }
         
-        self.performSegue(withIdentifier: "ObsToHatching", sender: self)
-        
-       
     }
 
+    @IBAction func noProblemsButtonPressed(_ sender: UIButton) {
+        hatch.noProblems = !hatch.noProblems
+        if hatch.noProblems {
+            sender.setTitle("No Problems ✓", for: .normal)
+            
+//     Consider whether to make selecting "No Problems" clear all the other problems
+//            lightsButton.setTitle("Lights", for: .normal)
+//            trashButton.setTitle("Trash", for: .normal)
+//            sewerButton.setTitle("Sewer", for: .normal)
+//            plantsButton.setTitle("Plants", for: .normal)
+//            otherButton.setTitle("Other", for: .normal)
+            print("No problems")
+        } else {
+            sender.setTitle("No Problems", for: .normal)
+            print("Problems")
+        }
+    }
+    
+    @IBAction func lightsButtonPressed(_ sender: UIButton) {
+        hatch.lights = !hatch.lights
+        if hatch.lights {
+            sender.setTitle("Lights ✓", for: .normal)
+            print("Light problem")
+        } else {
+            sender.setTitle("Lights", for: .normal)
+            print("No light problem")
+        }
+    }
+    
+    @IBAction func trashButtonPressed(_ sender: UIButton) {
+        hatch.trash = !hatch.trash
+         if hatch.trash {
+             sender.setTitle("Trash ✓", for: .normal)
+             print("Trash problem")
+         } else {
+             sender.setTitle("Trash", for: .normal)
+             print("No Trash problem")
+         }
+    }
+    
+    @IBAction func sewerButtonPressed(_ sender: UIButton) {
+        hatch.sewer = !hatch.sewer
+        if hatch.sewer {
+            sender.setTitle("Sewer ✓", for: .normal)
+            print("sewer problem")
+        } else {
+            sender.setTitle("Sewer", for: .normal)
+            print("No sewer problem")
+        }
+    }
+    
+    @IBAction func plantsButtonPressed(_ sender: UIButton) {
+        hatch.plants = !hatch.plants
+        if hatch.plants {
+            sender.setTitle("Plants ✓", for: .normal)
+            print("plants problem")
+        } else {
+            sender.setTitle("Plants", for: .normal)
+            print("No Plants problem")
+        }
+    }
+    
+    @IBAction func otherButtonPressed(_ sender: UIButton) {
+        hatch.other = !hatch.other
+          if hatch.other {
+              sender.setTitle("Other ✓", for: .normal)
+              print("Other problem")
+          } else {
+              sender.setTitle("Other", for: .normal)
+              print("No other problem")
+          }
+    }
+    
+    @IBAction func successButtonPressed(_ sender: UIButton) {
+        var myTextField : UITextField?
+        let alert = UIAlertController.init(title: "Estimate the number of babies that went unassisted to ocean", message: nil, preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            // make sure your outside any property should be accessed with self here
+            myTextField = textField
+            //Important step assign textfield delegate to self
+            myTextField?.delegate = self
+            myTextField?.placeholder = "0"
+            myTextField?.keyboardType = .numberPad
+        }
+            
+             alert.addAction(UIAlertAction(title: "CANCEL", style: .cancel, handler: { (_) in
+                 sender.setTitle("# Success", for: .normal)
+             }))
+        
+             alert.addAction(UIAlertAction(title: "DONE", style: .default, handler: { (action) in
+                 guard let num = Int(myTextField!.text!) else { return }
+                self.hatch.numSuccess = num
+                 sender.setTitle("\(num) Success", for: .normal)
+             }))
+
+             present(alert, animated: true, completion:nil)
+            
+    }
+    
+    @IBAction func strandedButtonPressed(_ sender: UIButton) {
+         var myTextField : UITextField?
+         let alert = UIAlertController.init(title: "Enter number of babies that were stranded and needed rescue", message: nil, preferredStyle: .alert)
+         alert.addTextField { (textField) in
+             myTextField = textField
+             myTextField?.delegate = self
+             myTextField?.placeholder = "0"
+             myTextField?.keyboardType = .numberPad
+         }
+         
+         alert.addAction(UIAlertAction(title: "CANCEL", style: .cancel, handler: { (_) in
+             sender.setTitle("# Stranded", for: .normal)
+         }))
+    
+         alert.addAction(UIAlertAction(title: "DONE", style: .default, handler: { (action) in
+             guard let num = Int(myTextField!.text!) else { return }
+            self.hatch.numStranded = num
+             sender.setTitle("\(num) Stranded", for: .normal)
+         }))
+
+        present(alert, animated: true, completion:nil)
+    }
+    
+    @IBAction func deadButtonPressed(_ sender: UIButton) {
+        var myTextField : UITextField?
+        let alert = UIAlertController.init(title: "Enter number of dead babies found", message: nil, preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            myTextField = textField
+            myTextField?.delegate = self
+            myTextField?.placeholder = "0"
+            myTextField?.keyboardType = .numberPad
+        }
+        
+        alert.addAction(UIAlertAction(title: "CANCEL", style: .cancel, handler: { (_) in
+            sender.setTitle("# Dead", for: .normal)
+        }))
+
+        alert.addAction(UIAlertAction(title: "DONE", style: .default, handler: { (action) in
+            guard let num = Int(myTextField!.text!) else { return }
+            self.hatch.numDead = num
+            sender.setTitle("\(num) Dead", for: .normal)
+        }))
+
+            present(alert, animated: true, completion:nil)
+    }
+    
     
     
     
@@ -485,8 +724,6 @@ extension ObservationViewController: UIImagePickerControllerDelegate, UINavigati
             //     Also note after 5 photos they can just replace a photo by tapping on it.
             
             
-            
-            
             let date = Date()
             
             let dateFormatter = DateFormatter()
@@ -496,8 +733,7 @@ extension ObservationViewController: UIImagePickerControllerDelegate, UINavigati
             let imageName = "/\(imgRef).jpg"
             
             var documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-//            print(documentsDirectoryPath)
-//            self.data.docDirPath = self.documentsDirectoryPath THIS IS INEFFECTIVE
+
 
             documentsDirectoryPath += imageName
             let settingsData: NSData = imageTaken.jpegData(compressionQuality: 1.0)! as NSData
