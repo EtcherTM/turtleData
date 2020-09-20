@@ -41,8 +41,8 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBOutlet weak var zoneButton: UIButton!
     @IBOutlet weak var propertyButton: UIButton!
     @IBOutlet weak var locationButton: UIButton!
-    @IBOutlet weak var nestButton: UIButton!
-    @IBOutlet weak var disturbedButton: UIButton!
+    @IBOutlet weak var emergeButton: UIButton!
+    @IBOutlet weak var existingNestDisturbedButton: UIButton!
     @IBOutlet weak var turtleButton: UIButton!
     @IBOutlet weak var hatchingButton: UIButton!
     @IBOutlet weak var commentsTextView: UITextView!
@@ -103,11 +103,11 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         temp.lat = data!.lat
         temp.lon = data!.lon
         
-        temp.nest = data!.nest
+        temp.emerge = data!.emerge
         temp.turtle = data!.turtle
         temp.existingNestDisturbed = data!.existingNestDisturbed
         
-        temp.nestType = data!.nestType
+        temp.emergeType = data!.emergeType
         temp.turtleType = data!.turtleType
         temp.existingNestDisturbedType = data!.existingNestDisturbedType
         
@@ -157,8 +157,8 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             locationButton.setTitle("", for: .normal)
             
         }
-        nestButton.setTitle(data!.nest ? data?.nestType : "", for: .normal)
-        disturbedButton.setTitle(data!.existingNestDisturbed ? data?.existingNestDisturbedType : "", for: .normal)
+        emergeButton.setTitle(data!.emerge ? data?.emergeType : "", for: .normal)
+        existingNestDisturbedButton.setTitle(data!.existingNestDisturbed ? data?.existingNestDisturbedType : "", for: .normal)
         turtleButton.setTitle(data!.turtle ? data?.turtleType : "", for: .normal)
                 hatchingButton.setTitle("Edit Hatching Data", for: .normal)
         commentsTextView.text = data!.comments
@@ -198,61 +198,10 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             }
         }
         
-        
-        
-        //  Trying to load the images but I cannot get the document directory path!  Saving in realm but it comes back as nothing.
-        //
-        //
-        //        if data != nil {
-        //        if data?.image1 != nil {
-        //            print("data?.image1 is:")
-        //            print(data?.image1)
-        ////            let url = NSURL(string: data!.image1)'
-        //            print(data!.docDirPath)  PROBLEM IS HERE, THIS IS ""
-        //            print("\(data!.docDirPath)/\(data!.image1).jpg")
-        //            let url = URL(fileReferenceLiteralResourceName: "\(data!.docDirPath)/\(data!.image1).jpg")
-        //            let imageToLoadData = NSData(contentsOf: url)
-        //            if imageToLoadData != nil {
-        //                let imageToLoad = UIImage(data: imageToLoadData! as Data )
-        //                photoImageView1.image = imageToLoad
-        //            } else {
-        //                print("imageToLoadData is nil")
-        //            }
-        //
-        //
-        //        } else {
-        //            print("data?.image1 is nil")
-        //            }
-        //        } else {
-        //            print("data is nil")
-        //        }
-        //
-        
-        //        switch sender.currentTitle ?? "" {
-        //        case "photo1":
-        //            image = 1
-        //        case "photo2":
-        //            image = 2
-        //        case "photo3":
-        //            image = 3
-        //        case "photo4":
-        //            image = 4
-        //        case "photo5":
-        //            image = 5
-        //        default:
-        //            print("DODODODODO")
-        //        }
-        
-        
     }
     
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "EditToHatching" {
-            let vc = segue.destination as! HatchingViewController
-            vc.obs = temp
-        }
-    }
+
 //MARK:- Data Entry
     
     @IBAction func zoneButtonPressed(_ sender: UIButton) {
@@ -340,11 +289,41 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         sender.setTitle("Getting: hold position . . .", for: .normal)
     }
     
-    @IBAction func nestButtonPressed(_ sender: UIButton) {
-        print("nest")
+    @IBAction func emergeButtonPressed(_ sender: UIButton) {
+        print("emergeButton pressed")
+            if !temp.emerge {
+                let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "NEW/PROBABLE NEST", style: .default, handler: { (action) in
+                    sender.setTitle("New Nest ✓", for: .normal)
+                    self.temp.emergeType = "nest"
+                }))
+                alert.addAction(UIAlertAction(title: "FALSE NEST", style: .default, handler: { (action) in
+                    self.temp.emergeType = "false nest"
+                    sender.setTitle("False Nest ✓", for: .normal)
+                }))
+                alert.addAction(UIAlertAction(title: "FALSE CRAWL", style: .default, handler: { (action) in
+                    self.temp.emergeType = "false crawl"
+                    sender.setTitle("False Crawl ✓", for: .normal)
+                    
+                }))
+        
+                
+                present(alert, animated: true)
+                alert.view.tintColor = UIColor.black
+                
+            } else {
+                sender.setTitle("", for: .normal)
+                temp.emergeType = ""
+            }
+            
+            
+            temp.emerge = !temp.emerge
+            
+        
     }
     
-    @IBAction func disturbedButtonPressed(_ sender: UIButton) {
+    @IBAction func existingNestDisturbedButtonPressed(_ sender: UIButton) {
         print("disturbed")
         
     }
@@ -357,7 +336,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBAction func hatchingButtonPressed(_ sender: UIButton) {
         print("hatching")
         
-        performSegue(withIdentifier: "EditToHatching", sender: self)
+//        performSegue(withIdentifier: "EditToHatching", sender: self)
         
     }
     
@@ -402,17 +381,18 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
-        print("DONE!!!")
+        print("Done button pressed")
         
         let alert = UIAlertController(title: "SAVE THIS OBSERVATION AND CLEAR ALL FIELDS?", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (_) in
+            
             
             self.temp.comments = self.commentsTextView.text ?? ""
             
             // creat id
             var id = "\(self.temp.zoneLocation)-" != "" ? "\(self.temp.zoneLocation)-": "-"
             
-            if self.temp.nest { id.append(self.temp.nestType == "nest" ? "N" : "F") }
+            if self.temp.emerge { id.append(self.temp.emergeType == "nest" ? "N" : "F") }
             if self.temp.existingNestDisturbed { id.append(self.temp.existingNestDisturbedType == "disturbed" ? "D" : "R") }
             //            id.append(self.data.hatching ? "H" : "")
             id.append(self.temp.turtle ? "T" : "")
@@ -457,12 +437,15 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         alert.addAction(UIAlertAction(title: "NO", style: .cancel, handler: nil))
         
         present(alert, animated: true)
-        alert.view.tintColor = UIColor.black
+        
+        self.navigationController?.popViewController(animated: true)
+
+        
     }
     @IBAction func deleteButtonPressed(_ sender: UIButton) {
-        print("deeeeeleting")
+        print("Deleting observation")
         
-        let alert = UIAlertController(title: "Delete observation?", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Delete this observation?", message: "", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Yes", style: .cancel, handler: { (_) in
             do {
@@ -470,12 +453,12 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
                     self.realm.delete(self.data!)
                 }
             } catch {
-                print("ERror deleting observation: \(error)")
+                print("Eror deleting observation: \(error)")
             }
             
             //Go back to main menu
-            
-            print("dismissed")
+            self.navigationController?.popViewController(animated: true)
+
         }))
         
         alert.addAction(UIAlertAction(title: "no", style: .default, handler: nil))

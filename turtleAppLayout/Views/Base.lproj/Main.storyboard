@@ -70,7 +70,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="nestButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gog-Mg-2LU"/>
+                                                    <action selector="emergeButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gog-Mg-2LU"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tr6-sd-TdT">
@@ -351,10 +351,10 @@
                     <navigationItem key="navigationItem" id="4Ua-VT-GnT"/>
                     <connections>
                         <outlet property="commentsTextView" destination="jfj-Ux-Bfd" id="gMZ-jH-DoM"/>
+                        <outlet property="emergeButton" destination="9dG-hv-tBp" id="EQm-fA-ZN0"/>
                         <outlet property="existingNestButton" destination="Tr6-sd-TdT" id="5G4-3l-gQE"/>
                         <outlet property="hatchingButton" destination="Sx7-Tr-IIj" id="2eM-5I-fDs"/>
                         <outlet property="locationButton" destination="MMQ-vv-ms8" id="iEY-oi-BJz"/>
-                        <outlet property="nestButton" destination="9dG-hv-tBp" id="EQm-fA-ZN0"/>
                         <outlet property="photoImage1" destination="175-YL-8wG" id="5HN-uX-bgd"/>
                         <outlet property="photoImage2" destination="MvJ-hO-JWc" id="n5g-zC-pDk"/>
                         <outlet property="photoImage3" destination="aIl-G0-B5c" id="L1q-dN-iAW"/>
@@ -1063,7 +1063,7 @@ w/ No Activity</string>
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="nestButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="igJ-Vv-mwy"/>
+                                                    <action selector="emergeButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="igJ-Vv-mwy"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1088,7 +1088,7 @@ w/ No Activity</string>
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="disturbedButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="udF-mv-1qC"/>
+                                                    <action selector="existingNestDisturbedButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="udF-mv-1qC"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1139,6 +1139,7 @@ w/ No Activity</string>
                                                 </state>
                                                 <connections>
                                                     <action selector="hatchingButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="nHe-9s-cIs"/>
+                                                    <segue destination="E22-2l-jpa" kind="show" identifier="EditToHatching" id="IiR-Ud-D9c"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1381,10 +1382,10 @@ w/ No Activity</string>
                     <navigationItem key="navigationItem" id="SYP-qN-KU4"/>
                     <connections>
                         <outlet property="commentsTextView" destination="tc1-w8-ehY" id="tqy-Fe-m5D"/>
-                        <outlet property="disturbedButton" destination="wTO-Za-23X" id="qb1-rs-Nfa"/>
+                        <outlet property="emergeButton" destination="F93-Th-nFc" id="35w-Ek-bZc"/>
+                        <outlet property="existingNestDisturbedButton" destination="wTO-Za-23X" id="qb1-rs-Nfa"/>
                         <outlet property="hatchingButton" destination="ARa-yI-MLa" id="jHa-YH-Vay"/>
                         <outlet property="locationButton" destination="YjK-Hw-8u5" id="jKC-u2-Qa9"/>
-                        <outlet property="nestButton" destination="F93-Th-nFc" id="35w-Ek-bZc"/>
                         <outlet property="photoImageView1" destination="zCc-N4-0ka" id="O2D-k9-thR"/>
                         <outlet property="photoImageView2" destination="uSW-nU-dVf" id="rg8-NK-Sun"/>
                         <outlet property="photoImageView3" destination="XDv-C2-8Kx" id="pDf-Dp-apH"/>
@@ -1422,6 +1423,7 @@ w/ No Activity</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Qut-vR-tEU"/>
+        <segue reference="IiR-Ud-D9c"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="camera.fill" catalog="system" width="128" height="96"/>

@@ -22,11 +22,11 @@ class Observation: Object {
     @objc dynamic var lon: Double = 0.0
     @objc dynamic var accuracy: Double = 0.0
     
-    @objc dynamic var nest : Bool = false
+    @objc dynamic var emerge : Bool = false
     @objc dynamic var turtle : Bool = false
     @objc dynamic var existingNestDisturbed : Bool = false
     
-    @objc dynamic var nestType: String = ""
+    @objc dynamic var emergeType: String = ""
     @objc dynamic var turtleType: String = ""
     @objc dynamic var existingNestDisturbedType : String = ""
 

@@ -181,7 +181,7 @@ var hatchingL: Dictionary<String, Bool> = [:]
                             ] : nil,
                         "turtle": obs.turtle ? obs.turtleType : nil,
                         "disturbed": obs.existingNestDisturbed ? obs.existingNestDisturbedType : nil,
-                        "nest": obs.nest ? obs.nestType : nil
+                        "nest": obs.emerge ? obs.emergeType : nil
                     ]
                     
                 ]) { (error) in

@@ -57,7 +57,7 @@ class ListTableViewController: UITableViewController {
 
         var type: String = ""
         
-        if observation.nest {
+        if observation.emerge {
             type = "New Nest "
         }
         if observation.existingNestDisturbed {

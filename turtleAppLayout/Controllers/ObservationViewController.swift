@@ -40,7 +40,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
     @IBOutlet weak var propertyButton: UIButton!
     @IBOutlet weak var locationButton: UIButton!
     
-    @IBOutlet weak var nestButton: UIButton!
+    @IBOutlet weak var emergeButton: UIButton!
     @IBOutlet weak var existingNestButton: UIButton!
     @IBOutlet weak var turtleButton: UIButton!
     @IBOutlet weak var hatchingButton: UIButton!
@@ -233,21 +233,21 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
 //        }
 
     }
-    @IBAction func nestButtonPressed(_ sender: UIButton) {
-        //Probability of nest?
-        if !data.nest {
+    @IBAction func emergeButtonPressed(_ sender: UIButton) {
+
+        if !data.emerge {
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "NEW/PROBABLE NEST", style: .default, handler: { (action) in
                 sender.setTitle("New Nest ✓", for: .normal)
-                self.data.nestType = "nest"
+                self.data.emergeType = "nest"
             }))
             alert.addAction(UIAlertAction(title: "FALSE NEST", style: .default, handler: { (action) in
-                self.data.nestType = "false nest"
+                self.data.emergeType = "false nest"
                 sender.setTitle("False Nest ✓", for: .normal)
             }))
             alert.addAction(UIAlertAction(title: "FALSE CRAWL", style: .default, handler: { (action) in
-                self.data.nestType = "false crawl"
+                self.data.emergeType = "false crawl"
                 sender.setTitle("False Crawl ✓", for: .normal)
                 
             }))
@@ -258,11 +258,11 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             
         } else {
             sender.setTitle("New Nest?", for: .normal)
-            data.nestType = ""
+            data.emergeType = ""
         }
         
         
-        data.nest = !data.nest
+        data.emerge = !data.emerge
         
     }
     
@@ -311,7 +311,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             }))
             
             alert.addAction(UIAlertAction(title: "MOVED TO", style: .default, handler: { (action) in
-                self.data.nestType = "relocated to"
+                self.data.emergeType = "relocated to"
                 sender.setTitle("Moved To ✓", for: .normal)
                 
             }))
@@ -376,7 +376,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
             // creat id
             var id = "\(self.data.zoneLocation)-" != "" ? "\(self.data.zoneLocation)-": "-"
             
-            if self.data.nest { id.append(self.data.nestType == "nest" ? "N" : "F") }
+            if self.data.emerge { id.append(self.data.emergeType == "nest" ? "N" : "F") }
             if self.data.existingNestDisturbed { id.append(self.data.existingNestDisturbedType == "disturbed" ? "D" : "R") }
             id.append(self.data.hatchingDetails != nil ? "H" : "")
             id.append(self.data.turtle ? "T" : "")
@@ -397,7 +397,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate{
                 
                 //Reset all fields if successfully saved
                 self.locationButton.setTitle("Get GPS Location", for: .normal)
-                self.nestButton.setTitle("Nest?", for: .normal)
+                self.emergeButton.setTitle("Nest?", for: .normal)
                 self.existingNestButton.setTitle("Disturb/Reloc?", for: .normal)
                 self.turtleButton.setTitle("Turtle?", for: .normal)
                 self.hatchingButton.setTitle("Hatching", for: .normal)
