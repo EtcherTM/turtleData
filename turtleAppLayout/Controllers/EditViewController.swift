@@ -48,11 +48,11 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBOutlet weak var turtleButton: UIButton!
     @IBOutlet weak var hatchingButton: UIButton!
     @IBOutlet weak var commentsTextView: UITextView!
-    @IBOutlet weak var photoImageView1: UIImageView!
-    @IBOutlet weak var photoImageView2: UIImageView!
-    @IBOutlet weak var photoImageView3: UIImageView!
-    @IBOutlet weak var photoImageView4: UIImageView!
-    @IBOutlet weak var photoImageView5: UIImageView!
+    @IBOutlet weak var photoImage1: UIImageView!
+    @IBOutlet weak var photoImage2: UIImageView!
+    @IBOutlet weak var photoImage3: UIImageView!
+    @IBOutlet weak var photoImage4: UIImageView!
+    @IBOutlet weak var photoImage5: UIImageView!
     
     @IBOutlet weak var doneButtonPressed: UIButton!
     
@@ -182,15 +182,15 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
                     
                     switch image {
                     case 0:
-                        photoImageView1.image = imageToLoad
+                        photoImage1.image = imageToLoad
                     case 1:
-                        photoImageView2.image = imageToLoad
+                        photoImage2.image = imageToLoad
                     case 2:
-                        photoImageView3.image = imageToLoad
+                        photoImage3.image = imageToLoad
                     case 3:
-                        photoImageView4.image = imageToLoad
+                        photoImage4.image = imageToLoad
                     case 4:
-                        photoImageView5.image = imageToLoad
+                        photoImage5.image = imageToLoad
                     default:
                         print("Error loading images")
                     }
@@ -394,28 +394,27 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     @IBAction func hatchingButtonPressed(_ sender: UIButton) {
         print("hatching")
-        
-//        performSegue(withIdentifier: "EditToHatching", sender: self)
-        
+                
     }
     
-    @IBAction func photoButtonPressed(_ sender: UIButton) {
+    @IBAction func photo1ButtonPressed(_ sender: UIButton) {
         print("click1")
-        
-        switch sender.currentTitle ?? "" {
-        case "photo1":
-            image = 1
-        case "photo2":
-            image = 2
-        case "photo3":
-            image = 3
-        case "photo4":
-            image = 4
-        case "photo5":
-            image = 5
-        default:
-            print("DODODODODO")
-        }
+        image = 1
+
+//        switch sender.currentTitle ?? "" {
+//        case "photo1":
+//            image = 1
+//        case "photo2":
+//            image = 2
+//        case "photo3":
+//            image = 3
+//        case "photo4":
+//            image = 4
+//        case "photo5":
+//            image = 5
+//        default:
+//            print("DODODODODO")
+//        }
         
         let alert = UIAlertController(title: "Choose image source", message: "", preferredStyle: .alert)
         
@@ -432,11 +431,189 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         }))
         print("present Choie")
         present(alert, animated: true)
-        
-        
-        //need to wait until other one is dismissed
+
         
     }
+    
+    @IBAction func handleGesture1(_ sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+            case .began:
+
+                UIView.animate(withDuration: 0.05,
+                               animations: {
+                                 self.photoImage1.transform = CGAffineTransform(scaleX: 8.0, y: 8.0)
+
+                },
+                               completion: nil)
+            case .ended:
+                UIView.animate(withDuration: 0.05) {
+                    self.photoImage1.transform = CGAffineTransform.identity
+                }
+            default: break
+            }
+    }
+    
+    @IBAction func photo2ButtonPressed(_ sender: UIButton) {
+        
+        print("click1")
+        image = 2
+                
+        let alert = UIAlertController(title: "Choose image source", message: "", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) in
+            self.imagePicker.allowsEditing = false
+            self.imagePicker.sourceType = .camera
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { (_) in
+            self.imagePicker.allowsEditing = false
+            self.imagePicker.sourceType = .photoLibrary
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }))
+        print("present Choie")
+        present(alert, animated: true)
+
+    }
+    
+    @IBAction func handleGesture2(_ sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+             case .began:
+
+                 UIView.animate(withDuration: 0.05,
+                                animations: {
+                                  self.photoImage2.transform = CGAffineTransform(scaleX: 8.0, y: 8.0)
+
+                 },
+                                completion: nil)
+             case .ended:
+                 UIView.animate(withDuration: 0.05) {
+                     self.photoImage2.transform = CGAffineTransform.identity
+                 }
+             default: break
+             }
+    }
+  
+    @IBAction func photo3ButtonPressed(_ sender: UIButton) {
+        print("click1")
+        image = 3
+                
+        let alert = UIAlertController(title: "Choose image source", message: "", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) in
+            self.imagePicker.allowsEditing = false
+            self.imagePicker.sourceType = .camera
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { (_) in
+            self.imagePicker.allowsEditing = false
+            self.imagePicker.sourceType = .photoLibrary
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }))
+        print("present Choie")
+        present(alert, animated: true)
+
+    }
+    
+    @IBAction func handleGesture3(_ sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+             case .began:
+
+                 UIView.animate(withDuration: 0.05,
+                                animations: {
+                                  self.photoImage3.transform = CGAffineTransform(scaleX: 8.0, y: 8.0)
+
+                 },
+                                completion: nil)
+             case .ended:
+                 UIView.animate(withDuration: 0.05) {
+                     self.photoImage3.transform = CGAffineTransform.identity
+                 }
+             default: break
+             }
+    }
+
+    @IBAction func photo4ButtonPressed(_ sender: UIButton) {
+         print("click1")
+         image = 4
+                 
+         let alert = UIAlertController(title: "Choose image source", message: "", preferredStyle: .alert)
+         
+         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) in
+             self.imagePicker.allowsEditing = false
+             self.imagePicker.sourceType = .camera
+             self.present(self.imagePicker, animated: true, completion: nil)
+         }))
+         
+         alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { (_) in
+             self.imagePicker.allowsEditing = false
+             self.imagePicker.sourceType = .photoLibrary
+             self.present(self.imagePicker, animated: true, completion: nil)
+         }))
+         print("present Choie")
+         present(alert, animated: true)
+    }
+    
+    @IBAction func handleGesture4(_ sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+             case .began:
+
+                 UIView.animate(withDuration: 0.05,
+                                animations: {
+                                  self.photoImage4.transform = CGAffineTransform(scaleX: 8.0, y: 8.0)
+
+                 },
+                                completion: nil)
+             case .ended:
+                 UIView.animate(withDuration: 0.05) {
+                     self.photoImage4.transform = CGAffineTransform.identity
+                 }
+             default: break
+             }
+    }
+    
+    @IBAction func photo5ButtonPressed(_ sender: UIButton) {
+        print("click1")
+        image = 5
+                
+        let alert = UIAlertController(title: "Choose image source", message: "", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) in
+            self.imagePicker.allowsEditing = false
+            self.imagePicker.sourceType = .camera
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { (_) in
+            self.imagePicker.allowsEditing = false
+            self.imagePicker.sourceType = .photoLibrary
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }))
+        print("present Choie")
+        present(alert, animated: true)
+        
+    }
+    
+    @IBAction func handleGesture5(_ sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+             case .began:
+
+                 UIView.animate(withDuration: 0.05,
+                                animations: {
+                                  self.photoImage5.transform = CGAffineTransform(scaleX: 8.0, y: 8.0)
+
+                 },
+                                completion: nil)
+             case .ended:
+                 UIView.animate(withDuration: 0.05) {
+                     self.photoImage5.transform = CGAffineTransform.identity
+                 }
+             default: break
+             }
+    }
+    
+    
     
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
@@ -587,19 +764,19 @@ extension EditViewController: UIImagePickerControllerDelegate, UINavigationContr
             
             switch image {
             case 1:
-                photoImageView1.image = imageTaken
+                photoImage1.image = imageTaken
                 temp.image1 = imgRef
             case 2:
-                photoImageView2.image = imageTaken
+                photoImage2.image = imageTaken
                 temp.image2 = imgRef
             case 3:
-                photoImageView3.image = imageTaken
+                photoImage3.image = imageTaken
                 temp.image3 = imgRef
             case 4:
-                photoImageView4.image = imageTaken
+                photoImage4.image = imageTaken
                 temp.image4 = imgRef
             case 5:
-                photoImageView5.image = imageTaken
+                photoImage5.image = imageTaken
                 temp.image5 = imgRef
             default:
                 print("error BOUBOUBOBUOBUBOUBOBUOUBBUBUBO")

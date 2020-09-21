@@ -1161,7 +1161,7 @@ w/ No Activity</string>
             <objects>
                 <viewController id="0zz-Dc-PVT" customClass="EditViewController" customModule="turtleAppLayout" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3R6-bV-ut4">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1007"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="9KK-YO-ZjO">
@@ -1404,9 +1404,11 @@ w/ No Activity</string>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f7P-v2-lSa" userLabel="Photo 1 Button">
                                                         <rect key="frame" x="0.0" y="0.0" width="80" height="75"/>
+                                                        <gestureRecognizers/>
                                                         <state key="normal" title="photo1"/>
                                                         <connections>
-                                                            <action selector="photoButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="ZMz-qZ-dC7"/>
+                                                            <action selector="photo1ButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="JnO-qz-Nuk"/>
+                                                            <outletCollection property="gestureRecognizers" destination="HB1-pd-lHb" appends="YES" id="NKL-dS-LeA"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -1431,10 +1433,12 @@ w/ No Activity</string>
                                                         <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ifl-Tz-b6a" userLabel="Photo 2 Button">
-                                                        <rect key="frame" x="17" y="0.0" width="46" height="80"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="80"/>
+                                                        <gestureRecognizers/>
                                                         <state key="normal" title="photo2"/>
                                                         <connections>
-                                                            <action selector="photoButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="XFK-QX-tmQ"/>
+                                                            <action selector="photo2ButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="CUX-ts-L9T"/>
+                                                            <outletCollection property="gestureRecognizers" destination="W28-h4-8lp" appends="YES" id="6YX-ID-BDT"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -1468,10 +1472,12 @@ w/ No Activity</string>
                                                         <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ky-U8-rpB" userLabel="Photo 3 Button">
-                                                        <rect key="frame" x="17" y="0.0" width="46" height="80"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="80"/>
+                                                        <gestureRecognizers/>
                                                         <state key="normal" title="photo3"/>
                                                         <connections>
-                                                            <action selector="photoButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="xg8-rg-dfb"/>
+                                                            <action selector="photo3ButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="Hie-fR-trO"/>
+                                                            <outletCollection property="gestureRecognizers" destination="oAH-ET-7Ex" appends="YES" id="awE-36-E2S"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -1498,9 +1504,11 @@ w/ No Activity</string>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HH5-CH-GPF" userLabel="Photo 4 Button">
                                                         <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                                        <gestureRecognizers/>
                                                         <state key="normal" title="photo4"/>
                                                         <connections>
-                                                            <action selector="photoButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="cUe-WZ-5Mh"/>
+                                                            <action selector="photo4ButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="dYV-eU-Btw"/>
+                                                            <outletCollection property="gestureRecognizers" destination="s4n-JA-m6l" appends="YES" id="Gqt-3O-4TY"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -1527,9 +1535,11 @@ w/ No Activity</string>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5dh-sg-nGO" userLabel="Photo 5 Button">
                                                         <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                                        <gestureRecognizers/>
                                                         <state key="normal" title="photo5"/>
                                                         <connections>
-                                                            <action selector="photoButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="8Wr-cc-bVj"/>
+                                                            <action selector="photo5ButtonPressed:" destination="0zz-Dc-PVT" eventType="touchUpInside" id="inE-Kq-1qG"/>
+                                                            <outletCollection property="gestureRecognizers" destination="1F7-DB-lQM" appends="YES" id="PLz-FR-xPD"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -1605,19 +1615,49 @@ w/ No Activity</string>
                         <outlet property="existingNestDisturbedButton" destination="wTO-Za-23X" id="qb1-rs-Nfa"/>
                         <outlet property="hatchingButton" destination="ARa-yI-MLa" id="jHa-YH-Vay"/>
                         <outlet property="locationButton" destination="YjK-Hw-8u5" id="jKC-u2-Qa9"/>
-                        <outlet property="photoImageView1" destination="zCc-N4-0ka" id="O2D-k9-thR"/>
-                        <outlet property="photoImageView2" destination="uSW-nU-dVf" id="rg8-NK-Sun"/>
-                        <outlet property="photoImageView3" destination="XDv-C2-8Kx" id="pDf-Dp-apH"/>
-                        <outlet property="photoImageView4" destination="BKM-Ct-ais" id="miW-pc-ohm"/>
-                        <outlet property="photoImageView5" destination="KZ3-L7-c4i" id="GnH-up-v6B"/>
+                        <outlet property="photoImage1" destination="zCc-N4-0ka" id="O2D-k9-thR"/>
+                        <outlet property="photoImage2" destination="uSW-nU-dVf" id="rg8-NK-Sun"/>
+                        <outlet property="photoImage3" destination="XDv-C2-8Kx" id="pDf-Dp-apH"/>
+                        <outlet property="photoImage4" destination="BKM-Ct-ais" id="miW-pc-ohm"/>
+                        <outlet property="photoImage5" destination="KZ3-L7-c4i" id="GnH-up-v6B"/>
                         <outlet property="propertyButton" destination="U9L-FI-Edf" id="jhT-1w-1sY"/>
                         <outlet property="turtleButton" destination="QDb-zI-d3w" id="f78-mr-X5v"/>
                         <outlet property="zoneButton" destination="beL-wd-4Uk" id="mhW-kd-KWm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mw9-Ep-fnZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="HB1-pd-lHb">
+                    <connections>
+                        <action selector="handleGesture1:" destination="0zz-Dc-PVT" id="7ju-4w-vgo"/>
+                        <outlet property="delegate" destination="0zz-Dc-PVT" id="0Bf-zm-nbE"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="W28-h4-8lp">
+                    <connections>
+                        <action selector="handleGesture2:" destination="0zz-Dc-PVT" id="Xa9-M5-uep"/>
+                        <outlet property="delegate" destination="0zz-Dc-PVT" id="8oX-1F-HJx"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="oAH-ET-7Ex">
+                    <connections>
+                        <action selector="handleGesture3:" destination="0zz-Dc-PVT" id="3pT-r5-Bfb"/>
+                        <outlet property="delegate" destination="0zz-Dc-PVT" id="slb-sK-Fnn"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="s4n-JA-m6l">
+                    <connections>
+                        <action selector="handleGesture4:" destination="0zz-Dc-PVT" id="uj8-la-Kig"/>
+                        <outlet property="delegate" destination="0zz-Dc-PVT" id="be8-pd-A9M"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="1F7-DB-lQM">
+                    <connections>
+                        <action selector="handleGesture5:" destination="0zz-Dc-PVT" id="ysl-gG-hiY"/>
+                        <outlet property="delegate" destination="0zz-Dc-PVT" id="bnb-S6-8XP"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4530" y="161"/>
+            <point key="canvasLocation" x="4529.8828125" y="160.76134699853586"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yq4-gO-DKr">
@@ -1642,7 +1682,7 @@ w/ No Activity</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Qut-vR-tEU"/>
-        <segue reference="W7i-oC-iVy"/>
+        <segue reference="IiR-Ud-D9c"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="camera.fill" catalog="system" width="128" height="96"/>
