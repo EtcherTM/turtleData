@@ -20,6 +20,8 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
     var data = Observation()
     var hatch = Hatching()
     
+//    
+    
     let realm = try! Realm()
     let db = Firestore.firestore()
     
@@ -347,45 +349,45 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             //            action.setValue(UIColor.orange, forKey: "titleTextColor") Sebo:  Don't know where to put this to make it actually do something.
             
-            alert.addAction(UIAlertAction(title: "DISTURBED BY NATURAL CAUSE", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "DISTURBED: NATURAL CAUSE", style: .default, handler: { (action) in
                 
                 self.data.existingNestDisturbedType = "disturbed nature"
                 sender.setTitle("Disturb/Nature ✓", for: .normal)
                 
             }))
-            alert.addAction(UIAlertAction(title: "DISTURBED BY HUMAN CAUSE", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "DISTURBED: HUMAN CAUSE", style: .default, handler: { (action) in
                 
                 self.data.existingNestDisturbedType = "disturbed human"
                 sender.setTitle("Disturb/Human ✓", for: .normal)
                 
             }))
 
-            alert.addAction(UIAlertAction(title: "LOST BY NATURAL CAUSE", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "LOST: NATURAL CAUSE", style: .default, handler: { (action) in
                 self.data.existingNestDisturbedType = "lost nature"
                 sender.setTitle("Lost/Nature ✓", for: .normal)
                 
             }))
             
-            alert.addAction(UIAlertAction(title: "LOST BY HUMAN CAUSE", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "LOST: HUMAN CAUSE", style: .default, handler: { (action) in
                 self.data.existingNestDisturbedType = "lost human"
                 sender.setTitle("Lost/Human ✓", for: .normal)
                 
             }))
             
             alert.addAction(UIAlertAction(title: "MOVED FROM: NATURAL CAUSE", style: .default, handler: { (action) in
-                self.data.existingNestDisturbedType = "relocated nature"
-                sender.setTitle("Move From/Natu ✓", for: .normal)
+                self.data.existingNestDisturbedType = "moved from/ nature"
+                sender.setTitle("Move From/Nat. ✓", for: .normal)
                 
             }))
             
             alert.addAction(UIAlertAction(title: "MOVED FROM: HUMAN ACTIVITY", style: .default, handler: { (action) in
-                self.data.existingNestDisturbedType = "relocated nature"
+                self.data.existingNestDisturbedType = "moved from/ human"
                 sender.setTitle("Move From/Human ✓", for: .normal)
                 
             }))
             
             alert.addAction(UIAlertAction(title: "MOVED TO", style: .default, handler: { (action) in
-                self.data.emergeType = "relocated to"
+                self.data.emergeType = "moved to"
                 sender.setTitle("Moved To ✓", for: .normal)
                 
             }))

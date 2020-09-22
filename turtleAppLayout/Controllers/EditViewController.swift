@@ -17,10 +17,9 @@ import FirebaseStorage
 class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     
     var data: Observation?
-    
     var temp = Observation()
-    
-    
+    var temphatchingDetails = Hatching()
+    var tempNoProblems: String?
     
     let realm = try! Realm()
     let db = Firestore.firestore()
@@ -54,6 +53,18 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBOutlet weak var photoImage4: UIImageView!
     @IBOutlet weak var photoImage5: UIImageView!
     
+    
+    @IBOutlet weak var hatchingBoolButton: UIButton!
+    @IBOutlet weak var noProblemsButton: UIButton!
+    @IBOutlet weak var lightsButton: UIButton!
+    @IBOutlet weak var trashButton: UIButton!
+    @IBOutlet weak var sewerButton: UIButton!
+    @IBOutlet weak var plantsButton: UIButton!
+    @IBOutlet weak var otherButton: UIButton!
+    @IBOutlet weak var successButton: UIButton!
+    @IBOutlet weak var strandedButton: UIButton!
+    @IBOutlet weak var deadButton: UIButton!
+    
     @IBOutlet weak var doneButtonPressed: UIButton!
     
     override func viewDidLoad() {
@@ -75,27 +86,11 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         imagePicker.delegate = self
         imagePicker.allowsEditing = false
         self.commentsTextView.delegate = self
-        //
-        //        //Set image ids
-        //        photoImage1.tag = 1
-        //        photoImage2.tag = 2
-        //        photoImage3.tag = 3
-        //        photoImage4.tag = 4
-        //        photoImage5.tag = 5
-        //
-        //        print(photoImage1.tag)
-        //        print(photoImage1)
-        //        print(photoImage2.tag)
-        //        print(photoImage2)
-        //        print(photoImage3.tag)
-        //        print(photoImage4.tag)
-        //        print(photoImage5.tag)
-        //
-        
-        
+     
     }
     
     func fillTextFields () {
+
         temp.id = data!.id
         temp.date = data!.date
         
@@ -114,6 +109,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         temp.existingNestDisturbedType = data!.existingNestDisturbedType
         
         temp.hatchingDetails = data!.hatchingDetails
+//        tempNoProblems = data!.hatchingDetails.noProblems
         
         temp.image1 = data!.image1
         temp.image2 = data!.image2
@@ -162,7 +158,13 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         emergeButton.setTitle(temp.emerge ? temp.emergeType : "--", for: .normal)
         existingNestDisturbedButton.setTitle(temp.existingNestDisturbed ? temp.existingNestDisturbedType : "--", for: .normal)
         turtleButton.setTitle(data!.turtle ? data?.turtleType : "--", for: .normal)
-                hatchingButton.setTitle("Edit Hatching Data", for: .normal)
+        hatchingButton.setTitle("No", for: .normal)
+        if temphatchingDetails.noProblems {
+            noProblemsButton.setTitle("✓", for: .normal)
+        } else {
+            noProblemsButton.setTitle("--", for: .normal)
+        }
+
         commentsTextView.text = data!.comments
         
         //      Displaying images:
@@ -330,27 +332,27 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             
-            alert.addAction(UIAlertAction(title: "DISTURBED BY NATURAL CAUSE", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "DISTURBED: NATURAL CAUSE", style: .default, handler: { (action) in
                 
                 self.temp.existingNestDisturbedType = "disturbed nature"
                 sender.setTitle(self.temp.existingNestDisturbedType, for: .normal)
                 
             }))
             
-            alert.addAction(UIAlertAction(title: "DISTURBED BY HUMAN CAUSE", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "DISTURBED: HUMAN CAUSE", style: .default, handler: { (action) in
                 
                 self.temp.existingNestDisturbedType = "disturbed human"
                 sender.setTitle(self.temp.existingNestDisturbedType, for: .normal)
                 
             }))
 
-            alert.addAction(UIAlertAction(title: "LOST BY NATURAL CAUSE", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "LOST: NATURAL CAUSE", style: .default, handler: { (action) in
                 self.temp.existingNestDisturbedType = "lost nature"
                 sender.setTitle(self.temp.existingNestDisturbedType, for: .normal)
                 
             }))
             
-            alert.addAction(UIAlertAction(title: "LOST BY HUMAN CAUSE", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "LOST: HUMAN CAUSE", style: .default, handler: { (action) in
                 self.temp.existingNestDisturbedType = "lost human"
                 sender.setTitle(self.temp.existingNestDisturbedType, for: .normal)
                 print("existingNestDisturbedType = \(self.temp.existingNestDisturbedType)")
@@ -358,13 +360,13 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             }))
             
             alert.addAction(UIAlertAction(title: "MOVED FROM: NATURAL CAUSE", style: .default, handler: { (action) in
-                self.temp.existingNestDisturbedType = "relocated nature"
+                self.temp.existingNestDisturbedType = "moved from/ nature"
                 sender.setTitle(self.temp.existingNestDisturbedType, for: .normal)
                 
             }))
             
             alert.addAction(UIAlertAction(title: "MOVED FROM: HUMAN ACTIVITY", style: .default, handler: { (action) in
-                self.temp.existingNestDisturbedType = "relocated nature"
+                self.temp.existingNestDisturbedType = "moved from/ human"
                 sender.setTitle(self.temp.existingNestDisturbedType, for: .normal)
                 
             }))
@@ -390,12 +392,66 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBAction func turtleButtonPressed(_ sender: UIButton) {
         print("turtle")
         
+        if !temp.turtle {
+
+            let alert = UIAlertController(title: "ADULT TURTLE:", message: "", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "DEAD", style: .default, handler: { (action) in
+                self.temp.turtleType = "dead"
+                sender.setTitle("dead", for: .normal)
+            }))
+            alert.addAction(UIAlertAction(title: "ALIVE", style: .default, handler: { (action) in
+                self.temp.turtleType = "live"
+                sender.setTitle("alive", for: .normal)
+            }))
+            
+            present(alert, animated: true)
+            alert.view.tintColor = UIColor.black
+            
+        } else {
+            sender.setTitle("--", for: .normal)
+            temp.turtleType = ""
+        }
+        temp.turtle = !temp.turtle
+        
+        
     }
     
-    @IBAction func hatchingButtonPressed(_ sender: UIButton) {
-        print("hatching")
-                
+    @IBAction func hatchingBoolButtonPressed(_ sender: UIButton) {
+        if temp.hatchingBool == true {
+            
+//            Add an alert here: "Clear all hatching details and set hatching to false?"
+            
+            temp.hatchingBool = false
+            sender.setTitle("No", for: .normal)
+        } else {
+            temp.hatchingBool = true
+            sender.setTitle("Yes", for: .normal)
+        }
+        
+        print("hatching is \(temp.hatchingBool)")
     }
+    
+    @IBAction func noProblemsButtonPressed(_ sender: UIButton) {
+        temphatchingDetails.noProblems = !temphatchingDetails.noProblems
+        if temphatchingDetails.noProblems {
+            sender.setTitle("✓", for: .normal)
+            
+//     Consider whether to make selecting "No Problems" clear all the other problems
+//            lightsButton.setTitle("Lights", for: .normal)
+//            trashButton.setTitle("Trash", for: .normal)
+//            sewerButton.setTitle("Sewer", for: .normal)
+//            plantsButton.setTitle("Plants", for: .normal)
+//            otherButton.setTitle("Other", for: .normal)
+            print("No problems")
+        } else {
+            sender.setTitle("", for: .normal)
+            print("Problems")
+        }
+
+        
+    }
+    
     
     @IBAction func photo1ButtonPressed(_ sender: UIButton) {
         print("click1")
@@ -613,9 +669,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
              }
     }
     
-    
-    
-    
+ 
     @IBAction func doneButtonPressed(_ sender: UIButton) {
         print("Done button pressed")
         
