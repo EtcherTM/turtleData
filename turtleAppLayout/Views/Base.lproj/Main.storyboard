@@ -19,7 +19,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="712" height="1007"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c38-5C-Q9H">
-                                        <rect key="frame" x="0.0" y="0.0" width="712" height="1200"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="712" height="1100"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Sl6-Po-jnQ" userLabel="Data Entry Stack View">
                                                 <rect key="frame" x="199" y="30" width="314" height="900"/>
@@ -495,14 +495,14 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="Sl6-Po-jnQ" firstAttribute="top" secondItem="c38-5C-Q9H" secondAttribute="top" constant="30" id="NCp-mS-Ec8"/>
-                                            <constraint firstAttribute="height" constant="1200" id="cOX-Ka-1m7"/>
+                                            <constraint firstAttribute="height" constant="1100" id="cOX-Ka-1m7"/>
                                             <constraint firstItem="Sl6-Po-jnQ" firstAttribute="centerX" secondItem="c38-5C-Q9H" secondAttribute="centerX" id="iRt-31-adi"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="c38-5C-Q9H" firstAttribute="top" secondItem="yLU-Aq-emR" secondAttribute="top" id="GjF-Kf-aXp"/>
-                                    <constraint firstAttribute="bottom" secondItem="c38-5C-Q9H" secondAttribute="bottom" constant="-400" id="RwP-aa-6lW" userLabel="bottom = View.bottom - 250"/>
+                                    <constraint firstAttribute="bottom" secondItem="c38-5C-Q9H" secondAttribute="bottom" constant="-100" id="RwP-aa-6lW" userLabel="bottom = View.bottom - 250"/>
                                     <constraint firstItem="c38-5C-Q9H" firstAttribute="leading" secondItem="yLU-Aq-emR" secondAttribute="leading" id="WND-zo-hdb"/>
                                     <constraint firstItem="c38-5C-Q9H" firstAttribute="width" secondItem="yLU-Aq-emR" secondAttribute="width" id="pHa-uT-V8v"/>
                                     <constraint firstAttribute="trailing" secondItem="c38-5C-Q9H" secondAttribute="trailing" id="ywN-7v-WzC"/>
@@ -511,6 +511,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="yLU-Aq-emR" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" id="2fV-fi-iLW"/>
                             <constraint firstItem="yLU-Aq-emR" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="345-BK-GAg"/>
                             <constraint firstItem="yLU-Aq-emR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Rl8-3n-jUu"/>
                             <constraint firstItem="yLU-Aq-emR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="krA-ie-FpN"/>
