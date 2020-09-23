@@ -18,8 +18,8 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     var data: Observation?
     var temp = Observation()
-    var temphatchingDetails = Hatching()
-    var tempNoProblems: String?
+//    var temphatchingDetails = Hatching()
+//    var tempNoProblems: String?
     
     let realm = try! Realm()
     let db = Firestore.firestore()
@@ -107,8 +107,19 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         temp.emergeType = data!.emergeType
         temp.turtleType = data!.turtleType
         temp.existingNestDisturbedType = data!.existingNestDisturbedType
+    
+        temp.hatchingBool = data!.hatchingBool
+        temp.noProblems = data!.noProblems
+        temp.lights = data!.lights
+        temp.sewer = data!.sewer
+        temp.plants = data!.plants
+        temp.trash = data!.trash
+        temp.other = data!.other
+        temp.numSuccess = data!.numSuccess
+        temp.numStranded = data!.numStranded
+        temp.numDead = data!.numDead
         
-        temp.hatchingDetails = data!.hatchingDetails
+//        temp.hatchingDetails = data!.hatchingDetails
 //        tempNoProblems = data!.hatchingDetails.noProblems
         
         temp.image1 = data!.image1
@@ -159,12 +170,49 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         existingNestDisturbedButton.setTitle(temp.existingNestDisturbed ? temp.existingNestDisturbedType : "--", for: .normal)
         turtleButton.setTitle(data!.turtle ? data?.turtleType : "--", for: .normal)
         hatchingButton.setTitle("No", for: .normal)
-        if temphatchingDetails.noProblems {
+        
+//      How to transfer the values to temphatchDetails?
+        
+        if temp.noProblems {
             noProblemsButton.setTitle("✓", for: .normal)
         } else {
-            noProblemsButton.setTitle("--", for: .normal)
+            noProblemsButton.setTitle("", for: .normal)
         }
 
+        if temp.lights {
+            lightsButton.setTitle("✓", for: .normal)
+        }  else {
+            lightsButton.setTitle("", for: .normal)
+        }
+        
+        if temp.trash {
+            trashButton.setTitle("✓", for: .normal)
+        } else {
+            trashButton.setTitle("", for: .normal)
+        }
+        
+        if temp.sewer {
+            sewerButton.setTitle("✓", for: .normal)
+        } else {
+            sewerButton.setTitle("", for: .normal)
+        }
+        
+        if temp.plants {
+            plantsButton.setTitle("✓", for: .normal)
+        } else {
+            plantsButton.setTitle("", for: .normal)
+        }
+        
+        if temp.other {
+            otherButton.setTitle("✓", for: .normal)
+        } else {
+            otherButton.setTitle("", for: .normal)
+        }
+        
+        successButton.setTitle(String(temp.numSuccess), for: .normal)
+        strandedButton.setTitle(String(temp.numStranded), for: .normal)
+        deadButton.setTitle(String(temp.numDead), for: .normal)
+        
         commentsTextView.text = data!.comments
         
         //      Displaying images:
@@ -422,19 +470,19 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             
 //            Add an alert here: "Clear all hatching details and set hatching to false?"
             
-            temp.hatchingBool = false
-            sender.setTitle("No", for: .normal)
-        } else {
             temp.hatchingBool = true
             sender.setTitle("Yes", for: .normal)
+        } else {
+            temp.hatchingBool = false
+            sender.setTitle("No", for: .normal)
         }
         
         print("hatching is \(temp.hatchingBool)")
     }
     
     @IBAction func noProblemsButtonPressed(_ sender: UIButton) {
-        temphatchingDetails.noProblems = !temphatchingDetails.noProblems
-        if temphatchingDetails.noProblems {
+        temp.noProblems = !temp.noProblems
+        if temp.noProblems {
             sender.setTitle("✓", for: .normal)
             
 //     Consider whether to make selecting "No Problems" clear all the other problems
@@ -448,11 +496,132 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             sender.setTitle("", for: .normal)
             print("Problems")
         }
-
-        
     }
     
+    @IBAction func lightsButtonPressed(_ sender: UIButton) {
+           temp.lights = !temp.lights
+            if temp.lights {
+                sender.setTitle("✓", for: .normal)
+                print("Lights a problem")
+            } else {
+                sender.setTitle("", for: .normal)
+                print("Lights not a problem")
+            }
+    }
     
+    @IBAction func trashButtonPressed(_ sender: UIButton) {
+        temp.trash = !temp.trash
+         if temp.trash {
+             sender.setTitle("✓", for: .normal)
+             print("Trash a problem")
+         } else {
+             sender.setTitle("", for: .normal)
+             print("Trash not a problem")
+         }
+    }
+    
+    @IBAction func sewerButtonPressed(_ sender: UIButton) {
+        temp.sewer = !temp.sewer
+         if temp.sewer {
+             sender.setTitle("✓", for: .normal)
+             print("Sewer a problem")
+         } else {
+             sender.setTitle("", for: .normal)
+             print("Sewer not a problem")
+         }
+    }
+    
+    @IBAction func plantsButtonPressed(_ sender: UIButton) {
+        temp.plants = !temp.plants
+         if temp.plants {
+             sender.setTitle("✓", for: .normal)
+             print("Plants a problem")
+         } else {
+             sender.setTitle("", for: .normal)
+             print("Plants not a problem")
+         }
+    }
+    
+    @IBAction func otherButtonPressed(_ sender: UIButton) {
+        temp.other = !temp.other
+         if temp.other {
+             sender.setTitle("✓", for: .normal)
+             print("Other problem")
+         } else {
+             sender.setTitle("", for: .normal)
+             print("No other problem")
+         }
+    }
+    
+    @IBAction func successButtonPressed(_ sender: UIButton) {
+        var myTextField : UITextField?
+        let alert = UIAlertController.init(title: "Estimate the number of babies that went unassisted to ocean", message: nil, preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            // make sure your outside any property should be accessed with self here
+            myTextField = textField
+            //Important step assign textfield delegate to self
+            myTextField?.delegate = self
+            myTextField?.placeholder = "0"
+            myTextField?.keyboardType = .numberPad
+        }
+            
+         alert.addAction(UIAlertAction(title: "CANCEL", style: .cancel, handler: { (_) in
+         }))
+    
+         alert.addAction(UIAlertAction(title: "DONE", style: .default, handler: { (action) in
+             guard let num = Int(myTextField!.text!) else { return }
+            self.temp.numSuccess = num
+             sender.setTitle("\(num)", for: .normal)
+         }))
+
+         present(alert, animated: true, completion:nil)
+    }
+    
+    @IBAction func strandedButtonPressed(_ sender: UIButton) {
+             var myTextField : UITextField?
+             let alert = UIAlertController.init(title: "Enter number of babies that were stranded and needed rescue", message: nil, preferredStyle: .alert)
+             alert.addTextField { (textField) in
+                 myTextField = textField
+                 myTextField?.delegate = self
+                 myTextField?.placeholder = "0"
+                 myTextField?.keyboardType = .numberPad
+             }
+             
+             alert.addAction(UIAlertAction(title: "CANCEL", style: .cancel, handler: { (_) in
+             }))
+        
+             alert.addAction(UIAlertAction(title: "DONE", style: .default, handler: { (action) in
+                 guard let num = Int(myTextField!.text!) else { return }
+                self.temp.numStranded = num
+                 sender.setTitle("\(num)", for: .normal)
+             }))
+
+            present(alert, animated: true, completion:nil)
+    }
+    
+    @IBAction func deadButtonPressed(_ sender: UIButton) {
+        var myTextField : UITextField?
+        let alert = UIAlertController.init(title: "Enter number of dead babies found", message: nil, preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            myTextField = textField
+            myTextField?.delegate = self
+            myTextField?.placeholder = "0"
+            myTextField?.keyboardType = .numberPad
+        }
+        
+        alert.addAction(UIAlertAction(title: "CANCEL", style: .cancel, handler: { (_) in
+ 
+        }))
+
+        alert.addAction(UIAlertAction(title: "DONE", style: .default, handler: { (action) in
+            guard let num = Int(myTextField!.text!) else { return }
+            self.temp.numDead = num
+            sender.setTitle("\(num)", for: .normal)
+        }))
+
+        present(alert, animated: true, completion:nil)
+        
+    }
     @IBAction func photo1ButtonPressed(_ sender: UIButton) {
         print("click1")
         image = 1

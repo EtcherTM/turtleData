@@ -61,9 +61,9 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
     @IBOutlet weak var lightsButton: UIButton!
     @IBOutlet weak var trashButton: UIButton!
     @IBOutlet weak var sewerButton: UIButton!
-    
     @IBOutlet weak var plantsButton: UIButton!
     @IBOutlet weak var otherButton: UIButton!
+    
     @IBOutlet weak var successButton: UIButton!
     @IBOutlet weak var strandedButton: UIButton!
     @IBOutlet weak var deadButton: UIButton!
@@ -74,18 +74,18 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if data.hatchingDetails != nil && data.hatchingDetails?.hatchingExists != false {
-                   print("NOT NIL")
-                    print(data.hatchingDetails?.hatchingExists)
-                   hatchingButton.setTitle("Hatching ✓", for: .normal)
-               } else {
-                   hatchingButton.setTitle("Hatching?", for: .normal)
-               }
+        
+//        if data.hatchingDetails != nil && data.hatchingDetails?.hatchingExists != false {
+//                   print("NOT NIL")
+//                    print(data.hatchingDetails?.hatchingExists)
+//                   hatchingButton.setTitle("Hatching ✓", for: .normal)
+//               } else {
+//                   hatchingButton.setTitle("Hatching?", for: .normal)
+//               }
     }
     
     func didDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func viewDidLoad() {
@@ -104,19 +104,18 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
         self.view.endEditing(true)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ObsToHatching" {
-            let vc = segue.destination as! HatchingViewController
-            vc.obs = data
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "ObsToHatching" {
+//            let vc = segue.destination as! HatchingViewController
+//            vc.obs = data
+//        }
+//    }
     
     
     //MARK:- IBActions: Data Entry
     @IBAction func zoneButtonPressed(_ sender: UIButton) {
         
         let alert = UIAlertController(title: "SELECT A ZONE", message: "", preferredStyle: .alert)
-        
         
         for zone in K.zones {
             let action = UIAlertAction(title: zone, style: .default) { (_) in
@@ -140,8 +139,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
         
         present(alert, animated: true)
         alert.view.tintColor = UIColor.black
-        
-        
+            
     }
     
     @IBAction func propertyButtonPressed(_ sender: UIButton) {
@@ -168,9 +166,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
         
         if let propertyList = propertyList {
             let alert = UIAlertController(title: "SELECT A PROPERTY FROM ZONE \(data.zoneLocation)", message: "", preferredStyle: .alert)
-            
-            
-            
+                 
             for property in propertyList {
                 alert.addAction(UIAlertAction(title: "\(property.0) : \(property.1)", style: .default, handler: { (_) in
                     self.data.property = property.0
@@ -186,7 +182,6 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
             alert.view.tintColor = UIColor.black
             
         }
-        
     }
     
     @IBAction func locationButtonPressed(_ sender: UIButton) {
@@ -442,8 +437,8 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
     }
 
     @IBAction func noProblemsButtonPressed(_ sender: UIButton) {
-        hatch.noProblems = !hatch.noProblems
-        if hatch.noProblems {
+        data.noProblems = !data.noProblems
+        if data.noProblems {
             sender.setTitle("No Problems ✓", for: .normal)
             
 //     Consider whether to make selecting "No Problems" clear all the other problems
@@ -460,8 +455,8 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
     }
     
     @IBAction func lightsButtonPressed(_ sender: UIButton) {
-        hatch.lights = !hatch.lights
-        if hatch.lights {
+        data.lights = !data.lights
+        if data.lights {
             sender.setTitle("Lights ✓", for: .normal)
             print("Light problem")
         } else {
@@ -471,8 +466,8 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
     }
     
     @IBAction func trashButtonPressed(_ sender: UIButton) {
-        hatch.trash = !hatch.trash
-         if hatch.trash {
+        data.trash = !data.trash
+         if data.trash {
              sender.setTitle("Trash ✓", for: .normal)
              print("Trash problem")
          } else {
@@ -482,8 +477,8 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
     }
     
     @IBAction func sewerButtonPressed(_ sender: UIButton) {
-        hatch.sewer = !hatch.sewer
-        if hatch.sewer {
+        data.sewer = !data.sewer
+        if data.sewer {
             sender.setTitle("Sewer ✓", for: .normal)
             print("sewer problem")
         } else {
@@ -493,8 +488,8 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
     }
     
     @IBAction func plantsButtonPressed(_ sender: UIButton) {
-        hatch.plants = !hatch.plants
-        if hatch.plants {
+        data.plants = !data.plants
+        if data.plants {
             sender.setTitle("Plants ✓", for: .normal)
             print("plants problem")
         } else {
@@ -504,8 +499,8 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
     }
     
     @IBAction func otherButtonPressed(_ sender: UIButton) {
-        hatch.other = !hatch.other
-          if hatch.other {
+        data.other = !data.other
+          if data.other {
               sender.setTitle("Other ✓", for: .normal)
               print("Other problem")
           } else {
@@ -532,11 +527,13 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
         
              alert.addAction(UIAlertAction(title: "DONE", style: .default, handler: { (action) in
                  guard let num = Int(myTextField!.text!) else { return }
-                self.hatch.numSuccess = num
+                self.data.numSuccess = num
                  sender.setTitle("\(num) Success", for: .normal)
              }))
 
              present(alert, animated: true, completion:nil)
+            alert.view.tintColor = UIColor.black
+
             
     }
     
@@ -556,11 +553,13 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
     
          alert.addAction(UIAlertAction(title: "DONE", style: .default, handler: { (action) in
              guard let num = Int(myTextField!.text!) else { return }
-            self.hatch.numStranded = num
+            self.data.numStranded = num
              sender.setTitle("\(num) Stranded", for: .normal)
          }))
 
         present(alert, animated: true, completion:nil)
+        alert.view.tintColor = UIColor.black
+
     }
     
     @IBAction func deadButtonPressed(_ sender: UIButton) {
@@ -579,11 +578,13 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
 
         alert.addAction(UIAlertAction(title: "DONE", style: .default, handler: { (action) in
             guard let num = Int(myTextField!.text!) else { return }
-            self.hatch.numDead = num
+            self.data.numDead = num
             sender.setTitle("\(num) Dead", for: .normal)
         }))
 
-            present(alert, animated: true, completion:nil)
+        present(alert, animated: true, completion:nil)
+        alert.view.tintColor = UIColor.black
+
     }
     
     
@@ -599,12 +600,12 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
             
             self.data.comments = self.commentsTextView.text ?? ""
             
-            // creat id
+            // create id
             var id = "\(self.data.zoneLocation)-" != "" ? "\(self.data.zoneLocation)-": "-"
             
             if self.data.emerge { id.append(self.data.emergeType == "nest" ? "N" : "F") }
             if self.data.existingNestDisturbed { id.append(self.data.existingNestDisturbedType == "disturbed" ? "D" : "R") }
-            id.append(self.data.hatchingDetails != nil ? "H" : "")
+            id.append(self.data.hatchingBool ? "H" : "")
             id.append(self.data.turtle ? "T" : "")
             
             let dateFormatter = DateFormatter()
@@ -630,7 +631,6 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
                 self.zoneButton.setTitle("Zone?", for: .normal)
                 self.propertyButton.setTitle("Property/Lot?", for: .normal)
                 self.commentsTextView.text = ""
-//                self.photoButton.setTitle("", for: .normal)  What's wrong here?
                 self.photoImage1.image = UIImage(systemName: "camera.fill")
                 self.photoImage2.image = UIImage(systemName: "camera.fill")
                 self.photoImage3.image = UIImage(systemName: "camera.fill")

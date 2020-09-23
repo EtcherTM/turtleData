@@ -33,6 +33,17 @@ class Observation: Object {
 //    Moved hatching values into own Object
     @objc dynamic var hatchingBool = false
     @objc dynamic var hatchingDetails : Hatching?
+    @objc dynamic var noProblems : Bool = false
+    @objc dynamic var lights : Bool = false
+    @objc dynamic var trash : Bool = false
+    @objc dynamic var sewer : Bool = false
+    @objc dynamic var plants : Bool = false
+    @objc dynamic var other : Bool = false
+    
+    @objc dynamic var numSuccess = 0
+    @objc dynamic var numStranded = 0
+    @objc dynamic var numDead = 0
+    
     
     
 
