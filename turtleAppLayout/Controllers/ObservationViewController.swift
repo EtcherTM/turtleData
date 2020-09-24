@@ -41,7 +41,11 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
     
     @IBOutlet weak var zoneButton: UIButton!
     @IBOutlet weak var propertyButton: UIButton!
+    
     @IBOutlet weak var locationButton: UIButton!
+    @IBOutlet weak var latitude: UILabel!
+    @IBOutlet weak var longitude: UILabel!
+    @IBOutlet weak var accuracy: UILabel!
     
     @IBOutlet weak var emergeButton: UIButton!
     @IBOutlet weak var existingNestButton: UIButton!
@@ -687,7 +691,11 @@ extension ObservationViewController: CLLocationManagerDelegate {
             data.lat = location.coordinate.latitude
             data.lon = location.coordinate.longitude
             data.accuracy = location.horizontalAccuracy
-            locationButton.setTitle("\(String(format: "%.2f", data.lat)), \(String(format: "%.2f", data.lon)), ± \(String(format: "%.2f", data.accuracy))m", for: .normal)
+            latitude.text = String(format: "%.7f", data.lat)
+            longitude.text = String(format: "%.7f", data.lon)
+            accuracy.text = "\(String(format: "%.2f", data.accuracy)) m"
+            
+//            ), \(String(format: "%.2f", data.lon)), ± \(String(format: "%.2f", data.accuracy))m", for: .normal)
         }
         
         
