@@ -189,6 +189,9 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
     }
     
     @IBAction func locationButtonPressed(_ sender: UIButton) {
+        // if lat and lon are both 0, then get location.  If lat and lon != 0, then present alert:
+//            (1) get location again, (2) clear existing loc data (reset to 0), (3) cancel/do nothing
+        
         //Get location with CoreLocation
         locationManager.requestLocation()
         sender.setTitle("Getting: hold position . . .", for: .normal)
@@ -694,8 +697,7 @@ extension ObservationViewController: CLLocationManagerDelegate {
             latitude.text = String(format: "%.7f", data.lat)
             longitude.text = String(format: "%.7f", data.lon)
             accuracy.text = "\(String(format: "%.2f", data.accuracy)) m"
-            
-//            ), \(String(format: "%.2f", data.lon)), ± \(String(format: "%.2f", data.accuracy))m", for: .normal)
+            locationButton.setTitle("Location ✓", for: .normal)
         }
         
         

@@ -59,11 +59,12 @@ struct K {
          ("D.2", "Tropicana"),
          ("D.3", "Petit bar"),
          ("D.4", "UN residence"),
-         ("D.5", "Bldg No. 5/Green tiles bldg"),
-         ("D.6", "Empty lot N of green tiles bldg"),
-         ("D.7", "House two lots N of green tiles bldg"),
-         ("D.8", "House 1 lot S of military event space"),
-         ("D.9", "Military: event/grey housing")]
+         ("D.5", "Bldg No. 5"),
+         ("D.6", "Green tiles bldg"),
+         ("D.7", "Empty lot N of green tiles bldg"),
+         ("D.8", "House two lots N of green tiles bldg"),
+         ("D.9", "House 1 lot S of military event space"),
+         ("D.10", "Military: event/grey housing")]
 
     static let propertiesInE =
         [("E.1", "Off-white military housing"),

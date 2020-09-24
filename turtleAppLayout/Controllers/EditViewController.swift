@@ -42,6 +42,13 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBOutlet weak var zoneButton: UIButton!
     @IBOutlet weak var propertyButton: UIButton!
     @IBOutlet weak var locationButton: UIButton!
+    @IBOutlet weak var latitudeLabel: UILabel!
+    @IBOutlet weak var latitudeTextField: UITextField!
+    
+    @IBOutlet weak var longitudeTextField: UITextField!
+    @IBOutlet weak var longitudeLabel: UILabel!
+    
+    @IBOutlet weak var accuracyLabel: UILabel!
     @IBOutlet weak var emergeButton: UIButton!
     @IBOutlet weak var existingNestDisturbedButton: UIButton!
     @IBOutlet weak var turtleButton: UIButton!
@@ -99,6 +106,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         
         temp.lat = data!.lat
         temp.lon = data!.lon
+        temp.accuracy = data!.accuracy
         
         temp.emerge = data!.emerge
         temp.turtle = data!.turtle
@@ -157,11 +165,15 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         propertyButton.setTitle(propertyDesc, for: .normal)
         
         
-        if data!.lat != 0.0 && data!.lon != 0.0 {
-            let latAsStr = String(format: "%.2f", data!.lat)
-            let lonAsStr = String(format: "%.2f", data!.lon)
-            let accAsStr = String(format: "%.1f", data!.accuracy)
-            locationButton.setTitle("\(latAsStr), \(lonAsStr) ± \(accAsStr) m", for: .normal)
+        if temp.lat != 0.0 && temp.lon != 0.0 {
+            let latAsStr = String(format: "%.10f", temp.lat)
+            let lonAsStr = String(format: "%.10f", temp.lon)
+            let accAsStr = String(format: "%.2f", temp.accuracy)
+            accuracyLabel.text = accAsStr
+            latitudeTextField.text = latAsStr
+            longitudeTextField.text = lonAsStr
+            
+//            locationButton.setTitle("\(latAsStr), \(lonAsStr) ± \(accAsStr) m", for: .normal)
         } else {
             locationButton.setTitle("--", for: .normal)
             
@@ -336,9 +348,19 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     @IBAction func locationButtonPressed(_ sender: UIButton) {
         print("location")
+        let alert = UIAlertController(title: "Get new GPS coordinates now?", message: "", preferredStyle: .alert)
         
-        locationManager.requestLocation()
-        sender.setTitle("Getting: hold position . . .", for: .normal)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
+            self.locationManager.requestLocation()
+                sender.setTitle("Getting: hold position . . .", for: .normal)
+
+            }))
+        
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+
+            present(alert, animated: true)
+
+
     }
     
     @IBAction func emergeButtonPressed(_ sender: UIButton) {
@@ -842,7 +864,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBAction func doneButtonPressed(_ sender: UIButton) {
         print("Done button pressed")
         
-        let alert = UIAlertController(title: "SAVE THIS OBSERVATION AND CLEAR ALL FIELDS?", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "SAVE CHANGES?", message: "", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (_) in
             
@@ -886,7 +908,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             self.dispatchGroup.wait()
             
             DispatchQueue.main.async {
-                print("About to pop vc.")
+            
                 self.navigationController?.popViewController(animated: true)
 
             }
@@ -901,7 +923,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBAction func deleteButtonPressed(_ sender: UIButton) {
         print("Deleting observation")
         
-        let alert = UIAlertController(title: "Delete this observation?", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "DELETE THIS OBSERVATION?", message: "", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
             
@@ -940,12 +962,16 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
 extension EditViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
+            print("Location done")
             temp.lat = location.coordinate.latitude
             temp.lon = location.coordinate.longitude
-            let latAsStr = String(format: "%.2f", temp.lat)
-            let lonAsStr = String(format: "%.2f", temp.lon)
-            let accAsStr = String(format: "%.1f", location.horizontalAccuracy)
-            locationButton.setTitle("\(latAsStr), \(lonAsStr), ± \(accAsStr)m", for: .normal)
+            let latAsStr = String(format: "%.10f", temp.lat)
+            let lonAsStr = String(format: "%.10f", temp.lon)
+            let accAsStr = String(format: "%.2f", location.horizontalAccuracy)
+            latitudeTextField.text = latAsStr
+            longitudeTextField.text = lonAsStr
+            accuracyLabel.text = accAsStr
+            locationButton.setTitle("Retake GPS?", for: .normal)
         }
         
         
