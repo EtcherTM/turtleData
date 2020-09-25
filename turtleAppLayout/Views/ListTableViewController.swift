@@ -100,6 +100,39 @@ class ListTableViewController: UITableViewController {
         let itemDate = dateFormatter.string(from: observation.date)
         
         cell.cellLabel?.text = "\(observation.property == "" ? observation.zoneLocation : observation.property):  \(type) \(itemDate) (\(propertyDesc))\n \(observation.comments)\n\(observation.id)"
+        
+        let images = [observation.image1, observation.image2, observation.image3, observation.image4, observation.image5]
+        
+        for image in 0...4 {
+            if images[image] != "" {
+                if var documentsPathURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                    
+                    documentsPathURL.appendPathComponent("\(images[image]).jpg")
+                    
+                    
+                    print(documentsPathURL)
+                    let imageToLoad = UIImage(contentsOfFile: documentsPathURL.path) ?? UIImage()
+                    
+                    
+                    switch image {
+                    case 0:
+                        cell.photoImage1.image = imageToLoad
+                    case 1:
+                        cell.photoImage2.image = imageToLoad
+                    case 2:
+                        cell.photoImage3.image = imageToLoad
+                    case 3:
+                        cell.photoImage4.image = imageToLoad
+                    case 4:
+                        cell.photoImage5.image = imageToLoad
+                    default:
+                        print("Error loading images")
+                    }
+                    
+                    
+                }
+            }
+        }
 
         
         return cell
@@ -116,4 +149,46 @@ class ListTableViewController: UITableViewController {
     }
 
 
+    @IBAction func createPDFPressed(_ sender: Any) {
+        let pdfFilePath = self.tableView.exportAsPdfFromTable()
+        print(pdfFilePath)
+    }
 }
+
+extension UITableView {
+    
+    // Export pdf from UITableView and save pdf in drectory and return pdf file path
+    func exportAsPdfFromTable() -> String {
+        
+        let originalBounds = self.bounds
+        self.bounds = CGRect(x:originalBounds.origin.x, y: originalBounds.origin.y, width: self.contentSize.width, height: self.contentSize.height)
+        let pdfPageFrame = CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.contentSize.height)
+        
+        let pdfData = NSMutableData()
+        UIGraphicsBeginPDFContextToData(pdfData, pdfPageFrame, nil)
+        UIGraphicsBeginPDFPageWithInfo(pdfPageFrame, nil)
+        guard let pdfContext = UIGraphicsGetCurrentContext() else { return "" }
+        self.layer.render(in: pdfContext)
+        UIGraphicsEndPDFContext()
+        self.bounds = originalBounds
+        // Save pdf data
+        return self.saveTablePdf(data: pdfData)
+        
+    }
+    
+    // Save pdf file in document directory
+    func saveTablePdf(data: NSMutableData) -> String {
+        
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let docDirectoryPath = paths[0]
+        let pdfPath = docDirectoryPath.appendingPathComponent("tablePdf.pdf")
+        if data.write(to: pdfPath, atomically: true) {
+            return pdfPath.path
+        } else {
+            return ""
+        }
+        
+    }
+}
+
+

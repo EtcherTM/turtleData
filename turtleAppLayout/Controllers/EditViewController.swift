@@ -108,53 +108,13 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     func fillTextFields () {
 
-//        temp.id = data!.id
-//        temp.date = data!.date
-//
-//        temp.zoneLocation = data!.zoneLocation
-//        temp.property = data!.property
-//
-//        temp.lat = data!.lat
-//        temp.lon = data!.lon
-//        temp.accuracy = data!.accuracy
-//
-//        temp.emerge = data!.emerge
-//        temp.turtle = data!.turtle
-//        temp.existingNestDisturbed = data!.existingNestDisturbed
-//
-//        temp.emergeType = data!.emergeType
-//        temp.turtleType = data!.turtleType
-//        temp.existingNestDisturbedType = data!.existingNestDisturbedType
-//
-//        temp.hatchingBool = data!.hatchingBool
-//        temp.noProblems = data!.noProblems
-//        temp.lights = data!.lights
-//        temp.sewer = data!.sewer
-//        temp.plants = data!.plants
-//        temp.trash = data!.trash
-//        temp.other = data!.other
-//        temp.numSuccess = data!.numSuccess
-//        temp.numStranded = data!.numStranded
-//        temp.numDead = data!.numDead
-//
-//        temp.image1 = data!.image1
-//        temp.image2 = data!.image2
-//        temp.image3 = data!.image3
-//        temp.image4 = data!.image4
-//        temp.image5 = data!.image5
-//
-//        temp.comments = data!.comments
         let dateFormatter = DateFormatter()
                    
         dateFormatter.dateFormat = "yyyyMMddHHmmss"
         dateTextField.text = dateFormatter.string(from: data!.date)
         
         zoneButton.setTitle(data!.zoneLocation, for: .normal)
-        
-        
-
-        
-        
+            
         if data!.lat != 0.0 && data!.lon != 0.0 {
             let latAsStr = String(format: "%.10f", data!.lat)
             let lonAsStr = String(format: "%.10f", data!.lon)
@@ -163,7 +123,6 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             latitudeTextField.text = latAsStr
             longitudeTextField.text = lonAsStr
             
-//            locationButton.setTitle("\(latAsStr), \(lonAsStr) ± \(accAsStr) m", for: .normal)
         } else {
             locationButton.setTitle("--", for: .normal)
             
@@ -943,6 +902,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             } catch {
                 print("Eror deleting observation: \(error)")
             }
+            
             
             self.dispatchGroup.leave()
             print("Done deleting data")

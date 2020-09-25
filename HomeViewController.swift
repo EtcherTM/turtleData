@@ -57,6 +57,7 @@ class HomeViewController: UIViewController, ButtonUpdater {
     
     
     @IBAction func reviewPressed(_ sender: UIButton) {
+        
         performSegue(withIdentifier: "ToLog", sender: self)
         
         
@@ -106,7 +107,22 @@ class HomeViewController: UIViewController, ButtonUpdater {
     }
     
     @IBAction func uploadButtonPressed(_ sender: UIButton) {
-        
+        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("tablePdf.pdf")
+        let pdfDATA = try? Data.init(contentsOf: path)
+        let activitycontroller = UIActivityViewController(activityItems: [pdfDATA], applicationActivities: nil)
+                    if activitycontroller.responds(to: #selector(getter: activitycontroller.completionWithItemsHandler))
+                    {
+                        activitycontroller.completionWithItemsHandler = {(type, isCompleted, items, error) in
+                            if isCompleted
+                            {
+                            print("completed")
+                            }
+                    }
+                }
+        activitycontroller.excludedActivityTypes = [UIActivity.ActivityType.airDrop]
+                    
+                    self.present(activitycontroller, animated: true, completion: nil)
+        /*
         let alert = UIAlertController(title: "Are you sure you want to upload your data to the database?", message: "This will clear all values", preferredStyle: .alert)
         
         
@@ -250,7 +266,7 @@ var hatchingL: Dictionary<String, Bool> = [:]
         
         present(alert, animated: true)
         alert.view.tintColor = UIColor.black
-        
+        */
     }
     
 }

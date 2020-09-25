@@ -640,13 +640,22 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
                 }
                 
                 //Reset all fields if successfully saved
-                self.locationButton.setTitle("Get GPS Location", for: .normal)
-                self.emergeButton.setTitle("Nest?", for: .normal)
-                self.existingNestButton.setTitle("Disturb/Reloc?", for: .normal)
-                self.turtleButton.setTitle("Turtle?", for: .normal)
-                self.hatchingButton.setTitle("Hatching", for: .normal)
                 self.zoneButton.setTitle("Zone?", for: .normal)
                 self.propertyButton.setTitle("Property/Lot?", for: .normal)
+                self.locationButton.setTitle("Get GPS Location", for: .normal)
+                self.emergeButton.setTitle("Emergence?", for: .normal)
+                self.existingNestButton.setTitle("Existing Nest?", for: .normal)
+                self.turtleButton.setTitle("Adult Turtle?", for: .normal)
+                self.hatchingButton.setTitle("Hatching?", for: .normal)
+                self.noProblemsButton.setTitle("No Problems", for: .normal)
+                self.lightsButton.setTitle("Lights", for: .normal)
+                self.trashButton.setTitle("Trash", for: .normal)
+                self.sewerButton.setTitle("Sewer", for: .normal)
+                self.plantsButton.setTitle("Plants", for: .normal)
+                self.otherButton.setTitle("Other", for: .normal)
+                self.successButton.setTitle("# Success", for: .normal)
+                self.strandedButton.setTitle("# Stranded", for: .normal)
+                self.deadButton.setTitle("# Dead", for: .normal)
                 self.commentsTextView.text = ""
                 self.photoImage1.image = UIImage(systemName: "camera.fill")
                 self.photoImage2.image = UIImage(systemName: "camera.fill")
