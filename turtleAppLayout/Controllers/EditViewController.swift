@@ -17,7 +17,7 @@ import FirebaseStorage
 class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     
     var data: Observation?
-    var temp = Observation()
+//    var temp = Observation()
 //    var temphatchingDetails = Hatching()
 //    var tempNoProblems: String?
     
@@ -38,15 +38,15 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     var image = 0
     let dispatchGroup = DispatchGroup()
 
+    @IBOutlet weak var dateTextField: UITextField!
     
     @IBOutlet weak var zoneButton: UIButton!
     @IBOutlet weak var propertyButton: UIButton!
     @IBOutlet weak var locationButton: UIButton!
-    @IBOutlet weak var latitudeLabel: UILabel!
+
     @IBOutlet weak var latitudeTextField: UITextField!
-    
     @IBOutlet weak var longitudeTextField: UITextField!
-    @IBOutlet weak var longitudeLabel: UILabel!
+
     
     @IBOutlet weak var accuracyLabel: UILabel!
     @IBOutlet weak var emergeButton: UIButton!
@@ -74,6 +74,16 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     @IBOutlet weak var doneButtonPressed: UIButton!
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        realm.beginWrite()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        try! realm.commitWrite()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -98,45 +108,46 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     func fillTextFields () {
 
-        temp.id = data!.id
-        temp.date = data!.date
-        
-        temp.zoneLocation = data!.zoneLocation
-        temp.property = data!.property
-        
-        temp.lat = data!.lat
-        temp.lon = data!.lon
-        temp.accuracy = data!.accuracy
-        
-        temp.emerge = data!.emerge
-        temp.turtle = data!.turtle
-        temp.existingNestDisturbed = data!.existingNestDisturbed
-        
-        temp.emergeType = data!.emergeType
-        temp.turtleType = data!.turtleType
-        temp.existingNestDisturbedType = data!.existingNestDisturbedType
-    
-        temp.hatchingBool = data!.hatchingBool
-        temp.noProblems = data!.noProblems
-        temp.lights = data!.lights
-        temp.sewer = data!.sewer
-        temp.plants = data!.plants
-        temp.trash = data!.trash
-        temp.other = data!.other
-        temp.numSuccess = data!.numSuccess
-        temp.numStranded = data!.numStranded
-        temp.numDead = data!.numDead
-        
-//        temp.hatchingDetails = data!.hatchingDetails
-//        tempNoProblems = data!.hatchingDetails.noProblems
-        
-        temp.image1 = data!.image1
-        temp.image2 = data!.image2
-        temp.image3 = data!.image3
-        temp.image4 = data!.image4
-        temp.image5 = data!.image5
-        
-        temp.comments = data!.comments
+//        temp.id = data!.id
+//        temp.date = data!.date
+//
+//        temp.zoneLocation = data!.zoneLocation
+//        temp.property = data!.property
+//
+//        temp.lat = data!.lat
+//        temp.lon = data!.lon
+//        temp.accuracy = data!.accuracy
+//
+//        temp.emerge = data!.emerge
+//        temp.turtle = data!.turtle
+//        temp.existingNestDisturbed = data!.existingNestDisturbed
+//
+//        temp.emergeType = data!.emergeType
+//        temp.turtleType = data!.turtleType
+//        temp.existingNestDisturbedType = data!.existingNestDisturbedType
+//
+//        temp.hatchingBool = data!.hatchingBool
+//        temp.noProblems = data!.noProblems
+//        temp.lights = data!.lights
+//        temp.sewer = data!.sewer
+//        temp.plants = data!.plants
+//        temp.trash = data!.trash
+//        temp.other = data!.other
+//        temp.numSuccess = data!.numSuccess
+//        temp.numStranded = data!.numStranded
+//        temp.numDead = data!.numDead
+//
+//        temp.image1 = data!.image1
+//        temp.image2 = data!.image2
+//        temp.image3 = data!.image3
+//        temp.image4 = data!.image4
+//        temp.image5 = data!.image5
+//
+//        temp.comments = data!.comments
+        let dateFormatter = DateFormatter()
+                   
+        dateFormatter.dateFormat = "yyyyMMddHHmmss"
+        dateTextField.text = dateFormatter.string(from: data!.date)
         
         zoneButton.setTitle(data!.zoneLocation, for: .normal)
         
@@ -165,10 +176,10 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         propertyButton.setTitle(propertyDesc, for: .normal)
         
         
-        if temp.lat != 0.0 && temp.lon != 0.0 {
-            let latAsStr = String(format: "%.10f", temp.lat)
-            let lonAsStr = String(format: "%.10f", temp.lon)
-            let accAsStr = String(format: "%.2f", temp.accuracy)
+        if data!.lat != 0.0 && data!.lon != 0.0 {
+            let latAsStr = String(format: "%.10f", data!.lat)
+            let lonAsStr = String(format: "%.10f", data!.lon)
+            let accAsStr = String(format: "%.2f", data!.accuracy)
             accuracyLabel.text = accAsStr
             latitudeTextField.text = latAsStr
             longitudeTextField.text = lonAsStr
@@ -178,52 +189,55 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             locationButton.setTitle("--", for: .normal)
             
         }
-        emergeButton.setTitle(temp.emerge ? temp.emergeType : "--", for: .normal)
-        existingNestDisturbedButton.setTitle(temp.existingNestDisturbed ? temp.existingNestDisturbedType : "--", for: .normal)
+        emergeButton.setTitle(data!.emerge ? data!.emergeType : "--", for: .normal)
+        existingNestDisturbedButton.setTitle(data!.existingNestDisturbed ? data!.existingNestDisturbedType : "--", for: .normal)
         turtleButton.setTitle(data!.turtle ? data?.turtleType : "--", for: .normal)
-        hatchingButton.setTitle("No", for: .normal)
         
-//      How to transfer the values to temphatchDetails?
+        if data!.hatchingBool {
+            hatchingButton.setTitle("Yes", for: .normal)
+        } else {
+            hatchingButton.setTitle("No", for: .normal)
+        }
         
-        if temp.noProblems {
+        if data!.noProblems {
             noProblemsButton.setTitle("✓", for: .normal)
         } else {
             noProblemsButton.setTitle("", for: .normal)
         }
 
-        if temp.lights {
+        if data!.lights {
             lightsButton.setTitle("✓", for: .normal)
         }  else {
             lightsButton.setTitle("", for: .normal)
         }
         
-        if temp.trash {
+        if data!.trash {
             trashButton.setTitle("✓", for: .normal)
         } else {
             trashButton.setTitle("", for: .normal)
         }
         
-        if temp.sewer {
+        if data!.sewer {
             sewerButton.setTitle("✓", for: .normal)
         } else {
             sewerButton.setTitle("", for: .normal)
         }
         
-        if temp.plants {
+        if data!.plants {
             plantsButton.setTitle("✓", for: .normal)
         } else {
             plantsButton.setTitle("", for: .normal)
         }
         
-        if temp.other {
+        if data!.other {
             otherButton.setTitle("✓", for: .normal)
         } else {
             otherButton.setTitle("", for: .normal)
         }
         
-        successButton.setTitle(String(temp.numSuccess), for: .normal)
-        strandedButton.setTitle(String(temp.numStranded), for: .normal)
-        deadButton.setTitle(String(temp.numDead), for: .normal)
+        successButton.setTitle(String(data!.numSuccess), for: .normal)
+        strandedButton.setTitle(String(data!.numStranded), for: .normal)
+        deadButton.setTitle(String(data!.numDead), for: .normal)
         
         commentsTextView.text = data!.comments
         
@@ -268,21 +282,25 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
 
 //MARK:- Data Entry
     
+
+
+    
+    
     @IBAction func zoneButtonPressed(_ sender: UIButton) {
         print("zone")
-        print(temp)
+        print(data!)
         
         
         let alert = UIAlertController(title: "SELECT A ZONE", message: "", preferredStyle: .alert)
         
         for zone in K.zones {
             let action = UIAlertAction(title: zone, style: .default) { (_) in
-                if self.temp.zoneLocation != zone {
-                    self.temp.property = ""
+                if self.data!.zoneLocation != zone {
+                    self.data!.property = ""
                     self.propertyButton.setTitle("--", for: .normal)
                 }
                 sender.setTitle(zone, for: .normal)
-                self.temp.zoneLocation = zone
+                self.data!.zoneLocation = zone
                 
             }
             alert.addAction(action)
@@ -290,8 +308,8 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         
         alert.addAction(UIAlertAction(title: "CANCEL", style: .cancel, handler: { (_) in
             sender.setTitle("--", for: .normal)
-            self.temp.zoneLocation = ""
-            self.temp.property = ""
+            self.data!.zoneLocation = ""
+            self.data!.property = ""
             self.propertyButton.setTitle("--", for: .normal)
         }))
         
@@ -304,7 +322,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         print("property")
         
         var propertyList: Array<(String, String)>?
-        switch temp.zoneLocation {
+        switch data!.zoneLocation {
         case "A":
             propertyList = K.propertiesInA
         case "B":
@@ -326,11 +344,11 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         
         
         if let propertyList = propertyList {
-            let alert = UIAlertController(title: "SELECT A PROPERTY FROM ZONE \(temp.zoneLocation)", message: "", preferredStyle: .alert)
+            let alert = UIAlertController(title: "SELECT A PROPERTY FROM ZONE \(data!.zoneLocation)", message: "", preferredStyle: .alert)
             
             for property in propertyList {
                 alert.addAction(UIAlertAction(title: "\(property.0) : \(property.1)", style: .default, handler: { (_) in
-                    self.temp.property = property.0
+                    self.data!.property = property.0
                     sender.setTitle("\(property.0) : \(property.1)", for: .normal)
                 }))
             }
@@ -365,21 +383,21 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     @IBAction func emergeButtonPressed(_ sender: UIButton) {
         print("emergeButton pressed")
-            if !temp.emerge {
+            if !data!.emerge {
                 let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: "NEW/PROBABLE NEST", style: .default, handler: { (action) in
-                    self.temp.emergeType = "nest"
-                    sender.setTitle(self.temp.emergeType, for: .normal)
+                    self.data!.emergeType = "nest"
+                    sender.setTitle(self.data!.emergeType, for: .normal)
 
                 }))
                 alert.addAction(UIAlertAction(title: "FALSE NEST", style: .default, handler: { (action) in
-                    self.temp.emergeType = "false nest"
-                    sender.setTitle(self.temp.emergeType, for: .normal)
+                    self.data!.emergeType = "false nest"
+                    sender.setTitle(self.data!.emergeType, for: .normal)
                 }))
                 alert.addAction(UIAlertAction(title: "FALSE CRAWL", style: .default, handler: { (action) in
-                    self.temp.emergeType = "false crawl"
-                    sender.setTitle(self.temp.emergeType, for: .normal)
+                    self.data!.emergeType = "false crawl"
+                    sender.setTitle(self.data!.emergeType, for: .normal)
                     
                 }))
         
@@ -388,62 +406,62 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
                 
             } else {
                 sender.setTitle("--", for: .normal)
-                temp.emergeType = ""
+                data!.emergeType = ""
             }
             
             
-            temp.emerge = !temp.emerge
+            data!.emerge = !data!.emerge
             
     }
     
     @IBAction func existingNestDisturbedButtonPressed(_ sender: UIButton) {
         print("existing nest pressed")
-        if !temp.existingNestDisturbed {
+        if !data!.existingNestDisturbed {
             
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "DISTURBED: NATURAL CAUSE", style: .default, handler: { (action) in
                 
-                self.temp.existingNestDisturbedType = "disturbed nature"
-                sender.setTitle(self.temp.existingNestDisturbedType, for: .normal)
+                self.data!.existingNestDisturbedType = "disturbed nature"
+                sender.setTitle(self.data!.existingNestDisturbedType, for: .normal)
                 
             }))
             
             alert.addAction(UIAlertAction(title: "DISTURBED: HUMAN CAUSE", style: .default, handler: { (action) in
                 
-                self.temp.existingNestDisturbedType = "disturbed human"
-                sender.setTitle(self.temp.existingNestDisturbedType, for: .normal)
+                self.data!.existingNestDisturbedType = "disturbed human"
+                sender.setTitle(self.data!.existingNestDisturbedType, for: .normal)
                 
             }))
 
             alert.addAction(UIAlertAction(title: "LOST: NATURAL CAUSE", style: .default, handler: { (action) in
-                self.temp.existingNestDisturbedType = "lost nature"
-                sender.setTitle(self.temp.existingNestDisturbedType, for: .normal)
+                self.data!.existingNestDisturbedType = "lost nature"
+                sender.setTitle(self.data!.existingNestDisturbedType, for: .normal)
                 
             }))
             
             alert.addAction(UIAlertAction(title: "LOST: HUMAN CAUSE", style: .default, handler: { (action) in
-                self.temp.existingNestDisturbedType = "lost human"
-                sender.setTitle(self.temp.existingNestDisturbedType, for: .normal)
-                print("existingNestDisturbedType = \(self.temp.existingNestDisturbedType)")
+                self.data!.existingNestDisturbedType = "lost human"
+                sender.setTitle(self.data!.existingNestDisturbedType, for: .normal)
+                print("existingNestDisturbedType = \(self.data!.existingNestDisturbedType)")
                 
             }))
             
             alert.addAction(UIAlertAction(title: "MOVED FROM: NATURAL CAUSE", style: .default, handler: { (action) in
-                self.temp.existingNestDisturbedType = "moved from/ nature"
-                sender.setTitle(self.temp.existingNestDisturbedType, for: .normal)
+                self.data!.existingNestDisturbedType = "moved from/ nature"
+                sender.setTitle(self.data!.existingNestDisturbedType, for: .normal)
                 
             }))
             
             alert.addAction(UIAlertAction(title: "MOVED FROM: HUMAN ACTIVITY", style: .default, handler: { (action) in
-                self.temp.existingNestDisturbedType = "moved from/ human"
-                sender.setTitle(self.temp.existingNestDisturbedType, for: .normal)
+                self.data!.existingNestDisturbedType = "moved from/ human"
+                sender.setTitle(self.data!.existingNestDisturbedType, for: .normal)
                 
             }))
             
             alert.addAction(UIAlertAction(title: "MOVED TO", style: .default, handler: { (action) in
-                self.temp.existingNestDisturbedType = "relocated to"
-                sender.setTitle(self.temp.existingNestDisturbedType, for: .normal)
+                self.data!.existingNestDisturbedType = "relocated to"
+                sender.setTitle(self.data!.existingNestDisturbedType, for: .normal)
                 
             }))
             
@@ -451,10 +469,10 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             
         } else {
             sender.setTitle("--", for: .normal)
-            temp.existingNestDisturbedType = ""
+            data!.existingNestDisturbedType = ""
         }
         
-        temp.existingNestDisturbed = !temp.existingNestDisturbed
+        data!.existingNestDisturbed = !data!.existingNestDisturbed
         
         
     }
@@ -462,16 +480,16 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBAction func turtleButtonPressed(_ sender: UIButton) {
         print("turtle")
         
-        if !temp.turtle {
+        if !data!.turtle {
 
             let alert = UIAlertController(title: "ADULT TURTLE:", message: "", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "DEAD", style: .default, handler: { (action) in
-                self.temp.turtleType = "dead"
+                self.data!.turtleType = "dead"
                 sender.setTitle("dead", for: .normal)
             }))
             alert.addAction(UIAlertAction(title: "ALIVE", style: .default, handler: { (action) in
-                self.temp.turtleType = "live"
+                self.data!.turtleType = "live"
                 sender.setTitle("alive", for: .normal)
             }))
             
@@ -480,31 +498,31 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             
         } else {
             sender.setTitle("--", for: .normal)
-            temp.turtleType = ""
+            data!.turtleType = ""
         }
-        temp.turtle = !temp.turtle
+        data!.turtle = !data!.turtle
         
         
     }
     
     @IBAction func hatchingBoolButtonPressed(_ sender: UIButton) {
-        if temp.hatchingBool == true {
+        if data!.hatchingBool == true {
             
 //            Add an alert here: "Clear all hatching details and set hatching to false?"
             
-            temp.hatchingBool = true
+            data!.hatchingBool = true
             sender.setTitle("Yes", for: .normal)
         } else {
-            temp.hatchingBool = false
+            data!.hatchingBool = false
             sender.setTitle("No", for: .normal)
         }
         
-        print("hatching is \(temp.hatchingBool)")
+        print("hatching is \(data!.hatchingBool)")
     }
     
     @IBAction func noProblemsButtonPressed(_ sender: UIButton) {
-        temp.noProblems = !temp.noProblems
-        if temp.noProblems {
+        data!.noProblems = !data!.noProblems
+        if data!.noProblems {
             sender.setTitle("✓", for: .normal)
             
 //     Consider whether to make selecting "No Problems" clear all the other problems
@@ -521,8 +539,8 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     }
     
     @IBAction func lightsButtonPressed(_ sender: UIButton) {
-           temp.lights = !temp.lights
-            if temp.lights {
+           data!.lights = !data!.lights
+            if data!.lights {
                 sender.setTitle("✓", for: .normal)
                 print("Lights a problem")
             } else {
@@ -532,8 +550,8 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     }
     
     @IBAction func trashButtonPressed(_ sender: UIButton) {
-        temp.trash = !temp.trash
-         if temp.trash {
+        data!.trash = !data!.trash
+         if data!.trash {
              sender.setTitle("✓", for: .normal)
              print("Trash a problem")
          } else {
@@ -543,8 +561,8 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     }
     
     @IBAction func sewerButtonPressed(_ sender: UIButton) {
-        temp.sewer = !temp.sewer
-         if temp.sewer {
+        data!.sewer = !data!.sewer
+         if data!.sewer {
              sender.setTitle("✓", for: .normal)
              print("Sewer a problem")
          } else {
@@ -554,8 +572,8 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     }
     
     @IBAction func plantsButtonPressed(_ sender: UIButton) {
-        temp.plants = !temp.plants
-         if temp.plants {
+        data!.plants = !data!.plants
+         if data!.plants {
              sender.setTitle("✓", for: .normal)
              print("Plants a problem")
          } else {
@@ -565,8 +583,8 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     }
     
     @IBAction func otherButtonPressed(_ sender: UIButton) {
-        temp.other = !temp.other
-         if temp.other {
+        data!.other = !data!.other
+         if data!.other {
              sender.setTitle("✓", for: .normal)
              print("Other problem")
          } else {
@@ -592,7 +610,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
          alert.addAction(UIAlertAction(title: "DONE", style: .default, handler: { (action) in
              guard let num = Int(myTextField!.text!) else { return }
-            self.temp.numSuccess = num
+            self.data!.numSuccess = num
              sender.setTitle("\(num)", for: .normal)
          }))
 
@@ -614,7 +632,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         
              alert.addAction(UIAlertAction(title: "DONE", style: .default, handler: { (action) in
                  guard let num = Int(myTextField!.text!) else { return }
-                self.temp.numStranded = num
+                self.data!.numStranded = num
                  sender.setTitle("\(num)", for: .normal)
              }))
 
@@ -637,7 +655,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
 
         alert.addAction(UIAlertAction(title: "DONE", style: .default, handler: { (action) in
             guard let num = Int(myTextField!.text!) else { return }
-            self.temp.numDead = num
+            self.data!.numDead = num
             sender.setTitle("\(num)", for: .normal)
         }))
 
@@ -869,38 +887,47 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (_) in
             
             self.dispatchGroup.enter()
+//            self.data!.date = self.dateTextField.text ?? ""  //Need to turn this into Date format
+            self.data!.comments = self.commentsTextView.text ?? ""
             
-            self.temp.comments = self.commentsTextView.text ?? ""
+            // create id -- do we need to delete first and start over?
+            var id = "\(self.data!.zoneLocation)-" != "" ? "\(self.data!.zoneLocation)-": "-"
             
-            // create id
-            var id = "\(self.temp.zoneLocation)-" != "" ? "\(self.temp.zoneLocation)-": "-"
-            
-            if self.temp.emerge { id.append(self.temp.emergeType == "nest" ? "N" : "F") }
-            if self.temp.existingNestDisturbed { id.append(self.temp.existingNestDisturbedType == "disturbed" ? "D" : "R") }
+            if self.data!.emerge { id.append(self.data!.emergeType == "nest" ? "N" : "F") }
+            if self.data!.existingNestDisturbed { id.append(self.data!.existingNestDisturbedType == "disturbed" ? "D" : "R") }
 
-            //            id.append(self.data.hatching ? "H" : "")
+            if self.data!.noProblems || self.data!.lights || self.data!.trash || self.data!.sewer || self.data!.plants || self.data!.other || self.data!.numSuccess != 0 || self.data!.numStranded != 0 || self.data!.numDead != 0 {
+                    
+                self.data!.hatchingBool = true
+                
+                } else {
+                    self.data!.hatchingBool = false
+                }
+            
+            id.append(self.data!.hatchingBool ? "H" : "")
 
-            id.append(self.temp.turtle ? "T" : "")
+            id.append(self.data!.turtle ? "T" : "")
             
             let dateFormatter = DateFormatter()
             
             dateFormatter.dateFormat = "-yyyyMMdd-HHmmss-"
             
+//            Need to keep the date the same?  Date needs to be editable.
             id.append(dateFormatter.string(from: Date()))
             id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
-            self.temp.id = id
+            self.data!.id = id
             
-            
-            do {
-                try self.realm.write {
-                    self.realm.add(self.temp)
-                    self.realm.delete(self.data!)
-                }
-                
-                self.data = Observation()
-            } catch {
-                print("Error saving data, \(error) END")
-            }
+//  Delete do and catch statements?
+//            do {
+//                try self.realm.write {
+//                    self.realm.add(self.data!)
+//                    self.realm.delete(self.data!)
+//                }
+//
+//                self.data = Observation()
+//            } catch {
+//                print("Error saving data, \(error) END")
+//            }
             
             self.dispatchGroup.leave()
             print("juoiu)")
@@ -929,6 +956,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             
             self.dispatchGroup.enter()
             
+//            Can the write block be removed?
             do {
                 try self.realm.write{
                     self.realm.delete(self.data!)
@@ -962,11 +990,12 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
 extension EditViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
-            print("Location done")
-            temp.lat = location.coordinate.latitude
-            temp.lon = location.coordinate.longitude
-            let latAsStr = String(format: "%.10f", temp.lat)
-            let lonAsStr = String(format: "%.10f", temp.lon)
+            print("Done getting location.")
+            data!.lat = location.coordinate.latitude
+            data!.lon = location.coordinate.longitude
+            data!.accuracy = location.horizontalAccuracy
+            let latAsStr = String(format: "%.10f", data!.lat)
+            let lonAsStr = String(format: "%.10f", data!.lon)
             let accAsStr = String(format: "%.2f", location.horizontalAccuracy)
             latitudeTextField.text = latAsStr
             longitudeTextField.text = lonAsStr
@@ -1014,19 +1043,19 @@ extension EditViewController: UIImagePickerControllerDelegate, UINavigationContr
             switch image {
             case 1:
                 photoImage1.image = imageTaken
-                temp.image1 = imgRef
+                data!.image1 = imgRef
             case 2:
                 photoImage2.image = imageTaken
-                temp.image2 = imgRef
+                data!.image2 = imgRef
             case 3:
                 photoImage3.image = imageTaken
-                temp.image3 = imgRef
+                data!.image3 = imgRef
             case 4:
                 photoImage4.image = imageTaken
-                temp.image4 = imgRef
+                data!.image4 = imgRef
             case 5:
                 photoImage5.image = imageTaken
-                temp.image5 = imgRef
+                data!.image5 = imgRef
             default:
                 print("error BOUBOUBOBUOBUBOUBOBUOUBBUBUBO")
             }

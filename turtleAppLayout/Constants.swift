@@ -51,8 +51,9 @@ struct K {
          ("C.9", "Pink wall N of Russians"),
          ("C.10", "Pink flower wall"),
          ("C.11", "Building 5A / Bldg IMP"),
-         ("C.12", "White wall/Residence Tahiti"),
-         ("C.13", "Yellow EU house")]
+         ("C.12", "Residence Tahiti"),
+         ("C.13", "White wall"),
+         ("C.14", "Yellow EU house")]
     
     static let propertiesInD =
         [("D.1", "Red house N of yellow EU house"),
@@ -67,7 +68,7 @@ struct K {
          ("D.10", "Military: event/grey housing")]
 
     static let propertiesInE =
-        [("E.1", "Off-white military housing"),
+        [("E.1", "Light yellow military next to fuel creek"),
          ("E.2", "Peach military housing"),
          ("E.3", "2 story military housing"),
          ("E.4", "Yellow military housing"),

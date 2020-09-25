@@ -612,8 +612,18 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
             
             if self.data.emerge { id.append(self.data.emergeType == "nest" ? "N" : "F") }
             if self.data.existingNestDisturbed { id.append(self.data.existingNestDisturbedType == "disturbed" ? "D" : "R") }
-            id.append(self.data.hatchingBool ? "H" : "")
             id.append(self.data.turtle ? "T" : "")
+
+            if self.data.noProblems || self.data.lights || self.data.trash || self.data.sewer || self.data.plants || self.data.other || self.data.numSuccess != 0 || self.data.numStranded != 0 || self.data.numDead != 0 {
+                    
+                self.data.hatchingBool = true
+                
+                } else {
+                    self.data.hatchingBool = false
+                }
+            
+            
+            id.append(self.data.hatchingBool ? "H" : "")
             
             let dateFormatter = DateFormatter()
             
