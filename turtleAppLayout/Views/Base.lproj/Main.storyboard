@@ -12,7 +12,7 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ObservationViewController" customModule="turtleAppLayout" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1007"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yLU-Aq-emR">
@@ -932,7 +932,7 @@
             <objects>
                 <viewController id="bou-N1-6x4" customClass="HomeViewController" customModule="turtleAppLayout" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IXE-q9-aGY">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1007"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="zH9-NS-mEr">
@@ -1024,7 +1024,7 @@ w/ No Activity</string>
             <objects>
                 <viewController id="EQF-wT-VWZ" customClass="NoActivityViewController" customModule="turtleAppLayout" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zxr-Pd-MAn">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1007"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" &quot;Nothing to report&quot; for which zones?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3F4-0Z-yUP" userLabel="&quot;Nothing to report&quot; for which zones?">
@@ -1199,7 +1199,7 @@ w/ No Activity</string>
             <objects>
                 <tableViewController id="Afx-ap-P9t" customClass="ListTableViewController" customModule="turtleAppLayout" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="71" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="kHr-Ck-TCs">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1007"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <connections>
@@ -1221,7 +1221,7 @@ w/ No Activity</string>
             <objects>
                 <viewController id="0zz-Dc-PVT" customClass="EditViewController" customModule="turtleAppLayout" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3R6-bV-ut4">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1007"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JLU-xf-320">

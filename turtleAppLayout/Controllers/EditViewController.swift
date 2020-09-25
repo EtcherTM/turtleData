@@ -152,28 +152,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         zoneButton.setTitle(data!.zoneLocation, for: .normal)
         
         
-        var propertyDesc = ""
-        
-        if var index = Int(String(data!.property.dropFirst().dropFirst())) {
-            index -= 1
-            switch data?.property.first {
-            case "A":
-                propertyDesc = K.propertiesInA[index].1
-            case "B":
-                propertyDesc = K.propertiesInB[index].1
-            case "C":
-                propertyDesc = K.propertiesInC[index].1
-            case "D":
-                propertyDesc = K.propertiesInD[index].1
-            case "E":
-                propertyDesc = K.propertiesInE[index].1
-            case "F":
-                propertyDesc = K.propertiesInF[index].1
-            default:
-                propertyDesc = "No property/lot selected"
-            }
-        }
-        propertyButton.setTitle(propertyDesc, for: .normal)
+
         
         
         if data!.lat != 0.0 && data!.lon != 0.0 {

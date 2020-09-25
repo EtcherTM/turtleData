@@ -55,6 +55,29 @@ class ListTableViewController: UITableViewController {
 
         let observation = listOfObservations[indexPath.row]
 
+        var propertyDesc = ""
+        
+        if var index = Int(String(observation.property.dropFirst().dropFirst())) {
+            index -= 1
+            switch observation.property.first {
+            case "A":
+                propertyDesc = K.propertiesInA[index].1
+            case "B":
+                propertyDesc = K.propertiesInB[index].1
+            case "C":
+                propertyDesc = K.propertiesInC[index].1
+            case "D":
+                propertyDesc = K.propertiesInD[index].1
+            case "E":
+                propertyDesc = K.propertiesInE[index].1
+            case "F":
+                propertyDesc = K.propertiesInF[index].1
+            default:
+                propertyDesc = "No property/lot selected"
+            }
+        }
+        
+        
         var type: String = ""
         
         if observation.emerge {
@@ -76,7 +99,7 @@ class ListTableViewController: UITableViewController {
          
         let itemDate = dateFormatter.string(from: observation.date)
         
-        cell.cellLabel?.text = "\(observation.property == "" ? observation.zoneLocation : observation.property):  \(type) \(itemDate) \(observation.comments)\n\(observation.id)"
+        cell.cellLabel?.text = "\(observation.property == "" ? observation.zoneLocation : observation.property):  \(type) \(itemDate) (\(propertyDesc))\n \(observation.comments)\n\(observation.id)"
 
         
         return cell
