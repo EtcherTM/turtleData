@@ -321,8 +321,8 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
                 self.data.emergeType = "nest"
             }))
             alert.addAction(UIAlertAction(title: "FALSE NEST", style: .default, handler: { (action) in
-                self.data.emergeType = "false nest"
                 sender.setTitle("False Nest ✓", for: .normal)
+                self.data.emergeType = "false nest"
             }))
             alert.addAction(UIAlertAction(title: "FALSE CRAWL", style: .default, handler: { (action) in
                 self.data.emergeType = "false crawl"
