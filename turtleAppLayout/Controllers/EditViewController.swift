@@ -37,6 +37,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     var image = 0
     let dispatchGroup = DispatchGroup()
+    let datePicker = UIDatePicker()
 
     @IBOutlet weak var dateTextField: UITextField!
     
@@ -74,6 +75,8 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     @IBOutlet weak var doneButtonPressed: UIButton!
     
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         realm.beginWrite()
@@ -97,20 +100,59 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             print("No data to load.")
         }
         
-        
+        createDatePicker()
         locationManager.requestWhenInUseAuthorization()
         locationManager.delegate = self
         imagePicker.delegate = self
         imagePicker.allowsEditing = false
         self.commentsTextView.delegate = self
-     
+        
+        }
+    
+    func createDatePicker() {
+        datePicker.date = data!.date
+
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(handleDatePicker(sender:)))
+        toolbar.setItems([doneBtn], animated: true)
+        dateTextField.inputAccessoryView = toolbar
+        dateTextField.inputView = datePicker
+
+        let datePicker = UIDatePicker()
+//        datePicker.datePickerMode = .dateAndTime
+//        datePicker.locale = Locale(identifier: "fr")
+//        if #available(iOS 13.4, *) {
+//            datePicker.preferredDatePickerStyle = .compact
+//        } else {
+//
+//        }
+
+
+        
+        datePicker.addTarget(self, action: #selector(handleDatePicker(sender:)), for: .valueChanged)
+    }
+    
+    @objc func handleDatePicker (sender: UIDatePicker) {
+
+        let dateFormatter = DateFormatter()
+//        formatter.dateStyle = .medium
+//        formatter.timeStyle = .medium
+//        print(datePicker.date)
+        dateFormatter.dateFormat = "d MMM yyyy, HH:mm:ss"
+
+        dateTextField.text = dateFormatter.string(from: datePicker.date)
+        data!.date = datePicker.date
+        self.view.endEditing(true)
     }
     
     func fillTextFields () {
 
         let dateFormatter = DateFormatter()
-                   
-        dateFormatter.dateFormat = "yyyyMMddHHmmss"
+//        dateFormatter.locale = Locale(identifier: "fr")
+//        dateFormatter.dateStyle = .medium
+//        dateFormatter.timeStyle = .medium
+        dateFormatter.dateFormat = "d MMM yyyy, HH:mm:ss"
         dateTextField.text = dateFormatter.string(from: data!.date)
         
         zoneButton.setTitle(data!.zoneLocation, for: .normal)
@@ -825,7 +867,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (_) in
             
             self.dispatchGroup.enter()
-//            self.data!.date = self.dateTextField.text ?? ""  //Need to turn this into Date format
+
             self.data!.comments = self.commentsTextView.text ?? ""
             
             // create id -- do we need to delete first and start over?
@@ -894,15 +936,9 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             
             self.dispatchGroup.enter()
             
-//            Can the write block be removed?
-            do {
-                try self.realm.write{
+
                     self.realm.delete(self.data!)
-                }
-            } catch {
-                print("Eror deleting observation: \(error)")
-            }
-            
+
             
             self.dispatchGroup.leave()
             print("Done deleting data")
