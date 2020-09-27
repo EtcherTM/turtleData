@@ -20,6 +20,8 @@ class ListTableViewController: UITableViewController {
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 300
+        
+        
 
     }
     

@@ -937,7 +937,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             self.dispatchGroup.enter()
             
 
-                    self.realm.delete(self.data!)
+            self.realm.delete(self.data!)
 
             
             self.dispatchGroup.leave()
@@ -990,6 +990,9 @@ extension EditViewController: CLLocationManagerDelegate {
 extension EditViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if imagePicker.sourceType == .camera {
+            try realm.beginWrite()
+        }
         if let imageTaken = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             
             //          Call function to set the image on the obs screen
@@ -1036,6 +1039,14 @@ extension EditViewController: UIImagePickerControllerDelegate, UINavigationContr
             }
             
         }
+        if imagePicker.sourceType == .camera {
+            do {
+                try realm.commitWrite()
+            } catch {
+                print(error)
+            }
+        }
+        
         
         imagePicker.dismiss(animated: true, completion: nil)
     }
