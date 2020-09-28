@@ -53,6 +53,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBOutlet weak var emergeButton: UIButton!
     @IBOutlet weak var existingNestDisturbedButton: UIButton!
     @IBOutlet weak var turtleButton: UIButton!
+    @IBOutlet weak var speciesButton: UIButton!
     @IBOutlet weak var hatchingButton: UIButton!
     @IBOutlet weak var commentsTextView: UITextView!
     @IBOutlet weak var photoImage1: UIImageView!
@@ -73,9 +74,10 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBOutlet weak var strandedButton: UIButton!
     @IBOutlet weak var deadButton: UIButton!
     
-    @IBOutlet weak var doneButtonPressed: UIButton!
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+         self.navigationItem.hidesBackButton = true
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -89,6 +91,8 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         if data != nil {
             title = "Edit \(data!.id)"
@@ -167,11 +171,44 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             
         } else {
             locationButton.setTitle("--", for: .normal)
-            
         }
+        var propertyDesc = ""
+
+        if var index = Int(String(data!.property.dropFirst().dropFirst())) {
+            index -= 1
+            switch data!.property.first {
+            case "A":
+                propertyDesc = K.propertiesInA[index].1
+
+            case "B":
+                propertyDesc = K.propertiesInB[index].1
+
+            case "C":
+                propertyDesc = K.propertiesInC[index].1
+
+            case "D":
+                propertyDesc = K.propertiesInD[index].1
+
+            case "E":
+                propertyDesc = K.propertiesInE[index].1
+
+            case "F":
+                propertyDesc = K.propertiesInF[index].1
+
+//            case "G":
+                
+            default:
+                propertyDesc = "No property/lot selected"
+            }
+        }
+            
+        propertyButton.setTitle("\(data!.property): \(propertyDesc)", for: .normal)
+        
         emergeButton.setTitle(data!.emerge ? data!.emergeType : "--", for: .normal)
         existingNestDisturbedButton.setTitle(data!.existingNestDisturbed ? data!.existingNestDisturbedType : "--", for: .normal)
         turtleButton.setTitle(data!.turtle ? data?.turtleType : "--", for: .normal)
+        
+        speciesButton.setTitle(data!.species, for: .normal)
         
         if data!.hatchingBool {
             hatchingButton.setTitle("Yes", for: .normal)
@@ -484,6 +521,40 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         
         
     }
+    
+    @IBAction func speciesButtonPressed(_ sender: UIButton) {
+         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+         
+         alert.addAction(UIAlertAction(title: "UNKNOWN", style: .default, handler: { (action) in
+             sender.setTitle("Unknown", for: .normal)
+             self.data!.species = ""
+         }))
+         
+         alert.addAction(UIAlertAction(title: "OLIVE RIDLEY", style: .default, handler: { (action) in
+             sender.setTitle("Olive Ridley", for: .normal)
+            self.data!.species = "olive ridley"
+         }))
+         alert.addAction(UIAlertAction(title: "GREEN", style: .default, handler: { (action) in
+             sender.setTitle("Green", for: .normal)
+             self.data!.species = "green"
+         }))
+         alert.addAction(UIAlertAction(title: "HAWKSBILL", style: .default, handler: { (action) in
+             self.data!.species = "hawksbill"
+             sender.setTitle("Hawksbill", for: .normal)
+             
+         }))
+         alert.addAction(UIAlertAction(title: "LEATHERBACK", style: .default, handler: { (action) in
+             self.data!.species = "leatherback"
+             sender.setTitle("Leatherback", for: .normal)
+             
+         }))
+
+         present(alert, animated: true)
+         alert.view.tintColor = UIColor.black
+        
+        
+    }
+    
     
     @IBAction func hatchingBoolButtonPressed(_ sender: UIButton) {
         if data!.hatchingBool == true {

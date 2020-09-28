@@ -50,7 +50,8 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
     @IBOutlet weak var emergeButton: UIButton!
     @IBOutlet weak var existingNestButton: UIButton!
     @IBOutlet weak var turtleButton: UIButton!
-
+    @IBOutlet weak var speciesButton: UIStackView!
+    
     
     @IBOutlet weak var photoImage1: UIImageView!
     @IBOutlet weak var photoImage2: UIImageView!
@@ -430,6 +431,41 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
         data.turtle = !data.turtle
         
     }
+    
+    
+    @IBAction func speciesButtonPressed(_ sender: UIButton) {
+        
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "UNKNOWN", style: .default, handler: { (action) in
+                sender.setTitle("Unknown", for: .normal)
+                self.data.species = ""
+            }))
+            
+            alert.addAction(UIAlertAction(title: "OLIVE RIDLEY", style: .default, handler: { (action) in
+                sender.setTitle("Olive Ridley", for: .normal)
+                self.data.species = "olive ridley"
+            }))
+            alert.addAction(UIAlertAction(title: "GREEN", style: .default, handler: { (action) in
+                sender.setTitle("Green", for: .normal)
+                self.data.species = "green"
+            }))
+            alert.addAction(UIAlertAction(title: "HAWKSBILL", style: .default, handler: { (action) in
+                self.data.species = "hawksbill"
+                sender.setTitle("Hawksbill", for: .normal)
+                
+            }))
+            alert.addAction(UIAlertAction(title: "LEATHERBACK", style: .default, handler: { (action) in
+                self.data.species = "leatherback"
+                sender.setTitle("Leatherback", for: .normal)
+                
+            }))
+
+            present(alert, animated: true)
+            alert.view.tintColor = UIColor.black
+       
+    }
+    
     
     @IBAction func hatchingButtonPressed(_ sender: UIButton) {
         data.hatchingBool = !data.hatchingBool

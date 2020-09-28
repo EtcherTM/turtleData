@@ -58,7 +58,7 @@ class HomeViewController: UIViewController, ButtonUpdater {
     
     @IBAction func reviewPressed(_ sender: UIButton) {
         
-        performSegue(withIdentifier: "ToTwoTables", sender: self)
+        performSegue(withIdentifier: "HomeToList", sender: self)
         
         
         //        let observations = self.realm.objects(Observation.self)

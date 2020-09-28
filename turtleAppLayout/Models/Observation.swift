@@ -28,6 +28,7 @@ class Observation: Object {
     
     @objc dynamic var emergeType: String = ""
     @objc dynamic var turtleType: String = ""
+    @objc dynamic var species: String = ""
     @objc dynamic var existingNestDisturbedType : String = ""
 
 //    Moved hatching values into own Object

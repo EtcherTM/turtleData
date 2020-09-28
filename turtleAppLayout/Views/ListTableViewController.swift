@@ -187,7 +187,7 @@ class ListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Row selected")
-        performSegue(withIdentifier: "Edit", sender: self)
+        performSegue(withIdentifier: "ListToEdit", sender: self)
     }
 
 

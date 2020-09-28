@@ -28,7 +28,7 @@ struct K {
     
     static let propertiesInB =
         
-        [("B.1", "Res. Grand Large Bleu/purple wall"),
+        [("B.1", "Res. Grd Lrg Bleu purple wall"),
          ("B.2", "Yellow house"),
          ("B.3", "Residence Atlantique - south"),
          ("B.4", "Residence Atlantique - north"),
