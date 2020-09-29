@@ -203,7 +203,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         }
             
         propertyButton.setTitle("\(data!.property): \(propertyDesc)", for: .normal)
-        
+        locationButton.setTitle("Retake GPS?", for: .normal)
         emergeButton.setTitle(data!.emerge ? data!.emergeType : "--", for: .normal)
         existingNestDisturbedButton.setTitle(data!.existingNestDisturbed ? data!.existingNestDisturbedType : "--", for: .normal)
         turtleButton.setTitle(data!.turtle ? data?.turtleType : "--", for: .normal)
@@ -383,15 +383,24 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     @IBAction func locationButtonPressed(_ sender: UIButton) {
         print("location")
-        let alert = UIAlertController(title: "Get new GPS coordinates now?", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Change GPS coordinates?", message: "", preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction(title: "Take new GPS reading now", style: .default, handler: { (_) in
             self.locationManager.requestLocation()
                 sender.setTitle("Getting: hold position . . .", for: .normal)
 
             }))
-        
-            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Clear GPS fields", style: .default, handler: { (_) in
+            self.latitudeTextField.text = "0.0"
+            self.longitudeTextField.text = "0.0"
+            self.accuracyLabel.text = "--"
+            self.data!.lat = 0.0
+            self.data!.lon = 0.0
+            self.data!.accuracy = 0.0
+
+        }))
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
             present(alert, animated: true)
 

@@ -653,6 +653,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
             if self.data.noProblems || self.data.lights || self.data.trash || self.data.sewer || self.data.plants || self.data.other || self.data.numSuccess != 0 || self.data.numStranded != 0 || self.data.numDead != 0 {
                     
                 self.data.hatchingBool = true
+                print("Hatching Bool is true")
                 
                 } else {
                     self.data.hatchingBool = false

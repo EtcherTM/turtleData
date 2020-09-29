@@ -128,7 +128,7 @@ class HomeViewController: UIViewController, ButtonUpdater {
     
     @IBAction func uploadButtonPressed(_ sender: UIButton) {
 
-        /*
+        
         let alert = UIAlertController(title: "Are you sure you want to upload your data to the database?", message: "This will clear all values", preferredStyle: .alert)
         
         
@@ -148,7 +148,7 @@ class HomeViewController: UIViewController, ButtonUpdater {
 //                if obs.turtle {type.append(obs.turtleType)}
 //                if obs.existingNestDisturbed {type.append("disturbed")}
 //                if obs.nest {type.append(obs.nestType)}
-var hatchingL: Dictionary<String, Bool> = [:]
+                var hatchingL: Dictionary<String, Bool> = [:]
                 if let hatch = obs.hatchingDetails {
                     
                     if hatch.hatchingExists { hatchingL["exists"] = hatch.hatchingExists }
@@ -177,34 +177,41 @@ var hatchingL: Dictionary<String, Bool> = [:]
 //                upload["userid"] = self.defaults.string(forKey: "userID") ?? ""
 //                upload["imageURLS"] = obs.id
                 
+                let hatchingData = [
+                "exists": obs.hatchingDetails?.hatchingExists ?? false ? obs.hatchingDetails?.hatchingExists : nil,
+                "noProblems": obs.hatchingDetails?.noProblems ?? false ? obs.hatchingDetails?.noProblems : nil,
+                "lights": obs.hatchingDetails?.lights ?? false ? obs.hatchingDetails?.lights : nil,
+                "trash": obs.hatchingDetails?.trash ?? false ? obs.hatchingDetails?.trash: nil,
+                "sewer": obs.hatchingDetails?.sewer ?? false ? obs.hatchingDetails?.sewer : nil,
+                "plants": obs.hatchingDetails?.plants ?? false ? obs.hatchingDetails?.plants : nil,
+                "other": obs.hatchingDetails?.other ?? false ? obs.hatchingDetails?.other : nil
+                ]
                 
+                let hatchingDataData = [
+                "numSuccess": obs.numSuccess != 0 ? obs.numSuccess : nil,
+                "numStranded": obs.numStranded != 0 ? obs.numStranded : nil,
+                "numDead": obs.numDead != 0 ? obs.numDead : nil
+                ]
+                
+                let type = [
+                    "hatching": obs.hatchingDetails != nil ? hatchingData : nil,
+                    "hatchingData": obs.hatchingDetails != nil ? hatchingDataData : nil,
+                    "turtle": obs.turtle ? obs.turtleType : nil,
+                    "disturbed": obs.existingNestDisturbed ? obs.existingNestDisturbedType : nil,
+                    "nest": obs.emerge ? obs.emergeType : nil
+                    ] as [String : Any]
                 //   NEED TO ADD "NO ACTIVITY" VALUES
                 
-                self.db.collection("observations").addDocument(data: [
+                self.db.collection("observationsTest").addDocument(data: [
                     "date": obs.date,
+                    "id": obs.id,
                     "property": obs.property != "" ? obs.property : nil,
                     "zone": obs.zoneLocation != "" ? obs.zoneLocation : nil,
                     "coords": obs.lat != 0 && obs.lon != 0 ? [obs.lat, obs.lon] : nil,
                     "comments": obs.comments != "" ? obs.comments : nil,
                     "userid": self.defaults.string(forKey: "userID") ?? "",
                     "imageURLS": obs.id,
-                    "type": [
-                        "hatching": obs.hatchingDetails != nil ? [
-                            "exists": obs.hatchingDetails?.hatchingExists ?? false ? obs.hatchingDetails?.hatchingExists : nil,
-                            "noProblems": obs.hatchingDetails?.noProblems ?? false ? obs.hatchingDetails?.noProblems : nil,
-                            "lights": obs.hatchingDetails?.lights ?? false ? obs.hatchingDetails?.lights : nil,
-                            "trash": obs.hatchingDetails?.trash ?? false ? obs.hatchingDetails?.trash: nil,
-                            "sewer": obs.hatchingDetails?.sewer ?? false ? obs.hatchingDetails?.sewer : nil,
-                            "plants": obs.hatchingDetails?.plants ?? false ? obs.hatchingDetails?.plants : nil,
-                            "other": obs.hatchingDetails?.other ?? false ? obs.hatchingDetails?.other : nil,
-//                            "numSuccess": obs.hatching?.numSuccess != 0 ? obs.hatching?.numSuccess : nil,
-//                            "numStranded": obs.hatching?.numStranded != 0 ? obs.hatching?.numStranded : nil,
-//                            "numDead": obs.hatching?.hatchingExists != 0 ? obs.hatching?.hatchingExists : nil,
-                            ] : nil,
-                        "turtle": obs.turtle ? obs.turtleType : nil,
-                        "disturbed": obs.existingNestDisturbed ? obs.existingNestDisturbedType : nil,
-                        "nest": obs.emerge ? obs.emergeType : nil
-                    ]
+                    "type": type
                     
                 ]) { (error) in
                     if let error = error {
@@ -272,7 +279,7 @@ var hatchingL: Dictionary<String, Bool> = [:]
         
         present(alert, animated: true)
         alert.view.tintColor = UIColor.black
-        */
+        
     }
     
 }
