@@ -12,7 +12,14 @@
 		C35164F825092D4D00784FB2 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35164F725092D4D00784FB2 /* EditViewController.swift */; };
 		C355D2602523B81C001CEE69 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355D25F2523B81C001CEE69 /* MapViewController.swift */; };
 		C355D2622524449E001CEE69 /* NestLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355D2612524449E001CEE69 /* NestLocations.swift */; };
-		C355D2642524D511001CEE69 /* nestMarkerViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355D2632524D511001CEE69 /* nestMarkerViews.swift */; };
+		C355D2642524D511001CEE69 /* NestMarkerViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355D2632524D511001CEE69 /* NestMarkerViews.swift */; };
+		C355D26D25253B18001CEE69 /* A.wav in Resources */ = {isa = PBXBuildFile; fileRef = C355D26625253B18001CEE69 /* A.wav */; };
+		C355D26E25253B18001CEE69 /* C.wav in Resources */ = {isa = PBXBuildFile; fileRef = C355D26725253B18001CEE69 /* C.wav */; };
+		C355D26F25253B18001CEE69 /* B.wav in Resources */ = {isa = PBXBuildFile; fileRef = C355D26825253B18001CEE69 /* B.wav */; };
+		C355D27025253B18001CEE69 /* F.wav in Resources */ = {isa = PBXBuildFile; fileRef = C355D26925253B18001CEE69 /* F.wav */; };
+		C355D27125253B18001CEE69 /* G.wav in Resources */ = {isa = PBXBuildFile; fileRef = C355D26A25253B18001CEE69 /* G.wav */; };
+		C355D27225253B18001CEE69 /* E.wav in Resources */ = {isa = PBXBuildFile; fileRef = C355D26B25253B18001CEE69 /* E.wav */; };
+		C355D27325253B18001CEE69 /* D.wav in Resources */ = {isa = PBXBuildFile; fileRef = C355D26C25253B18001CEE69 /* D.wav */; };
 		C3A209CA2504247E00FCBA16 /* NoActivityReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A209C92504247E00FCBA16 /* NoActivityReport.swift */; };
 		C3A9EA7A24F4FDF4006056A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A9EA7924F4FDF4006056A6 /* AppDelegate.swift */; };
 		C3A9EA7C24F4FDF4006056A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A9EA7B24F4FDF4006056A6 /* SceneDelegate.swift */; };
@@ -57,7 +64,14 @@
 		C35164F725092D4D00784FB2 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		C355D25F2523B81C001CEE69 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		C355D2612524449E001CEE69 /* NestLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestLocations.swift; sourceTree = "<group>"; };
-		C355D2632524D511001CEE69 /* nestMarkerViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nestMarkerViews.swift; sourceTree = "<group>"; };
+		C355D2632524D511001CEE69 /* NestMarkerViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestMarkerViews.swift; sourceTree = "<group>"; };
+		C355D26625253B18001CEE69 /* A.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = A.wav; sourceTree = "<group>"; };
+		C355D26725253B18001CEE69 /* C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = C.wav; sourceTree = "<group>"; };
+		C355D26825253B18001CEE69 /* B.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = B.wav; sourceTree = "<group>"; };
+		C355D26925253B18001CEE69 /* F.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = F.wav; sourceTree = "<group>"; };
+		C355D26A25253B18001CEE69 /* G.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = G.wav; sourceTree = "<group>"; };
+		C355D26B25253B18001CEE69 /* E.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = E.wav; sourceTree = "<group>"; };
+		C355D26C25253B18001CEE69 /* D.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = D.wav; sourceTree = "<group>"; };
 		C3A209C92504247E00FCBA16 /* NoActivityReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoActivityReport.swift; sourceTree = "<group>"; };
 		C3A9EA7624F4FDF4006056A6 /* turtleAppLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = turtleAppLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3A9EA7924F4FDF4006056A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -126,7 +140,7 @@
 				C348F9BD251E22EC00E9724B /* TwoTableViewController.swift */,
 				C35164F725092D4D00784FB2 /* EditViewController.swift */,
 				C355D25F2523B81C001CEE69 /* MapViewController.swift */,
-				C355D2632524D511001CEE69 /* nestMarkerViews.swift */,
+				C355D2632524D511001CEE69 /* NestMarkerViews.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -150,6 +164,20 @@
 				C355D2612524449E001CEE69 /* NestLocations.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C355D26525253B18001CEE69 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				C355D26625253B18001CEE69 /* A.wav */,
+				C355D26725253B18001CEE69 /* C.wav */,
+				C355D26825253B18001CEE69 /* B.wav */,
+				C355D26925253B18001CEE69 /* F.wav */,
+				C355D26A25253B18001CEE69 /* G.wav */,
+				C355D26B25253B18001CEE69 /* E.wav */,
+				C355D26C25253B18001CEE69 /* D.wav */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		C3A9EA6D24F4FDF4006056A6 = {
@@ -185,6 +213,7 @@
 				C3A9EA8724F4FDF5006056A6 /* Info.plist */,
 				C31E3B5724FAF2210067193A /* GoogleService-Info.plist */,
 				C3DE600C24F94A39005FCF02 /* Constants.swift */,
+				C355D26525253B18001CEE69 /* Sounds */,
 			);
 			path = turtleAppLayout;
 			sourceTree = "<group>";
@@ -304,11 +333,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C355D27225253B18001CEE69 /* E.wav in Resources */,
+				C355D26D25253B18001CEE69 /* A.wav in Resources */,
 				C3A9EA8624F4FDF5006056A6 /* LaunchScreen.storyboard in Resources */,
 				C31E3B5824FAF2210067193A /* GoogleService-Info.plist in Resources */,
+				C355D27025253B18001CEE69 /* F.wav in Resources */,
+				C355D26F25253B18001CEE69 /* B.wav in Resources */,
 				C3A9EA8324F4FDF5006056A6 /* Assets.xcassets in Resources */,
+				C355D27125253B18001CEE69 /* G.wav in Resources */,
 				C3A9EA8124F4FDF4006056A6 /* Main.storyboard in Resources */,
+				C355D27325253B18001CEE69 /* D.wav in Resources */,
 				C3E6748A2506787500B38ED6 /* ListCell.xib in Resources */,
+				C355D26E25253B18001CEE69 /* C.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,7 +418,7 @@
 				C355D2622524449E001CEE69 /* NestLocations.swift in Sources */,
 				C3DE600D24F94A39005FCF02 /* Constants.swift in Sources */,
 				C3A9EA7E24F4FDF4006056A6 /* ObservationViewController.swift in Sources */,
-				C355D2642524D511001CEE69 /* nestMarkerViews.swift in Sources */,
+				C355D2642524D511001CEE69 /* NestMarkerViews.swift in Sources */,
 				C3E674892506787500B38ED6 /* ListCell.swift in Sources */,
 				C3B77B2D2501817B00CFCD79 /* NoActivityViewController.swift in Sources */,
 				C35164F825092D4D00784FB2 /* EditViewController.swift in Sources */,

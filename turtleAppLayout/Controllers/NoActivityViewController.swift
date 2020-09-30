@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+//import AVFoundation
 
 
 class NoActivityViewController: UIViewController {
@@ -34,52 +35,55 @@ class NoActivityViewController: UIViewController {
     }
     
     @IBAction func aButtonPressed(_ sender: UIButton) {
+//        playSound()
         noAct.aNoActivity = !noAct.aNoActivity
         if noAct.aNoActivity == true {
-            sender.setTitle("A ✓", for: .normal)
+            sender.backgroundColor = UIColor(named: "Dull red")
+       
         } else {
-            sender.setTitle("A", for: .normal)
+            sender.backgroundColor = .gray
         }
     }
     
     @IBAction func bButtonPressed(_ sender: UIButton) {
         noAct.bNoActivity = !noAct.bNoActivity
         if noAct.bNoActivity == true {
-            sender.setTitle("B ✓", for: .normal)
+            sender.backgroundColor = UIColor(named: "Dull orange")
         } else {
-            sender.setTitle("B", for: .normal)
+            sender.backgroundColor = .gray
         }
     }
     @IBAction func cButtonPressed(_ sender: UIButton) {
         noAct.cNoActivity = !noAct.cNoActivity
-        if noAct.cNoActivity == true {            sender.setTitle("C ✓", for: .normal)
+        if noAct.cNoActivity == true {
+            sender.backgroundColor = UIColor(named: "Dull yellow")
         } else {
-            sender.setTitle("C", for: .normal)
+            sender.backgroundColor = .gray
         }
     }
     
     @IBAction func dButtonPressed(_ sender: UIButton) {
          noAct.dNoActivity = !noAct.dNoActivity
          if noAct.dNoActivity == true {
-            sender.setTitle("D ✓", for: .normal)
+            sender.backgroundColor = UIColor(named: "Dull green")
         } else {
-            sender.setTitle("D", for: .normal)
+            sender.backgroundColor = .gray
         }
     }
     @IBAction func eButtonPressed(_ sender: UIButton) {
         noAct.eNoActivity = !noAct.eNoActivity
         if noAct.eNoActivity == true {
-            sender.setTitle("E ✓", for: .normal)
+            sender.backgroundColor = UIColor(named: "Dull blue")
         } else {
-            sender.setTitle("E", for: .normal)
+            sender.backgroundColor = .gray
         }
     }
     @IBAction func fButtonPressed(_ sender: UIButton) {
         noAct.fNoActivity = !noAct.fNoActivity
         if noAct.fNoActivity == true {
-            sender.setTitle("F ✓", for: .normal)
+            sender.backgroundColor = UIColor(named: "Dull purple")
         } else {
-            sender.setTitle("F", for: .normal)
+            sender.backgroundColor = .gray
         }
     }
     
@@ -168,8 +172,13 @@ class NoActivityViewController: UIViewController {
             
             
         }
-//        sender.destination.
-        // Pass the selected object to the new view controller.
+
+//    func playSound () {
+//        let url = Bundle.main.url(forResource: "C", withExtension: .wav)
+//        player = try! AVAudioPlayer(contentsOf: url!)
+//        player.play()
+//    }
+    
     }
 
 

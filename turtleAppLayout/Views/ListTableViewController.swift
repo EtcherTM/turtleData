@@ -65,29 +65,29 @@ class ListTableViewController: UITableViewController {
             switch observation.property.first {
             case "A":
                 propertyDesc = K.propertiesInA[index].1
-                newBackgroundColor = #colorLiteral(red: 0.9394575357, green: 0.08814223856, blue: 0, alpha: 1)
+                newBackgroundColor = UIColor(named: "Dull red") ?? #colorLiteral(red: 0.9394575357, green: 0.08814223856, blue: 0, alpha: 1)
                 newFontColor = .white
                 
             case "B":
                 propertyDesc = K.propertiesInB[index].1
-                newBackgroundColor = #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)
+                newBackgroundColor = UIColor(named: "Dull orange") ?? .orange
                 newFontColor = .white
             case "C":
                 propertyDesc = K.propertiesInC[index].1
-                newBackgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
+                newBackgroundColor = UIColor(named: "Dull yellow") ?? #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
                 newFontColor = .black
             case "D":
                 propertyDesc = K.propertiesInD[index].1
-                newBackgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+                newBackgroundColor = UIColor(named: "Dull green")  ?? #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
                 newFontColor = .white
             case "E":
                 propertyDesc = K.propertiesInE[index].1
-                newBackgroundColor = .orange
+                newBackgroundColor = UIColor(named: "Dull blue ")  ?? #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)
                 newFontColor = .white
             case "F":
                 propertyDesc = K.propertiesInF[index].1
-                newBackgroundColor = #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
-                newFontColor = .black
+                newBackgroundColor = UIColor(named: "Dull purple") ?? #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+                newFontColor = .white
 //            case "G":
                 
             default:
