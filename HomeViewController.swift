@@ -124,6 +124,10 @@ class HomeViewController: UIViewController, ButtonUpdater {
                 self.present(activitycontroller, animated: true, completion: nil)
     }
     
+    @IBAction func viewMapButtonPressed(_ sender: Any) {
+        self.performSegue(withIdentifier: "ToMap", sender: self)
+
+    }
     
     
     @IBAction func uploadButtonPressed(_ sender: UIButton) {

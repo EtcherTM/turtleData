@@ -10,6 +10,9 @@
 		C31E3B5824FAF2210067193A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C31E3B5724FAF2210067193A /* GoogleService-Info.plist */; };
 		C348F9BE251E22EC00E9724B /* TwoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C348F9BD251E22EC00E9724B /* TwoTableViewController.swift */; };
 		C35164F825092D4D00784FB2 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35164F725092D4D00784FB2 /* EditViewController.swift */; };
+		C355D2602523B81C001CEE69 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355D25F2523B81C001CEE69 /* MapViewController.swift */; };
+		C355D2622524449E001CEE69 /* NestLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355D2612524449E001CEE69 /* NestLocations.swift */; };
+		C355D2642524D511001CEE69 /* nestMarkerViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355D2632524D511001CEE69 /* nestMarkerViews.swift */; };
 		C3A209CA2504247E00FCBA16 /* NoActivityReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A209C92504247E00FCBA16 /* NoActivityReport.swift */; };
 		C3A9EA7A24F4FDF4006056A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A9EA7924F4FDF4006056A6 /* AppDelegate.swift */; };
 		C3A9EA7C24F4FDF4006056A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A9EA7B24F4FDF4006056A6 /* SceneDelegate.swift */; };
@@ -52,6 +55,9 @@
 		C31E3B5724FAF2210067193A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C348F9BD251E22EC00E9724B /* TwoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoTableViewController.swift; sourceTree = "<group>"; };
 		C35164F725092D4D00784FB2 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		C355D25F2523B81C001CEE69 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		C355D2612524449E001CEE69 /* NestLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestLocations.swift; sourceTree = "<group>"; };
+		C355D2632524D511001CEE69 /* nestMarkerViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nestMarkerViews.swift; sourceTree = "<group>"; };
 		C3A209C92504247E00FCBA16 /* NoActivityReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoActivityReport.swift; sourceTree = "<group>"; };
 		C3A9EA7624F4FDF4006056A6 /* turtleAppLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = turtleAppLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3A9EA7924F4FDF4006056A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +125,8 @@
 				C3E6748325049BD000B38ED6 /* ListTableViewController.swift */,
 				C348F9BD251E22EC00E9724B /* TwoTableViewController.swift */,
 				C35164F725092D4D00784FB2 /* EditViewController.swift */,
+				C355D25F2523B81C001CEE69 /* MapViewController.swift */,
+				C355D2632524D511001CEE69 /* nestMarkerViews.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -139,6 +147,7 @@
 				C3B350BB24F768A0004CA8EA /* Observation.swift */,
 				C3A209C92504247E00FCBA16 /* NoActivityReport.swift */,
 				C3B79393250D814200D8D267 /* Hatching.swift */,
+				C355D2612524449E001CEE69 /* NestLocations.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -370,8 +379,10 @@
 				C3BC007225014C1E00881E7B /* LoginViewController.swift in Sources */,
 				C3FEC67224FEEFC1000711D2 /* HomeViewController.swift in Sources */,
 				C3E6748425049BD000B38ED6 /* ListTableViewController.swift in Sources */,
+				C355D2622524449E001CEE69 /* NestLocations.swift in Sources */,
 				C3DE600D24F94A39005FCF02 /* Constants.swift in Sources */,
 				C3A9EA7E24F4FDF4006056A6 /* ObservationViewController.swift in Sources */,
+				C355D2642524D511001CEE69 /* nestMarkerViews.swift in Sources */,
 				C3E674892506787500B38ED6 /* ListCell.swift in Sources */,
 				C3B77B2D2501817B00CFCD79 /* NoActivityViewController.swift in Sources */,
 				C35164F825092D4D00784FB2 /* EditViewController.swift in Sources */,
@@ -379,6 +390,7 @@
 				C3A9EA7A24F4FDF4006056A6 /* AppDelegate.swift in Sources */,
 				C3B350BC24F768A0004CA8EA /* Observation.swift in Sources */,
 				C348F9BE251E22EC00E9724B /* TwoTableViewController.swift in Sources */,
+				C355D2602523B81C001CEE69 /* MapViewController.swift in Sources */,
 				C3A9EA7C24F4FDF4006056A6 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
