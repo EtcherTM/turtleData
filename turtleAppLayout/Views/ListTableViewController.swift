@@ -113,12 +113,18 @@ class ListTableViewController: UITableViewController {
         if observation.existingNestDisturbed {
             type.append("Existing Nest ")
         }
-        if observation.hatchingBool {
-            type.append("Hatching ")
-        }
+        
         if observation.turtle {
             type.append("Turtle")
         }
+        if observation.hatchingBool {
+            type.append("Hatching ")
+        }
+
+        if observation.id.count < 3 {
+            type.append("Other")
+        }
+
         
         let dateFormatter = DateFormatter()
          

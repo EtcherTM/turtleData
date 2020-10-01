@@ -41,7 +41,7 @@ class NoActivityViewController: UIViewController {
             sender.backgroundColor = UIColor(named: "Dull red")
        
         } else {
-            sender.backgroundColor = .gray
+            sender.backgroundColor = .lightGray
         }
     }
     
@@ -50,7 +50,7 @@ class NoActivityViewController: UIViewController {
         if noAct.bNoActivity == true {
             sender.backgroundColor = UIColor(named: "Dull orange")
         } else {
-            sender.backgroundColor = .gray
+            sender.backgroundColor = .lightGray
         }
     }
     @IBAction func cButtonPressed(_ sender: UIButton) {
@@ -58,7 +58,7 @@ class NoActivityViewController: UIViewController {
         if noAct.cNoActivity == true {
             sender.backgroundColor = UIColor(named: "Dull yellow")
         } else {
-            sender.backgroundColor = .gray
+            sender.backgroundColor = .lightGray
         }
     }
     
@@ -67,7 +67,7 @@ class NoActivityViewController: UIViewController {
          if noAct.dNoActivity == true {
             sender.backgroundColor = UIColor(named: "Dull green")
         } else {
-            sender.backgroundColor = .gray
+            sender.backgroundColor = .lightGray
         }
     }
     @IBAction func eButtonPressed(_ sender: UIButton) {
@@ -75,7 +75,7 @@ class NoActivityViewController: UIViewController {
         if noAct.eNoActivity == true {
             sender.backgroundColor = UIColor(named: "Dull blue")
         } else {
-            sender.backgroundColor = .gray
+            sender.backgroundColor = .lightGray
         }
     }
     @IBAction func fButtonPressed(_ sender: UIButton) {
@@ -83,7 +83,7 @@ class NoActivityViewController: UIViewController {
         if noAct.fNoActivity == true {
             sender.backgroundColor = UIColor(named: "Dull purple")
         } else {
-            sender.backgroundColor = .gray
+            sender.backgroundColor = .lightGray
         }
     }
     

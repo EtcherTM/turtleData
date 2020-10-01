@@ -662,6 +662,11 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
             
             id.append(self.data.hatchingBool ? "H" : "")
             
+            if id.count < 3 {
+                
+                id.append("O")
+            }
+            
             let dateFormatter = DateFormatter()
             
             dateFormatter.dateFormat = "-yyyyMMdd-HHmmss-"

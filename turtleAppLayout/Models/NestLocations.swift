@@ -19,27 +19,27 @@ class NestLocations: NSObject, MKAnnotation {
         var toDate = Date()
         var daysAgo = 0
         daysAgo = Calendar.current.dateComponents([.day], from: date, to: Date()).day ?? 0
-        if daysAgo < 4 {
+        if daysAgo < 5 {
             return UIColor(named: "0-4 days") ?? UIColor.cyan
         } else {
             
-            if daysAgo < 35 {
+            if daysAgo < 36 {
                 return UIColor(named: "5-35 days") ?? UIColor.cyan
                 
             } else {
-                if daysAgo < 45 {
+                if daysAgo < 46 {
                     return UIColor(named: "36-45 days") ?? .red
                     
                 } else {
-                    if daysAgo < 55 {
-                        return UIColor(named: "46-55 days") ?? .red
+                    if daysAgo < 61 {
+                        return UIColor(named: "46-60 days") ?? .red
                     } else {
-                        if daysAgo < 68 {
-                            return UIColor(named: "56-68 days") ?? .red
+                        if daysAgo < 71 {
+                            return UIColor(named: "61-70 days") ?? .red
                             
                         } else {
-                            if daysAgo > 69 {
-                                return UIColor(named: "69+ days") ?? UIColor.black
+                            if daysAgo > 72 {
+                                return UIColor(named: "71+ days") ?? .white
                             } 
                             
                         }

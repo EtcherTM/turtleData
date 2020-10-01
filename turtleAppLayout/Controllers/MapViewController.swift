@@ -9,35 +9,51 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, CLLocationManagerDelegate {
 
+
+    
     @IBOutlet private var mapView: MKMapView!
+
+    var locationManager = CLLocationManager()
+    var userLocated = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        locationManager.delegate = self
+        
+        if CLLocationManager.authorizationStatus() == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+                
+        } else {
+            locationManager.startUpdatingLocation()
+            mapView.showsUserLocation = true
+
+        }
+
+        
         let initialLocation = CLLocation(latitude: 0.458049, longitude: 9.406771)
         mapView.centerToLocation(initialLocation)
         let plageTahitiCenter = CLLocation(latitude: 0.458049, longitude: 9.406771)
         let region = MKCoordinateRegion(
-          center: plageTahitiCenter.coordinate,
-          latitudinalMeters: 5000,
-          longitudinalMeters: 10000)
+            center: plageTahitiCenter.coordinate,
+            latitudinalMeters: 5000,
+            longitudinalMeters: 10000)
         mapView.setCameraBoundary(
-          MKMapView.CameraBoundary(coordinateRegion: region),
-          animated: true)
+            MKMapView.CameraBoundary(coordinateRegion: region),
+            animated: true)
         
         let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 40000)
         mapView.setCameraZoomRange(zoomRange, animated: true)
-        // Show artwork on map
         
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd/yyyy"
         let date = formatter.date(from: "08/06/2020") ?? Date()
 
         mapView.delegate = self
-    mapView.register(NestMarkerView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+        
+        mapView.register(NestMarkerView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         
         
         let nestLocations = [
@@ -79,9 +95,6 @@ class MapViewController: UIViewController {
         }
 
         
- 
-//        loadInitialData()
-//        mapView.addAnnotations(artworks)
 
         
     }
