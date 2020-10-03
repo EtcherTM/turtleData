@@ -67,7 +67,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         mapView.register(NestMarkerView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         
         /*
-        let nestLocations = [
+        nestLocations = [
             NestLocations (title: "A-N-20200929-user",
                            id: "A-N-20200929-user",
                            coordinate: CLLocationCoordinate2D(latitude: 0.437601, longitude: 9.416195),
@@ -100,7 +100,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
             
         ]*/
-        self.dispatchGroup.enter()
+//        self.dispatchGroup.enter()
 
 //        Below sign in does not change anything:
 //        Auth.auth().signInAnonymously { (result, error) in
@@ -109,6 +109,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 //        }
         
         let db = Firestore.firestore()
+        
         db.collection("observations").getDocuments { (querySnapshot, error) in
             if let error = error {
                 
@@ -122,36 +123,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                     let coords = data["coords"] as? Array<Double>
               
                     let id = data["imageURLS"] as? String
-                    let date = data["date"] as? Date
-                    
+                    let date = data["date"]
+                    print(data)
                     if let coords = coords {
                         
-                            self.nestLocations.append(NestLocations(title: id, id: id, coordinate: CLLocationCoordinate2D(latitude: coords[0], longitude: coords[1]), date: date ?? Date()))
+                            self.nestLocations.append(NestLocations(title: id, id: id, coordinate: CLLocationCoordinate2D(latitude: coords[0], longitude: coords[1]), date: Date() ?? Date()))
                         
                     }
                 }
                 
             }
             
-            self.dispatchGroup.leave()
+            
 
             print("done getting docs")
-            
+    
+            self.doneGettingDocuments()
         }
         
         
        
-        
-        self.dispatchGroup.wait()
-        
-        DispatchQueue.main.async {
-            print(self.nestLocations)
-            for n in self.nestLocations {
-                       print(n)
-                self.mapView.addAnnotation(n)
-                   }
 
-        }
+
+       
         
        
         
@@ -159,7 +153,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         
     }
-    
+    func doneGettingDocuments() {
+        DispatchQueue.main.async {
+            print(self.nestLocations)
+            for n in self.nestLocations {
+                print(n)
+                self.mapView.addAnnotation(n)
+            }
+            
+        }
+    }
     @IBAction func mapTypeSegmentSelected(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:

@@ -209,7 +209,7 @@ class HomeViewController: UIViewController, ButtonUpdater {
                     ] as [String : Any]
                 //   NEED TO ADD "NO ACTIVITY" VALUES
                 
-                self.db.collection("observationsTest").addDocument(data: [
+                self.db.collection("observations").addDocument(data: [
                     "date": obs.date,
                     "id": obs.id,
                     "property": obs.property != "" ? obs.property : nil,
