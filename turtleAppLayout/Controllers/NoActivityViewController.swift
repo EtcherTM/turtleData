@@ -35,7 +35,7 @@ class NoActivityViewController: UIViewController {
     }
     
     @IBAction func aButtonPressed(_ sender: UIButton) {
-//        playSound()
+        print("A")
         noAct.aNoActivity = !noAct.aNoActivity
         if noAct.aNoActivity == true {
             sender.backgroundColor = UIColor(named: "Dull red")
@@ -136,6 +136,18 @@ class NoActivityViewController: UIViewController {
             print("error saving noAct, \(error)")
         }
         
+        let pdfFilePath = self.view.exportAsPdfFromView()
+        print(pdfFilePath)
+        
+        let alert = UIAlertController(title: "Generate PDF of this screen to share?", message: nil, preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            let pdfFilePath = self.view.exportAsPdfFromView()
+            print(pdfFilePath)
+//            Add another alert: "Share pdf?"
+            
+        }))
+        
         self.dismiss(animated: true, completion: createLabel)
             
     }
@@ -173,13 +185,38 @@ class NoActivityViewController: UIViewController {
             
         }
 
-//    func playSound () {
-//        let url = Bundle.main.url(forResource: "C", withExtension: .wav)
-//        player = try! AVAudioPlayer(contentsOf: url!)
-//        player.play()
-//    }
+
     
     }
 
+extension UIView {
+    
+    // Export pdf from Save pdf in drectory and return pdf file path
+    func exportAsPdfFromView() -> String {
+        
+        let pdfPageFrame = self.bounds
+        let pdfData = NSMutableData()
+        UIGraphicsBeginPDFContextToData(pdfData, pdfPageFrame, nil)
+        UIGraphicsBeginPDFPageWithInfo(pdfPageFrame, nil)
+        guard let pdfContext = UIGraphicsGetCurrentContext() else { return "" }
+        self.layer.render(in: pdfContext)
+        UIGraphicsEndPDFContext()
+        return self.saveViewPdf(data: pdfData)
+        
+    }
+    
+    // Save pdf file in document directory
+    func saveViewPdf(data: NSMutableData) -> String {
+        
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let docDirectoryPath = paths[0]
+        let pdfPath = docDirectoryPath.appendingPathComponent("viewPdf.pdf")
+        if data.write(to: pdfPath, atomically: true) {
+            return pdfPath.path
+        } else {
+            return ""
+        }
+    }
+}
 
 

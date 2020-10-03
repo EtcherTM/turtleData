@@ -125,6 +125,9 @@ class HomeViewController: UIViewController, ButtonUpdater {
     }
     
     @IBAction func viewMapButtonPressed(_ sender: Any) {
+        
+        
+        
         self.performSegue(withIdentifier: "ToMap", sender: self)
 
     }

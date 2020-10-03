@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class LoginViewController: UIViewController {
 
     let defaults = UserDefaults.standard

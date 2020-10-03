@@ -8,15 +8,19 @@
 
 import UIKit
 import MapKit
+import FirebaseFirestore
+import FirebaseAuth
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
 
-
+    let dispatchGroup = DispatchGroup()
     
     @IBOutlet private var mapView: MKMapView!
 
     var locationManager = CLLocationManager()
     var userLocated = false
+    
+    var nestLocations: Array<NestLocations> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +40,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let initialLocation = CLLocation(latitude: 0.458049, longitude: 9.406771)
         mapView.centerToLocation(initialLocation)
         let plageTahitiCenter = CLLocation(latitude: 0.458049, longitude: 9.406771)
+        
+//        let region = MKCoordinateRegion( center: location.coordinate, latitudinalMeters: CLLocationDistance(exactly: 5000)!, longitudinalMeters: CLLocationDistance(exactly: 5000)!)
+
+        
+        
         let region = MKCoordinateRegion(
             center: plageTahitiCenter.coordinate,
             latitudinalMeters: 5000,
             longitudinalMeters: 10000)
+
+        mapView.setRegion(mapView.regionThatFits(region), animated: true)
+
         mapView.setCameraBoundary(
             MKMapView.CameraBoundary(coordinateRegion: region),
             animated: true)
@@ -49,13 +61,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd/yyyy"
-        let date = formatter.date(from: "08/06/2020") ?? Date()
-
+        
         mapView.delegate = self
         
         mapView.register(NestMarkerView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         
-        
+        /*
         let nestLocations = [
             NestLocations (title: "A-N-20200929-user",
                            id: "A-N-20200929-user",
@@ -88,17 +99,89 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                            date: formatter.date(from: "07/10/2020") ?? Date()),
 
             
-        ]
-   
-        for n in nestLocations {
-          mapView.addAnnotation(n)
-        }
+        ]*/
+        self.dispatchGroup.enter()
 
+//        Below sign in does not change anything:
+//        Auth.auth().signInAnonymously { (result, error) in
+//            print("result:\(result) " )
+//            print("error: \(error)")
+//        }
         
+        let db = Firestore.firestore()
+        db.collection("observations").getDocuments { (querySnapshot, error) in
+            if let error = error {
+                
+                print("Error getting documents: \(error.localizedDescription)")
+            } else {
+                
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+      
+                    
+                    let coords = data["coords"] as? Array<Double>
+              
+                    let id = data["imageURLS"] as? String
+                    let date = data["date"] as? Date
+                    
+                    if let coords = coords {
+                        
+                            self.nestLocations.append(NestLocations(title: id, id: id, coordinate: CLLocationCoordinate2D(latitude: coords[0], longitude: coords[1]), date: date ?? Date()))
+                        
+                    }
+                }
+                
+            }
+            
+            self.dispatchGroup.leave()
 
+            print("done getting docs")
+            
+        }
+        
+        
+       
+        
+        self.dispatchGroup.wait()
+        
+        DispatchQueue.main.async {
+            print(self.nestLocations)
+            for n in self.nestLocations {
+                       print(n)
+                self.mapView.addAnnotation(n)
+                   }
+
+        }
+        
+       
+        
+        
+        
         
     }
     
+    @IBAction func mapTypeSegmentSelected(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            mapView.mapType = .standard
+        case 1:
+            mapView.mapType = .satellite
+        default:
+            mapView.mapType = .hybrid
+        }
+    }
+    
+    
+    @IBAction func centerToUserButtonPressed(_ sender: UIBarButtonItem) {
+            centerToUsersLocation()
+    }
+    
+    func centerToUsersLocation() {
+      let center = mapView.userLocation.coordinate
+      let zoomRegion: MKCoordinateRegion = MKCoordinateRegion(center: center, latitudinalMeters: 200, longitudinalMeters: 200)
+      
+      mapView.setRegion(zoomRegion, animated: true)
+    }
 
     
     /*
