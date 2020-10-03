@@ -123,6 +123,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                     let coords = data["coords"] as? Array<Double>
               
                     let id = data["imageURLS"] as? String
+                    
+                    
+                    
                     let date = data["date"]
                     print(data)
                     if let coords = coords {
@@ -142,16 +145,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }
         
         
-       
-
-
-       
-        
-       
-        
-        
-        
-        
     }
     func doneGettingDocuments() {
         DispatchQueue.main.async {
@@ -168,9 +161,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         case 0:
             mapView.mapType = .standard
         case 1:
-            mapView.mapType = .satellite
-        default:
             mapView.mapType = .hybrid
+        default:
+            mapView.mapType = .satellite
         }
     }
     

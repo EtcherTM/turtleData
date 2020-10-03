@@ -989,6 +989,14 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
 //                print("Error saving data, \(error) END")
 //            }
             
+            if let newLat = Double(self.latitudeTextField.text!) {
+                self.data!.lat = newLat
+            }
+            
+            if let newLon = Double(self.longitudeTextField.text!) {
+                self.data!.lon = newLon
+            }
+            
             self.dispatchGroup.leave()
             print("juoiu)")
             

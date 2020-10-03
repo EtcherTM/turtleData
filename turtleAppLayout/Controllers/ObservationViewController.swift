@@ -685,6 +685,8 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
                 self.zoneButton.setTitle("Zone?", for: .normal)
                 self.propertyButton.setTitle("Property/Lot?", for: .normal)
                 self.locationButton.setTitle("Get GPS Location", for: .normal)
+                self.latitude.text = ""
+                self.longitude.text = "" 
                 self.emergeButton.setTitle("Emergence?", for: .normal)
                 self.existingNestButton.setTitle("Existing Nest?", for: .normal)
                 self.turtleButton.setTitle("Adult Turtle?", for: .normal)
