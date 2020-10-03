@@ -16,7 +16,7 @@ class NestLocations: NSObject, MKAnnotation {
     let date: Date
     
     var markerTintColor: UIColor  {
-        var toDate = Date()
+        print("made it to markertintcolor")
         var daysAgo = 0
         daysAgo = Calendar.current.dateComponents([.day], from: date, to: Date()).day ?? 0
         if daysAgo < 5 {
@@ -46,11 +46,7 @@ class NestLocations: NSObject, MKAnnotation {
                         return UIColor(named: "Unknown") ?? .yellow
                     }
         }
-        
-//        if let interval = Calendar.current.dateComponents([.day], from: date, to: toDate).day, interval > 0 {
-//            daysAgo = interval
-//            print(interval)
-//        }
+    
         
       }
     }

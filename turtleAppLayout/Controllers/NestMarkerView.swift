@@ -13,9 +13,13 @@ class NestMarkerView: MKMarkerAnnotationView {
   override var annotation: MKAnnotation? {
     willSet {
       // 1
+    
       guard let nestLocation = newValue as? NestLocations else {
+
         return
       }
+        
+    
       canShowCallout = true
       calloutOffset = CGPoint(x: -5, y: 5)
       rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
@@ -25,6 +29,7 @@ class NestMarkerView: MKMarkerAnnotationView {
         var daysAgo = 0
         daysAgo = Calendar.current.dateComponents([.day], from: nestLocation.date, to: Date()).day ?? 0
         if daysAgo != 0 {
+            print("Days ago is \(daysAgo)")
             glyphText = String(daysAgo)
         }
     }

@@ -66,93 +66,77 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         mapView.register(NestMarkerView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         
-        /*
-        nestLocations = [
-            NestLocations (title: "A-N-20200929-user",
-                           id: "A-N-20200929-user",
-                           coordinate: CLLocationCoordinate2D(latitude: 0.437601, longitude: 9.416195),
-                           date: formatter.date(from: "09/29/2020") ?? Date()),
-                             
-            NestLocations (title: "G-T-20200807-user",
-                           id: "G-T-20200807-user",
-                           coordinate: CLLocationCoordinate2D(latitude: 0.461894, longitude: 9.404853),
-                           date: formatter.date(from: "08/07/2020") ?? Date()),
-
-            NestLocations (title: "D-N-20200926-user",
-                           id: "D-N-20200926-user",
-                           coordinate: CLLocationCoordinate2D(latitude: 0.448704, longitude: 9.414098),
-                           date: formatter.date(from: "08/30/2020") ?? Date()),
-
-            NestLocations (title: "C-N-20200820-user",
-                           id: "C-N-20200820-user",
-                           coordinate: CLLocationCoordinate2D(latitude: 0.444734, longitude: 9.414095),
-                           date: formatter.date(from: "08/20/2020") ?? Date()),
         
-            NestLocations (title: "E-F-20200730-user",
-                           id: "E-F-20200730-user",
-                           coordinate: CLLocationCoordinate2D(latitude: 0.457181, longitude:  9.407347),
-                           date: formatter.date(from: "07/30/2020") ?? Date()),
-            
-            NestLocations (title: "B-N-20200710-user",
-                           id: "B-N-20200710-user",
-                           coordinate: CLLocationCoordinate2D(latitude: 0.440590, longitude:  9.415476),
-                           date: formatter.date(from: "07/10/2020") ?? Date()),
-
-            
-        ]*/
-//        self.dispatchGroup.enter()
-
-//        Below sign in does not change anything:
-//        Auth.auth().signInAnonymously { (result, error) in
-//            print("result:\(result) " )
-//            print("error: \(error)")
-//        }
-        
-        let db = Firestore.firestore()
-        
-        db.collection("observations").getDocuments { (querySnapshot, error) in
-            if let error = error {
-                
-                print("Error getting documents: \(error.localizedDescription)")
-            } else {
-                
-                for document in querySnapshot!.documents {
-                    let data = document.data()
-      
-                    
-                    let coords = data["coords"] as? Array<Double>
-              
-                    let id = data["imageURLS"] as? String
-                    
-                    
-                    
-                    let date = data["date"]
-                    print(data)
-                    if let coords = coords {
-                        
-                            self.nestLocations.append(NestLocations(title: id, id: id, coordinate: CLLocationCoordinate2D(latitude: coords[0], longitude: coords[1]), date: Date() ?? Date()))
-                        
-                    }
-                }
-                
-            }
-            
-            
-
-            print("done getting docs")
-    
-            self.doneGettingDocuments()
+        let dateString = "01/20/2020"
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        if let date = dateFormatter.date(from: dateString) {
+            print(date)
         }
         
+        
+     
+//        let nestLocations = NestLocations(
+//            title: "Nest in B",
+//            id: "B-N-20200828-user",
+//            coordinate: CLLocationCoordinate2D(latitude: 0.4405901, longitude: 9.4154763),
+//            date: dateFormatter.date(from: "08/20/2020") ?? Date())
+
+        
+        
+        let db = Firestore.firestore()
+
+        db.collection("observations").getDocuments { (querySnapshot, error) in
+            if let error = error {
+
+                print("Error getting documents: \(error.localizedDescription)")
+            } else {
+
+                for document in querySnapshot!.documents {
+
+                    let data = document.data()
+
+                    let coords = data["coords"] as? Array<Double>
+
+                    let id = data["imageURLS"] as? String
+
+                    let timestamp: Timestamp
+                    timestamp = data["date"] as! Timestamp
+
+                    let date: Date = timestamp.dateValue()
+                    print(date)
+
+                    if let coords = coords {
+
+                    self.nestLocations.append(NestLocations(title: id, id: id, coordinate: CLLocationCoordinate2D(latitude: coords[0], longitude: coords[1]), date: date ?? Date()))
+
+                    }
+                }
+
+            }
+
+
+
+
+
+            print("done getting docs")
+
+            self.doneGettingDocuments()
+        }
+//        mapView.addAnnotation(nestLocations)
+
         
     }
     func doneGettingDocuments() {
         DispatchQueue.main.async {
-            print(self.nestLocations)
             for n in self.nestLocations {
-                print(n)
-                self.mapView.addAnnotation(n)
+                print(self.nestLocations)
+            self.mapView.addAnnotation(n)
             }
+            print(self.nestLocations)
+            
+
             
         }
     }
@@ -206,13 +190,12 @@ private extension MKMapView {
 }
 
 extension MapViewController: MKMapViewDelegate {
-  // 1
-//  func mapView(
-//    _ mapView: MKMapView,
-//    viewFor annotation: MKAnnotation
-//  ) -> MKAnnotationView? {
+   
+//  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
 //    // 2
+//    print("hllo")
 //    guard let annotation = annotation as? NestLocations else {
+//        print("goodbye")
 //      return nil
 //    }
 //    // 3
