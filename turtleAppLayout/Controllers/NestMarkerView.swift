@@ -28,8 +28,7 @@ class NestMarkerView: MKMarkerAnnotationView {
       markerTintColor = nestLocation.markerTintColor
         var daysAgo = 0
         daysAgo = Calendar.current.dateComponents([.day], from: nestLocation.date, to: Date()).day ?? 0
-        if daysAgo != 0 {
-            print("Days ago is \(daysAgo)")
+        if daysAgo >= 0 {
             glyphText = String(daysAgo)
         }
     }

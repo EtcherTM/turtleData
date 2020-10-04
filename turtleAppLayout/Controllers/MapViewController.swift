@@ -14,6 +14,8 @@ import FirebaseAuth
 class MapViewController: UIViewController, CLLocationManagerDelegate {
 
     let dispatchGroup = DispatchGroup()
+    let db = Firestore.firestore()
+
     
     @IBOutlet private var mapView: MKMapView!
 
@@ -40,11 +42,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let initialLocation = CLLocation(latitude: 0.458049, longitude: 9.406771)
         mapView.centerToLocation(initialLocation)
         let plageTahitiCenter = CLLocation(latitude: 0.458049, longitude: 9.406771)
-        
-//        let region = MKCoordinateRegion( center: location.coordinate, latitudinalMeters: CLLocationDistance(exactly: 5000)!, longitudinalMeters: CLLocationDistance(exactly: 5000)!)
-
-        
-        
+  
         let region = MKCoordinateRegion(
             center: plageTahitiCenter.coordinate,
             latitudinalMeters: 5000,
@@ -67,25 +65,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         mapView.register(NestMarkerView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         
         
-        let dateString = "01/20/2020"
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        dateFormatter.dateFormat = "MM/dd/yyyy"
-        if let date = dateFormatter.date(from: dateString) {
-            print(date)
-        }
-        
-        
-     
-//        let nestLocations = NestLocations(
-//            title: "Nest in B",
-//            id: "B-N-20200828-user",
-//            coordinate: CLLocationCoordinate2D(latitude: 0.4405901, longitude: 9.4154763),
-//            date: dateFormatter.date(from: "08/20/2020") ?? Date())
-
-        
-        
-        let db = Firestore.firestore()
+//        let dateString = "01/20/2020"
+//        let dateFormatter = DateFormatter()
+//       dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+//        dateFormatter.dateFormat = "MM/dd/yyyy"
+//        if let date = dateFormatter.date(from: dateString) {
+//            print(date)
+//        }
+ 
+//MARK:- Download map points
 
         db.collection("observations").getDocuments { (querySnapshot, error) in
             if let error = error {
@@ -113,12 +101,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
                     }
                 }
-
             }
-
-
-
-
 
             print("done getting docs")
 
@@ -190,32 +173,6 @@ private extension MKMapView {
 }
 
 extension MapViewController: MKMapViewDelegate {
-   
-//  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//    // 2
-//    print("hllo")
-//    guard let annotation = annotation as? NestLocations else {
-//        print("goodbye")
-//      return nil
-//    }
-//    // 3
-//    let identifier = "nestLocation"
-//    var view: MKMarkerAnnotationView
-//    // 4
-//    if let dequeuedView = mapView.dequeueReusableAnnotationView(
-//        withIdentifier: identifier) as? MKMarkerAnnotationView {
-//      dequeuedView.annotation = annotation
-//      view = dequeuedView
-//    } else {
-//      // 5
-//      view = MKMarkerAnnotationView(
-//        annotation: annotation,
-//        reuseIdentifier: identifier)
-//      view.canShowCallout = true
-//      view.calloutOffset = CGPoint(x: -5, y: 5)
-//      view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-//    }
-//    return view
-//  }
+
 }
 
