@@ -19,7 +19,9 @@ class ListTableViewController: UITableViewController {
         tableView.register(UINib(nibName: "ListCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
         
         tableView.rowHeight = UITableView.automaticDimension
+        
         tableView.estimatedRowHeight = 300
+     
         
         
 
@@ -49,22 +51,23 @@ class ListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(listOfObservations.count)
         return listOfObservations.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath) as! ListCell
-
         let observation = listOfObservations[indexPath.row]
         var propertyDesc = ""
-        var newBackgroundColor = UIColor()
-        var newFontColor = UIColor()
-        
-        if var index = Int(String(observation.property.dropFirst().dropFirst())) {
-            index -= 1
+        var newBackgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        var newFontColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        print(observation.property)
+        var index = Int(String(observation.property.dropFirst().dropFirst())) ?? 0
+        index -= 1
             switch observation.property.first {
             case "A":
-                propertyDesc = K.propertiesInA[index].1
+               
+                    propertyDesc = K.propertiesInA[index].1
                 newBackgroundColor = UIColor(named: "Dull red") ?? #colorLiteral(red: 0.9394575357, green: 0.08814223856, blue: 0, alpha: 1)
                 newFontColor = .white
                 
@@ -88,12 +91,15 @@ class ListTableViewController: UITableViewController {
                 propertyDesc = K.propertiesInF[index].1
                 newBackgroundColor = UIColor(named: "Dull purple") ?? #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
                 newFontColor = .white
-//            case "G":
+            case "G":
+                propertyDesc = K.propertiesInG[index].1
+                newBackgroundColor = UIColor(named: "Dark purple") ?? #colorLiteral(red: 0.3236978054, green: 0.1063579395, blue: 0.574860394, alpha: 1)
+                newFontColor = .white
                 
             default:
                 propertyDesc = "No property/lot selected"
             }
-        }
+        
         
         
         
@@ -136,7 +142,6 @@ class ListTableViewController: UITableViewController {
         
         let images = [observation.image1, observation.image2, observation.image3, observation.image4, observation.image5]
         
-//        var firstRound: Data
         var compressedImageToLoad: Data
         
         for image in 0...4 {
@@ -149,26 +154,20 @@ class ListTableViewController: UITableViewController {
                     
                     
                     let imageToLoad = UIImage(contentsOfFile: documentsPathURL.path) ?? UIImage()
-//                    if let firstRound = imageToLoad.jpeg(.lowest) {}
                     if let compressedImageToLoad = imageToLoad.jpeg(.lowest) {
                          switch image {
                                case 0:
-                //                               cell.photoImage1.image = imageToLoad
                                    cell.photoImage1.image = UIImage(data: compressedImageToLoad)
                                case 1:
-                //                                   cell.photoImage2.image = imageToLoad
                             cell.photoImage2.image = UIImage(data: compressedImageToLoad)
 
                                case 2:
-                //                                   cell.photoImage3.image = imageToLoad
                             cell.photoImage3.image = UIImage(data: compressedImageToLoad)
 
                                case 3:
-                //                                   cell.photoImage4.image = imageToLoad
                             cell.photoImage4.image = UIImage(data: compressedImageToLoad)
 
                                case 4:
-                //                                   cell.photoImage5.image = imageToLoad
                             cell.photoImage5.image = UIImage(data: compressedImageToLoad)
 
                                default:
@@ -209,7 +208,7 @@ extension UITableView {
     func exportAsPdfFromTable() -> String {
         
         let originalBounds = self.bounds
-        self.bounds = CGRect(x:originalBounds.origin.x, y: originalBounds.origin.y, width: self.contentSize.width, height: self.contentSize.height)
+        self.bounds = CGRect(x:originalBounds.origin.x, y: originalBounds.origin.y, width: self.contentSize.width, height: self.contentSize.height+100)
         let pdfPageFrame = CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.contentSize.height)
         
         let pdfData = NSMutableData()

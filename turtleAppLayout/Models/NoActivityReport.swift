@@ -18,6 +18,8 @@ import RealmSwift
     @objc dynamic var dNoActivity : Bool = false
     @objc dynamic var eNoActivity : Bool = false
     @objc dynamic var fNoActivity : Bool = false
+    @objc dynamic var gNoActivity : Bool = false
+
     
     
 //  What does this observation identifier look like:

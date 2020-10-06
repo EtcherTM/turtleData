@@ -21,6 +21,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
     var locationManager = CLLocationManager()
     var userLocated = false
+    var zoneLoc = "X"
     
     var nestLocations: Array<NestLocations> = []
     
@@ -64,6 +65,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         mapView.register(NestMarkerView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         
+//        var points = [CLLocationCoordinate2D] ()
+//        points.append(CLLocationCoordinate2DMake(0.44047, 9.41562))
+//        points.append(CLLocationCoordinate2DMake(0.44038, 9.41523))
+//        points.append(CLLocationCoordinate2DMake(0.43628, 9.41618))
+//        points.append(CLLocationCoordinate2DMake(0.43618, 9.41684))
+//
+//        let polygon = MKPolygon(coordinates: points, count: 4)
+//        mapView.addOverlay(polygon)
+//        polygonRenderer.lineWidth = 5
+
+        
+        
         
 //        let dateString = "01/20/2020"
 //        let dateFormatter = DateFormatter()
@@ -74,31 +87,34 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 //        }
  
 //MARK:- Download map points
+        db.collection("observations").getDocuments() {(querySnapshot, error) in
 
-        db.collection("observations").getDocuments { (querySnapshot, error) in
-            if let error = error {
+                if let error = error {
 
-                print("Error getting documents: \(error.localizedDescription)")
-            } else {
+                    print("Error getting documents: \(error.localizedDescription)")
+
+                } else {
 
                 for document in querySnapshot!.documents {
-
                     let data = document.data()
-
+                    
+                    if (data["type"] as? [String: Any])?["nest"] as? String == "nest" {
+                        
+                    let zoneLoc = data["zone"] as? String
+                    
                     let coords = data["coords"] as? Array<Double>
 
                     let id = data["imageURLS"] as? String
 
-                    let timestamp: Timestamp
-                    timestamp = data["date"] as! Timestamp
-
-                    let date: Date = timestamp.dateValue()
+                    let date = (data["date"] as? Timestamp ?? Timestamp()).dateValue()
+                    
                     print(date)
 
                     if let coords = coords {
 
-                    self.nestLocations.append(NestLocations(title: id, id: id, coordinate: CLLocationCoordinate2D(latitude: coords[0], longitude: coords[1]), date: date ?? Date()))
+                    self.nestLocations.append(NestLocations(title: id, id: id, coordinate: CLLocationCoordinate2D(latitude: coords[0], longitude: coords[1]), date: date))
 
+                    }
                     }
                 }
             }
@@ -111,6 +127,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
         
     }
+    
     func doneGettingDocuments() {
         DispatchQueue.main.async {
             for n in self.nestLocations {
@@ -145,17 +162,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
       
       mapView.setRegion(zoomRegion, animated: true)
     }
-
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Color</key>
+	<string>Dull red</string>
+	<key>boundaries</key>
+	<array>
+		<string>{0.44047, 9.41562}</string>
+		<string>{0.44038, 9.41523}</string>
+		<string>{0.43628, 9.41618}</string>
+		<string>{0.43618, 9.41684}</string>
+	</array>
+</dict>
+</plist>

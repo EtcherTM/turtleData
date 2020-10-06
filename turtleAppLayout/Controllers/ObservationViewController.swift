@@ -162,6 +162,9 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
             propertyList = K.propertiesInE
         case "F":
             propertyList = K.propertiesInF
+        case "G":
+            propertyList = K.propertiesInG
+
         default:
             let alert = UIAlertController(title: "SELECT ZONE FIRST", message: "", preferredStyle: .alert)
             
@@ -776,10 +779,10 @@ extension ObservationViewController: UIImagePickerControllerDelegate, UINavigati
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        if let imageTaken = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+        if var imageTaken = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             
             //          Call function to set the image on the obs screen
-            //          Call function to generate reference
+            //          Call function to generate referencer
             //           Maybe instead of saving to realm here just save image to variables imageTaken1 - imageTaken5 and save to realm with the rest of data
             //     Also note after 5 photos they can just replace a photo by tapping on it.
             
@@ -796,7 +799,8 @@ extension ObservationViewController: UIImagePickerControllerDelegate, UINavigati
 
 
             documentsDirectoryPath += imageName
-            let settingsData: NSData = imageTaken.jpegData(compressionQuality: 1.0)! as NSData
+            
+            let settingsData: NSData = imageTaken.jpeg(.lowest)! as NSData
             settingsData.write(toFile: documentsDirectoryPath, atomically: true)
             
             switch image {
@@ -825,3 +829,4 @@ extension ObservationViewController: UIImagePickerControllerDelegate, UINavigati
     }
     
 }
+

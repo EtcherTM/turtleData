@@ -178,6 +178,10 @@ class NoActivityViewController: UIViewController {
             if noAct.fNoActivity {
                 noActButtonText.append("F")
             }
+            if noAct.gNoActivity {
+                noActButtonText.append("G")
+            }
+        
             
             print(noActButtonText)
         

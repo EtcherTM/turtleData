@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import FirebaseAuth
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
+    
     let defaults = UserDefaults.standard
 
     @IBOutlet weak var userIDTextField: UITextField!
@@ -28,9 +30,65 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         title = "Login"
         userIDTextField.text = defaults.value(forKey: "userID") as? String
-        
+        let email = defaults.value(forKey: "email") as? String ?? ""
+        let password = defaults.value(forKey: "password") as? String ?? ""
+        login()
+
+
     }
     
+    func login() {
+        let email = defaults.value(forKey: "email") as? String ?? ""
+        let password = defaults.value(forKey: "password") as? String ?? ""
+        if email != "" && password != "" {
+            print("gud")
+            Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+                if let error = error {
+                    print(error)
+                    Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                        if let error = error {
+                            print(error.localizedDescription)
+                        }
+                    }
+                }
+            }
+        } else {
+            var emailTextField = UITextField()
+            var passwordTextField = UITextField()
+            
+            let alert = UIAlertController(title: "Create an account", message: "", preferredStyle: .alert)
+            
+            alert.addTextField { (textField) in
+                emailTextField = textField
+                emailTextField.delegate = self
+                emailTextField.placeholder = "email"
+            }
+            
+            alert.addTextField { (textField) in
+                passwordTextField = textField
+                passwordTextField.delegate = self
+                passwordTextField.placeholder = "password"
+            }
+            
+            alert.addAction(UIAlertAction(title: "Don", style: .default, handler: { (action) in
+                guard let email = emailTextField.text else { return }
+                guard let password = passwordTextField.text else { return }
+                self.defaults.set(emailTextField.text ?? "", forKey: "email")
+                self.defaults.set(passwordTextField.text ?? "", forKey: "password")
+                Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                }
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (_) in
+                
+            }))
+            
+            present(alert, animated: true)
+        }
+    }
     
     @IBAction func loginPressed(_ sender: Any) {
         defaults.set(userIDTextField.text ?? "", forKey: "userID")

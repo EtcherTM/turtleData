@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C31E3B5824FAF2210067193A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C31E3B5724FAF2210067193A /* GoogleService-Info.plist */; };
+		C348D346252C6D2800DFEBA7 /* Zone A boundaries.plist in Resources */ = {isa = PBXBuildFile; fileRef = C348D345252C6D2800DFEBA7 /* Zone A boundaries.plist */; };
 		C35164F825092D4D00784FB2 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35164F725092D4D00784FB2 /* EditViewController.swift */; };
 		C355D2602523B81C001CEE69 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355D25F2523B81C001CEE69 /* MapViewController.swift */; };
 		C355D2622524449E001CEE69 /* NestLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355D2612524449E001CEE69 /* NestLocations.swift */; };
@@ -59,6 +60,7 @@
 		3A5CCE7C77B351B3C207AFE1 /* Pods_turtleAppLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_turtleAppLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E65270D1DFA47275E37A9AD /* Pods-turtleAppLayout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-turtleAppLayout.release.xcconfig"; path = "Target Support Files/Pods-turtleAppLayout/Pods-turtleAppLayout.release.xcconfig"; sourceTree = "<group>"; };
 		C31E3B5724FAF2210067193A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C348D345252C6D2800DFEBA7 /* Zone A boundaries.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Zone A boundaries.plist"; sourceTree = "<group>"; };
 		C35164F725092D4D00784FB2 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		C355D25F2523B81C001CEE69 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		C355D2612524449E001CEE69 /* NestLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestLocations.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				C3A9EA8724F4FDF5006056A6 /* Info.plist */,
 				C31E3B5724FAF2210067193A /* GoogleService-Info.plist */,
 				C3DE600C24F94A39005FCF02 /* Constants.swift */,
+				C348D345252C6D2800DFEBA7 /* Zone A boundaries.plist */,
 				C355D26525253B18001CEE69 /* Sounds */,
 			);
 			path = turtleAppLayout;
@@ -332,6 +335,7 @@
 			files = (
 				C355D27225253B18001CEE69 /* E.wav in Resources */,
 				C355D26D25253B18001CEE69 /* A.wav in Resources */,
+				C348D346252C6D2800DFEBA7 /* Zone A boundaries.plist in Resources */,
 				C3A9EA8624F4FDF5006056A6 /* LaunchScreen.storyboard in Resources */,
 				C31E3B5824FAF2210067193A /* GoogleService-Info.plist in Resources */,
 				C355D27025253B18001CEE69 /* F.wav in Resources */,

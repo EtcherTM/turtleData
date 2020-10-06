@@ -184,6 +184,16 @@ class HomeViewController: UIViewController, ButtonUpdater {
 //                upload["userid"] = self.defaults.string(forKey: "userID") ?? ""
 //                upload["imageURLS"] = obs.id
                 
+                //   NEED TO ADD "NO ACTIVITY" VALUES
+  
+
+
+//                To use a custom ID you need to use .set, rather than .add
+//
+//                This creates a document with the ID "LA":
+//
+//                db.collection("cities").doc("LA").set({
+                
                 let hatchingData = [
                 "exists": obs.hatchingDetails?.hatchingExists ?? false ? obs.hatchingDetails?.hatchingExists : nil,
                 "noProblems": obs.hatchingDetails?.noProblems ?? false ? obs.hatchingDetails?.noProblems : nil,
@@ -209,7 +219,7 @@ class HomeViewController: UIViewController, ButtonUpdater {
                     ] as [String : Any]
                 //   NEED TO ADD "NO ACTIVITY" VALUES
                 
-                self.db.collection("observations").addDocument(data: [
+                self.db.collection("observations").document("\(obs.id)").setData([
                     "date": obs.date,
                     "id": obs.id,
                     "property": obs.property != "" ? obs.property : nil,
