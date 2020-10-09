@@ -106,24 +106,24 @@ class HomeViewController: UIViewController, ButtonUpdater {
         
     }
     
-    @IBAction func sharePDFPressed(_ sender: UIButton) {
-    let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("tablePdf.pdf")
-    let pdfDATA = try? Data.init(contentsOf: path)
-    let activitycontroller = UIActivityViewController(activityItems: [pdfDATA], applicationActivities: nil)
-                if activitycontroller.responds(to: #selector(getter: activitycontroller.completionWithItemsHandler))
-                {
-                    activitycontroller.completionWithItemsHandler = {(type, isCompleted, items, error) in
-                        if isCompleted
-                        {
-                        print("completed")
-                        }
-                }
-            }
-    activitycontroller.excludedActivityTypes = [UIActivity.ActivityType.airDrop]
-                
-                self.present(activitycontroller, animated: true, completion: nil)
-    }
-    
+//    @IBAction func sharePDFPressed(_ sender: UIButton) {
+//        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("tablePdf.pdf")
+//        let pdfDATA = try? Data.init(contentsOf: path)
+//        let activitycontroller = UIActivityViewController(activityItems: [pdfDATA], applicationActivities: nil)
+//        if activitycontroller.responds(to: #selector(getter: activitycontroller.completionWithItemsHandler))
+//        {
+//            activitycontroller.completionWithItemsHandler = {(type, isCompleted, items, error) in
+//                if isCompleted
+//                {
+//                    print("completed")
+//                }
+//            }
+//        }
+//        activitycontroller.excludedActivityTypes = [UIActivity.ActivityType.airDrop]
+//        
+//        self.present(activitycontroller, animated: true, completion: nil)
+//    }
+//    
     @IBAction func viewMapButtonPressed(_ sender: Any) {
         
         

@@ -733,7 +733,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="zH9-NS-mEr">
-                                <rect key="frame" x="231" y="276" width="250" height="455"/>
+                                <rect key="frame" x="231" y="311" width="250" height="385"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OqP-8m-69z">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="60"/>
@@ -780,19 +780,8 @@ w/ No Activity</string>
                                             <action selector="reviewPressed:" destination="bou-N1-6x4" eventType="touchUpInside" id="CZv-ar-YSw"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgO-X5-5ll">
-                                        <rect key="frame" x="0.0" y="255" width="250" height="45"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                        <state key="normal" title="Share PDF">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="sharePDFPressed:" destination="bou-N1-6x4" eventType="touchUpInside" id="l9Y-Y7-TBH"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Luh-P8-gU3">
-                                        <rect key="frame" x="0.0" y="325" width="250" height="45"/>
+                                        <rect key="frame" x="0.0" y="255" width="250" height="45"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                         <state key="normal" title="View Map">
@@ -803,7 +792,7 @@ w/ No Activity</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGe-Jg-qMo">
-                                        <rect key="frame" x="0.0" y="395" width="250" height="60"/>
+                                        <rect key="frame" x="0.0" y="325" width="250" height="60"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="P8E-Sl-zUF"/>
@@ -1102,7 +1091,7 @@ Generate PDF</string>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Review Items" id="HvL-MX-ye2">
-                        <barButtonItem key="rightBarButtonItem" title="Create PDF" id="koz-EF-nih">
+                        <barButtonItem key="rightBarButtonItem" title="Share PDF" id="koz-EF-nih" userLabel="Share PDF">
                             <connections>
                                 <action selector="createPDFPressed:" destination="Afx-ap-P9t" id="u33-CA-93n"/>
                             </connections>
@@ -2073,6 +2062,7 @@ Generate PDF</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="PBx-1e-EMO"/>
         <segue reference="Qut-vR-tEU"/>
     </inferredMetricsTieBreakers>
     <resources>
