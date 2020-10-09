@@ -120,10 +120,10 @@ class HomeViewController: UIViewController, ButtonUpdater {
 //            }
 //        }
 //        activitycontroller.excludedActivityTypes = [UIActivity.ActivityType.airDrop]
-//        
+//
 //        self.present(activitycontroller, animated: true, completion: nil)
 //    }
-//    
+//
     @IBAction func viewMapButtonPressed(_ sender: Any) {
         
         
@@ -224,7 +224,8 @@ class HomeViewController: UIViewController, ButtonUpdater {
                     "id": obs.id,
                     "property": obs.property != "" ? obs.property : nil,
                     "zone": obs.zoneLocation != "" ? obs.zoneLocation : nil,
-                    "coords": obs.lat != 0 && obs.lon != 0 ? [obs.lat, obs.lon] : nil,
+//                    "coords": obs.lat != 0 && obs.lon != 0 ? [obs.lat, obs.lon] : nil,
+                    "coords":  GeoPoint(latitude: obs.lat, longitude: obs.lon),
                     "comments": obs.comments != "" ? obs.comments : nil,
                     "userid": self.defaults.string(forKey: "userID") ?? "",
                     "imageURLS": obs.id,
