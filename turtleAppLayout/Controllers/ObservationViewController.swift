@@ -46,6 +46,9 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
     @IBOutlet weak var latitude: UILabel!
     @IBOutlet weak var longitude: UILabel!
     @IBOutlet weak var accuracy: UILabel!
+    @IBOutlet weak var latLabel: UILabel!
+    @IBOutlet weak var lonLabel: UILabel!
+    @IBOutlet weak var accuracyLabel: UILabel!
     
     @IBOutlet weak var emergeButton: UIButton!
     @IBOutlet weak var existingNestButton: UIButton!
@@ -77,9 +80,34 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
     
     //    @IBOutlet weak var commentsTextField: UITextField!
     
+    func toggleHatching (_ active: Bool) {
+        noProblemsButton.isHidden = active
+        lightsButton.isHidden = active
+        trashButton.isHidden = active
+        sewerButton.isHidden = active
+        plantsButton.isHidden = active
+        otherButton.isHidden = active
+        
+        successButton.isHidden = active
+        strandedButton.isHidden = active
+        deadButton.isHidden = active
+    }
+    
+    func toggleCoords(_ active: Bool) {
+        latitude.isHidden = active
+        longitude.isHidden = active
+        accuracy.isHidden = active
+        latLabel.isHidden = active
+        lonLabel.isHidden = active
+        accuracyLabel.isHidden = active
+        
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        toggleHatching(true)
+        toggleCoords(true)
 //        if data.hatchingDetails != nil && data.hatchingDetails?.hatchingExists != false {
 //                   print("NOT NIL")
 //                    print(data.hatchingDetails?.hatchingExists)
@@ -197,8 +225,29 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
 //            (1) get location again, (2) clear existing loc data (reset to 0), (3) cancel/do nothing
         
         //Get location with CoreLocation
-        locationManager.requestLocation()
-        sender.setTitle("Getting: hold position . . .", for: .normal)
+        if data.lat == 0 && data.lon == 0 {
+            locationManager.requestLocation()
+            sender.setTitle("Getting: hold position . . .", for: .normal)
+        } else {
+            let alert = UIAlertController(title: "Would you like to retake location?", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Retake Location", style: .default, handler: { (_) in
+                self.locationManager.requestLocation()
+                sender.setTitle("Getting: hold position . . .", for: .normal)
+                self.latitude.text = "--"
+                self.longitude.text = "--"
+                self.accuracy.text = "--"
+            }))
+            alert.addAction(UIAlertAction(title: "Clear existing location data", style: .default, handler: { (_) in
+                self.data.lat = 0
+                self.data.lon = 0
+                self.data.accuracy = 0
+                self.locationButton.setTitle("Get Location", for: .normal)
+                self.toggleCoords(true)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            present(alert, animated: true)
+        }
+        
     }
     
     @IBAction func photo1ButtonPressed(_ sender: UIButton) {
@@ -442,7 +491,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
             
             alert.addAction(UIAlertAction(title: "UNKNOWN", style: .default, handler: { (action) in
                 sender.setTitle("Unknown", for: .normal)
-                self.data.species = ""
+                self.data.species = "unknown"
             }))
             
             alert.addAction(UIAlertAction(title: "OLIVE RIDLEY", style: .default, handler: { (action) in
@@ -471,6 +520,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
     
     
     @IBAction func hatchingButtonPressed(_ sender: UIButton) {
+        toggleHatching(data.hatchingBool)
         data.hatchingBool = !data.hatchingBool
         if data.hatchingBool {
             sender.setTitle("Hatching ✓", for: .normal)
@@ -650,7 +700,12 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
             var id = "\(self.data.zoneLocation)-" != "" ? "\(self.data.zoneLocation)-": "-"
             
             if self.data.emerge { id.append(self.data.emergeType == "nest" ? "N" : "F") }
-            if self.data.existingNestDisturbed { id.append(self.data.existingNestDisturbedType == "disturbed" ? "D" : "R") }
+            
+            if self.data.existingNestDisturbed {
+                let type = self.data.existingNestDisturbedType.components(separatedBy: " ")[0]
+                id.append(type == "disturbed" ? "D" : type == "lost" ? "L" : "R")
+            }
+            
             id.append(self.data.turtle ? "T" : "")
 
             if self.data.noProblems || self.data.lights || self.data.trash || self.data.sewer || self.data.plants || self.data.other || self.data.numSuccess != 0 || self.data.numStranded != 0 || self.data.numDead != 0 {
@@ -764,6 +819,7 @@ extension ObservationViewController: CLLocationManagerDelegate {
             longitude.text = String(format: "%.7f", data.lon)
             accuracy.text = "\(String(format: "%.2f", data.accuracy)) m"
             locationButton.setTitle("Location ✓", for: .normal)
+            toggleCoords(false)
         }
         
         

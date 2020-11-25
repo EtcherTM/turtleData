@@ -14,61 +14,47 @@ class NestLocations: NSObject, MKAnnotation {
     let id: String?
     let coordinate: CLLocationCoordinate2D
     let date: Date
+    let comments: String?
     
     var markerTintColor: UIColor  {
-        print("made it to markertintcolor")
         var daysAgo = 0
         daysAgo = Calendar.current.dateComponents([.day], from: date, to: Date()).day ?? 0
-        print("calculated daysAgo is \(daysAgo)")
-        if daysAgo < 5 {
-            return UIColor(named: "0-4 days") ?? UIColor.cyan
-        } else {
-            
-            if daysAgo < 36 {
-                return UIColor(named: "5-35 days") ?? UIColor.cyan
-                
-            } else {
-                if daysAgo < 46 {
-                    return UIColor(named: "36-45 days") ?? .red
-                    
-                } else {
-                    if daysAgo < 61 {
-                        return UIColor(named: "46-60 days") ?? .red
-                    } else {
-                        if daysAgo < 71 {
-                            return UIColor(named: "61-70 days") ?? .red
-                            
-                        } else {
-                            if daysAgo > 72 {
-                                return UIColor(named: "71+ days") ?? .white
-                            } 
-                            
-                        }
-                        return UIColor(named: "Unknown") ?? .yellow
-                    }
-        }
-    
         
-      }
+        switch daysAgo {
+        case 0...4:
+            return UIColor(named: "0-4 days") ?? UIColor.cyan
+        case 5...36:
+            return UIColor(named: "5-35 days") ?? UIColor.cyan
+        case 37...45:
+            return UIColor(named: "36-45 days") ?? .red
+        case 46...60:
+            return UIColor(named: "46-60 days") ?? .red
+        case 61...70:
+            return UIColor(named: "61-70 days") ?? .red
+        default:
+            return UIColor(named: "71+ days") ?? .white
+        }
     }
-    }
-
-
+    
+    
     init(
-    title: String?,
-    id: String?,
-    coordinate: CLLocationCoordinate2D,
-    date: Date
+        title: String?,
+        id: String?,
+        coordinate: CLLocationCoordinate2D,
+        date: Date,
+        comments: String?
     ) {
         
-    self.title = title
-    self.id = id
-    self.coordinate = coordinate
-    self.date = date
-
-    super.init()
+        self.title = title
+        self.id = id
+        self.coordinate = coordinate
+        self.date = date
+        self.comments = comments
+        
+        
+        super.init()
     }
-
-
+    
+    
     
 }

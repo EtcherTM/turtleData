@@ -22,7 +22,7 @@ struct K {
          ("A.7", "EU Residence"),
          ("A.8", "Twin houses N of EU"),
          ("A.9", "Pink flower wall"),
-         ("A.10", "White house wooden shutters"),
+         ("A.10", "White wall wood frames"),
          ("A.11", "Encroaching metal roof"),
          ("A.12", "White wall/red rocks"),]
     
@@ -43,7 +43,7 @@ struct K {
         [("C.1", "Residence Bora Bora"),
          ("C.2", "Tall Building"),
          ("C.3", "Dirty flower wall (N of tall bldg)"),
-         ("C.4", "Empty lot S of Total house"),
+         ("C.4", "Low palms yellow wall"),
          ("C.5", "Total house"),
          ("C.6", "Fish tiles house"),
          ("C.7", "White wall S of Russians"),
@@ -56,13 +56,13 @@ struct K {
          ("C.14", "Yellow EU house")]
     
     static let propertiesInD =
-        [("D.1", "Red house N of yellow EU house"),
+        [("D.1", "Orange wall w/ playground"),
          ("D.2", "Tropicana"),
          ("D.3", "Petit bar"),
          ("D.4", "UN residence"),
          ("D.5", "Bldg No. 5"),
          ("D.6", "Green tiles bldg"),
-         ("D.7", "Empty lot N of green tiles bldg"),
+         ("D.7", "Lot N of green tiles bldg"),
          ("D.8", "House two lots N of green tiles bldg"),
          ("D.9", "House 1 lot S of military event space"),
          ("D.10", "Military: event/grey housing")]

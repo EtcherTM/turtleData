@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C31E3B5824FAF2210067193A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C31E3B5724FAF2210067193A /* GoogleService-Info.plist */; };
 		C348D346252C6D2800DFEBA7 /* Zone A boundaries.plist in Resources */ = {isa = PBXBuildFile; fileRef = C348D345252C6D2800DFEBA7 /* Zone A boundaries.plist */; };
+		C348D348253379CA00DFEBA7 /* MapPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C348D347253379CA00DFEBA7 /* MapPoint.swift */; };
 		C35164F825092D4D00784FB2 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35164F725092D4D00784FB2 /* EditViewController.swift */; };
 		C355D2602523B81C001CEE69 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355D25F2523B81C001CEE69 /* MapViewController.swift */; };
 		C355D2622524449E001CEE69 /* NestLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355D2612524449E001CEE69 /* NestLocations.swift */; };
@@ -61,6 +62,7 @@
 		8E65270D1DFA47275E37A9AD /* Pods-turtleAppLayout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-turtleAppLayout.release.xcconfig"; path = "Target Support Files/Pods-turtleAppLayout/Pods-turtleAppLayout.release.xcconfig"; sourceTree = "<group>"; };
 		C31E3B5724FAF2210067193A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C348D345252C6D2800DFEBA7 /* Zone A boundaries.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Zone A boundaries.plist"; sourceTree = "<group>"; };
+		C348D347253379CA00DFEBA7 /* MapPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPoint.swift; sourceTree = "<group>"; };
 		C35164F725092D4D00784FB2 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		C355D25F2523B81C001CEE69 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		C355D2612524449E001CEE69 /* NestLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestLocations.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				C3A209C92504247E00FCBA16 /* NoActivityReport.swift */,
 				C3B79393250D814200D8D267 /* Hatching.swift */,
 				C355D2612524449E001CEE69 /* NestLocations.swift */,
+				C348D347253379CA00DFEBA7 /* MapPoint.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 				C355D2642524D511001CEE69 /* NestMarkerView.swift in Sources */,
 				C3E674892506787500B38ED6 /* ListCell.swift in Sources */,
 				C3B77B2D2501817B00CFCD79 /* NoActivityViewController.swift in Sources */,
+				C348D348253379CA00DFEBA7 /* MapPoint.swift in Sources */,
 				C35164F825092D4D00784FB2 /* EditViewController.swift in Sources */,
 				C3B79394250D814200D8D267 /* Hatching.swift in Sources */,
 				C3A9EA7A24F4FDF4006056A6 /* AppDelegate.swift in Sources */,

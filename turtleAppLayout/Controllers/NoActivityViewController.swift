@@ -17,6 +17,12 @@ class NoActivityViewController: UIViewController {
 
     let realm = try! Realm()
     
+    let datePicker = UIDatePicker()
+    
+    var reportDate = Date()
+    
+    @IBOutlet weak var dateTextField: UITextField!
+    
     @IBOutlet weak var aButton: UIButton!
     @IBOutlet weak var bButton: UIButton!
     @IBOutlet weak var cButton: UIButton!
@@ -26,6 +32,7 @@ class NoActivityViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createDatePicker()
         noAct.aNoActivity = false
         noAct.bNoActivity = false
         noAct.cNoActivity = false
@@ -33,6 +40,43 @@ class NoActivityViewController: UIViewController {
         noAct.eNoActivity = false
         noAct.fNoActivity = false
     }
+    
+
+
+    func createDatePicker() {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d MMM yyyy"
+        datePicker.date = reportDate
+        dateTextField.text = dateFormatter.string(from: reportDate)
+
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(handleDatePicker(sender:)))
+        toolbar.setItems([doneBtn], animated: true)
+        dateTextField.inputAccessoryView = toolbar
+        dateTextField.inputView = datePicker
+
+//        let datePicker = UIDatePicker()
+        
+        datePicker.addTarget(self, action: #selector(handleDatePicker(sender:)), for: .valueChanged)
+    }
+    
+    @objc func handleDatePicker (sender: UIDatePicker) {
+
+            let dateFormatter = DateFormatter()
+    //        formatter.dateStyle = .medium
+    //        formatter.timeStyle = .medium
+    //        print(datePicker.date)
+            dateFormatter.dateFormat = "d MMM yyyy"
+
+            dateTextField.text = dateFormatter.string(from: datePicker.date)
+            reportDate = datePicker.date
+            self.view.endEditing(true)
+        }
+    
+    
+
     
     @IBAction func aButtonPressed(_ sender: UIButton) {
         print("A")
@@ -121,7 +165,7 @@ class NoActivityViewController: UIViewController {
             id.append("F")
         }
         
-        id.append("-\(dateFormatter.string(from: Date()))")
+        id.append("-\(dateFormatter.string(from:reportDate))")
         id.append(defaults.string(forKey: "userID") ?? "NOUSER")
         
         noAct.id = id

@@ -17,9 +17,6 @@ import FirebaseStorage
 class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     
     var data: Observation?
-//    var temp = Observation()
-//    var temphatchingDetails = Hatching()
-//    var tempNoProblems: String?
     
     let realm = try! Realm()
     let db = Firestore.firestore()
@@ -124,15 +121,6 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         dateTextField.inputView = datePicker
 
         let datePicker = UIDatePicker()
-//        datePicker.datePickerMode = .dateAndTime
-//        datePicker.locale = Locale(identifier: "fr")
-//        if #available(iOS 13.4, *) {
-//            datePicker.preferredDatePickerStyle = .compact
-//        } else {
-//
-//        }
-
-
         
         datePicker.addTarget(self, action: #selector(handleDatePicker(sender:)), for: .valueChanged)
     }
@@ -352,6 +340,8 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             propertyList = K.propertiesInE
         case "F":
             propertyList = K.propertiesInF
+        case "G":
+            propertyList = K.propertiesInG
         default:
             let alert = UIAlertController(title: "SELECT ZONE FIRST", message: "", preferredStyle: .alert)
             
@@ -754,6 +744,10 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             self.imagePicker.sourceType = .photoLibrary
             self.present(self.imagePicker, animated: true, completion: nil)
         }))
+        alert.addAction(UIAlertAction(title: "Delete Photo", style: .default, handler: { (_) in
+            self.data?.image1 = ""
+            self.photoImage1.image = UIImage()
+        }))
         print("present Choie")
         present(alert, animated: true)
 
@@ -796,6 +790,10 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             self.imagePicker.sourceType = .photoLibrary
             self.present(self.imagePicker, animated: true, completion: nil)
         }))
+        alert.addAction(UIAlertAction(title: "Delete Photo", style: .default, handler: { (_) in
+            self.data?.image2 = ""
+            self.photoImage2.image = UIImage()
+        }))
         print("present Choie")
         present(alert, animated: true)
 
@@ -835,6 +833,10 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             self.imagePicker.allowsEditing = false
             self.imagePicker.sourceType = .photoLibrary
             self.present(self.imagePicker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Delete Photo", style: .default, handler: { (_) in
+            self.data?.image3 = ""
+            self.photoImage3.image = UIImage()
         }))
         print("present Choie")
         present(alert, animated: true)
@@ -876,6 +878,10 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
              self.imagePicker.sourceType = .photoLibrary
              self.present(self.imagePicker, animated: true, completion: nil)
          }))
+        alert.addAction(UIAlertAction(title: "Delete Photo", style: .default, handler: { (_) in
+            self.data?.image4 = ""
+            self.photoImage4.image = UIImage()
+        }))
          print("present Choie")
          present(alert, animated: true)
     }
@@ -914,6 +920,10 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             self.imagePicker.allowsEditing = false
             self.imagePicker.sourceType = .photoLibrary
             self.present(self.imagePicker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Delete Photo", style: .default, handler: { (_) in
+            self.data?.image5 = ""
+            self.photoImage5.image = UIImage()
         }))
         print("present Choie")
         present(alert, animated: true)

@@ -10,26 +10,26 @@ import Foundation
 import MapKit
 
 class NestMarkerView: MKMarkerAnnotationView {
-  override var annotation: MKAnnotation? {
-    willSet {
-      // 1
-    
-      guard let nestLocation = newValue as? NestLocations else {
-
-        return
-      }
-        
-    
-      canShowCallout = true
-      calloutOffset = CGPoint(x: -5, y: 5)
-
-      // 2
-      markerTintColor = nestLocation.markerTintColor
-        var daysAgo = 0
-        daysAgo = Calendar.current.dateComponents([.day], from: nestLocation.date, to: Date()).day ?? 0
-        if daysAgo >= 0 {
-            glyphText = String(daysAgo)
+    override var annotation: MKAnnotation? {
+        willSet {
+            // 1
+            displayPriority = .required
+            guard let nestLocation = newValue as? NestLocations else { return }
+         
+            canShowCallout = true
+            calloutOffset = CGPoint(x: -5, y: 5)
+            let detailLabel = UILabel()
+            detailLabel.numberOfLines = 3
+            detailLabel.text = nestLocation.comments
+            detailCalloutAccessoryView = detailLabel
+            
+            // 2
+            markerTintColor = nestLocation.markerTintColor
+            var daysAgo = 0
+            daysAgo = Calendar.current.dateComponents([.day], from: nestLocation.date, to: Date()).day ?? 0
+            if daysAgo >= 0 {
+                glyphText = String(daysAgo)
+            }
         }
     }
-  }
 }

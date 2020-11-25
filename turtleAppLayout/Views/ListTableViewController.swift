@@ -103,19 +103,16 @@ class ListTableViewController: UITableViewController {
         
         
         
-        var type: String = ""
+        var type = ""
         
         if observation.emergeType == "nest" {
             type = "New Nest "
-        } else {
-            if observation.emergeType == "false nest" {
+        } else if observation.emergeType == "false nest" {
             type = "False Nest "
-            } else {
-                if observation.emergeType == "false crawl" {
-                    type = "False Crawl"
-                }
-                }
+        } else if observation.emergeType == "false crawl" {
+            type = "False Crawl"
         }
+        
         if observation.existingNestDisturbed {
             type.append("Existing Nest ")
         }
@@ -134,15 +131,21 @@ class ListTableViewController: UITableViewController {
         
         let dateFormatter = DateFormatter()
          
-         dateFormatter.dateFormat = "dd-MM"
+         dateFormatter.dateFormat = "dd MMM"
          
         let itemDate = dateFormatter.string(from: observation.date)
         
-        cell.cellLabel?.text = "\(observation.property == "" ? observation.zoneLocation : observation.property):  \(type) \(itemDate) (\(propertyDesc))\n \(observation.comments)\n\(observation.id)"
+        
+        cell.cellLabel?.text = "\(observation.property == "" ? observation.zoneLocation : observation.property): \(type) \(itemDate) (\(propertyDesc))\n \(observation.comments)\n\(observation.id)"
         
         let images = [observation.image1, observation.image2, observation.image3, observation.image4, observation.image5]
         
         var compressedImageToLoad: Data
+        cell.photoImage1.image = UIImage()
+        cell.photoImage2.image = UIImage()
+        cell.photoImage3.image = UIImage()
+        cell.photoImage4.image = UIImage()
+        cell.photoImage5.image = UIImage()
         
         for image in 0...4 {
             if images[image] != "" {
@@ -255,7 +258,7 @@ extension UITableView {
 
 extension UIImage {
     enum JPEGQuality: CGFloat {
-        case lowest  = 0.0
+        case lowest  = 0.01
         case low     = 0.13
         case medium  = 0.25
         case high    = 0.37
