@@ -131,6 +131,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             if let error = error {
                 print("Error getting documents: \(error.localizedDescription)")
             } else {
+                
+                
                 let points = self.realm.objects(MapPoint.self)
                 
                 do {
@@ -143,10 +145,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                 
                 for document in querySnapshot!.documents {
                     
-                    let randomNumber = Double(Int.random(in: 0...5)) - 3 / 10000
-                    let mapPoint = MapPoint()
                     
                     let data = document.data()
+                    
+                    
+                    let mapPoint = MapPoint()
+                    if let date = document["date"] as? Timestamp {
+                        if date.compare(Timestamp(date: Date(timeIntervalSinceNow: -6480000))).rawValue == 1 {
+                        
+                        
                     
                     if let type = document["type"] as? Array<String>, let active = document["active"] as? Bool {
                         
@@ -160,7 +167,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                                 let lat = point.latitude
                                 let lon = point.longitude
                                 
-                                mapPoint.lat = lat + randomNumber
+                                mapPoint.lat = lat
                                 mapPoint.lon = lon
                                 
                                 
@@ -193,7 +200,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                     }
                 }
             }
-            
+                }}
             print("done getting docs")
             
             self.doneGettingDocuments()
