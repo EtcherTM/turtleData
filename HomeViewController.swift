@@ -98,13 +98,7 @@ class HomeViewController: UIViewController, ButtonUpdater {
         
     }
     
-    @IBAction func noActivityPressed(_ sender: UIButton) {
-        
-        self.performSegue(withIdentifier: "HomeToNoActivity", sender: self)
-        
-        //        sender.setTitle(data.noActivityValue, for: .normal) NEED TO DO THIS AFTER COMING BACK FROM NoActivityViewController
-        
-    }
+    
     
     //    @IBAction func sharePDFPressed(_ sender: UIButton) {
     //        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("tablePdf.pdf")

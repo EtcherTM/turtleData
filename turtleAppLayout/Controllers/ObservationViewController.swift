@@ -537,12 +537,17 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
         if data.noProblems {
             sender.setTitle("No Problems ✓", for: .normal)
             
-//     Consider whether to make selecting "No Problems" clear all the other problems
-//            lightsButton.setTitle("Lights", for: .normal)
-//            trashButton.setTitle("Trash", for: .normal)
-//            sewerButton.setTitle("Sewer", for: .normal)
-//            plantsButton.setTitle("Plants", for: .normal)
-//            otherButton.setTitle("Other", for: .normal)
+     //Consider whether to make selecting "No Problems" clear all the other problems
+            lightsButton.setTitle("Lights", for: .normal)
+            trashButton.setTitle("Trash", for: .normal)
+            sewerButton.setTitle("Sewer", for: .normal)
+            plantsButton.setTitle("Plants", for: .normal)
+            otherButton.setTitle("Other", for: .normal)
+            data.lights = false
+            data.trash = false
+            data.sewer = false
+            data.plants = false
+            data.other = false
             print("No problems")
         } else {
             sender.setTitle("No Problems", for: .normal)
@@ -555,6 +560,8 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
         if data.lights {
             sender.setTitle("Lights ✓", for: .normal)
             print("Light problem")
+            data.noProblems = false
+            noProblemsButton.setTitle("No Problems", for: .normal)
         } else {
             sender.setTitle("Lights", for: .normal)
             print("No light problem")
@@ -566,6 +573,8 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
          if data.trash {
              sender.setTitle("Trash ✓", for: .normal)
              print("Trash problem")
+             data.noProblems = false
+             noProblemsButton.setTitle("No Problems", for: .normal)
          } else {
              sender.setTitle("Trash", for: .normal)
              print("No Trash problem")
@@ -577,6 +586,8 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
         if data.sewer {
             sender.setTitle("Sewer ✓", for: .normal)
             print("sewer problem")
+            data.noProblems = false
+            noProblemsButton.setTitle("No Problems", for: .normal)
         } else {
             sender.setTitle("Sewer", for: .normal)
             print("No sewer problem")
@@ -588,6 +599,8 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
         if data.plants {
             sender.setTitle("Plants ✓", for: .normal)
             print("plants problem")
+            data.noProblems = false
+            noProblemsButton.setTitle("No Problems", for: .normal)
         } else {
             sender.setTitle("Plants", for: .normal)
             print("No Plants problem")
@@ -599,6 +612,8 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
           if data.other {
               sender.setTitle("Other ✓", for: .normal)
               print("Other problem")
+              data.noProblems = false
+              noProblemsButton.setTitle("No Problems", for: .normal)
           } else {
               sender.setTitle("Other", for: .normal)
               print("No other problem")

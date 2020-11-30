@@ -18,6 +18,8 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     var data: Observation?
     
+    var prevdata = Observation()
+    
     let realm = try! Realm()
     let db = Firestore.firestore()
     
@@ -86,14 +88,84 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         try! realm.commitWrite()
     }
 
+    func copyObs(to from: Observation, from to: Observation) {
+        from.id = to.id
+        from.date = to.date
+        from.zoneLocation = to.zoneLocation
+        from.property = to.property
+        from.lat = to.lat
+        from.lon = to.lon
+        from.accuracy = to.accuracy
+        from.emerge = to.emerge
+        from.turtle = to.turtle
+        from.existingNestDisturbed = to.existingNestDisturbed
+        from.emergeType = to.emergeType
+        from.turtleType = to.turtleType
+        from.species = to.species
+        from.existingNestDisturbedType = to.existingNestDisturbedType
+        from.hatchingBool = to.hatchingBool
+        from.hatchingDetails = to.hatchingDetails
+        from.noProblems = to.noProblems
+        from.lights = to.lights
+        from.trash = to.trash
+        from.sewer = to.sewer
+        from.plants = to.plants
+        from.other = to.other
+        from.numSuccess = to.numSuccess
+        from.numStranded = to.numStranded
+        from.numDead = to.numDead
+        from.image1 = to.image1
+        from.image2 = to.image2
+        from.image3 = to.image3
+        from.image4 = to.image4
+        from.image5 = to.image5
+        from.comments = to.comments
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         if data != nil {
+            copyObs(to: prevdata, from: data!)
+            /*
+            prevdata.id = data!.id
+            prevdata.date = data!.date
+            prevdata.zoneLocation = data!.zoneLocation
+            prevdata.property = data!.property
+            prevdata.lat = data!.lat
+            prevdata.lon = data!.lon
+            prevdata.accuracy = data!.accuracy
+            prevdata.emerge = data!.emerge
+            prevdata.turtle = data!.turtle
+            prevdata.existingNestDisturbed = data!.existingNestDisturbed
+            prevdata.emergeType = data!.emergeType
+            prevdata.turtleType = data!.turtleType
+            prevdata.species = data!.species
+            prevdata.existingNestDisturbedType = data!.existingNestDisturbedType
+            prevdata.hatchingBool = data!.hatchingBool
+            prevdata.hatchingDetails = data!.hatchingDetails
+            prevdata.noProblems = data!.noProblems
+            prevdata.lights = data!.lights
+            prevdata.trash = data!.trash
+            prevdata.sewer = data!.sewer
+            prevdata.plants = data!.plants
+            prevdata.other = data!.other
+            prevdata.numSuccess = data!.numSuccess
+            prevdata.numStranded = data!.numStranded
+            prevdata.numDead = data!.numDead
+            prevdata.image1 = data!.image1
+            prevdata.image2 = data!.image2
+            prevdata.image3 = data!.image3
+            prevdata.image4 = data!.image4
+            prevdata.image5 = data!.image5
+            prevdata.comments = data!.comments
+            */
+            /*
+            print(prevdata.zoneLocation)
             title = "Edit \(data!.id)"
+            */
             print("Data is not nil!!!")
+            
             fillTextFields()
         }
         else {
@@ -134,7 +206,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         dateFormatter.dateFormat = "d MMM yyyy, HH:mm:ss"
 
         dateTextField.text = dateFormatter.string(from: datePicker.date)
-        data!.date = datePicker.date
+       data!.date = datePicker.date
         self.view.endEditing(true)
     }
     
@@ -145,14 +217,14 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
 //        dateFormatter.dateStyle = .medium
 //        dateFormatter.timeStyle = .medium
         dateFormatter.dateFormat = "d MMM yyyy, HH:mm:ss"
-        dateTextField.text = dateFormatter.string(from: data!.date)
+        dateTextField.text = dateFormatter.string(from:data!.date)
         
         zoneButton.setTitle(data!.zoneLocation, for: .normal)
             
         if data!.lat != 0.0 && data!.lon != 0.0 {
-            let latAsStr = String(format: "%.10f", data!.lat)
-            let lonAsStr = String(format: "%.10f", data!.lon)
-            let accAsStr = String(format: "%.2f", data!.accuracy)
+            let latAsStr = String(format: "%.10f",data!.lat)
+            let lonAsStr = String(format: "%.10f",data!.lon)
+            let accAsStr = String(format: "%.2f",data!.accuracy)
             accuracyLabel.text = accAsStr
             latitudeTextField.text = latAsStr
             longitudeTextField.text = lonAsStr
@@ -194,7 +266,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         locationButton.setTitle("Retake GPS?", for: .normal)
         emergeButton.setTitle(data!.emerge ? data!.emergeType : "--", for: .normal)
         existingNestDisturbedButton.setTitle(data!.existingNestDisturbed ? data!.existingNestDisturbedType : "--", for: .normal)
-        turtleButton.setTitle(data!.turtle ? data?.turtleType : "--", for: .normal)
+        turtleButton.setTitle(data!.turtle ? data!.turtleType : "--", for: .normal)
         
         speciesButton.setTitle(data!.species, for: .normal)
         
@@ -293,7 +365,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     @IBAction func zoneButtonPressed(_ sender: UIButton) {
         print("zone")
-        print(data!)
+        print(data)
         
         
         let alert = UIAlertController(title: "SELECT A ZONE", message: "", preferredStyle: .alert)
@@ -745,7 +817,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             self.present(self.imagePicker, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "Delete Photo", style: .default, handler: { (_) in
-            self.data?.image1 = ""
+            self.data!.image1 = ""
             self.photoImage1.image = UIImage()
         }))
         print("present Choie")
@@ -791,7 +863,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             self.present(self.imagePicker, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "Delete Photo", style: .default, handler: { (_) in
-            self.data?.image2 = ""
+            self.data!.image2 = ""
             self.photoImage2.image = UIImage()
         }))
         print("present Choie")
@@ -835,7 +907,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             self.present(self.imagePicker, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "Delete Photo", style: .default, handler: { (_) in
-            self.data?.image3 = ""
+            self.data!.image3 = ""
             self.photoImage3.image = UIImage()
         }))
         print("present Choie")
@@ -879,7 +951,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
              self.present(self.imagePicker, animated: true, completion: nil)
          }))
         alert.addAction(UIAlertAction(title: "Delete Photo", style: .default, handler: { (_) in
-            self.data?.image4 = ""
+            self.data!.image4 = ""
             self.photoImage4.image = UIImage()
         }))
          print("present Choie")
@@ -922,7 +994,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             self.present(self.imagePicker, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "Delete Photo", style: .default, handler: { (_) in
-            self.data?.image5 = ""
+            self.data!.image5 = ""
             self.photoImage5.image = UIImage()
         }))
         print("present Choie")
@@ -948,7 +1020,39 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
              }
     }
     
- 
+    @IBAction func cancelButtonPressed(_ sender: UIButton) {
+        print("Cancel")
+        
+        let alert = UIAlertController(title: "CANCEL CHANGES?", message: "", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (_) in
+                    
+                    print(self.data)
+                    print(self.prevdata)
+                    
+                    self.dispatchGroup.enter()
+                    
+                    self.copyObs(to: self.data!, from: self.prevdata)
+                    
+                    
+                    self.dispatchGroup.leave()
+                    print("juoiu)")
+                    
+                    self.dispatchGroup.wait()
+                    
+                    DispatchQueue.main.async {
+                    
+                        self.navigationController?.popViewController(animated: true)
+
+                    }
+                    
+                })) // Ends closure begun in line 392
+                alert.addAction(UIAlertAction(title: "NO", style: .cancel, handler: nil))
+                
+                present(alert, animated: true)
+        
+    }
+    
     @IBAction func doneButtonPressed(_ sender: UIButton) {
         print("Done button pressed")
         
@@ -990,8 +1094,8 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
 //  Delete do and catch statements?
 //            do {
 //                try self.realm.write {
-//                    self.realm.add(self.data!)
-//                    self.realm.delete(self.data!)
+//                    self.realm.add(self.data)
+//                    self.realm.delete(self.data)
 //                }
 //
 //                self.data = Observation()

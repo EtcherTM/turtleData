@@ -19,7 +19,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     let realm = try! Realm()
     
     @IBOutlet private var mapView: MKMapView!
-
+    
     
     var locationManager = CLLocationManager()
     var userLocated = false
@@ -50,7 +50,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             center: plageTahitiCenter.coordinate,
             latitudinalMeters: 5000,
             longitudinalMeters: 10000)
-                
+        
         mapView.setRegion(mapView.regionThatFits(region), animated: true)
         
         mapView.setCameraBoundary(
@@ -75,7 +75,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let points = self.realm.objects(MapPoint.self)
         print("no new")
         for point in points {
-//            print(point.id)
+            //            print(point.id)
             nestLocations.append(NestLocations(title: point.id, id: point.id, coordinate: CLLocationCoordinate2D(latitude: point.lat, longitude: point.lon), date: point.date, comments: point.comments))
         }
         
@@ -87,11 +87,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         DispatchQueue.main.async {
             
-//      Put sort so that maps newest first
+            //      Put sort so that maps newest first
             
             for n in self.nestLocations {
                 //                print("addingdocuumentea")
-                print("Placing point \(n.id) with coords \(n.coordinate)")
+                //print("Placing point \(n.id) with coords \(n.coordinate)")
                 self.mapView.addAnnotation(n)
             }
             
@@ -144,70 +144,68 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                 }
                 
                 for document in querySnapshot!.documents {
-                    
-                    
                     let data = document.data()
-                    
-                    
                     let mapPoint = MapPoint()
-                    if let date = document["date"] as? Timestamp {
-                        if date.compare(Timestamp(date: Date(timeIntervalSinceNow: -6480000))).rawValue == 1 {
-                        
-                        
                     
-                    if let type = document["type"] as? Array<String>, let active = document["active"] as? Bool {
+                    if let date = document["date"] as? Timestamp {
                         
-                        if (type.contains("nest") || type.contains("false nest")) && active {
+                        if date.compare(Timestamp(date: Date(timeIntervalSinceNow: -6480000))).rawValue == 1 {
                             
-//                            if  document["date"] help need to only take those that are less than 71 days old
-                            
-                            
-                            if let coords = document["coords"] {
-                                let point = coords as! GeoPoint
-                                let lat = point.latitude
-                                let lon = point.longitude
+                            if let type = document["type"] as? Array<String>, let active = document["active"] as? Bool {
                                 
-                                mapPoint.lat = lat
-                                mapPoint.lon = lon
-                                
-                                
-                                
-                                //                    else if coords is empty, assign standard coordinates based on property
-                                
-                                let id = data["id"] as? String
-                                let title = data["id"] as? String
-                                let date = (data["date"] as? Timestamp ?? Timestamp()).dateValue()
-                                
-                                mapPoint.id = id ?? ""
-                                mapPoint.date = date
-                                
-                                
-                                let comments = data["comments"] as? String
-                                mapPoint.comments = comments ?? ""
-                                self.nestLocations.append(NestLocations(title: title, id: id, coordinate: CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude), date: date, comments: comments))
-                                print("Mapping \(id) with coords: \(lat), \(lon)")
-                                do {
-                                    try self.realm.write {
-                                        //print("mapPoint \(mapPoint)")
-                                        self.realm.add(mapPoint)
+                                if (type.contains("nest") || type.contains("false nest")) && active {
+                                    
+                                    //                            if  document["date"] help need to only take those that are less than 71 days old
+                                    
+                                    
+                                    if let coords = document["coords"] {
+                                        let point = coords as! GeoPoint
+                                        let lat = point.latitude
+                                        let lon = point.longitude
+                                        
+                                        mapPoint.lat = lat
+                                        mapPoint.lon = lon
+                                        
+                                        
+                                        
+                                        //                    else if coords is empty, assign standard coordinates based on property
+                                        
+                                        let id = data["id"] as? String
+                                        let title = data["id"] as? String
+                                        let date = (data["date"] as? Timestamp ?? Timestamp()).dateValue()
+                                        
+                                        mapPoint.id = id ?? ""
+                                        mapPoint.date = date
+                                        
+                                        
+                                        let property = data["property"] as? String ?? ""
+                                        let comments = data["comments"] as? String ?? ""
+                                        let text = property + " " + comments
+                                        
+                                        mapPoint.comments = comments
+                                        self.nestLocations.append(NestLocations(title: title, id: id, coordinate: CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude), date: date, comments: text))
+                                        //print("Mapping \(id) with coords: \(lat), \(lon)")
+                                        do {
+                                            try self.realm.write {
+                                                //print("mapPoint \(mapPoint)")
+                                                self.realm.add(mapPoint)
+                                            }
+                                        } catch {
+                                            print("Error saving data, \(error) END")
+                                        }
+                                        
                                     }
-                                } catch {
-                                    print("Error saving data, \(error) END")
                                 }
-                                
                             }
                         }
                     }
                 }
             }
-                }}
             print("done getting docs")
             
             self.doneGettingDocuments()
         }
     }
-    
-    
 }
 
 private extension MKMapView {
