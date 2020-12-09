@@ -153,7 +153,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                             
                             if let type = document["type"] as? Array<String>, let active = document["active"] as? Bool {
                                 
-                                if (type.contains("nest") || type.contains("false nest")) && active {
+                                if (type.contains("nest") || type.contains("false nest") || type.contains("false crawl")) && active {
                                     
                                     //                            if  document["date"] help need to only take those that are less than 71 days old
                                     
@@ -178,9 +178,41 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                                         mapPoint.date = date
                                         
                                         
-                                        let property = data["property"] as? String ?? ""
+                                        let property = data["property"] as? String
+                                        
                                         let comments = data["comments"] as? String ?? ""
-                                        let text = property + " " + comments
+                                        var propertyDesc = ""
+                                        
+                                        if var index = Int(String((property?.dropFirst().dropFirst())!)) {
+                                                    index -= 1
+                                                    switch property?.first {
+                                                    case "A":
+                                                        propertyDesc = K.propertiesInA[index].1
+
+                                                    case "B":
+                                                        propertyDesc = K.propertiesInB[index].1
+
+                                                    case "C":
+                                                        propertyDesc = K.propertiesInC[index].1
+
+                                                    case "D":
+                                                        propertyDesc = K.propertiesInD[index].1
+
+                                                    case "E":
+                                                        propertyDesc = K.propertiesInE[index].1
+
+                                                    case "F":
+                                                        propertyDesc = K.propertiesInF[index].1
+
+                                        //            case "G":
+                                                        
+                                                    default:
+                                                        propertyDesc = "No property/lot selected"
+                                                    }
+                                                }
+                                        
+                                        let text = property! + " | " + propertyDesc + "\n" + comments
+                                        print(text)
                                         
                                         mapPoint.comments = comments
                                         self.nestLocations.append(NestLocations(title: title, id: id, coordinate: CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude), date: date, comments: text))

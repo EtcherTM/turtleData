@@ -19,7 +19,7 @@ class NestMarkerView: MKMarkerAnnotationView {
             canShowCallout = true
             calloutOffset = CGPoint(x: -5, y: 5)
             let detailLabel = UILabel()
-            detailLabel.numberOfLines = 3
+            detailLabel.numberOfLines = 4
             detailLabel.text = nestLocation.comments
             detailCalloutAccessoryView = detailLabel
             

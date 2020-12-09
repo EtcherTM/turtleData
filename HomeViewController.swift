@@ -223,35 +223,8 @@ class HomeViewController: UIViewController, ButtonUpdater {
                     }
                 }
                 
-                let noActs = self.realm.objects(NoActivityReport.self)
-                
-                for noAct in noActs {
-                    self.db.collection("noActivity's").addDocument(data: [
-                        "id": noAct.id,
-                        "a": noAct.aNoActivity,
-                        "b": noAct.bNoActivity,
-                        "c": noAct.cNoActivity,
-                        "d": noAct.dNoActivity,
-                        "e": noAct.eNoActivity,
-                        "f": noAct.fNoActivity
-                    ]) { (error) in
-                        if let error = error {
-                            print("error saving noAct to FireBase, \(error)")
-                        } else {
-                            do {
-                                try self.realm.write({
-                                    self.realm.delete(noAct)
-                                })
-                            } catch {
-                                print("error deleting from realm: \(error)")
-                            }
-                        }
-                    }
-                    
-                    self.done()
-                }
             
-            
+            self.done()
             
         }))
         
