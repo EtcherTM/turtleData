@@ -37,16 +37,16 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     var image = 0
     let dispatchGroup = DispatchGroup()
     let datePicker = UIDatePicker()
-
+    
     @IBOutlet weak var dateTextField: UITextField!
     
     @IBOutlet weak var zoneButton: UIButton!
     @IBOutlet weak var propertyButton: UIButton!
     @IBOutlet weak var locationButton: UIButton!
-
+    
     @IBOutlet weak var latitudeTextField: UITextField!
     @IBOutlet weak var longitudeTextField: UITextField!
-
+    
     
     @IBOutlet weak var accuracyLabel: UILabel!
     @IBOutlet weak var emergeButton: UIButton!
@@ -75,19 +75,19 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     
     override func viewWillAppear(_ animated: Bool) {
-         self.navigationItem.hidesBackButton = true
+        self.navigationItem.hidesBackButton = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         realm.beginWrite()
     }
-
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         try! realm.commitWrite()
     }
-
+    
     func copyObs(to from: Observation, from to: Observation) {
         from.id = to.id
         from.date = to.date
@@ -128,42 +128,42 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         if data != nil {
             copyObs(to: prevdata, from: data!)
             /*
-            prevdata.id = data!.id
-            prevdata.date = data!.date
-            prevdata.zoneLocation = data!.zoneLocation
-            prevdata.property = data!.property
-            prevdata.lat = data!.lat
-            prevdata.lon = data!.lon
-            prevdata.accuracy = data!.accuracy
-            prevdata.emerge = data!.emerge
-            prevdata.turtle = data!.turtle
-            prevdata.existingNestDisturbed = data!.existingNestDisturbed
-            prevdata.emergeType = data!.emergeType
-            prevdata.turtleType = data!.turtleType
-            prevdata.species = data!.species
-            prevdata.existingNestDisturbedType = data!.existingNestDisturbedType
-            prevdata.hatchingBool = data!.hatchingBool
-            prevdata.hatchingDetails = data!.hatchingDetails
-            prevdata.noProblems = data!.noProblems
-            prevdata.lights = data!.lights
-            prevdata.trash = data!.trash
-            prevdata.sewer = data!.sewer
-            prevdata.plants = data!.plants
-            prevdata.other = data!.other
-            prevdata.numSuccess = data!.numSuccess
-            prevdata.numStranded = data!.numStranded
-            prevdata.numDead = data!.numDead
-            prevdata.image1 = data!.image1
-            prevdata.image2 = data!.image2
-            prevdata.image3 = data!.image3
-            prevdata.image4 = data!.image4
-            prevdata.image5 = data!.image5
-            prevdata.comments = data!.comments
-            */
+             prevdata.id = data!.id
+             prevdata.date = data!.date
+             prevdata.zoneLocation = data!.zoneLocation
+             prevdata.property = data!.property
+             prevdata.lat = data!.lat
+             prevdata.lon = data!.lon
+             prevdata.accuracy = data!.accuracy
+             prevdata.emerge = data!.emerge
+             prevdata.turtle = data!.turtle
+             prevdata.existingNestDisturbed = data!.existingNestDisturbed
+             prevdata.emergeType = data!.emergeType
+             prevdata.turtleType = data!.turtleType
+             prevdata.species = data!.species
+             prevdata.existingNestDisturbedType = data!.existingNestDisturbedType
+             prevdata.hatchingBool = data!.hatchingBool
+             prevdata.hatchingDetails = data!.hatchingDetails
+             prevdata.noProblems = data!.noProblems
+             prevdata.lights = data!.lights
+             prevdata.trash = data!.trash
+             prevdata.sewer = data!.sewer
+             prevdata.plants = data!.plants
+             prevdata.other = data!.other
+             prevdata.numSuccess = data!.numSuccess
+             prevdata.numStranded = data!.numStranded
+             prevdata.numDead = data!.numDead
+             prevdata.image1 = data!.image1
+             prevdata.image2 = data!.image2
+             prevdata.image3 = data!.image3
+             prevdata.image4 = data!.image4
+             prevdata.image5 = data!.image5
+             prevdata.comments = data!.comments
+             */
             /*
-            print(prevdata.zoneLocation)
-            title = "Edit \(data!.id)"
-            */
+             print(prevdata.zoneLocation)
+             title = "Edit \(data!.id)"
+             */
             print("Data is not nil!!!")
             
             fillTextFields()
@@ -180,47 +180,47 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         imagePicker.allowsEditing = false
         self.commentsTextView.delegate = self
         
-        }
+    }
     
     func createDatePicker() {
         datePicker.date = data!.date
-
+        
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(handleDatePicker(sender:)))
         toolbar.setItems([doneBtn], animated: true)
         dateTextField.inputAccessoryView = toolbar
         dateTextField.inputView = datePicker
-
+        
         let datePicker = UIDatePicker()
         
         datePicker.addTarget(self, action: #selector(handleDatePicker(sender:)), for: .valueChanged)
     }
     
     @objc func handleDatePicker (sender: UIDatePicker) {
-
+        
         let dateFormatter = DateFormatter()
-//        formatter.dateStyle = .medium
-//        formatter.timeStyle = .medium
-//        print(datePicker.date)
+        //        formatter.dateStyle = .medium
+        //        formatter.timeStyle = .medium
+        //        print(datePicker.date)
         dateFormatter.dateFormat = "d MMM yyyy, HH:mm:ss"
-
+        
         dateTextField.text = dateFormatter.string(from: datePicker.date)
-       data!.date = datePicker.date
+        data!.date = datePicker.date
         self.view.endEditing(true)
     }
     
     func fillTextFields () {
-
+        
         let dateFormatter = DateFormatter()
-//        dateFormatter.locale = Locale(identifier: "fr")
-//        dateFormatter.dateStyle = .medium
-//        dateFormatter.timeStyle = .medium
+        //        dateFormatter.locale = Locale(identifier: "fr")
+        //        dateFormatter.dateStyle = .medium
+        //        dateFormatter.timeStyle = .medium
         dateFormatter.dateFormat = "d MMM yyyy, HH:mm:ss"
         dateTextField.text = dateFormatter.string(from:data!.date)
         
         zoneButton.setTitle(data!.zoneLocation, for: .normal)
-            
+        
         if data!.lat != 0.0 && data!.lon != 0.0 {
             let latAsStr = String(format: "%.10f",data!.lat)
             let lonAsStr = String(format: "%.10f",data!.lon)
@@ -233,35 +233,35 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             locationButton.setTitle("--", for: .normal)
         }
         var propertyDesc = ""
-
+        
         if var index = Int(String(data!.property.dropFirst().dropFirst())) {
             index -= 1
             switch data!.property.first {
             case "A":
                 propertyDesc = K.propertiesInA[index].1
-
+                
             case "B":
                 propertyDesc = K.propertiesInB[index].1
-
+                
             case "C":
                 propertyDesc = K.propertiesInC[index].1
-
+                
             case "D":
                 propertyDesc = K.propertiesInD[index].1
-
+                
             case "E":
                 propertyDesc = K.propertiesInE[index].1
-
+                
             case "F":
                 propertyDesc = K.propertiesInF[index].1
-
-//            case "G":
+                
+                //            case "G":
                 
             default:
                 propertyDesc = "No property/lot selected"
             }
         }
-            
+        
         propertyButton.setTitle("\(data!.property): \(propertyDesc)", for: .normal)
         locationButton.setTitle("Retake GPS?", for: .normal)
         emergeButton.setTitle(data!.emerge ? data!.emergeType : "--", for: .normal)
@@ -281,7 +281,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         } else {
             noProblemsButton.setTitle("", for: .normal)
         }
-
+        
         if data!.lights {
             lightsButton.setTitle("✓", for: .normal)
         }  else {
@@ -356,11 +356,11 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     }
     
     
-
-//MARK:- Data Entry
     
-
-
+    //MARK:- Data Entry
+    
+    
+    
     
     
     @IBAction func zoneButtonPressed(_ sender: UIButton) {
@@ -449,9 +449,9 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         
         alert.addAction(UIAlertAction(title: "Take new GPS reading now", style: .default, handler: { (_) in
             self.locationManager.requestLocation()
-                sender.setTitle("Getting: hold position . . .", for: .normal)
-
-            }))
+            sender.setTitle("Getting: hold position . . .", for: .normal)
+            
+        }))
         alert.addAction(UIAlertAction(title: "Clear GPS fields", style: .default, handler: { (_) in
             self.latitudeTextField.text = "0.0"
             self.longitudeTextField.text = "0.0"
@@ -459,47 +459,47 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             self.data!.lat = 0.0
             self.data!.lon = 0.0
             self.data!.accuracy = 0.0
-
+            
         }))
-
+        
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
-            present(alert, animated: true)
-
-
+        
+        present(alert, animated: true)
+        
+        
     }
     
     @IBAction func emergeButtonPressed(_ sender: UIButton) {
         print("emergeButton pressed")
-            if !data!.emerge {
-                let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        if !data!.emerge {
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "NEW/PROBABLE NEST", style: .default, handler: { (action) in
+                self.data!.emergeType = "nest"
+                sender.setTitle(self.data!.emergeType, for: .normal)
                 
-                alert.addAction(UIAlertAction(title: "NEW/PROBABLE NEST", style: .default, handler: { (action) in
-                    self.data!.emergeType = "nest"
-                    sender.setTitle(self.data!.emergeType, for: .normal)
-
-                }))
-                alert.addAction(UIAlertAction(title: "FALSE NEST", style: .default, handler: { (action) in
-                    self.data!.emergeType = "false nest"
-                    sender.setTitle(self.data!.emergeType, for: .normal)
-                }))
-                alert.addAction(UIAlertAction(title: "FALSE CRAWL", style: .default, handler: { (action) in
-                    self.data!.emergeType = "false crawl"
-                    sender.setTitle(self.data!.emergeType, for: .normal)
-                    
-                }))
+            }))
+            alert.addAction(UIAlertAction(title: "FALSE NEST", style: .default, handler: { (action) in
+                self.data!.emergeType = "false nest"
+                sender.setTitle(self.data!.emergeType, for: .normal)
+            }))
+            alert.addAction(UIAlertAction(title: "FALSE CRAWL", style: .default, handler: { (action) in
+                self.data!.emergeType = "false crawl"
+                sender.setTitle(self.data!.emergeType, for: .normal)
+                
+            }))
+            
+            
+            present(alert, animated: true)
+            
+        } else {
+            sender.setTitle("--", for: .normal)
+            data!.emergeType = ""
+        }
         
-                
-                present(alert, animated: true)
-                
-            } else {
-                sender.setTitle("--", for: .normal)
-                data!.emergeType = ""
-            }
-            
-            
-            data!.emerge = !data!.emerge
-            
+        
+        data!.emerge = !data!.emerge
+        
     }
     
     @IBAction func existingNestDisturbedButtonPressed(_ sender: UIButton) {
@@ -521,7 +521,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
                 sender.setTitle(self.data!.existingNestDisturbedType, for: .normal)
                 
             }))
-
+            
             alert.addAction(UIAlertAction(title: "LOST: NATURAL CAUSE", style: .default, handler: { (action) in
                 self.data!.existingNestDisturbedType = "lost nature"
                 sender.setTitle(self.data!.existingNestDisturbedType, for: .normal)
@@ -569,7 +569,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         print("turtle")
         
         if !data!.turtle {
-
+            
             let alert = UIAlertController(title: "ADULT TURTLE:", message: "", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "DEAD", style: .default, handler: { (action) in
@@ -594,34 +594,34 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     }
     
     @IBAction func speciesButtonPressed(_ sender: UIButton) {
-         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-         
-         alert.addAction(UIAlertAction(title: "UNKNOWN", style: .default, handler: { (action) in
-             sender.setTitle("Unknown", for: .normal)
-             self.data!.species = ""
-         }))
-         
-         alert.addAction(UIAlertAction(title: "OLIVE RIDLEY", style: .default, handler: { (action) in
-             sender.setTitle("Olive Ridley", for: .normal)
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "UNKNOWN", style: .default, handler: { (action) in
+            sender.setTitle("Unknown", for: .normal)
+            self.data!.species = ""
+        }))
+        
+        alert.addAction(UIAlertAction(title: "OLIVE RIDLEY", style: .default, handler: { (action) in
+            sender.setTitle("Olive Ridley", for: .normal)
             self.data!.species = "olive ridley"
-         }))
-         alert.addAction(UIAlertAction(title: "GREEN", style: .default, handler: { (action) in
-             sender.setTitle("Green", for: .normal)
-             self.data!.species = "green"
-         }))
-         alert.addAction(UIAlertAction(title: "HAWKSBILL", style: .default, handler: { (action) in
-             self.data!.species = "hawksbill"
-             sender.setTitle("Hawksbill", for: .normal)
-             
-         }))
-         alert.addAction(UIAlertAction(title: "LEATHERBACK", style: .default, handler: { (action) in
-             self.data!.species = "leatherback"
-             sender.setTitle("Leatherback", for: .normal)
-             
-         }))
-
-         present(alert, animated: true)
-         alert.view.tintColor = UIColor.black
+        }))
+        alert.addAction(UIAlertAction(title: "GREEN", style: .default, handler: { (action) in
+            sender.setTitle("Green", for: .normal)
+            self.data!.species = "green"
+        }))
+        alert.addAction(UIAlertAction(title: "HAWKSBILL", style: .default, handler: { (action) in
+            self.data!.species = "hawksbill"
+            sender.setTitle("Hawksbill", for: .normal)
+            
+        }))
+        alert.addAction(UIAlertAction(title: "LEATHERBACK", style: .default, handler: { (action) in
+            self.data!.species = "leatherback"
+            sender.setTitle("Leatherback", for: .normal)
+            
+        }))
+        
+        present(alert, animated: true)
+        alert.view.tintColor = UIColor.black
         
         
     }
@@ -630,29 +630,67 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBAction func hatchingBoolButtonPressed(_ sender: UIButton) {
         if data!.hatchingBool == true {
             
-//            Add an alert here: "Clear all hatching details and set hatching to false?"
+            //            Add an alert here: "Clear all hatching details and set hatching to false?"
+            let alert = UIAlertController(title: "Clear all hatching details and set hatching to false?", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                self.data!.hatchingBool = false
+                sender.setTitle("No", for: .normal)
+                
+                self.noProblemsButton.setTitle("", for: .normal)
+                self.lightsButton.setTitle("", for: .normal)
+                self.trashButton.setTitle("", for: .normal)
+                self.sewerButton.setTitle("", for: .normal)
+                self.plantsButton.setTitle("", for: .normal)
+                self.otherButton.setTitle("", for: .normal)
+                self.successButton.setTitle("0", for: .normal)
+                self.strandedButton.setTitle("0", for: .normal)
+                self.deadButton.setTitle("0", for: .normal)
+                
+                self.data!.noProblems = false
+                self.data!.lights = false
+                self.data!.trash = false
+                self.data!.sewer = false
+                self.data!.plants = false
+                self.data!.other = false
+                
+                self.data!.numSuccess = 0
+                self.data!.numStranded = 0
+                self.data!.numDead = 0
+            }))
+            alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (action) in
+                
+            }))
             
+            present(alert, animated: true)
+            
+        } else {
             data!.hatchingBool = true
             sender.setTitle("Yes", for: .normal)
-        } else {
-            data!.hatchingBool = false
-            sender.setTitle("No", for: .normal)
         }
         
         print("hatching is \(data!.hatchingBool)")
     }
     
     @IBAction func noProblemsButtonPressed(_ sender: UIButton) {
+        data!.hatchingBool = true
+        hatchingButton.setTitle("Yes", for: .normal)
+        
         data!.noProblems = !data!.noProblems
         if data!.noProblems {
             sender.setTitle("✓", for: .normal)
             
-//     Consider whether to make selecting "No Problems" clear all the other problems
-//            lightsButton.setTitle("Lights", for: .normal)
-//            trashButton.setTitle("Trash", for: .normal)
-//            sewerButton.setTitle("Sewer", for: .normal)
-//            plantsButton.setTitle("Plants", for: .normal)
-//            otherButton.setTitle("Other", for: .normal)
+            //     Consider whether to make selecting "No Problems" clear all the other problems
+            lightsButton.setTitle("", for: .normal)
+            trashButton.setTitle("", for: .normal)
+            sewerButton.setTitle("", for: .normal)
+            plantsButton.setTitle("", for: .normal)
+            otherButton.setTitle("", for: .normal)
+            
+            data!.lights = false
+            data!.trash = false
+            data!.sewer = false
+            data!.plants = false
+            data!.other = false
             print("No problems")
         } else {
             sender.setTitle("", for: .normal)
@@ -661,58 +699,83 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     }
     
     @IBAction func lightsButtonPressed(_ sender: UIButton) {
-           data!.lights = !data!.lights
-            if data!.lights {
-                sender.setTitle("✓", for: .normal)
-                print("Lights a problem")
-            } else {
-                sender.setTitle("", for: .normal)
-                print("Lights not a problem")
-            }
+        data!.noProblems = false
+        noProblemsButton.setTitle("", for: .normal)
+        data!.hatchingBool = true
+        hatchingButton.setTitle("Yes", for: .normal)
+        
+        data!.lights = !data!.lights
+        if data!.lights {
+            sender.setTitle("✓", for: .normal)
+            print("Lights a problem")
+        } else {
+            sender.setTitle("", for: .normal)
+            print("Lights not a problem")
+        }
     }
     
     @IBAction func trashButtonPressed(_ sender: UIButton) {
+        data!.noProblems = false
+        noProblemsButton.setTitle("", for: .normal)
+        data!.hatchingBool = true
+        hatchingButton.setTitle("Yes", for: .normal)
+        
         data!.trash = !data!.trash
-         if data!.trash {
-             sender.setTitle("✓", for: .normal)
-             print("Trash a problem")
-         } else {
-             sender.setTitle("", for: .normal)
-             print("Trash not a problem")
-         }
+        if data!.trash {
+            sender.setTitle("✓", for: .normal)
+            print("Trash a problem")
+        } else {
+            sender.setTitle("", for: .normal)
+            print("Trash not a problem")
+        }
     }
     
     @IBAction func sewerButtonPressed(_ sender: UIButton) {
+        data!.noProblems = false
+        noProblemsButton.setTitle("", for: .normal)
+        data!.hatchingBool = true
+        hatchingButton.setTitle("Yes", for: .normal)
+        
         data!.sewer = !data!.sewer
-         if data!.sewer {
-             sender.setTitle("✓", for: .normal)
-             print("Sewer a problem")
-         } else {
-             sender.setTitle("", for: .normal)
-             print("Sewer not a problem")
-         }
+        if data!.sewer {
+            sender.setTitle("✓", for: .normal)
+            print("Sewer a problem")
+        } else {
+            sender.setTitle("", for: .normal)
+            print("Sewer not a problem")
+        }
     }
     
     @IBAction func plantsButtonPressed(_ sender: UIButton) {
+        data!.noProblems = false
+        noProblemsButton.setTitle("", for: .normal)
+        data!.hatchingBool = true
+        hatchingButton.setTitle("Yes", for: .normal)
+        
         data!.plants = !data!.plants
-         if data!.plants {
-             sender.setTitle("✓", for: .normal)
-             print("Plants a problem")
-         } else {
-             sender.setTitle("", for: .normal)
-             print("Plants not a problem")
-         }
+        if data!.plants {
+            sender.setTitle("✓", for: .normal)
+            print("Plants a problem")
+        } else {
+            sender.setTitle("", for: .normal)
+            print("Plants not a problem")
+        }
     }
     
     @IBAction func otherButtonPressed(_ sender: UIButton) {
+        data!.noProblems = false
+        noProblemsButton.setTitle("", for: .normal)
+        data!.hatchingBool = true
+        hatchingButton.setTitle("Yes", for: .normal)
+        
         data!.other = !data!.other
-         if data!.other {
-             sender.setTitle("✓", for: .normal)
-             print("Other problem")
-         } else {
-             sender.setTitle("", for: .normal)
-             print("No other problem")
-         }
+        if data!.other {
+            sender.setTitle("✓", for: .normal)
+            print("Other problem")
+        } else {
+            sender.setTitle("", for: .normal)
+            print("No other problem")
+        }
     }
     
     @IBAction func successButtonPressed(_ sender: UIButton) {
@@ -726,39 +789,45 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             myTextField?.placeholder = "0"
             myTextField?.keyboardType = .numberPad
         }
-            
-         alert.addAction(UIAlertAction(title: "CANCEL", style: .cancel, handler: { (_) in
-         }))
-    
-         alert.addAction(UIAlertAction(title: "DONE", style: .default, handler: { (action) in
-             guard let num = Int(myTextField!.text!) else { return }
+        
+        alert.addAction(UIAlertAction(title: "CANCEL", style: .cancel, handler: { (_) in
+        }))
+        
+        alert.addAction(UIAlertAction(title: "DONE", style: .default, handler: { (action) in
+            guard let num = Int(myTextField!.text!) else { return }
             self.data!.numSuccess = num
-             sender.setTitle("\(num)", for: .normal)
-         }))
-
-         present(alert, animated: true, completion:nil)
+            sender.setTitle("\(num)", for: .normal)
+            
+            self.data!.hatchingBool = true
+            self.hatchingButton.setTitle("Yes", for: .normal)
+        }))
+        
+        present(alert, animated: true, completion:nil)
     }
     
     @IBAction func strandedButtonPressed(_ sender: UIButton) {
-             var myTextField : UITextField?
-             let alert = UIAlertController.init(title: "Enter number of babies that were stranded and needed rescue", message: nil, preferredStyle: .alert)
-             alert.addTextField { (textField) in
-                 myTextField = textField
-                 myTextField?.delegate = self
-                 myTextField?.placeholder = "0"
-                 myTextField?.keyboardType = .numberPad
-             }
-             
-             alert.addAction(UIAlertAction(title: "CANCEL", style: .cancel, handler: { (_) in
-             }))
+        var myTextField : UITextField?
+        let alert = UIAlertController.init(title: "Enter number of babies that were stranded and needed rescue", message: nil, preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            myTextField = textField
+            myTextField?.delegate = self
+            myTextField?.placeholder = "0"
+            myTextField?.keyboardType = .numberPad
+        }
         
-             alert.addAction(UIAlertAction(title: "DONE", style: .default, handler: { (action) in
-                 guard let num = Int(myTextField!.text!) else { return }
-                self.data!.numStranded = num
-                 sender.setTitle("\(num)", for: .normal)
-             }))
-
-            present(alert, animated: true, completion:nil)
+        alert.addAction(UIAlertAction(title: "CANCEL", style: .cancel, handler: { (_) in
+        }))
+        
+        alert.addAction(UIAlertAction(title: "DONE", style: .default, handler: { (action) in
+            guard let num = Int(myTextField!.text!) else { return }
+            self.data!.numStranded = num
+            sender.setTitle("\(num)", for: .normal)
+            
+            self.data!.hatchingBool = true
+            self.hatchingButton.setTitle("Yes", for: .normal)
+        }))
+        
+        present(alert, animated: true, completion:nil)
     }
     
     @IBAction func deadButtonPressed(_ sender: UIButton) {
@@ -769,39 +838,42 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             myTextField?.delegate = self
             myTextField?.placeholder = "0"
             myTextField?.keyboardType = .numberPad
+            
+            self.data!.hatchingBool = true
+            self.hatchingButton.setTitle("Yes", for: .normal)
         }
         
         alert.addAction(UIAlertAction(title: "CANCEL", style: .cancel, handler: { (_) in
- 
+            
         }))
-
+        
         alert.addAction(UIAlertAction(title: "DONE", style: .default, handler: { (action) in
             guard let num = Int(myTextField!.text!) else { return }
             self.data!.numDead = num
             sender.setTitle("\(num)", for: .normal)
         }))
-
+        
         present(alert, animated: true, completion:nil)
         
     }
     @IBAction func photo1ButtonPressed(_ sender: UIButton) {
         print("click1")
         image = 1
-
-//        switch sender.currentTitle ?? "" {
-//        case "photo1":
-//            image = 1
-//        case "photo2":
-//            image = 2
-//        case "photo3":
-//            image = 3
-//        case "photo4":
-//            image = 4
-//        case "photo5":
-//            image = 5
-//        default:
-//            print("DODODODODO")
-//        }
+        
+        //        switch sender.currentTitle ?? "" {
+        //        case "photo1":
+        //            image = 1
+        //        case "photo2":
+        //            image = 2
+        //        case "photo3":
+        //            image = 3
+        //        case "photo4":
+        //            image = 4
+        //        case "photo5":
+        //            image = 5
+        //        default:
+        //            print("DODODODODO")
+        //        }
         
         let alert = UIAlertController(title: "Choose image source", message: "", preferredStyle: .alert)
         
@@ -822,33 +894,33 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         }))
         print("present Choie")
         present(alert, animated: true)
-
+        
         
     }
     
     @IBAction func handleGesture1(_ sender: UILongPressGestureRecognizer) {
         switch sender.state {
-            case .began:
-
-                UIView.animate(withDuration: 0.05,
-                               animations: {
-                                 self.photoImage1.transform = CGAffineTransform(scaleX: 8.0, y: 8.0)
-
-                },
-                               completion: nil)
-            case .ended:
-                UIView.animate(withDuration: 0.05) {
-                    self.photoImage1.transform = CGAffineTransform.identity
-                }
-            default: break
+        case .began:
+            
+            UIView.animate(withDuration: 0.05,
+                           animations: {
+                            self.photoImage1.transform = CGAffineTransform(scaleX: 8.0, y: 8.0)
+                            
+            },
+                           completion: nil)
+        case .ended:
+            UIView.animate(withDuration: 0.05) {
+                self.photoImage1.transform = CGAffineTransform.identity
             }
+        default: break
+        }
     }
     
     @IBAction func photo2ButtonPressed(_ sender: UIButton) {
         
         print("click1")
         image = 2
-                
+        
         let alert = UIAlertController(title: "Choose image source", message: "", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) in
@@ -868,31 +940,31 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         }))
         print("present Choie")
         present(alert, animated: true)
-
+        
     }
     
     @IBAction func handleGesture2(_ sender: UILongPressGestureRecognizer) {
         switch sender.state {
-             case .began:
-
-                 UIView.animate(withDuration: 0.05,
-                                animations: {
-                                  self.photoImage2.transform = CGAffineTransform(scaleX: 8.0, y: 8.0)
-
-                 },
-                                completion: nil)
-             case .ended:
-                 UIView.animate(withDuration: 0.05) {
-                     self.photoImage2.transform = CGAffineTransform.identity
-                 }
-             default: break
-             }
+        case .began:
+            
+            UIView.animate(withDuration: 0.05,
+                           animations: {
+                            self.photoImage2.transform = CGAffineTransform(scaleX: 8.0, y: 8.0)
+                            
+            },
+                           completion: nil)
+        case .ended:
+            UIView.animate(withDuration: 0.05) {
+                self.photoImage2.transform = CGAffineTransform.identity
+            }
+        default: break
+        }
     }
-  
+    
     @IBAction func photo3ButtonPressed(_ sender: UIButton) {
         print("click1")
         image = 3
-                
+        
         let alert = UIAlertController(title: "Choose image source", message: "", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) in
@@ -912,74 +984,74 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         }))
         print("present Choie")
         present(alert, animated: true)
-
+        
     }
     
     @IBAction func handleGesture3(_ sender: UILongPressGestureRecognizer) {
         switch sender.state {
-             case .began:
-
-                 UIView.animate(withDuration: 0.05,
-                                animations: {
-                                  self.photoImage3.transform = CGAffineTransform(scaleX: 8.0, y: 8.0)
-
-                 },
-                                completion: nil)
-             case .ended:
-                 UIView.animate(withDuration: 0.05) {
-                     self.photoImage3.transform = CGAffineTransform.identity
-                 }
-             default: break
-             }
+        case .began:
+            
+            UIView.animate(withDuration: 0.05,
+                           animations: {
+                            self.photoImage3.transform = CGAffineTransform(scaleX: 8.0, y: 8.0)
+                            
+            },
+                           completion: nil)
+        case .ended:
+            UIView.animate(withDuration: 0.05) {
+                self.photoImage3.transform = CGAffineTransform.identity
+            }
+        default: break
+        }
     }
-
+    
     @IBAction func photo4ButtonPressed(_ sender: UIButton) {
-         print("click1")
-         image = 4
-                 
-         let alert = UIAlertController(title: "Choose image source", message: "", preferredStyle: .alert)
-         
-         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) in
-             self.imagePicker.allowsEditing = false
-             self.imagePicker.sourceType = .camera
-             self.present(self.imagePicker, animated: true, completion: nil)
-         }))
-         
-         alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { (_) in
-             self.imagePicker.allowsEditing = false
-             self.imagePicker.sourceType = .photoLibrary
-             self.present(self.imagePicker, animated: true, completion: nil)
-         }))
+        print("click1")
+        image = 4
+        
+        let alert = UIAlertController(title: "Choose image source", message: "", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) in
+            self.imagePicker.allowsEditing = false
+            self.imagePicker.sourceType = .camera
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { (_) in
+            self.imagePicker.allowsEditing = false
+            self.imagePicker.sourceType = .photoLibrary
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }))
         alert.addAction(UIAlertAction(title: "Delete Photo", style: .default, handler: { (_) in
             self.data!.image4 = ""
             self.photoImage4.image = UIImage()
         }))
-         print("present Choie")
-         present(alert, animated: true)
+        print("present Choie")
+        present(alert, animated: true)
     }
     
     @IBAction func handleGesture4(_ sender: UILongPressGestureRecognizer) {
         switch sender.state {
-             case .began:
-
-                 UIView.animate(withDuration: 0.05,
-                                animations: {
-                                  self.photoImage4.transform = CGAffineTransform(scaleX: 8.0, y: 8.0)
-
-                 },
-                                completion: nil)
-             case .ended:
-                 UIView.animate(withDuration: 0.05) {
-                     self.photoImage4.transform = CGAffineTransform.identity
-                 }
-             default: break
-             }
+        case .began:
+            
+            UIView.animate(withDuration: 0.05,
+                           animations: {
+                            self.photoImage4.transform = CGAffineTransform(scaleX: 8.0, y: 8.0)
+                            
+            },
+                           completion: nil)
+        case .ended:
+            UIView.animate(withDuration: 0.05) {
+                self.photoImage4.transform = CGAffineTransform.identity
+            }
+        default: break
+        }
     }
     
     @IBAction func photo5ButtonPressed(_ sender: UIButton) {
         print("click1")
         image = 5
-                
+        
         let alert = UIAlertController(title: "Choose image source", message: "", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) in
@@ -1004,52 +1076,52 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     @IBAction func handleGesture5(_ sender: UILongPressGestureRecognizer) {
         switch sender.state {
-             case .began:
-
-                 UIView.animate(withDuration: 0.05,
-                                animations: {
-                                  self.photoImage5.transform = CGAffineTransform(scaleX: 8.0, y: 8.0)
-
-                 },
-                                completion: nil)
-             case .ended:
-                 UIView.animate(withDuration: 0.05) {
-                     self.photoImage5.transform = CGAffineTransform.identity
-                 }
-             default: break
-             }
+        case .began:
+            
+            UIView.animate(withDuration: 0.05,
+                           animations: {
+                            self.photoImage5.transform = CGAffineTransform(scaleX: 8.0, y: 8.0)
+                            
+            },
+                           completion: nil)
+        case .ended:
+            UIView.animate(withDuration: 0.05) {
+                self.photoImage5.transform = CGAffineTransform.identity
+            }
+        default: break
+        }
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
         print("Cancel")
         
         let alert = UIAlertController(title: "CANCEL CHANGES?", message: "", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (_) in
+            
+            print(self.data)
+            print(self.prevdata)
+            
+            self.dispatchGroup.enter()
+            
+            self.copyObs(to: self.data!, from: self.prevdata)
+            
+            
+            self.dispatchGroup.leave()
+            print("juoiu)")
+            
+            self.dispatchGroup.wait()
+            
+            DispatchQueue.main.async {
                 
-                alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (_) in
-                    
-                    print(self.data)
-                    print(self.prevdata)
-                    
-                    self.dispatchGroup.enter()
-                    
-                    self.copyObs(to: self.data!, from: self.prevdata)
-                    
-                    
-                    self.dispatchGroup.leave()
-                    print("juoiu)")
-                    
-                    self.dispatchGroup.wait()
-                    
-                    DispatchQueue.main.async {
-                    
-                        self.navigationController?.popViewController(animated: true)
-
-                    }
-                    
-                })) // Ends closure begun in line 392
-                alert.addAction(UIAlertAction(title: "NO", style: .cancel, handler: nil))
+                self.navigationController?.popViewController(animated: true)
                 
-                present(alert, animated: true)
+            }
+            
+        })) // Ends closure begun in line 392
+        alert.addAction(UIAlertAction(title: "NO", style: .cancel, handler: nil))
+        
+        present(alert, animated: true)
         
     }
     
@@ -1061,7 +1133,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (_) in
             
             self.dispatchGroup.enter()
-
+            
             self.data!.comments = self.commentsTextView.text ?? ""
             
             // create id -- do we need to delete first and start over?
@@ -1069,39 +1141,33 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             
             if self.data!.emerge { id.append(self.data!.emergeType == "nest" ? "N" : "F") }
             if self.data!.existingNestDisturbed { id.append(self.data!.existingNestDisturbedType == "disturbed" ? "D" : "R") }
-
-            if self.data!.noProblems || self.data!.lights || self.data!.trash || self.data!.sewer || self.data!.plants || self.data!.other || self.data!.numSuccess != 0 || self.data!.numStranded != 0 || self.data!.numDead != 0 {
-                    
-                self.data!.hatchingBool = true
-                
-                } else {
-                    self.data!.hatchingBool = false
-                }
             
-            id.append(self.data!.hatchingBool ? "H" : "")
-
-            id.append(self.data!.turtle ? "T" : "")
+            self.data!.hatchingBool = self.data!.noProblems || self.data!.lights || self.data!.trash || self.data!.sewer || self.data!.plants || self.data!.other || self.data!.numSuccess != 0 || self.data!.numStranded != 0 || self.data!.numDead != 0
+            
+            if self.data!.hatchingBool { id.append("H") }
+            if self.data!.turtle { id.append("T") }
+            if id.count < 3 { id.append("O") }
             
             let dateFormatter = DateFormatter()
             
             dateFormatter.dateFormat = "-yyyyMMdd-HHmmss-"
             
-//            Need to keep the date the same?  Date needs to be editable.
-            id.append(dateFormatter.string(from: Date()))
+            //            Date needs to be editable.
+            id.append(dateFormatter.string(from: self.data!.date))
             id.append(self.defaults.string(forKey: "userID") ?? "NOUSER")
             self.data!.id = id
             
-//  Delete do and catch statements?
-//            do {
-//                try self.realm.write {
-//                    self.realm.add(self.data)
-//                    self.realm.delete(self.data)
-//                }
-//
-//                self.data = Observation()
-//            } catch {
-//                print("Error saving data, \(error) END")
-//            }
+            //  Delete do and catch statements?
+            //            do {
+            //                try self.realm.write {
+            //                    self.realm.add(self.data)
+            //                    self.realm.delete(self.data)
+            //                }
+            //
+            //                self.data = Observation()
+            //            } catch {
+            //                print("Error saving data, \(error) END")
+            //            }
             
             if let newLat = Double(self.latitudeTextField.text!) {
                 self.data!.lat = newLat
@@ -1117,16 +1183,16 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             self.dispatchGroup.wait()
             
             DispatchQueue.main.async {
-            
+                
                 self.navigationController?.popViewController(animated: true)
-
+                
             }
             
         })) // Ends closure begun in line 392
         alert.addAction(UIAlertAction(title: "NO", style: .cancel, handler: nil))
         
         present(alert, animated: true)
-       
+        
     }
     
     @IBAction func deleteButtonPressed(_ sender: UIButton) {
@@ -1138,9 +1204,9 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             
             self.dispatchGroup.enter()
             
-
+            
             self.realm.delete(self.data!)
-
+            
             
             self.dispatchGroup.leave()
             print("Done deleting data")
@@ -1150,7 +1216,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             DispatchQueue.main.async {
                 print("About to pop vc.")
                 self.navigationController?.popViewController(animated: true)
-
+                
             }
         }))
         

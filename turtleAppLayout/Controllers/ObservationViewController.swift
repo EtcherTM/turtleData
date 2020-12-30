@@ -388,7 +388,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
             alert.view.tintColor = UIColor.black
             
         } else {
-            sender.setTitle("New Nest?", for: .normal)
+            sender.setTitle("Emergence?", for: .normal)
             data.emergeType = ""
         }
         
@@ -452,7 +452,7 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
             alert.view.tintColor = UIColor.black
             
         } else {
-            sender.setTitle("Old Nest?", for: .normal)
+            sender.setTitle("Disturbed Nest?", for: .normal)
             data.existingNestDisturbedType = ""
         }
         data.existingNestDisturbed = !data.existingNestDisturbed
@@ -734,11 +734,8 @@ class ObservationViewController: UIViewController, UITextViewDelegate, UITextFie
             
             
             id.append(self.data.hatchingBool ? "H" : "")
-            
-            if id.count < 3 {
-                
-                id.append("O")
-            }
+            print(id.count)
+            if id.count < 3 { id.append("O") }
             
             let dateFormatter = DateFormatter()
             

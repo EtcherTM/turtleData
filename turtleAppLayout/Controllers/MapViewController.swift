@@ -216,7 +216,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                                         
                                         mapPoint.comments = comments
                                         self.nestLocations.append(NestLocations(title: title, id: id, coordinate: CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude), date: date, comments: text))
-                                        //print("Mapping \(id) with coords: \(lat), \(lon)")
+                                            //print("Mapping \(id) with coords: \(lat), \(lon)")
                                         do {
                                             try self.realm.write {
                                                 //print("mapPoint \(mapPoint)")
