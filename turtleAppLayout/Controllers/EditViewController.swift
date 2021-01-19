@@ -548,7 +548,7 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             }))
             
             alert.addAction(UIAlertAction(title: "MOVED TO", style: .default, handler: { (action) in
-                self.data!.existingNestDisturbedType = "relocated to"
+                self.data!.existingNestDisturbedType = "moved to"
                 sender.setTitle(self.data!.existingNestDisturbedType, for: .normal)
                 
             }))
@@ -1140,9 +1140,9 @@ class EditViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             var id = "\(self.data!.zoneLocation)-" != "" ? "\(self.data!.zoneLocation)-": "-"
             
             if self.data!.emerge { id.append(self.data!.emergeType == "nest" ? "N" : "F") }
-            if self.data!.existingNestDisturbed { id.append(self.data!.existingNestDisturbedType == "disturbed" ? "D" : "R") }
+            if self.data!.existingNestDisturbed { id.append(self.data!.existingNestDisturbedType.split(separator: " ")[0] == "moved" ? "R" : "D") }
             
-            self.data!.hatchingBool = self.data!.noProblems || self.data!.lights || self.data!.trash || self.data!.sewer || self.data!.plants || self.data!.other || self.data!.numSuccess != 0 || self.data!.numStranded != 0 || self.data!.numDead != 0
+            
             
             if self.data!.hatchingBool { id.append("H") }
             if self.data!.turtle { id.append("T") }

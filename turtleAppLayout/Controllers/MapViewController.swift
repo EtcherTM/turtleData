@@ -149,7 +149,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                     
                     if let date = document["date"] as? Timestamp {
                         
-                        if date.compare(Timestamp(date: Date(timeIntervalSinceNow: -6480000))).rawValue == 1 {
+                        if date.compare(Timestamp(date: Date(timeIntervalSinceNow: -6480000))).rawValue == 1 || (date.compare(Timestamp(date: Date(timeIntervalSinceNow: -7344000))).rawValue == 1 && document["species"] as? String == "leatherback") {
                             
                             if let type = document["type"] as? Array<String>, let active = document["active"] as? Bool {
                                 
@@ -179,7 +179,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                                         
                                         
                                         let property = data["property"] as? String
-                                        
+                                        var species = ""
+                                        if let s = data["species"] as? String {
+                                            species = s + " "
+                                        }
                                         let comments = data["comments"] as? String ?? ""
                                         var propertyDesc = ""
                                         
@@ -211,10 +214,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                                                     }
                                                 }
                                         
-                                        let text = property! + " | " + propertyDesc + "\n" + comments
+                                        let text = species + property! + " | " + propertyDesc + "\n" + comments
                                         print(text)
                                         
-                                        mapPoint.comments = comments
                                         self.nestLocations.append(NestLocations(title: title, id: id, coordinate: CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude), date: date, comments: text))
                                             //print("Mapping \(id) with coords: \(lat), \(lon)")
                                         do {
